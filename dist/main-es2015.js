@@ -146,7 +146,7 @@ AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵ�
             _angular_material_form_field__WEBPACK_IMPORTED_MODULE_27__.MatFormFieldModule,
             _angular_material_input__WEBPACK_IMPORTED_MODULE_28__.MatInputModule,
             _angular_forms__WEBPACK_IMPORTED_MODULE_22__.ReactiveFormsModule,
-            _angular_router__WEBPACK_IMPORTED_MODULE_29__.RouterModule.forRoot(_app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutes)
+            _angular_router__WEBPACK_IMPORTED_MODULE_29__.RouterModule.forRoot(_app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutes, { useHash: true })
         ], _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_18__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent,
         _layouts_full_full_component__WEBPACK_IMPORTED_MODULE_2__.FullComponent,
@@ -200,7 +200,7 @@ const AppRoutes = [
         children: [
             {
                 path: '',
-                redirectTo: 'login',
+                redirectTo: 'project',
                 pathMatch: 'full'
             },
             {

@@ -329,7 +329,9 @@
           provide: _angular_common__WEBPACK_IMPORTED_MODULE_19__.LocationStrategy,
           useClass: _angular_common__WEBPACK_IMPORTED_MODULE_19__.PathLocationStrategy
         }],
-        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_20__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_22__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_23__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_24__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_26__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_27__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_28__.MatInputModule, _angular_forms__WEBPACK_IMPORTED_MODULE_22__.ReactiveFormsModule, _angular_router__WEBPACK_IMPORTED_MODULE_29__.RouterModule.forRoot(_app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutes)], _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule]
+        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_20__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_22__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_23__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_24__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_26__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_27__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_28__.MatInputModule, _angular_forms__WEBPACK_IMPORTED_MODULE_22__.ReactiveFormsModule, _angular_router__WEBPACK_IMPORTED_MODULE_29__.RouterModule.forRoot(_app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutes, {
+          useHash: true
+        })], _angular_material_table__WEBPACK_IMPORTED_MODULE_25__.MatTableModule]
       });
 
       (function () {
@@ -386,7 +388,7 @@
         component: _layouts_full_full_component__WEBPACK_IMPORTED_MODULE_0__.FullComponent,
         children: [{
           path: '',
-          redirectTo: 'login',
+          redirectTo: 'project',
           pathMatch: 'full'
         }, {
           path: '',
