@@ -1,0 +1,131 @@
+ <div fxLayout="row">
+  <h4>Nuevo Proyecto</h4>
+</div>
+<br>
+<div mat-dialog-content-example [formGroup]="newProject">
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div>Código</div>
+    </div>
+    <div fxFlex.gt-sm="10%" >
+        <div><input type="text" class="form-control form-control-line control" placeholder="" formControlName="codigo_proyecto" [(ngModel)]="codigo_proyecto"></div><!--[(ngModel)]="numerotxt" -->
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>Nombre</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div><input type="text" class="form-control form-control-line control" placeholder="" formControlName="nombre_proyecto" [(ngModel)]="nombre_proyecto"></div><!--[(ngModel)]="nombretxt" -->
+    </div>
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div>Cliente</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+        <div><mat-select class="form-control control" formControlName="cliente" [(ngModel)]="cliente"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
+          <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
+          <mat-option value= "1">Javier Peña y asociados</mat-option>
+          <mat-option value= "2">Ragasa</mat-option>
+          <mat-option value= "3">Cemex</mat-option>
+          </mat-select></div>
+    </div>
+    <div fxFlex.gt-sm="10%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>Presupuesto</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div><input type="text" class="form-control form-control-line control" formControlName="presupuesto_proyecto" [(ngModel)]="presupuesto_proyecto"></div>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div>Fecha Inicial</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+        <div><mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha_inicial_proyecto" (dateChange)="fechaInicial($event)" [(ngModel)]="fecha_inicial_proyecto" class="control">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field></div>
+    </div>
+    <div fxFlex.gt-sm="10%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>Fecha Final</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div><mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="pickerf" formControlName="fecha_final_proyecto" [(ngModel)]="fecha_final_proyecto" class="control">
+        <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
+        <mat-datepicker #pickerf></mat-datepicker>
+      </mat-form-field></div>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div>Responsable</div>
+    </div>
+    <div fxFlex.gt-sm="25%">
+        <div><input type="text" class="form-control form-control-line control" placeholder="Responsable" formControlName="responsable_proyecto" [(ngModel)]="responsable_proyecto"></div>
+    </div>
+    <div fxFlex.gt-sm="10%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>Centro de costos</div>
+    </div>
+    <div fxFlex.gt-sm="25%">
+      <div><mat-select class="form-control" formControlName="centroDeCostos" [(ngModel)]="centro_de_costo_proyecto"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
+        <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
+        <mat-option value= "1">Acabados</mat-option>
+        <mat-option value= "2">Tuberias</mat-option>
+        <mat-option value= "3">Electrico</mat-option>
+        </mat-select></div>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div>Almacén</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+        <div><mat-select class="form-control"  formControlName="almacen" [(ngModel)]="almacen"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
+          <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
+          <mat-option value= "1">California</mat-option>
+          <mat-option value= "2">Norte</mat-option>
+          <mat-option value= "3">Centro</mat-option>
+          </mat-select></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+  </div>
+</div>
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+    </div>
+  </div>
