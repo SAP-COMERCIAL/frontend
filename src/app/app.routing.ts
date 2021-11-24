@@ -1,7 +1,9 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 export const AppRoutes: Routes = [
   {
@@ -10,7 +12,7 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'project',
         pathMatch: 'full'
       },
       {

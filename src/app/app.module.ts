@@ -64,7 +64,7 @@ import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invo
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes, {useHash: true})
   ],
   exports:[ MatTableModule ],
   providers: [
