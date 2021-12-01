@@ -8,7 +8,12 @@
         <div>Código</div>
     </div>
     <div fxFlex.gt-sm="10%" >
-        <div><input type="text" class="form-control form-control-line control" placeholder="" formControlName="codigo_proyecto" [(ngModel)]="codigo_proyecto"></div><!--[(ngModel)]="numerotxt" -->
+        <div>
+          <input type="text" class="form-control form-control-line control" formControlName="codigo_proyecto" [(ngModel)]="codigo_proyecto" disabled:true >
+          <span *ngIf="newProject.hasError('codigo_proyecto', 'codigo_proyecto') && newProject.get('codigo_proyecto').touched">
+            Please enter the correct email, this email not valid.
+          </span>
+        </div>
     </div>
     <div fxFlex.gt-sm="25%" >
       <div></div>

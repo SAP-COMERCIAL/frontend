@@ -38,17 +38,34 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['proyecto_id', 'Categoria_Id', 'Requisicion_Id', 'Fecha_Requisicion', 'Estatus', 'editar'];
+  // displayedColumns = ['proyecto_id', 'Categoria_Id', 'Requisicion_Id', 'Fecha_Requisicion', 'Estatus', 'editar'];
+  displayedColumns = ['codigo_proyecto', 'codigo_categoria', 'codigo', 'fecha', 'estado', 'editar'];
   
   constructor(public dialog: MatDialog
-          , private _excelService : ExcelServiceService) { }
+          , private _excelService : ExcelServiceService
+          , private _requisitionService : requisitionservice) { }
 
   ngOnInit(): void {
-    let arrayData : any;
 
-    arrayData = [{proyecto_id : 1, Categoria_Id : 1, Requisicion_Id : 1, Fecha_Requisicion : '2020-01-01', Estatus : 'ACTIVO'}]
-    this.dataSourceShow = new MatTableDataSource(arrayData);
+    this.getrequisition();
+      
+  }
 
+  getrequisition(){
+    // Proyectos registrados
+    this._requisitionService.getRequisitionAll().subscribe(
+      res=> {
+        console.log('Requisiciones', res);
+        this.dataSourceShow = new MatTableDataSource(res);
+        this.array = res;
+        this.totalSize = this.array.length;
+        
+        this.iterator();
+        this.dataSourceShow.sort = this.sort;
+        
+      },
+      error => console.log("error consulta regiones",error)
+    )
   }
 
   descargarExcel(){
@@ -76,11 +93,11 @@ dataSourceShow : MatTableDataSource<requisitionModel>
       id: 1,
       title: 'REQUISICIONES',
       arrayData : null,
-      requisicionId: 1
+      requisicionId: 0
      
     }
-    dialogConfig.width = '900px';
-    dialogConfig.height = '400px';
+    dialogConfig.width = '1200px';
+    dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
@@ -90,20 +107,20 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     });
   }
 
-  editRequisicion(event){
-    console.log('Alta de requisiciones');
+  editRequisicion(element){
+    console.log('Editar de requisiciones');
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id: 1,
       title: 'REQUISICIONES',
-      arrayData : null,
-      requisicionId: 1
+      arrayData : element,
+      requisicionId: element.requisicioninterna_id
      
     }
-    dialogConfig.width = '900px';
-    dialogConfig.height = '400px';
+    dialogConfig.width = '1200px';
+    dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);

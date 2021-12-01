@@ -15,16 +15,24 @@ export class requisitionservice {
 
   constructor(protected http: HttpClient) { }
 
-    getProjectAll() {
-        return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'Project/lista');
+    getRequisitionAll() {
+        return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/lista');
     }
 
-    updateProjects(arrayToDb : any) {
-        return this.http.put(environment.urlapi+environment.apiContextDrivers+'Project/actualizar',arrayToDb);
+    getRequisitionById(id : any) {
+        return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/' + id);
     }
 
-    insertProjects(arrayToDb : any) {
-        return this.http.post(environment.urlapi+environment.apiContextDrivers+'Project/registrar',arrayToDb);
+    insertRequisition(arrayToDb : any) {
+        return this.http.post(environment.urlapi+environment.apiContextDrivers+'InternalRequisition/registrar',arrayToDb);
+    }
+
+    insertRequisitionDetail(arrayToDb : any) {
+        return this.http.post(environment.urlapi+environment.apiContextDrivers+'InternalRequisition/registrar/detalle',arrayToDb);
+    }
+
+    insertRequisitionCancel(id : any) {
+        // return this.http.put(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/cancelar' + id);
     }
 
 }

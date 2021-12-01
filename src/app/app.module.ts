@@ -31,7 +31,9 @@ import { RequisitionListComponent } from './pages/requisition/requisition-list/r
 import { RequisitionDetailComponent } from './components/requisitions/requisition-detail/requisition-detail.component';
 import { QuotationListComponent } from './pages/quotation/quotation-list/quotation-list.component';
 import { PoListComponent } from './pages/purchaseOrder/po-list/po-list.component';
-import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invoice-list/storage-invoice-list.component' 
+import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invoice-list/storage-invoice-list.component';
+// import { Notification } from './components/notification/notification.component/notification.component.component';
+// import { NotificationComponent } from './components/notification/notification/notification.component' 
 
 @NgModule({
   declarations: [
@@ -50,6 +52,9 @@ import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invo
     QuotationListComponent,
     PoListComponent,
     StorageInvoiceListComponent
+    // ,
+    // Notification.ComponentComponent,
+    // NotificationComponent
   ],
   imports: [
     BrowserModule,

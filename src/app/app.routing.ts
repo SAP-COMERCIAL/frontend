@@ -12,7 +12,7 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'project',
+        redirectTo: 'login',
         pathMatch: 'full'
       },
       {

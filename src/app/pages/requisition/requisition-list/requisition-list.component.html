@@ -35,40 +35,42 @@
           </div>
 
           <!-- INICIA CUERPO DE LA PÁGINA-->
-
 <div class="col-12 col-md-12 p-0">
           <div class="card">
             <div class="card-body card-body-table">
               <mat-table [dataSource]="dataSourceShow" matSort class="mat-elevation-z8" style="width: 95%;">
       
                 <!-- ID Column -->
-                <ng-container matColumnDef="proyecto_id">
+                <ng-container matColumnDef="codigo_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Proyecto</span> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.proyecto_id}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.codigo_proyecto}} </td>
                 </ng-container>
                 
                 <!-- Name Column -->
-                <ng-container matColumnDef="Categoria_Id">
+                <ng-container matColumnDef="codigo_categoria">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Categoria </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Categoria_Id}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.codigo_categoria}} </td>
                 </ng-container>
                 
                 <!-- Email Column -->
-                <ng-container matColumnDef="Requisicion_Id">
+                <ng-container matColumnDef="codigo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Requisición </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Requisicion_Id}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
-                <ng-container matColumnDef="Fecha_Requisicion">
+                <ng-container matColumnDef="fecha">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha de Requisición </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Fecha_Requisicion | date: ' dd-MM-yyyy'}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.fecha | date: ' dd-MM-yyyy'}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
-                <ng-container matColumnDef="Estatus">
+                <ng-container matColumnDef="estado">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Estatus}} </td>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.estado == true">ACTIVO</ng-container>
+                  <ng-container *ngIf="element.estado == false">INACTIVO</ng-container>
+                  </td>
                 </ng-container>
 
                 <!-- Email Column -->

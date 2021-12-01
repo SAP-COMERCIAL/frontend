@@ -30,6 +30,8 @@ export class ProjectCaptureDetailComponent implements OnInit {
   centro_de_costo_proyecto : any = '0';
   almacen : any = '0';
   codigo_proyecto : any = '';
+  proeycto_id_mayor : number = 0;
+  proeycto_numero_mayor : number = 0;
 
   numerotxt : any;
   nombretxt : any;
@@ -42,8 +44,9 @@ export class ProjectCaptureDetailComponent implements OnInit {
   almacencbo : any;
   projectInfo : any;
   projectId : any;
-  newProject: FormGroup;
+  public newProject: FormGroup;
   datasourceCategories : any[] = [];
+  datasourceProyects : any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<projectModel>
@@ -57,26 +60,29 @@ export class ProjectCaptureDetailComponent implements OnInit {
     this.projectId = data.projectId;
 
     this.newProject = this.formBuilder.group({
-      codigo_proyecto : new FormControl(''),
-      proyecto_id: new FormControl(''),
+      codigo_proyecto :  new FormControl(this.codigo_proyecto, [Validators.required, Validators.minLength(4), Validators.maxLength(7)]),
+      // proyecto_id: new FormControl(''),
       nombre_proyecto: new FormControl(''),
       cliente: new FormControl(''),
-      presupuesto_proyecto: new FormControl('', Validators.required),
+      presupuesto_proyecto: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      // presupuesto_proyecto: new FormControl('', Validators.required),
       fecha_inicial_proyecto: new FormControl(''),
       fecha_final_proyecto: new FormControl(''),
       responsable_proyecto: new FormControl(''),
       centroDeCostos: new FormControl(''),
       almacen: new FormControl('')  
-  });
+    });
   }
 
   ngOnInit(): void {
 
+    this.getAllProjects();
     this.getEnabledCategories();
 
     if(this.projectId != 0){
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
+          codigo_proyecto : this.projectInfo["codigo_proyecto"],
           nombre_proyecto : this.projectInfo["nombre_proyecto"] ,
           cliente : this.projectInfo["cliente_id"],
           presupuesto_proyecto : this.projectInfo["presupuesto_proyecto"] ,
@@ -84,8 +90,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
           fecha_final_proyecto : this.projectInfo["fecha_final_proyecto"] ,
           responsable_proyecto : this.projectInfo["responsable_proyecto"],
           centroDeCostos : this.projectInfo["centro_de_costo_proyecto_id"] ,
-          almacen : this.projectInfo["almacen_id"],
-          codigo_proyecto : this.projectInfo["codigo_proyecto"]
+          almacen : this.projectInfo["almacen_id"]
       })
 
       this.nombre_proyecto = this.projectInfo["nombre_proyecto"];
@@ -96,9 +101,27 @@ export class ProjectCaptureDetailComponent implements OnInit {
       this.responsable_proyecto = this.projectInfo["responsable_proyecto"];
       this.centro_de_costo_proyecto = this.projectInfo["centro_de_costo_proyecto_id"];
       this.almacen = this.projectInfo["almacen_id"];
-      this.codigo_proyecto = this.projectInfo["codigo_proyecto"];
+      this.codigo_proyecto = '';
     }
 
+  }
+
+  getAllProjects(){
+    // Actualiza registro NUEVO
+    this._projectService.getProjectAll().subscribe(
+      res=> {
+        this.datasourceProyects = res;
+        if(this.projectId == 0){
+          console.log('prpyeccccc', this.projectId )
+          this.codigo_proyecto = Number(this.datasourceProyects[this.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
+          console.log('PROEYCTOS TODOS', this.proeycto_numero_mayor);
+        }else{
+          this.codigo_proyecto = this.projectInfo["codigo_proyecto"];
+        }
+
+      },
+      error => console.log("error consulta proyectos",error)
+    )
   }
 
   getEnabledCategories(){
@@ -211,7 +234,6 @@ insertCategories(){
   )
 
 }
-
 
   fechaInicial(event){
     console.log('fecha', this.fecha_inicial_proyecto);

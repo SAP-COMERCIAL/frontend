@@ -1,1 +1,128 @@
-<p>requisition-detail works!</p>
+<div fxLayout="row">
+    <h4>Nueva Requisición</h4>
+  </div>
+  <br>
+  <div mat-dialog-content-example [formGroup]="newProject">
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div>Proyecto</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <!-- [(ngModel)]="proyecto_id" (selectionChange)="emitFilters($event, 'Enviado')"  -->
+          <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
+            <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
+              {{op.codigo_proyecto}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div>Categoria</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div><mat-select class="form-control control" formControlName="categoria_id" [(ngModel)]="categoria_id" (selectionChange)="categorySelected()" ><!-- (selectionChange)="emitFilters($event, 'Enviado')"-->
+              <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
+                {{opx.codigo_proyectocategoria}}
+              </mat-option>
+            </mat-select></div>
+      </div>
+    </div>
+  
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div>Requisición</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+          <div><input type="text" class="form-control form-control-line control" formControlName="requisicion_Numero" [(ngModel)]="requisicion_Numero"></div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div>Fecha</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div><mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control"> <!--[(ngModel)]="fecha" -->
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field></div>
+      </div>
+    </div>
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div class="input-group mb-3">
+                            <input type="file" name="loadFile" id="loadFile" class="form-control form-control-line" placeholder="SELECCIONA ARCHIVO" style="display: none;" (change)="onFileChange($event)" onclick="this.value=null;"> <!--[(ngModel)]="buscar" -->
+                            <label for="loadFile" style="margin: 0; text-align: left; width: 400px;" class="btn btn-outline-dark"><b>{{nombreArchivo}}</b></label><br><!--{{nombreArchivo}}  formControlName="loadFile"--> 
+                        </div>
+        </div>
+        <div fxFlex.gt-sm="20%">
+            <div><button mat-raised-button color="primary" (click)="save(newProject, $event)">Subir Archivo</button></div>
+        </div>
+        <div fxFlex.gt-sm="20%">
+            <div></div>
+        </div>
+    </div>
+
+    <br>
+    <!--Tabla de captura-->
+    <div fxLayout="row" class="division">
+        
+    </div>
+
+  </div>
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+          <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+      </div>
+    </div>
+     <!-- INICIA CUERPO DE LA PÁGINA-->
+     <div class="col-12 col-md-12 p-0">
+      <div class="card">
+        <div class="card-body card-body-table">
+          <mat-table [dataSource]="UploadDataExcel" matSort class="mat-elevation-z8" style="width: 95%;">
+  
+            <!-- ID Column -->
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad</span> </th>
+              <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="unidad_de_medida">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Unidad de Medida </th>
+              <td mat-cell *matCellDef="let element"> {{element.unidad_de_medida}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
+              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </mat-table>
+    
+        </div>
+        <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator>
+      </div>
+    </div>
+  

@@ -19,11 +19,16 @@ export class projectCategoryservice {
         return this.http.get<projectCategoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'ProjectCategory/lista');
     }
 
+    // getProjectCateogryById(proyectoId : any) {
+    //     return this.http.get<projectCategoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
+    // }
+
     getProjectCateogryById(proyectoId : any) {
+        console.log('vvv', environment.urlapi + environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
         return this.http.get<projectCategoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
     }
 
-    updateProjects(arrayToDb : any) {
+    updateProjectCatgory(arrayToDb : any) {
         return this.http.put(environment.urlapi+environment.apiContextDrivers+'ProjectCategory/actualizar',arrayToDb);
     }
 

@@ -50,7 +50,8 @@ export class CategoriesComponent implements OnInit {
           responsable: new FormControl(''),
           presupuesto: new FormControl(''),
           fecha_inicial: new FormControl('', Validators.required),
-          almacen: new FormControl('')
+          almacen: new FormControl(''),
+          activo: new FormControl('')
       });
       }
 
@@ -63,11 +64,14 @@ export class CategoriesComponent implements OnInit {
     // Proyectos categorias
     this._projectCategoryservice.getProjectCateogryById(this.projectId).subscribe(
       res=> {
+        // console.log('this.datasourceProjectCategories.filteredData["responsable"]', this.datasourceProjectCategories.filteredData["responsable"]);
         console.log('Proyectos', res);
         this.datasourceProjectCategories = new MatTableDataSource(res);
         this.array = res;
         this.totalSize = this.array.length;
         this.datasourceProjectCategories.sort = this.sort;
+        // this.newProject.controls["responsable"].setValue = this.datasourceProjectCategories.filteredData["responsable"];
+        
       },
       error => console.log("error consulta regiones",error)
     )
@@ -79,19 +83,30 @@ console.log('Actualiza registro de activar y desactivar', element)
   }
 
   save(element : any){
-    console.log('element', element);
     let arraySaveData : any;
 
     arraySaveData = {proyectocategoria_id : element.proyectocategoria_id
           , codigo_proyectocategoria : element.codigo_proyectocategoria
-          , presupuesto : element.presupuesto
-          , responsable : element.responsable
-          , fecha_inicial : element.fecha_inicial
-          , almacen_id : element.almacen_id
+          , presupuesto : this.newProject.controls["presupuesto"].value
+          , responsable : this.newProject.controls["responsable"].value
+          , fecha_inicial : moment(element.fecha_inicial, 'YYYY-MM-DD').format('YYYY-MM-DD')
+          , almacen_id : 1 // element.almacen_id
           , activo : element.activo}
 
           console.log('datos a actualizar', arraySaveData)
 
+          this.insertProjectCategoryDet(arraySaveData);
+  }
+
+  insertProjectCategoryDet(arrayToDb : any){
+    // Inserta Proyecto Categoria
+    this._projectCategoryservice.updateProjectCatgory(arrayToDb).subscribe(
+      res=> {
+        console.log('ACTUALIZA PROYECO CATEGORIA', arrayToDb);
+      },
+      error => console.log("error al insertar proyectos categorias",error)
+    )
+    
   }
 
   fechaInicial(event){

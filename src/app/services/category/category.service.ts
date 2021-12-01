@@ -19,7 +19,7 @@ export class categoryservice {
         return this.http.get<categoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'Category/lista');
     }
 
-    getProjectById(id : number) {
+    getCategoryById(id : number) {
         return this.http.get<categoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'Category/' + id);
     }
 
