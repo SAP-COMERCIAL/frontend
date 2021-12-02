@@ -32,6 +32,7 @@ import { RequisitionDetailComponent } from './components/requisitions/requisitio
 import { QuotationListComponent } from './pages/quotation/quotation-list/quotation-list.component';
 import { PoListComponent } from './pages/purchaseOrder/po-list/po-list.component';
 import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invoice-list/storage-invoice-list.component';
+import { QuotationDetailComponent } from './components/quotations/quotation-detail/quotation-detail.component';
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
 
@@ -51,7 +52,8 @@ import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invo
     RequisitionDetailComponent,
     QuotationListComponent,
     PoListComponent,
-    StorageInvoiceListComponent
+    StorageInvoiceListComponent,
+    QuotationDetailComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

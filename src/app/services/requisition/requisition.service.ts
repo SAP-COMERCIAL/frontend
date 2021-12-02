@@ -23,6 +23,10 @@ export class requisitionservice {
         return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/' + id);
     }
 
+    getRequisitionDetail(id : any) {
+        return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/' + id);
+    }
+
     insertRequisition(arrayToDb : any) {
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'InternalRequisition/registrar',arrayToDb);
     }

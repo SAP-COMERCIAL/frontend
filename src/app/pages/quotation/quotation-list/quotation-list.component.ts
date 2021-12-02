@@ -2,9 +2,8 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { requisitionModel } from 'src/app/models/requisition.model';
-import { requisitionservice } from 'src/app/services/requisition/requisition.service';
-import { RequisitionDetailComponent } from 'src/app/components/requisitions/requisition-detail/requisition-detail.component';
+import { quotationListModel } from 'src/app/models/quotation-list.model';
+import { quotationservice } from 'src/app/services/quotation/quotation.service';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import * as moment from 'moment';
@@ -15,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { DataSource } from '@angular/cdk/table';
-import { ProjectCaptureDetailComponent } from 'src/app/components/project-capture-detail/project-capture-detail/project-capture-detail.component';
+import { QuotationDetailComponent } from 'src/app/components/quotations/quotation-detail/quotation-detail.component';
 import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 
@@ -31,85 +30,108 @@ public pageSize:number = 20;
 public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
-dataSourceShow : MatTableDataSource<requisitionModel>
+dataSourceShow : MatTableDataSource<quotationListModel>
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['proyecto_id', 'Categoria_Id', 'Requisicion_Id', 'Fecha_Requisicion', 'Estatus', 'editar'];
+  displayedColumns = ['codigo_requisicioninterna', 'codigo', 'fecha', 'estado', 'editar'];
   
   constructor(public dialog: MatDialog
-    , private _excelService : ExcelServiceService) { }
+    , private _excelService : ExcelServiceService
+    , private _quotationService : quotationservice) { }
 
   ngOnInit(): void {
-    let arrayData : any;
 
-    arrayData = [{proyecto_id : 1, Categoria_Id : 1, Requisicion_Id : 1, Fecha_Requisicion : '2020-01-01', Estatus : 'ACTIVO'}]
-    this.dataSourceShow = new MatTableDataSource(arrayData);
+    this.getQuotationAll();
+
+    // let arrayData : any;
+
+    // arrayData = [{codigo_requisicioninterna : 1, codigo : 1, fecha : '2020-01-01', estado : 'ACTIVO', requisicioninterna_id : 1, cotizacion_id : 1}]
+    // this.dataSourceShow = new MatTableDataSource(arrayData);
 
   }
+
+  getQuotationAll(){
+    // Proyectos registrados
+    this._quotationService.getQuotationAll().subscribe(
+      res=> {
+        console.log('Cotizaciones', res);
+        this.dataSourceShow = new MatTableDataSource(res);
+        this.array = res;
+        this.totalSize = this.array.length;
+        
+        this.iterator();
+        this.dataSourceShow.sort = this.sort;
+        
+      },
+      error => console.log("error consulta regiones",error)
+    )
+  }
+  
 
   descargarExcel(){
     console.log('Descargar a excel');
     let dataSourceShowToExcel : any[] = [];
 
   this.dataSourceShow.filteredData.forEach(element => {
-    dataSourceShowToExcel.push({proyecto_id : element.proyecto_id
-                              , categoria : element.Categoria_Id
-                              , requisicion : element.Requisicion_Id
-                              , Fecha_Requisicion : moment(element.Fecha_Requisicion, 'YYYY-MM-DD').format('DD-MM-YYYY')
-                              , estatus : element.Estatus
+    dataSourceShowToExcel.push({cotizacion_id : element.cotizacion_id
+                              , requisicioninterna_id : element.requisicioninterna_id
+                              , codigo_requisicioninterna : element.codigo_requisicioninterna
+                              , codigo : element.codigo
+                              , fecha : moment(element.fecha, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                              , estado : element.estado
       })
     });
 
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Requisicones');  
   }
 
-  nuevaRequisicion(evetn){
-    console.log('Alta de requisiciones');
+  nuevaCotizacion(evetn){
+    console.log('Alta de cotizaciones');
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id: 1,
-      title: 'REQUISICIONES',
+      title: 'COTIZACIONES',
       arrayData : null,
       requisicionId: 1
      
     }
-    dialogConfig.width = '900px';
-    dialogConfig.height = '400px';
+    dialogConfig.width = '1200px';
+    dialogConfig.height = '700px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(QuotationDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();
     });
   }
 
-  editRequisicion(event){
-    console.log('Alta de requisiciones');
+  editCotizacion(event){
+    console.log('Edita cotizaciones');
 
-    const dialogConfig = new MatDialogConfig();
+    // const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'REQUISICIONES',
-      arrayData : null,
-      requisicionId: 1
+    // dialogConfig.data = {
+    //   id: 1,
+    //   title: 'COTIZACIONES',
+    //   arrayData : null,
+    //   requisicionId: 1
      
-    }
-    dialogConfig.width = '900px';
-    dialogConfig.height = '400px';
-    dialogConfig.disableClose = true;
+    // }
+    // dialogConfig.width = '900px';
+    // dialogConfig.height = '400px';
+    // dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
+    // const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   window.location.reload();
+    // });
   }
 
   filtrar(event){}
