@@ -9,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-categories',
@@ -25,16 +26,20 @@ export class CategoriesComponent implements OnInit {
   projectInfo : any;
   projectId : any;
 
-  almacen : any = 1;
+  almacen_id : any = '1';
   fecha_inicial : any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   proyecto_id : any = 0;
-  responsable : any = '';
+  responsableEdicion : any = '';
+  presupuestoEdicion : any = '';
+  activoEdicion : boolean = false;
+  almacenEdicion : any = '';
+  fechaEdicion : any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   presupuesto : any = 0;
   activo : any = false;
 
   displayedColumns: string[] = ['select','codigo_proyectocategoria', 'nombre_categoria', 'responsable', 'presupuesto', 'fecha_inicial', 'almacen_id', 'actualizar'];
   datasourceProjectCategories : MatTableDataSource<projectCategoryModel>
-  newProject: FormGroup;
+  // newProject: FormGroup;
   
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -46,13 +51,13 @@ export class CategoriesComponent implements OnInit {
         this.projectInfo = data.arrayData;
         this.projectId = data.projectId;
 
-        this.newProject = this.formBuilder.group({
-          responsable: new FormControl(''),
-          presupuesto: new FormControl(''),
-          fecha_inicial: new FormControl('', Validators.required),
-          almacen: new FormControl(''),
-          activo: new FormControl('')
-      });
+      //   this.newProject = this.formBuilder.group({
+      //     responsable: new FormControl(''),
+      //     presupuesto: new FormControl(''),
+      //     fecha_inicial: new FormControl('', Validators.required),
+      //     almacen_id: new FormControl(''),
+      //     activo: new FormControl('')
+      // });
       }
 
   ngOnInit(): void {
@@ -78,24 +83,49 @@ export class CategoriesComponent implements OnInit {
 
   }
 
-  ActivarDesactivar(element : any){
-console.log('Actualiza registro de activar y desactivar', element)
+  ActivarDesactivar(element : any, event : Event){
+    this.activoEdicion = event["checked"]
+    console.log('Actualiza registro de activar y desactivar', event["checked"])
   }
 
-  save(element : any){
+  save(element : any, camporesponsable : any, event : Event){
     let arraySaveData : any;
+    console.log('frfrfr', element);
+    console.log('ENTRADA', event);
 
     arraySaveData = {proyectocategoria_id : element.proyectocategoria_id
           , codigo_proyectocategoria : element.codigo_proyectocategoria
-          , presupuesto : this.newProject.controls["presupuesto"].value
-          , responsable : this.newProject.controls["responsable"].value
-          , fecha_inicial : moment(element.fecha_inicial, 'YYYY-MM-DD').format('YYYY-MM-DD')
-          , almacen_id : 1 // element.almacen_id
-          , activo : element.activo}
+          , presupuesto : (this.presupuestoEdicion != '') ? this.presupuestoEdicion : element.presupuesto //this.newProject.controls["presupuesto"].value
+          , responsable : (this.responsableEdicion != '') ? this.responsableEdicion : element.responsable //this.newProject.controls["responsable"].value
+          , fecha_inicial : (this.fechaEdicion != '') ? this.fechaEdicion : moment(element.fecha_inicial, 'YYYY-MM-DD').format('YYYY-MM-DD')
+          , almacen_id : (this.almacenEdicion != '') ? this.almacenEdicion : element.almacen_id.toString()
+          , activo : this.activoEdicion // (this.activoEdicion != false) ? this.activoEdicion : element.activo
+        }
 
           console.log('datos a actualizar', arraySaveData)
 
           this.insertProjectCategoryDet(arraySaveData);
+
+          // Limpia variables
+          this.responsableEdicion = '';
+          this.presupuestoEdicion = '';
+          this.fechaEdicion = '';
+
+  }
+
+  checkEnterKey(event: Event, campo : any){
+
+    switch (campo){
+      case 'responsable' : this.responsableEdicion = (event.target as HTMLInputElement).value;
+        break;
+      case 'presupuesto' : this.presupuestoEdicion = (event.target as HTMLInputElement).value;
+        break;
+      case 'fecha' : this.fechaEdicion = moment((event.target as HTMLInputElement).value, 'YYYY-MM-DD').format('YYYY-MM-DD');
+        break;
+      default : this.responsableEdicion = '';
+        break;
+    }
+    console.log('filtro', this.responsableEdicion);
   }
 
   insertProjectCategoryDet(arrayToDb : any){
@@ -109,8 +139,10 @@ console.log('Actualiza registro de activar y desactivar', element)
     
   }
 
-  fechaInicial(event){
+  seleccionaAlmacen(elementAlmacen : any){
 
+    this.almacenEdicion = elementAlmacen.value;
+    console.log('almacen', this.almacenEdicion);
   }
 
   salir(){

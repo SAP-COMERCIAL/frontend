@@ -39,7 +39,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   @Output() filterChange = new EventEmitter();
 
   // displayedColumns = ['proyecto_id', 'Categoria_Id', 'Requisicion_Id', 'Fecha_Requisicion', 'Estatus', 'editar'];
-  displayedColumns = ['codigo_proyecto', 'codigo_categoria', 'codigo', 'fecha', 'estado', 'editar'];
+  displayedColumns = ['codigo_proyectocategoria', 'codigo', 'fecha', 'estado', 'editar'];
   
   constructor(public dialog: MatDialog
           , private _excelService : ExcelServiceService
@@ -73,8 +73,9 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     let dataSourceShowToExcel : any[] = [];
 
   this.dataSourceShow.filteredData.forEach(element => {
-    dataSourceShowToExcel.push({proyecto_id : element.proyecto_id
-                              , categoria : element.Categoria_Id
+    dataSourceShowToExcel.push({
+                              // proyecto_id : element.proyecto_id
+                              categoria : element.codigo_proyectocategoria
                               , requisicion : element.Requisicion_Id
                               , Fecha_Requisicion : moment(element.Fecha_Requisicion, 'YYYY-MM-DD').format('DD-MM-YYYY')
                               , estatus : element.Estatus

@@ -5,52 +5,63 @@
   <div mat-dialog-content-example [formGroup]="newProject">
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
-          <div>Proyecto</div>
+          <div><br>Proyecto</div>
       </div>
       <div fxFlex.gt-sm="25%" >
         <div>
-          <!-- [(ngModel)]="proyecto_id" (selectionChange)="emitFilters($event, 'Enviado')"  -->
-          <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
-            <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
-              {{op.codigo_proyecto}}
-            </mat-option>
-          </mat-select>
+          <mat-form-field>
+            <!-- [(ngModel)]="proyecto_id" (selectionChange)="emitFilters($event, 'Enviado')"  -->
+            <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
+              <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
+                {{op.codigo_proyecto}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
       <div fxFlex.gt-sm="10%" >
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div>Categoria</div>
+        <div><br>Proyecto-Categoría</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-            <div><mat-select class="form-control control" formControlName="categoria_id" [(ngModel)]="categoria_id" (selectionChange)="categorySelected()" ><!-- (selectionChange)="emitFilters($event, 'Enviado')"-->
-              <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
-                {{opx.codigo_proyectocategoria}}
-              </mat-option>
-            </mat-select></div>
+            <div>
+              <mat-form-field>
+                <mat-select class="form-control control" formControlName="categoria_id" [(ngModel)]="categoria_id" (selectionChange)="categorySelected()" ><!-- (selectionChange)="emitFilters($event, 'Enviado')"-->
+                <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
+                  {{opx.codigo_proyectocategoria}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
       </div>
     </div>
   
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
-          <div>Requisición</div>
+          <div><br>Requisición</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-          <div><input type="text" class="form-control form-control-line control" formControlName="requisicion_Numero" [(ngModel)]="requisicion_Numero"></div>
+          <div>
+            <mat-form-field>
+              <input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero" [(ngModel)]="requisicion_Numero">
+            </mat-form-field>
+          </div>
       </div>
       <div fxFlex.gt-sm="10%" >
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div>Fecha</div>
+        <div><br>Fecha</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-        <div><mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control"> <!--[(ngModel)]="fecha" -->
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>{{fecha | date: 'dd-MM-yyyy'}}</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control" [(ngModel)]="fecha"> <!--[(ngModel)]="fecha" -->
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker [startAt]="fecha" #picker></mat-datepicker>
           </mat-form-field></div>
       </div>
     </div>
@@ -62,7 +73,7 @@
                         </div>
         </div>
         <div fxFlex.gt-sm="20%">
-            <div><button mat-raised-button color="primary" (click)="save(newProject, $event)">Subir Archivo</button></div>
+            <!-- <div><button mat-raised-button color="primary" (click)="save(newProject, $event)">Subir Archivo</button></div> -->
         </div>
         <div fxFlex.gt-sm="20%">
             <div></div>
@@ -122,7 +133,7 @@
           </mat-table>
     
         </div>
-        <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator>
+        <!-- <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator> -->
       </div>
     </div>
   

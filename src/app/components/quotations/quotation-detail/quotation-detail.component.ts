@@ -17,6 +17,8 @@ import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
 import { requisitionModel } from 'src/app/models/requisition.model';
 import { requisitionservice } from '../../../services/requisition/requisition.service';
+import { quotationListModel } from '../../../models/quotation-list.model'
+import { quotationservice } from '../../../services/quotation/quotation.service';
 import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
 import { AppConstants } from '../../../shared/app.constants';
 import { MatSort } from '@angular/material/sort';
@@ -42,7 +44,7 @@ export class QuotationDetailComponent implements OnInit {
   fecha:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   requisicion_id : any = '';
   categoria_id : any = '';
-  proyecto_id : any = 0;
+  // proyecto_id : any = 0;
   requisicion_Numero : any = '';
   cotizacion_Numero : any = '';
   loadfile : any  = '';
@@ -50,15 +52,20 @@ export class QuotationDetailComponent implements OnInit {
   public nombreArchivo : any = 'selecciona archivo';
   dataSourceShow : MatTableDataSource<requisitionModel>;
   dataExcel: any[];
-  displayedColumns = ['select', 'cantidad', 'unidad_de_medida', 'descripcion'];
+  seleccionaRegistro : any;
+  displayedColumns = ['select', 'cantidad', 'um', 'descripcion'];
 
   projectInfo : any;
   requisicionId : any = 0;
+  quotationId : any = 0;
   newProject: FormGroup;
   datasourceCategories : any[] = [];
   datasourcePorjects : any[] = [];
-  datasourceRequisition : any[] = [];
-  datasourceRequisitionDetail : any[] = [];
+  datasourceRequisition : any;
+  datasourceRequisitionDetail : any = []; // MatTableDataSource<requisitionModelDetail>;
+  datasourceCotizaciones : any;
+  arraytemp : any = [];
+  
 
   constructor(
     public dialogRef: MatDialogRef<projectModel>
@@ -69,28 +76,30 @@ export class QuotationDetailComponent implements OnInit {
     , private formBuilder: FormBuilder
     , private _snackBar : MatSnackBar
     , private _requisitionservice : requisitionservice
+    , private _quotationservice : quotationservice
     // , private notificationService: NotificationService,
   ) { 
     this.projectInfo = data.arrayData;
     this.requisicionId = data.requisicionId;
 
     this.newProject = this.formBuilder.group({
-      proyecto_id : new FormControl(''),
+      // proyecto_id : new FormControl(''),
       categoria_id: new FormControl(''),
       requisicion_id: new FormControl(''),
       fecha: new FormControl(''),
       requisicion_Numero : new FormControl(''),
-      cotizacion_Numero : new FormControl('')
+      cotizacion_Numero : new FormControl(''),
+      seleccionar : new FormControl('')
   });
   }
 
   ngOnInit(): void {
 
-    this.getProyectos();
-    this.getEnabledCategories();
+    this.getCategories()
+    // this.getProyectos();
     if(this.requisicionId != 0){
         this.newProject.patchValue({
-          proyecto_id : this.projectInfo["proyecto_id"],
+          // proyecto_id : this.projectInfo["proyecto_id"],
           requisicion_id : '', // this.projectInfo["requisicion_id"] ,
           requisicion_Numero : this.projectInfo["codigo"] ,
           categoria_id : '', // this.projectInfo["categoria_id"],
@@ -99,24 +108,13 @@ export class QuotationDetailComponent implements OnInit {
           
       })
       this.requisicion_Numero = this.projectInfo["codigo"];
-      this.proyecto_id = this.projectInfo["proyecto_id"];
+      // this.proyecto_id = this.projectInfo["proyecto_id"];
       this.requisicion_id = '' //this.projectInfo["requisicion_id"];
       this.categoria_id = this.projectInfo["categoria_id"];
       this.fecha = '', //this.projectInfo["fecha"];
       this.loadfile = ''
     }
 
-  }
-
-  getEnabledCategories(){
-    // Actualiza registro NUEVO
-    this._projectCategoryservice.getProjectCateogryById(1).subscribe(
-      res=> {
-        this.datasourceCategories = res;
-        console.log('CATEGORIAS', res);
-      },
-      error => console.log("error consulta categorias",error)
-    )
   }
 
   getProyectos(){
@@ -135,44 +133,96 @@ export class QuotationDetailComponent implements OnInit {
   }
 
   proyectoSelected(){
-    console.log('Selecciona categorias', this.proyecto_id);
-    this.getCategories(this.proyecto_id);
+    // console.log('Selecciona categorias', this.proyecto_id);
+    // this.getCategories(this.proyecto_id);
   }
 
   categorySelected(){
-    this.getrequisition();
+    console.log('aaaaa', this.newProject.controls["categoria_id"].value);
+    this.getrequisitionAll();
+  }
+
+  RequisitionSelected(){
+    let requisicion_Id : any;
+    let arrayRequisicion_interna : any;
+    let codigoRequisicion_interna : any;
+
+    requisicion_Id = this.newProject.controls["requisicion_Numero"].value;
+    arrayRequisicion_interna = this.datasourceRequisition.filter(e => e.requisicioninterna_id == requisicion_Id);
+    console.log('requisicion interna', arrayRequisicion_interna[0]["codigo"]);
+    
+    this.getCotizacionesAll(arrayRequisicion_interna[0]["codigo"])
+    
+
+    // Busca cotizaciones y arma nuevo numero de cotización
+    this.getRequisitionDetail(requisicion_Id)
+  }
+
+  getCotizacionesAll(requisicion_interna : any){
+    this._quotationservice.getQuotationAll().subscribe(
+      res=> {
+        this.datasourceCotizaciones = res;
+        console.log('COTIZACIONES TODAS', res);
+        this.cotizacion_Numero = this.cotizacion_Numero = requisicion_interna + '-' + (this.datasourceCotizaciones.filter(e => e.codigo_requisicioninterna == requisicion_interna).length + 1);
+
+      },
+      error => console.log("error consulta proyectos",error)
+    )
+  }
+
+  getrequisitionAll(){
+    // Obtiene todas las requisiciones 
+    console.log('requisiciones', this.newProject.controls["categoria_id"].value)
+    this._requisitionservice.getRequisitionAll().subscribe(
+      res=> {
+        // this.datasourceRequisition = [];
+        this.datasourceRequisition = res;
+        console.log('categoria_id', this.newProject.controls["categoria_id"].value);
+        console.log('ALL ALL ALL', res);
+          console.log('REQUISICIONES TODAS', this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value));
+          this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value)
+
+          // // Consulta detalle de requisición
+          // this.getRequisitionDetail();
+      },
+      error => console.log("error consulta requisiciones",error)
+    )
+
   }
 
   getrequisition(){
-    // Obtiene requisiciones 
+    // Obtiene las requisiciones 
+    console.log('requisiciones', this.newProject.controls["categoria_id"].value)
     this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(
       res=> {
         this.datasourceRequisition = [];
         this.datasourceRequisition.push(res);
           console.log('REQUISICIONES', this.datasourceRequisition);
 
-          // Consulta detalle de requisición
-          this.getRequisitionDetail();
+      //     // Consulta detalle de requisición
+      //     this.getRequisitionDetail();
       },
       error => console.log("error consulta requisiciones",error)
     )
   }
 
-  getRequisitionDetail(){
+  getRequisitionDetail(Requisition_Id : any){
     // Obtiene requisiciones 
-    this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(
+    
+    console.log('Requisition_Id', Requisition_Id);
+    this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(
       res=> {
-        this.dataSourceShow = new MatTableDataSource(res);
-          console.log('REQUISICIONES', this.datasourceRequisitionDetail);
-
+        this.datasourceRequisitionDetail = [(res)];
+  
+          console.log('REQUISICIONES DETALLE', this.datasourceRequisitionDetail);
       },
       error => console.log("error consulta requisiciones",error)
     )
   }
 
-  getCategories(proyecto : any){
+  getCategories(){
     // Obtiene categorias 
-    this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(
+    this._projectCategoryservice.getProjectCateogryAll().subscribe(
       res=> {
         this.datasourceCategories = res;
         console.log('PROYECTOS - CATEGORIAS', res);
@@ -181,13 +231,32 @@ export class QuotationDetailComponent implements OnInit {
     )
   }
 
+  find(form, event){
+    // Buscar requisiciones
+    console.log('requisiciones', this.requisicion_Numero)
+    // this._requisitionservice.getRequisitionById(this.cotizacion_Numero).subscribe(
+    //   res=> {
+    //     this.datasourceCategories = res;
+    //     console.log('PROYECTOS - CATEGORIAS', res);
+    //   },
+    //   error => console.log("error consulta cateogorias",error)
+    // )
+
+  }
+
+  SeleccionarRegistro(element : any, event : Event){
+    this.seleccionaRegistro = event["checked"]
+    console.log('Actualiza registro de activar y desactivar', event["checked"])
+  }
+
   save(form, event){
 
     let arrayTodb : any;
 
     if(this.requisicionId == 0){
-      arrayTodb = { proyecto_id : this.proyecto_id,
-                  categoria_id : this.categoria_id,
+      arrayTodb = { 
+        // proyecto_id : this.proyecto_id,
+                  requisicioninterna_id : this.requisicionId,
                   codigo : this.requisicion_Numero,
                   fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 };
@@ -204,7 +273,8 @@ export class QuotationDetailComponent implements OnInit {
       )
     }
     else{
-      arrayTodb = {proyecto_id : this.proyecto_id,
+      arrayTodb = {
+        // proyecto_id : this.proyecto_id,
         categoria_id : this.categoria_id,
         requisicion_id : this.requisicion_id,
         fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')

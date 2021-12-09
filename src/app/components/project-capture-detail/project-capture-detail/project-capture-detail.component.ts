@@ -24,11 +24,11 @@ export class ProjectCaptureDetailComponent implements OnInit {
   fecha_inicial_proyecto:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   fecha_final_proyecto:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   nombre_proyecto : any = ''  
-  cliente : any = '0';
+  cliente : any = '1';
   presupuesto_proyecto : any = 0;
   responsable_proyecto : any = '';
-  centro_de_costo_proyecto : any = '0';
-  almacen : any = '0';
+  centro_de_costo_proyecto : any = '1';
+  almacen : any = '1';
   codigo_proyecto : any = '';
   proeycto_id_mayor : number = 0;
   proeycto_numero_mayor : number = 0;
@@ -64,7 +64,8 @@ export class ProjectCaptureDetailComponent implements OnInit {
       // proyecto_id: new FormControl(''),
       nombre_proyecto: new FormControl(''),
       cliente: new FormControl(''),
-      presupuesto_proyecto: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      // presupuesto_proyecto: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      presupuesto_proyecto: (''),
       // presupuesto_proyecto: new FormControl('', Validators.required),
       fecha_inicial_proyecto: new FormControl(''),
       fecha_final_proyecto: new FormControl(''),
@@ -84,23 +85,23 @@ export class ProjectCaptureDetailComponent implements OnInit {
           proyecto_id : this.projectInfo["proyecto_id"],
           codigo_proyecto : this.projectInfo["codigo_proyecto"],
           nombre_proyecto : this.projectInfo["nombre_proyecto"] ,
-          cliente : this.projectInfo["cliente_id"],
+          cliente : this.projectInfo["cliente_id"].toString(),
           presupuesto_proyecto : this.projectInfo["presupuesto_proyecto"] ,
           fecha_inicial_proyecto : this.projectInfo["fecha_inicial_proyecto"],
           fecha_final_proyecto : this.projectInfo["fecha_final_proyecto"] ,
           responsable_proyecto : this.projectInfo["responsable_proyecto"],
-          centroDeCostos : this.projectInfo["centro_de_costo_proyecto_id"] ,
-          almacen : this.projectInfo["almacen_id"]
+          centroDeCostos : this.projectInfo["centro_de_costo_proyecto_id"].toString() ,
+          almacen : this.projectInfo["almacen_id"].toString()
       })
-
+console.log('sss', this.projectInfo["cliente_id"]);
       this.nombre_proyecto = this.projectInfo["nombre_proyecto"];
-      this.cliente = this.projectInfo["cliente_id"];
+      this.cliente = this.projectInfo["cliente_id"].toString() ;
       this.presupuesto_proyecto = this.projectInfo["presupuesto_proyecto"];
       this.fecha_inicial_proyecto = this.projectInfo["fecha_inicial_proyecto"];
       this.fecha_final_proyecto = this.projectInfo["fecha_final_proyecto"];
       this.responsable_proyecto = this.projectInfo["responsable_proyecto"];
-      this.centro_de_costo_proyecto = this.projectInfo["centro_de_costo_proyecto_id"];
-      this.almacen = this.projectInfo["almacen_id"];
+      this.centro_de_costo_proyecto = this.projectInfo["centro_de_costo_proyecto_id"].toString();
+      this.almacen = this.projectInfo["almacen_id"].toString();
       this.codigo_proyecto = '';
     }
 

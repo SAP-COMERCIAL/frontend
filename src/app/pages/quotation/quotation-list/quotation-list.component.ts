@@ -97,7 +97,8 @@ dataSourceShow : MatTableDataSource<quotationListModel>
       id: 1,
       title: 'COTIZACIONES',
       arrayData : null,
-      requisicionId: 1
+      requisicionId: 0,
+      cotizacionId : 0
      
     }
     dialogConfig.width = '1200px';

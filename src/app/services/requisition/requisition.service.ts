@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { observable, Observable, of } from 'rxjs';
 import { requisitionModel } from 'src/app/models/requisition.model';
+import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
 import { environment } from 'src/environments/environment';
 import { from } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -24,7 +25,7 @@ export class requisitionservice {
     }
 
     getRequisitionDetail(id : any) {
-        return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/' + id);
+        return this.http.get<requisitionModelDetail[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/detalle/' + id);
     }
 
     insertRequisition(arrayToDb : any) {

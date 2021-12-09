@@ -56,7 +56,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
 
   this.dataSourceShow.filteredData.forEach(element => {
     dataSourceShowToExcel.push({proyecto_id : element.proyecto_id
-                              , categoria : element.Categoria_Id
+                              , categoria : element.codigo_proyectocategoria
                               , requisicion : element.Requisicion_Id
                               , Fecha_Requisicion : moment(element.Fecha_Requisicion, 'YYYY-MM-DD').format('DD-MM-YYYY')
                               , estatus : element.Estatus

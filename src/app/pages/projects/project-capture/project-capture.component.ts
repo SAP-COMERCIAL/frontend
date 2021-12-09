@@ -97,8 +97,8 @@ public array: any;
       projectId : element.proyecto_id
      
     }
-    dialogConfig.width = '800px';
-    dialogConfig.height = '500px';
+    dialogConfig.width = '900px';
+    dialogConfig.height = '700px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(ProjectCaptureDetailComponent, dialogConfig);
@@ -143,7 +143,7 @@ public array: any;
      
     }
     dialogConfig.width = '900px';
-    dialogConfig.height = '500px';
+    dialogConfig.height = '700px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(ProjectCaptureDetailComponent, dialogConfig);

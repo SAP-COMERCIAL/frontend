@@ -1,4 +1,5 @@
-<div fxLayout="row" [formGroup]="newProject">
+<!-- [formGroup]="newProject" -->
+<div fxLayout="row" >
     <div fxFlex.gt-sm="95%" >
             <mat-card>
               <mat-table [dataSource]="datasourceProjectCategories" matSort class="mat-elevation-z8" style="vertical-align: middle;">
@@ -11,10 +12,12 @@
                     <div style="width: 50px;">
                     <td mat-cell *matCellDef="let element; let i = index">
                       <mat-checkbox color="warn"
-                                  formControlName="activo" 
+                                  [checked]="element.activo"
                                   (click)="$event.stopPropagation()"
                                   (change)="ActivarDesactivar(element.activo, $event)"
+                                  [(ngModel)]="element.activo"
                                   >
+                                  <!-- formControlName="activo"  -->
                                   <!--[checked]="selection.isSelected(element.proyecto_id)"-->
                                   <!--[(ngModel)]="element.activo" -->
                       </mat-checkbox>
@@ -37,41 +40,59 @@
               <!-- responsable Column -->
               <ng-container matColumnDef="responsable">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Responable </th>
-                <td mat-cell *matCellDef="let element"> <input type="text" class="controltable100" formControlName="responsable" value="{{element.responsable}}" placeholder="{{element.responsable}}"> </td><!--[(ngModel)]="element.responsable" -->
+                <td mat-cell *matCellDef="let element"> 
+                  <mat-form-field>
+                    <mat-label>{{element.responsable}}</mat-label>
+                    <input [type]="element.responsable" matInput [(ngModel)]="element.responsable" (keyup)="checkEnterKey($event, 'responsable')">
+                  </mat-form-field>
+                  <!-- <input type="text" class="controltable100" [(ngModel)]="element.responsable" value="responsableEdicion">  -->
+                </td>
+                <!-- formControlName="responsable" -->
               </ng-container>
 
               <!-- presupuesto Column -->
               <ng-container matColumnDef="presupuesto">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Presupuesto </th>
-                <td mat-cell *matCellDef="let element"> <input type="text" class="controltable100" formControlName="presupuesto" value="{{element.presupuesto}}" placeholder="{{element.presupuesto}}"> </td><!--[(ngModel)]="element.presupuesto" -->
+                <td mat-cell *matCellDef="let element"> 
+                  <mat-form-field>
+                    <mat-label>{{element.presupuesto}}</mat-label>
+                    <input [type]="element.presupuesto" matInput [(ngModel)]="element.presupuesto" (keyup)="checkEnterKey($event, 'presupuesto')">
+                  </mat-form-field>
+                  <!-- <input type="number" step="any" class="controltable100" formControlName="presupuesto" value="{{element.presupuesto}}" placeholder="{{element.presupuesto}}">  -->
+                </td>
+                  <!--[(ngModel)]="element.presupuesto" -->
               </ng-container>
 
               <!-- fecha incial Column -->
               <ng-container matColumnDef="fecha_inicial">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha incial </th>
                 <td mat-cell *matCellDef="let element"> <div><mat-form-field appearance="fill">
-                  <mat-label>Selecciona</mat-label>
-                  <input matInput [matDatepicker]="picker" formControlName="fecha_inicial" (dateChange)="fechaInicial($event)" class="controltable100" [(ngModel)]="element.fecha_inicial"><!--[(ngModel)]="element.fecha_inicial" -->
+                  <mat-label>{{element.fecha_inicial | date: 'dd-MM-yyyy'}}</mat-label>
+                  <input matInput [matDatepicker]="picker" (dateChange)="checkEnterKey($event, 'fecha')" class="controltable100" [(ngModel)]="element.fecha_inicial" ><!-- formControlName="fecha_inicial"" -->
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-datepicker [startAt]="element.fecha_inicial" #picker></mat-datepicker>
                 </mat-form-field></div></td>
               </ng-container>
 
               <!-- almacen Column -->
               <ng-container matColumnDef="almacen_id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Almacen </th>
-                <td mat-cell *matCellDef="let element"> <div><mat-select class="form-control"  formControlName="almacen" ><!--(selectionChange)="emitFilters($event, 'Enviado')" [(ngModel)]="element.almacen"-->
-                  <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
-                  <mat-option value= "1">California</mat-option>
-                  <mat-option value= "2">Norte</mat-option>
-                  <mat-option value= "3">Centro</mat-option>
-                  </mat-select></div> </td>
+                <td mat-cell *matCellDef="let element"> 
+                  <div>
+                    <mat-select class="form-control"  [(ngModel)]="element.almacen_id" (selectionChange)="seleccionaAlmacen($event, 'almacen')"><!--(selectionChange)="emitFilters($event, 'Enviado')" [(ngModel)]="element.almacen" formControlName="almacen_id" -->
+                      <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
+                      <mat-option value= "1">California</mat-option>
+                      <mat-option value= "2">Norte</mat-option>
+                      <mat-option value= "3">Centro</mat-option>
+                    </mat-select>
+                  </div>
+                </td>
               </ng-container>
 
               <!-- Email Column -->
               <ng-container matColumnDef="actualizar">
                 <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Actualizar </th>
-                <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="save(element, $event)">Actualizar</button> </td>
+                <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="save(element, element.responsable, $event)">Actualizar</button> </td>
               </ng-container>
               
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

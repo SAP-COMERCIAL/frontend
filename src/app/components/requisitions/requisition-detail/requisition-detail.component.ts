@@ -93,7 +93,7 @@ export class RequisitionDetailComponent implements OnInit {
           requisicion_id : '', // this.projectInfo["requisicion_id"] ,
           requisicion_Numero : this.projectInfo["codigo"] ,
           categoria_id : '', // this.projectInfo["categoria_id"],
-          fecha : '', // this.projectInfo["fecha"]
+          fecha : this.projectInfo["fecha"], // this.projectInfo["fecha"]
           loadfile : ''
           
       })
@@ -265,10 +265,6 @@ export class RequisitionDetailComponent implements OnInit {
 
     arrayProyectoCategoria = this.datasourceCategories.filter(e => e.proyectocategoria_id == proyectoCategoria_id);
     codigo_categoria = arrayProyectoCategoria[0]["codigo_proyectocategoria"]
-
-    console.log('Selecciona requiscion, buscar en this.datasourceCategories', codigo_categoria);
-
-
     this.getrequisition(codigo_categoria);
   }
 
@@ -290,24 +286,18 @@ export class RequisitionDetailComponent implements OnInit {
           console.log('Primer codigo requsicion', codigo_requisicion);
         }else{
           // Obtener requisicion en la que se mas alta y determinar cual sigue
-          arrayRequisition = this.datasourceRequisition.filteredData.filter(e => e.categoria_id == categoria_id);
-
-          console.log('No hay requisiciones, nuevo valor', arrayRequisition);
-
+          arrayRequisition = this.datasourceRequisition.filteredData.filter(e => e.proyectocategoria_id == categoria_id);
+          console.log('arrayRequisition', arrayRequisition);
           if(arrayRequisition.length > 0){
-            // codigo_categoria = arrayRequisition[0]["codigo_categoria"]
-            arrayCodigoCategoria = (this.datasourceRequisition.filteredData.filter(e => e.codigo_categoria == codigo_categoria)).length
-            codigo_requisicion = codigo_categoria + '-' + (arrayCodigoCategoria + 1)
+            let cantidadRequisition = arrayRequisition.length
+            codigo_requisicion = codigo_categoria + '-' + (cantidadRequisition + 1)
           }else{
             // obtener codigo_categoria
-            // codigo_categoria = '1900-PIP'
             arrayCodigoCategoria = 1;
             codigo_requisicion = codigo_categoria + '-1'; 
           }
 
         }
-        
-        
 
         // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
         this.requisicion_Numero = codigo_requisicion;
@@ -315,8 +305,6 @@ export class RequisitionDetailComponent implements OnInit {
 
         console.log('aqui esta', this.datasourceRequisition.filteredData.filter(e => e.codigo_categoria == codigo_categoria))
         console.log('aqui esta', categoria_id)
-        // console.log('aqui esta', this.datasourceRequisition.filteredData.filter(e => e.codigo_categoria == categoria_id))
-        // console.log('aqui esta', this.datasourceRequisition.filteredData.find(e => e.codigo_categoria == this.newProject["codigo_categoria"].value))
       },
       error => console.log("error consulta regiones",error)
     )
@@ -375,7 +363,7 @@ export class RequisitionDetailComponent implements OnInit {
 
 insertRequisitionDet(requisicionId : any){
 
-  console.log('para guardar')
+  console.log('para guardar', this.UploadDataExcel.filteredData)
 
   // Obtiene Requisicion Registrada
   let datasourceRequsition : MatTableDataSource<requisitionModel>
@@ -385,14 +373,16 @@ insertRequisitionDet(requisicionId : any){
       this.UploadDataExcel.filteredData.forEach(element => {
         arrayToDb = {requisicioninterna_id : requisicionId
             , cantidad : element.cantidad
-            , um : element.unidad_de_medida
+            , um : element.um
             , descripcion : element.descripcion
         }
+
+        console.log('DETALLE DETALLE DETALLE', arrayToDb);
 
         // Inserta Proyecto Categoria
         this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
           res=> {
-            console.log('REQUISICIONES DETALLE', arrayToDb);
+            console.log('REQUISICIONES DETALLE', res);
           },
           error => console.log("error al insertar proyectos categorias",error)
         )
