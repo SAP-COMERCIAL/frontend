@@ -139,7 +139,6 @@ export class QuotationDetailComponent implements OnInit {
   }
 
   categorySelected(){
-    console.log('aaaaa', this.newProject.controls["categoria_id"].value);
     this.getrequisitionAll();
   }
 
@@ -150,11 +149,9 @@ export class QuotationDetailComponent implements OnInit {
 
     this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
     arrayRequisicion_interna = this.datasourceRequisition.filter(e => e.requisicioninterna_id == this.requisicionId);
-    console.log('requisicion interna', this.requisicionId);
     
     this.getCotizacionesAll(arrayRequisicion_interna[0]["codigo"])
     
-
     // Busca cotizaciones y arma nuevo numero de cotización
     this.getRequisitionDetail(this.requisicionId)
   }
@@ -173,14 +170,10 @@ export class QuotationDetailComponent implements OnInit {
 
   getrequisitionAll(){
     // Obtiene todas las requisiciones 
-    console.log('requisiciones', this.newProject.controls["categoria_id"].value)
     this._requisitionservice.getRequisitionAll().subscribe(
       res=> {
         // this.datasourceRequisition = [];
         this.datasourceRequisition = res;
-        console.log('categoria_id', this.newProject.controls["categoria_id"].value);
-        console.log('ALL ALL ALL', res);
-          console.log('REQUISICIONES TODAS', this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value));
           this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value)
 
           // // Consulta detalle de requisición
@@ -193,7 +186,6 @@ export class QuotationDetailComponent implements OnInit {
 
   getrequisition(){
     // Obtiene las requisiciones 
-    console.log('requisiciones', this.newProject.controls["categoria_id"].value)
     this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(
       res=> {
         this.datasourceRequisition = [];
@@ -209,8 +201,6 @@ export class QuotationDetailComponent implements OnInit {
 
   getRequisitionDetail(Requisition_Id : any){
     // Obtiene requisiciones 
-    
-    console.log('Requisition_Id', Requisition_Id);
     this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(
       res=> {
         this.datasourceRequisitionDetail = [(res)];
@@ -258,7 +248,7 @@ export class QuotationDetailComponent implements OnInit {
       arrayTodb = { 
         // proyecto_id : this.proyecto_id,
                   requisicioninterna_id : this.requisicionId,
-                  codigo : this.requisicion_Numero,
+                  codigo : this.newProject.controls["cotizacion_Numero"].value,
                   fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 };
 

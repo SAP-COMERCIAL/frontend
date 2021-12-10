@@ -89,7 +89,6 @@ dataSourceShow : MatTableDataSource<quotationListModel>
   }
 
   nuevaCotizacion(evetn){
-    console.log('Alta de cotizaciones');
 
     const dialogConfig = new MatDialogConfig();
 

@@ -93,7 +93,6 @@ export class ProjectCaptureDetailComponent implements OnInit {
           centroDeCostos : this.projectInfo["centro_de_costo_proyecto_id"].toString() ,
           almacen : this.projectInfo["almacen_id"].toString()
       })
-console.log('sss', this.projectInfo["cliente_id"]);
       this.nombre_proyecto = this.projectInfo["nombre_proyecto"];
       this.cliente = this.projectInfo["cliente_id"].toString() ;
       this.presupuesto_proyecto = this.projectInfo["presupuesto_proyecto"];
@@ -113,7 +112,6 @@ console.log('sss', this.projectInfo["cliente_id"]);
       res=> {
         this.datasourceProyects = res;
         if(this.projectId == 0){
-          console.log('prpyeccccc', this.projectId )
           this.codigo_proyecto = Number(this.datasourceProyects[this.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
           console.log('PROEYCTOS TODOS', this.proeycto_numero_mayor);
         }else{
@@ -190,9 +188,6 @@ console.log('sss', this.projectInfo["cliente_id"]);
   }
 
 insertCategories(){
-
-  console.log('para guardar')
-
   // Obtiene Proyecto Registrado
   let datasourceProyectos : MatTableDataSource<projectModel>
   let proyectoIdMaximo : any = "0";
@@ -205,10 +200,7 @@ insertCategories(){
       proyectoIdMaximo = (datasourceProyectos.filteredData[datasourceProyectos.filteredData.length -1]["proyecto_id"]);
       codigoProyecto = datasourceProyectos.filteredData.find(e => e.proyecto_id == proyectoIdMaximo);
 
-      console.log('proyectoid proyectaso', codigoProyecto["codigo_proyecto"]);
-
       this.datasourceCategories.forEach(element => {
-        console.log('proyectoid', codigoProyecto["codigo_proyecto"] + '-' + element.codigo_categoria);
         arrayProjectCategories = {proyecto_id : proyectoIdMaximo
             , categoria_id : element.categoria_id
             , presupuesto : 0

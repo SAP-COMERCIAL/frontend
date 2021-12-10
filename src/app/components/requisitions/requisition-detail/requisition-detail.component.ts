@@ -362,9 +362,6 @@ export class RequisitionDetailComponent implements OnInit {
   }
 
 insertRequisitionDet(requisicionId : any){
-
-  console.log('para guardar', this.UploadDataExcel.filteredData)
-
   // Obtiene Requisicion Registrada
   let datasourceRequsition : MatTableDataSource<requisitionModel>
   let requisitionIdMaximo : any = "0";
