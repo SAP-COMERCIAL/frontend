@@ -4,7 +4,7 @@ export class requisitionModelDetail{
     requisicioninterna_id : string
     cantidad: number
     codigo_requisicioninterna : string
-    um : string
+    unidad_de_medida : string
     descripcion: string
     estado : boolean
     cotizado: boolean

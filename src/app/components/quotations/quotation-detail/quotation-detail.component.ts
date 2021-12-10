@@ -81,6 +81,7 @@ export class QuotationDetailComponent implements OnInit {
   ) { 
     this.projectInfo = data.arrayData;
     this.requisicionId = data.requisicionId;
+    this.quotationId = data.cotizacionId;
 
     this.newProject = this.formBuilder.group({
       // proyecto_id : new FormControl(''),
@@ -143,19 +144,19 @@ export class QuotationDetailComponent implements OnInit {
   }
 
   RequisitionSelected(){
-    let requisicion_Id : any;
+    
     let arrayRequisicion_interna : any;
     let codigoRequisicion_interna : any;
 
-    requisicion_Id = this.newProject.controls["requisicion_Numero"].value;
-    arrayRequisicion_interna = this.datasourceRequisition.filter(e => e.requisicioninterna_id == requisicion_Id);
-    console.log('requisicion interna', arrayRequisicion_interna[0]["codigo"]);
+    this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
+    arrayRequisicion_interna = this.datasourceRequisition.filter(e => e.requisicioninterna_id == this.requisicionId);
+    console.log('requisicion interna', this.requisicionId);
     
     this.getCotizacionesAll(arrayRequisicion_interna[0]["codigo"])
     
 
     // Busca cotizaciones y arma nuevo numero de cotización
-    this.getRequisitionDetail(requisicion_Id)
+    this.getRequisitionDetail(this.requisicionId)
   }
 
   getCotizacionesAll(requisicion_interna : any){
@@ -253,7 +254,7 @@ export class QuotationDetailComponent implements OnInit {
 
     let arrayTodb : any;
 
-    if(this.requisicionId == 0){
+    if(this.quotationId == 0){
       arrayTodb = { 
         // proyecto_id : this.proyecto_id,
                   requisicioninterna_id : this.requisicionId,
@@ -262,12 +263,12 @@ export class QuotationDetailComponent implements OnInit {
                 };
 
       // INSERTA REQUISICION HDR
-      this._requisitionservice.insertRequisition(arrayTodb).subscribe(
+      this._quotationservice.insertQuotation(arrayTodb).subscribe(
         res=> {
           console.log('Se inserto con éxito', res);
 
           // INSERTA REQUISICIONES DET
-          this.insertRequisitionDet(res);
+          this.insertQuotationDet(res);
         },
         error => console.log("error alta de proyectos",error)
       )
@@ -276,7 +277,7 @@ export class QuotationDetailComponent implements OnInit {
       arrayTodb = {
         // proyecto_id : this.proyecto_id,
         categoria_id : this.categoria_id,
-        requisicion_id : this.requisicion_id,
+        requisicioninterna_id : this.requisicionId,
         fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
       };
 
@@ -291,7 +292,7 @@ export class QuotationDetailComponent implements OnInit {
     }
   }
 
-insertRequisitionDet(requisicionId : any){
+  insertQuotationDet(cotizacionId : any){
 
   console.log('para guardar')
 
@@ -300,24 +301,25 @@ insertRequisitionDet(requisicionId : any){
   let requisitionIdMaximo : any = "0";
   let arrayToDb : any;
 
-      // this.UploadDataExcel.filteredData.forEach(element => {
-      //   arrayToDb = {requisicioninterna_id : requisicionId
-      //       , cantidad : element.cantidad
-      //       , um : element.unidad_de_medida
-      //       , descripcion : element.descripcion
-      //   }
+      this.datasourceRequisitionDetail.forEach(element => {
+        arrayToDb = { cotizacion_id : cotizacionId
+            , requisicioninternaDetalle_id : cotizacionId
+            , cantidad : element.cantidad
+            , um : element.um
+            , descripcion : element.descripcion
+        }
 
-      //   // Inserta Proyecto Categoria
-      //   this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
-      //     res=> {
-      //       console.log('REQUISICIONES DETALLE', arrayToDb);
-      //     },
-      //     error => console.log("error al insertar proyectos categorias",error)
-      //   )
+        // Inserta Proyecto Categoria
+        this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
+          res=> {
+            console.log('INSERTA COTIZACION DETALLE', arrayToDb);
+          },
+          error => console.log("error al insertar proyectos categorias",error)
+        )
         
-      //   arrayToDb = null;
+        arrayToDb = null;
 
-      // });
+      });
 }
 
   fechaControl(event){

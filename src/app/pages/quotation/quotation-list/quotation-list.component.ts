@@ -135,7 +135,11 @@ dataSourceShow : MatTableDataSource<quotationListModel>
     // });
   }
 
-  filtrar(event){}
+  filtrar(event : Event){
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSourceShow.filter = filtro.trim().toLowerCase();
+    console.log('filtro', filtro);
+  }
 
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;

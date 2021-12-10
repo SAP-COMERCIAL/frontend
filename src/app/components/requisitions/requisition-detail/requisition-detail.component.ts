@@ -327,7 +327,7 @@ export class RequisitionDetailComponent implements OnInit {
 
     if(this.requisicionId == 0){
       arrayTodb = { proyecto_id : this.proyecto_id,
-                  categoria_id : this.categoria_id,
+                  proyectocategoria_id : this.categoria_id,
                   codigo : this.requisicion_Numero,
                   fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 };
@@ -345,7 +345,7 @@ export class RequisitionDetailComponent implements OnInit {
     }
     else{
       arrayTodb = {proyecto_id : this.proyecto_id,
-        categoria_id : this.categoria_id,
+        proyectocategoria_id : this.categoria_id,
         requisicion_id : this.requisicion_id,
         fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
       };
@@ -373,7 +373,7 @@ insertRequisitionDet(requisicionId : any){
       this.UploadDataExcel.filteredData.forEach(element => {
         arrayToDb = {requisicioninterna_id : requisicionId
             , cantidad : element.cantidad
-            , um : element.um
+            , um : element.unidad_de_medida
             , descripcion : element.descripcion
         }
 
