@@ -4309,7 +4309,7 @@ File: scss
   color: rgba(0, 0, 0, 0.38);
 }
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-  color: orangered; /*#1e88e5*/
+  color: #1e88e5;
 }
 .mat-accent .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #3f51b5;
@@ -4334,7 +4334,7 @@ File: scss
 }
 .mat-primary .mat-pseudo-checkbox-checked,
 .mat-primary .mat-pseudo-checkbox-indeterminate {
-  background: orangered; /*#1e88e5*/
+  background: #1e88e5;
 }
 .mat-pseudo-checkbox-checked,
 .mat-pseudo-checkbox-indeterminate,
@@ -4447,7 +4447,7 @@ File: scss
 }
 .mat-badge-content {
   color: white;
-  background: orangered; /*#1e88e5*/
+  background: #1e88e5;
 }
 .cdk-high-contrast-active .mat-badge-content {
   outline: solid 1px;
@@ -4617,7 +4617,7 @@ File: scss
   background: transparent;
 }
 .mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {
-  color: orangered; /*#1e88e5*/
+  color: #1e88e5;
 }
 .mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
   color: #3f51b5;
@@ -4629,7 +4629,7 @@ File: scss
   color: rgba(0, 0, 0, 0.26);
 }
 .mat-button.mat-primary .mat-button-focus-overlay, .mat-icon-button.mat-primary .mat-button-focus-overlay, .mat-stroked-button.mat-primary .mat-button-focus-overlay {
-  background-color: orangered; /*#1e88e5*/
+  background-color: #1e88e5;
 }
 .mat-button.mat-accent .mat-button-focus-overlay, .mat-icon-button.mat-accent .mat-button-focus-overlay, .mat-stroked-button.mat-accent .mat-button-focus-overlay {
   background-color: #3f51b5;
@@ -4667,7 +4667,7 @@ File: scss
   color: rgba(0, 0, 0, 0.26);
 }
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
-  background-color: orangered; /*#1e88e5*/
+  background-color: #1e88e5;
 }
 .mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
   background-color: #3f51b5;
@@ -4791,7 +4791,7 @@ File: scss
   background-color: #fafafa;
 }
 .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background, .mat-checkbox-checked.mat-primary .mat-checkbox-background {
-  background-color: orangered; /*#1e88e5*/
+  background-color: #1e88e5;
 }
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background-color: #3f51b5;
@@ -4813,7 +4813,7 @@ File: scss
 }
 .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element,
 .mat-checkbox:active:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
-  background: orangered; /*#1e88e5*/
+  background: #1e88e5;
 }
 .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
 .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
@@ -5846,11 +5846,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   color: rgba(0, 0, 0, 0.87);
 }
 .mat-toolbar.mat-primary {
-  background: orangered; /*#1e88e5*/
-  color: white;
-}
-.mat-toolbar.mat-orange {
-  background: 242.133.50;
+  background: #1e88e5;
   color: white;
 }
 .mat-toolbar.mat-accent {
@@ -10317,7 +10313,7 @@ html body [dir=rtl] .course-header .mat-card-title .course-duration {
   color: rgba(0, 0, 0, 0.87);
 }
 .danger .mat-toolbar.mat-primary {
-  background: orangered; /* #f44336 */
+  background: #f44336;
   color: white;
 }
 .danger .mat-toolbar.mat-accent {
@@ -11921,7 +11917,7 @@ html body [dir=rtl] .course-header .mat-card-title .course-duration {
   color: rgba(0, 0, 0, 0.87);
 }
 .blue .mat-toolbar.mat-primary {
-  background: orangered; /* #1e88e5 */
+  background: #1e88e5;
   color: white;
 }
 .blue .mat-toolbar.mat-accent {
@@ -15406,7 +15402,7 @@ html body [dir=rtl] .course-header .mat-card-title .course-duration {
   color: white;
 }
 .dark .mat-toolbar.mat-primary {
-  background: orangered; /*#2196f3*/
+  background: #2196f3;
   color: white;
 }
 .dark .mat-toolbar.mat-accent {
