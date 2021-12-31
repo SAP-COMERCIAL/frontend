@@ -57,16 +57,16 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   this.dataSourceShow.filteredData.forEach(element => {
     dataSourceShowToExcel.push({proyecto_id : element.proyecto_id
                               , categoria : element.codigo_proyectocategoria
-                              , requisicion : element.Requisicion_Id
+                              , requisicion : element.requisicioninterna_id
                               , Fecha_Requisicion : moment(element.Fecha_Requisicion, 'YYYY-MM-DD').format('DD-MM-YYYY')
-                              , estatus : element.Estatus
+                              , estatus : element.estado
       })
     });
 
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Requisicones');  
   }
 
-  nuevaRequisicion(evetn){
+  nuevaOrdenDeCompra(evetn){
     console.log('Alta de requisiciones');
 
     const dialogConfig = new MatDialogConfig();
@@ -78,8 +78,8 @@ dataSourceShow : MatTableDataSource<requisitionModel>
       requisicionId: 1
      
     }
-    dialogConfig.width = '900px';
-    dialogConfig.height = '400px';
+    dialogConfig.width = '1500px';
+    dialogConfig.height = '9000px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);

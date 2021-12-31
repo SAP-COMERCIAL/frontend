@@ -31,11 +31,11 @@ export class CategoriesComponent implements OnInit {
   proyecto_id : any = 0;
   responsableEdicion : any = '';
   presupuestoEdicion : any = '';
-  activoEdicion : boolean = false;
+  activoEdicion : boolean = true;
   almacenEdicion : any = '';
   fechaEdicion : any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   presupuesto : any = 0;
-  activo : any = false;
+  activo : any = true;
 
   displayedColumns: string[] = ['select','codigo_proyectocategoria', 'nombre_categoria', 'responsable', 'presupuesto', 'fecha_inicial', 'almacen_id', 'actualizar'];
   datasourceProjectCategories : MatTableDataSource<projectCategoryModel>
@@ -47,7 +47,8 @@ export class CategoriesComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<projectCategoryModel>
       , @Inject(MAT_DIALOG_DATA) public data,public snackBar: MatSnackBar
       , private _projectCategoryservice : projectCategoryservice
-      , private formBuilder: FormBuilder) { 
+      , private formBuilder: FormBuilder
+      , private _snackBar : MatSnackBar) { 
         this.projectInfo = data.arrayData;
         this.projectId = data.projectId;
 
@@ -133,6 +134,7 @@ export class CategoriesComponent implements OnInit {
     this._projectCategoryservice.updateProjectCatgory(arrayToDb).subscribe(
       res=> {
         console.log('ACTUALIZA PROYECO CATEGORIA', arrayToDb);
+        this.openSnackBar('El registro se actualizó con éxito', '');
       },
       error => console.log("error al insertar proyectos categorias",error)
     )
@@ -145,6 +147,10 @@ export class CategoriesComponent implements OnInit {
     console.log('almacen', this.almacenEdicion);
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration : 3000});
+  }
+  
   salir(){
     this.dialogRef.close();
   }

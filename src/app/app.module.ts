@@ -2,10 +2,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { AppRoutes } from './app.routing';
+import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -33,6 +34,9 @@ import { QuotationListComponent } from './pages/quotation/quotation-list/quotati
 import { PoListComponent } from './pages/purchaseOrder/po-list/po-list.component';
 import { StorageInvoiceListComponent } from './pages/storageInvoice/storage-invoice-list/storage-invoice-list.component';
 import { QuotationDetailComponent } from './components/quotations/quotation-detail/quotation-detail.component';
+import { QuotationDetailFilesComponent } from './components/quotations/quotation-detail-files/quotation-detail-files.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { WarehouseReviewComponent } from './pages/warehouse-review/warehouse-review.component';
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
 
@@ -53,7 +57,10 @@ import { QuotationDetailComponent } from './components/quotations/quotation-deta
     QuotationListComponent,
     PoListComponent,
     StorageInvoiceListComponent,
-    QuotationDetailComponent
+    QuotationDetailComponent,
+    QuotationDetailFilesComponent,
+    AuthComponent,
+    WarehouseReviewComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent
@@ -71,7 +78,13 @@ import { QuotationDetailComponent } from './components/quotations/quotation-deta
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(AppRoutes, {useHash: true})
+    AppRoutingModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    })
+    // RouterModule.forRoot(AppRoutingModule, {useHash: true}) // AppRoutes
   ],
   exports:[ MatTableModule ],
   providers: [

@@ -15,8 +15,10 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { DataSource } from '@angular/cdk/table';
 import { QuotationDetailComponent } from 'src/app/components/quotations/quotation-detail/quotation-detail.component';
+import { QuotationDetailFilesComponent } from 'src/app/components/quotations/quotation-detail-files/quotation-detail-files.component';
 import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-quotation-list',
@@ -100,8 +102,8 @@ dataSourceShow : MatTableDataSource<quotationListModel>
       cotizacionId : 0
      
     }
-    dialogConfig.width = '1200px';
-    dialogConfig.height = '700px';
+    dialogConfig.width = '1300px';
+    dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(QuotationDetailComponent, dialogConfig);
@@ -111,27 +113,28 @@ dataSourceShow : MatTableDataSource<quotationListModel>
     });
   }
 
-  editCotizacion(event){
+  editCotizacion(element : any, event){
     console.log('Edita cotizaciones');
 
-    // const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.data = {
-    //   id: 1,
-    //   title: 'COTIZACIONES',
-    //   arrayData : null,
-    //   requisicionId: 1
+    dialogConfig.data = {
+      id: 1,
+      title: 'COTIZACIONES',
+      arrayData : element,
+      requisicionId: 0,
+      cotizacionId : 0
      
-    // }
-    // dialogConfig.width = '900px';
-    // dialogConfig.height = '400px';
-    // dialogConfig.disableClose = true;
+    }
+    dialogConfig.width = '1200px';
+    dialogConfig.height = '700px';
+    dialogConfig.disableClose = true;
 
-    // const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(QuotationDetailFilesComponent, dialogConfig);
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   window.location.reload();
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 
   filtrar(event : Event){

@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DemoMaterialModule } from '../../../demo-material-module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { QuotationDetailRoutes } from './quotation-detail.routing';
+import { QuotationDetailFilesRoutes } from './quotation-detail-files.routing';
 import { ChartistModule } from 'ng-chartist';
 
 @NgModule({
@@ -12,8 +12,8 @@ import { ChartistModule } from 'ng-chartist';
     DemoMaterialModule,
     FlexLayoutModule,
     ChartistModule,
-    RouterModule.forChild(QuotationDetailRoutes)
+    RouterModule.forChild(QuotationDetailFilesRoutes)
   ],
   // declarations: [ProjectCaptureDetailComponent]
 })
-export class QuotationDetailModule {}
+export class QuotationDetailFilesModule {}

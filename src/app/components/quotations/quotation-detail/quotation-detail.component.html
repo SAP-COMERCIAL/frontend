@@ -9,13 +9,13 @@
     </div>
     <div fxFlex.gt-sm="25%" >
       <div>
-        <!-- <mat-form-field>
+        <mat-form-field>
           <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
             <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
               {{op.codigo_proyecto}}
             </mat-option>
           </mat-select>
-        </mat-form-field> -->
+        </mat-form-field>
       </div>
     </div>
     <div fxFlex.gt-sm="10%" >
@@ -127,7 +127,7 @@
                   <mat-checkbox color="warn"
                               formControlName="seleccionar" 
                               (click)="$event.stopPropagation()"
-                              (change)="SeleccionarRegistro(element.cantidad, $event)"
+                              (change)="SeleccionarRegistro(element.cantidad, element.requisicioninternadetalle_id, element.um, element.descripcion, $event)"
                               >
                               <!--[checked]="selection.isSelected(element.proyecto_id)"-->
                               <!--[(ngModel)]="element.activo" -->
@@ -136,22 +136,46 @@
               </div>
           </ng-container>
 
-          <!-- ID Column -->
-          <ng-container matColumnDef="cantidad">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad</span> </th>
-            <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+          <!-- SKU Column -->
+          <ng-container matColumnDef="sku">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>sku</span> </th>
+            <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
           </ng-container>
-          
+
+          <!-- descripción Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <!-- descripción Column -->
+          <ng-container matColumnDef="medida">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Medida </th>
+            <td mat-cell *matCellDef="let element"> {{element.medida}} </td>
+          </ng-container>
+
+          <!-- descripción Column -->
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Color </th>
+            <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+          </ng-container>
+
           <!-- Name Column -->
           <ng-container matColumnDef="um">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Unidad de Medida </th>
             <td mat-cell *matCellDef="let element"> {{element.unidad_de_medida}} </td>
           </ng-container>
 
-          <!-- Email Column -->
-          <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
-            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          <!-- ID Column -->
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad</span> </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+          </ng-container>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="cantidad_comprar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad a comprar</span> </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad_comprar}} </td>
           </ng-container>
           
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

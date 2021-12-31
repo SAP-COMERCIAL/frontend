@@ -126,7 +126,7 @@ public array: any;
     const dialogRef = this.dialog.open(CategoriesComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 

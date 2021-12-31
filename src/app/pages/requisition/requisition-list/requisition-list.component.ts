@@ -76,9 +76,9 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     dataSourceShowToExcel.push({
                               // proyecto_id : element.proyecto_id
                               categoria : element.codigo_proyectocategoria
-                              , requisicion : element.Requisicion_Id
+                              , requisicion : element.requisicioninterna_id
                               , Fecha_Requisicion : moment(element.Fecha_Requisicion, 'YYYY-MM-DD').format('DD-MM-YYYY')
-                              , estatus : element.Estatus
+                              , estatus : element.estado
       })
     });
 
@@ -97,7 +97,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
       requisicionId: 0
      
     }
-    dialogConfig.width = '1200px';
+    dialogConfig.width = '1300px';
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 

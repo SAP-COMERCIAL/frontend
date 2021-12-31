@@ -61,7 +61,7 @@
     <div fxFlex.gt-sm="25%" >
       <div>
         <mat-form-field>
-          <input [type]="presupuesto_proyecto" matInput class="form-control form-control-line control" formControlName="presupuesto_proyecto" [(ngModel)]="presupuesto_proyecto" step="any" > <!--required="required" min="0" max="999999999"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"-->
+          <input [type]="presupuesto_proyecto" matInput class="form-control form-control-line control" formControlName="presupuesto_proyecto" [(ngModel)]="presupuesto_proyecto" step="any" (keyup)="_keyUp($event)" > <!--required="required" min="0" max="999999999"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"-->
         </mat-form-field>
       </div>
     </div>
@@ -115,12 +115,7 @@
     <div fxFlex.gt-sm="25%">
       <div>
         <mat-form-field>
-          <mat-select class="form-control" formControlName="centroDeCostos" [(ngModel)]="centro_de_costo_proyecto"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
-          <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
-          <mat-option value= "1">Acabados</mat-option>
-          <mat-option value= "2">Tuberias</mat-option>
-          <mat-option value= "3">Electrico</mat-option>
-          </mat-select>
+          <input [type]="centro_de_costo_proyecto" matInput class="form-control form-control-line control" placeholder="centroDeCostos" formControlName="centroDeCostos" [(ngModel)]="centro_de_costo_proyecto">
         </mat-form-field>
       </div>
     </div>

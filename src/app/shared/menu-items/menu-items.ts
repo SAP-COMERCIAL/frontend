@@ -14,6 +14,7 @@ const MENUITEMS = [
   { state: 'quotation', name: 'Cotizaciones', type: 'link', icon: 'web' },
   { state: 'po', name: 'Orden de compra', type: 'link', icon: 'tab' },
   { state: 'storage', name: 'Almacén', type: 'link', icon: 'assignment_turned_in' },
+  { state: 'warehouse-review', name: 'Revisión en Almacén', type: 'link', icon: 'assignment_turned_in' },
   // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   // { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
   // { state: 'lists', type: 'link', name: 'Lists', icon: 'view_list' },

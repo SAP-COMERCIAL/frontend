@@ -2,26 +2,19 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import * as XLSX from 'xlsx';
-import { from } from 'rxjs';
 import { projectModel } from 'src/app/models/project.model';
 import { projectservice } from '../../../services/projects/project.service';
-import { categoryModel } from '../../../models/category.model';
 import { categoryservice } from '../../../services/category/category.service';
-import { ProjectCaptureComponent } from 'src/app/pages/projects/project-capture/project-capture.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
-import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
 import { requisitionModel } from 'src/app/models/requisition.model';
 import { requisitionservice } from '../../../services/requisition/requisition.service';
 import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
-import { AppConstants } from '../../../shared/app.constants';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { filter } from 'rxjs-compat/operator/filter';
+import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 // import { NotificationService } from '../../../services/common/notification.service';
 
 @Component({
@@ -30,6 +23,10 @@ import { filter } from 'rxjs-compat/operator/filter';
   styleUrls: ['./requisition-detail.component.css']
 })
 export class RequisitionDetailComponent implements OnInit {
+  // ===================
+  // DECLARACIONES
+  // ===================
+
   // Para paginación
   public pageIndex:number = 0;
   public pageSize:number = 20;
@@ -43,14 +40,15 @@ export class RequisitionDetailComponent implements OnInit {
   fecha:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   requisicion_id : any = '';
   categoria_id : any = '';
-  proyecto_id : any = 0;
+  proyecto_id : any = 77;
   requisicion_Numero : any = ''
   loadfile : any  = '';
   buscar : any = '';
   public nombreArchivo : any = 'selecciona archivo';
   UploadDataExcel : MatTableDataSource<requisitionModelDetail>;
   dataExcel: any[];
-  displayedColumns = ['cantidad', 'unidad_de_medida', 'descripcion'];
+  // displayedColumns = ['SKU', 'cantidad', 'unidad_de_medida', 'descripcion'];
+  displayedColumns = ['SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones'];
 
   projectInfo : any;
   requisicionId : any = 0;
@@ -59,12 +57,17 @@ export class RequisitionDetailComponent implements OnInit {
   datasourcePorjects : any[] = [];
   datasourceRequisition : any;
 
+  fo : string
+  cargo : string
+  no_pym : string
+
   constructor(
     public dialogRef: MatDialogRef<projectModel>
     , private _projectService : projectservice
     , private _categoryService : categoryservice
     , private _projectCategoryservice : projectCategoryservice
-    , @Inject(MAT_DIALOG_DATA) public data,public snackBar: MatSnackBar
+    , @Inject(MAT_DIALOG_DATA) public data
+    , public snackBar: MatSnackBar
     , private formBuilder: FormBuilder
     , private _snackBar : MatSnackBar
     , private _requisitionservice : requisitionservice
@@ -83,50 +86,35 @@ export class RequisitionDetailComponent implements OnInit {
   });
   }
 
+// ===============
+// PROCEDIMIENTOS
+// ===============
+
   ngOnInit(): void {
 
     this.getProyectos();
     this.getEnabledCategories();
+
+    console.log('this.projectInfo["codigo"]', this.projectInfo["proyectocategoria_id"]);
     if(this.requisicionId != 0){
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
           requisicion_id : '', // this.projectInfo["requisicion_id"] ,
           requisicion_Numero : this.projectInfo["codigo"] ,
           categoria_id : '', // this.projectInfo["categoria_id"],
-          fecha : this.projectInfo["fecha"], // this.projectInfo["fecha"]
+          fecha : moment(new Date), //this.projectInfo["fecha"], // this.projectInfo["fecha"]
           loadfile : ''
-          
       })
       this.requisicion_Numero = this.projectInfo["codigo"];
+      // this.projectInfo.controls["proyecto_id"].setValue(77);
       this.proyecto_id = this.projectInfo["proyecto_id"];
       this.requisicion_id = '' //this.projectInfo["requisicion_id"];
-      this.categoria_id = this.projectInfo["categoria_id"];
+      this.categoria_id = this.projectInfo["proyectocategoria_id"];
+      this.projectInfo.controls["categoria_id"].setValue('161');
       this.fecha = '', //this.projectInfo["fecha"];
       this.loadfile = ''
     }
 
-  }
-
-  getEnabledCategories(){
-    // Actualiza registro NUEVO
-    this._projectCategoryservice.getProjectCateogryById(1).subscribe(
-      res=> {
-        this.datasourceCategories = res;
-        console.log('CATEGORIAS', res);
-      },
-      error => console.log("error consulta categorias",error)
-    )
-  }
-
-  getProyectos(){
-    // Obtiene proyectos
-    this._projectService.getProjectAll().subscribe(
-      res=> {
-        this.datasourcePorjects = res;
-        console.log('PROYECTOS', res);
-      },
-      error => console.log("error consulta proyectos",error)
-    )
   }
 
   onFileChange(event){
@@ -169,6 +157,7 @@ export class RequisitionDetailComponent implements OnInit {
         let errorCantidad : boolean = false;
         let errorUoM : boolean = false;
         let errorDescripcion : boolean = false;
+        let errorSKU : boolean = false;
         let DescripcionAnt : string = '';
         let Descripcion : string = '';
 
@@ -195,24 +184,29 @@ export class RequisitionDetailComponent implements OnInit {
 
         Descripcion = element.DESCRIPCION.toUpperCase()
 
-        if(element.CANTIDAD == '') {valido = false; errorCantidad = true;}
-        if(element.UNIDAD_DE_MEDIDA.toUpperCase() == '') {valido = false; errorUoM = true;}
+        if(element.SKU == '') {valido = false; errorSKU = true}
+        if(element.CANTIDAD_REQUERIDA == '') {valido = false; errorCantidad = true;}
+        if(element.UNIDAD.toUpperCase() == '') {valido = false; errorUoM = true;}
         if(element.DESCRIPCION.toUpperCase() == '') {valido = false; errorDescripcion = true;}
 
         contador++;
         DescripcionAnt = Descripcion;
 
         if(valido == false){
-          arrayErrores.push({ cantidad : element.CANTIDAD, 
-            unidad_De_Medida : element.UNIDAD_DE_MEDIDA, 
+          arrayErrores.push({ cantidad : element.CANTIDAD_REQUERIDA, 
+            unidad_de_medida : element.UNIDAD, 
             descripcion : element.DESCRIPCION.toUpperCase()
            })
         }else{
           arrayExcel.push({ 
             requisition_Id : 0,
-            cantidad : element.CANTIDAD, 
-            unidad_de_medida : element.UNIDAD_DE_MEDIDA,
-            descripcion : element.DESCRIPCION
+            SKU : element.SKU,
+            cantidad : element.CANTIDAD_REQUERIDA, 
+            um : element.UNIDAD,
+            descripcion : element.DESCRIPCION,
+            medida : element.MEDIDA,
+            color : element.COLOR,
+            otras_especificaciones : element.OTRAS_ESPECIFICACIONES
            })
         }
       });
@@ -227,6 +221,7 @@ export class RequisitionDetailComponent implements OnInit {
       }
 
       this.UploadDataExcel = new MatTableDataSource(arrayExcel);
+      console.log('datos del excel', this.UploadDataExcel);
 
       };
     }
@@ -235,10 +230,6 @@ export class RequisitionDetailComponent implements OnInit {
       // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'No es un archivo de excel válido', 'warn');
       this.deleteUploadFile(event);
     }
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {duration : 3000});
   }
 
   validate(data : any)
@@ -268,59 +259,6 @@ export class RequisitionDetailComponent implements OnInit {
     this.getrequisition(codigo_categoria);
   }
 
-  getrequisition(codigo_categoria : any){
-
-    let categoria_id : any = this.newProject.controls["categoria_id"].value
-    let codigo_requisicion : any = 0;
-    let arrayRequisition : any;
-    let arrayCodigoCategoria : any;
-    
-    // Proyectos registrados
-    this._requisitionservice.getRequisitionAll().subscribe(
-      res=> {
-        console.log('Requisiciones', res);
-        this.datasourceRequisition = new MatTableDataSource(res);
-
-        if(this.datasourceRequisition.filteredData.length == 0){
-          codigo_requisicion = codigo_categoria + '-1'; 
-          console.log('Primer codigo requsicion', codigo_requisicion);
-        }else{
-          // Obtener requisicion en la que se mas alta y determinar cual sigue
-          arrayRequisition = this.datasourceRequisition.filteredData.filter(e => e.proyectocategoria_id == categoria_id);
-          console.log('arrayRequisition', arrayRequisition);
-          if(arrayRequisition.length > 0){
-            let cantidadRequisition = arrayRequisition.length
-            codigo_requisicion = codigo_categoria + '-' + (cantidadRequisition + 1)
-          }else{
-            // obtener codigo_categoria
-            arrayCodigoCategoria = 1;
-            codigo_requisicion = codigo_categoria + '-1'; 
-          }
-
-        }
-
-        // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
-        this.requisicion_Numero = codigo_requisicion;
-
-
-        console.log('aqui esta', this.datasourceRequisition.filteredData.filter(e => e.codigo_categoria == codigo_categoria))
-        console.log('aqui esta', categoria_id)
-      },
-      error => console.log("error consulta regiones",error)
-    )
-  }
-
-  getCategories(proyecto : any){
-    // Obtiene categorias 
-    this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(
-      res=> {
-        this.datasourceCategories = res;
-        console.log('PROYECTOS - CATEGORIAS', res);
-      },
-      error => console.log("error consulta cateogorias",error)
-    )
-  }
-
   save(form, event){
 
     let arrayTodb : any;
@@ -329,19 +267,14 @@ export class RequisitionDetailComponent implements OnInit {
       arrayTodb = { proyecto_id : this.proyecto_id,
                   proyectocategoria_id : this.categoria_id,
                   codigo : this.requisicion_Numero,
-                  fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
+                  fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD'),
+                  fo : this.fo,
+                  cargo : this.cargo,
+                  no_pym : this.no_pym
                 };
 
       // INSERTA REQUISICION HDR
-      this._requisitionservice.insertRequisition(arrayTodb).subscribe(
-        res=> {
-          console.log('Se inserto con éxito', res);
-
-          // INSERTA REQUISICIONES DET
-          this.insertRequisitionDet(res);
-        },
-        error => console.log("error alta de proyectos",error)
-      )
+      this.insertRequisition(arrayTodb)
     }
     else{
       arrayTodb = {proyecto_id : this.proyecto_id,
@@ -351,45 +284,9 @@ export class RequisitionDetailComponent implements OnInit {
       };
 
         // Actualiza registro EDICION
-        // this._projectService.updateProjects(arrayTodb).subscribe(
-        // res=> {
-        // console.log('Se edito con éxito', res);
-        // },
-        // error => console.log("error consulta regiones",error)
-        // )
-        // this.dialogRef.close();
+        this.updateRequisition(arrayTodb);
     }
   }
-
-insertRequisitionDet(requisicionId : any){
-  // Obtiene Requisicion Registrada
-  let datasourceRequsition : MatTableDataSource<requisitionModel>
-  let requisitionIdMaximo : any = "0";
-  let arrayToDb : any;
-
-      this.UploadDataExcel.filteredData.forEach(element => {
-        arrayToDb = {requisicioninterna_id : requisicionId
-            , cantidad : element.cantidad
-            , um : element.unidad_de_medida
-            , descripcion : element.descripcion
-        }
-
-        console.log('DETALLE DETALLE DETALLE', arrayToDb);
-
-        // Inserta Proyecto Categoria
-        this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
-          res=> {
-            console.log('REQUISICIONES DETALLE', res);
-          },
-          error => console.log("error al insertar proyectos categorias",error)
-        )
-        
-        arrayToDb = null;
-
-      });
-
-
-}
 
   fechaInicial(event){
     console.log('fecha', this.fecha);
@@ -397,6 +294,14 @@ insertRequisitionDet(requisicionId : any){
 
   cancel(event){
     this.dialogRef.close();
+  }
+
+  // ====================
+  // UTILERIAS
+  // ====================
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration : 3000});
   }
 
   public handlePage(e: any) {
@@ -418,6 +323,135 @@ insertRequisitionDet(requisicionId : any){
     const filtro = (event.target as HTMLInputElement).value;
     this.UploadDataExcel.filter = filtro.trim().toLowerCase();
     console.log('filtro', filtro);
+  }
+
+  // ====================
+  // LLAMADAS A SERVICIOS
+  // ====================
+
+  getEnabledCategories(){
+    // Actualiza registro NUEVO
+    this._projectCategoryservice.getProjectCateogryById(1).subscribe(
+      res=> {
+        this.datasourceCategories = res;
+        console.log('CATEGORIAS', res);
+      },
+      error => console.log("error consulta categorias",error)
+    )
+  }
+
+  getProyectos(){
+    // Obtiene proyectos
+    this._projectService.getProjectAll().subscribe(
+      res=> {
+        this.datasourcePorjects = res;
+        console.log('PROYECTOS', res);
+      },
+      error => console.log("error consulta proyectos",error)
+    )
+  }
+
+  getrequisition(codigo_categoria : any){
+
+    let categoria_id : any = this.newProject.controls["categoria_id"].value
+    let codigo_requisicion : any = 0;
+    let arrayRequisition : any;
+    let arrayCodigoCategoria : any;
+    
+    // Proyectos registrados
+    this._requisitionservice.getRequisitionAll().subscribe(
+      res=> {
+        this.datasourceRequisition = new MatTableDataSource(res);
+
+        if(this.datasourceRequisition.filteredData.length == 0){
+          codigo_requisicion = codigo_categoria + '-1'; 
+        }else{
+          // Obtener requisicion en la que se mas alta y determinar cual sigue
+          arrayRequisition = this.datasourceRequisition.filteredData.filter(e => e.proyectocategoria_id == categoria_id);
+          if(arrayRequisition.length > 0){
+            let cantidadRequisition = arrayRequisition.length
+            codigo_requisicion = codigo_categoria + '-' + (cantidadRequisition + 1)
+          }else{
+            // obtener codigo_categoria
+            arrayCodigoCategoria = 1;
+            codigo_requisicion = codigo_categoria + '-1'; 
+          }
+
+        }
+
+        // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
+        this.requisicion_Numero = codigo_requisicion;
+      },
+      error => console.log("error consulta regiones",error)
+    )
+  }
+
+  getCategories(proyecto : any){
+    // Obtiene categorias 
+    this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(
+      res=> {
+        this.datasourceCategories = res;
+        console.log('PROYECTOS - CATEGORIAS', res);
+      },
+      error => console.log("error consulta cateogorias",error)
+    )
+  }
+
+  insertRequisition(arrayTodb : any){
+    this._requisitionservice.insertRequisition(arrayTodb).subscribe(
+      res=> {
+        console.log('Se inserto con éxito', res);
+
+        // INSERTA REQUISICIONES DET
+        this.insertRequisitionDet(res);
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+  }
+
+  updateRequisition(arrayTodb : any){
+    console.log('ACTUALIZA REQUISICION');
+        // this._projectService.updateProjects(arrayTodb).subscribe(
+        // res=> {
+        // console.log('Se edito con éxito', res);
+        // },
+        // error => console.log("error consulta regiones",error)
+        // )
+        // this.dialogRef.close();
+  }
+
+  insertRequisitionDet(requisicionId : any){
+    // Obtiene Requisicion Registrada
+    let datasourceRequsition : MatTableDataSource<requisitionModel>
+    let requisitionIdMaximo : any = "0";
+    let arrayToDb : any;
+
+      this.UploadDataExcel.filteredData.forEach(element => {
+        arrayToDb = {requisicioninterna_id : requisicionId
+            , SKU : element.SKU
+            , cantidad : element.cantidad
+            , um : element.um
+            , descripcion : element.descripcion
+            , medida : (element.medida != undefined) ? element.medida : ''
+            , color : (element.color != undefined) ? element.color : ''
+            , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
+        }
+
+        console.log('DETALLE DETALLE DETALLE', arrayToDb);
+
+        // Inserta Proyecto Categoria
+        this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
+          res=> {
+            console.log('REQUISICIONES DETALLE', res);
+            this.openSnackBar('Se genero el la requisición exitosamente', 'success');
+            // this.dialogRef.close();
+          },
+          error => console.log("error al insertar proyectos categorias",error)
+        )
+        
+        arrayToDb = null;
+
+      });
   }
 
 }

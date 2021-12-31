@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
+import { coerceStringArray } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-project-capture-detail',
@@ -53,7 +54,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
     , private _projectService : projectservice
     , private _categoryService : categoryservice
     , private _projectCategoryservice : projectCategoryservice
-    , @Inject(MAT_DIALOG_DATA) public data,public snackBar: MatSnackBar
+    , @Inject(MAT_DIALOG_DATA) public data,public _snackBar: MatSnackBar
     , private formBuilder: FormBuilder
   ) { 
     this.projectInfo = data.arrayData;
@@ -62,10 +63,10 @@ export class ProjectCaptureDetailComponent implements OnInit {
     this.newProject = this.formBuilder.group({
       codigo_proyecto :  new FormControl(this.codigo_proyecto, [Validators.required, Validators.minLength(4), Validators.maxLength(7)]),
       // proyecto_id: new FormControl(''),
-      nombre_proyecto: new FormControl(''),
-      cliente: new FormControl(''),
+      nombre_proyecto: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]),
+      cliente: new FormControl(this.cliente, [Validators.required]),
       // presupuesto_proyecto: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
-      presupuesto_proyecto: (''),
+      presupuesto_proyecto: new FormControl(this.presupuesto_proyecto, [Validators.required, Validators.pattern('^[0-9]+([.][0-9]{1,2})?$')]),
       // presupuesto_proyecto: new FormControl('', Validators.required),
       fecha_inicial_proyecto: new FormControl(''),
       fecha_final_proyecto: new FormControl(''),
@@ -90,7 +91,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
           fecha_inicial_proyecto : this.projectInfo["fecha_inicial_proyecto"],
           fecha_final_proyecto : this.projectInfo["fecha_final_proyecto"] ,
           responsable_proyecto : this.projectInfo["responsable_proyecto"],
-          centroDeCostos : this.projectInfo["centro_de_costo_proyecto_id"].toString() ,
+          centroDeCostos : this.projectInfo["centro_de_costo_proyecto"].toString() ,
           almacen : this.projectInfo["almacen_id"].toString()
       })
       this.nombre_proyecto = this.projectInfo["nombre_proyecto"];
@@ -99,7 +100,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
       this.fecha_inicial_proyecto = this.projectInfo["fecha_inicial_proyecto"];
       this.fecha_final_proyecto = this.projectInfo["fecha_final_proyecto"];
       this.responsable_proyecto = this.projectInfo["responsable_proyecto"];
-      this.centro_de_costo_proyecto = this.projectInfo["centro_de_costo_proyecto_id"].toString();
+      this.centro_de_costo_proyecto = this.projectInfo["centro_de_costo_proyecto"].toString();
       this.almacen = this.projectInfo["almacen_id"].toString();
       this.codigo_proyecto = '';
     }
@@ -147,14 +148,15 @@ export class ProjectCaptureDetailComponent implements OnInit {
                   fecha_inicial_proyecto : moment(this.fecha_inicial_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
                   fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
                   responsable_proyecto : this.responsable_proyecto,
-                  centro_de_costo_proyecto_id : this.centro_de_costo_proyecto,
+                  centro_de_costo_proyecto : '', //this.centro_de_costo_proyecto,
                   almacen_id : this.almacen};
 
       // Actualiza registro NUEVO
       this._projectService.insertProjects(arrayTodb).subscribe(
         res=> {
           console.log('Se inserto con éxito', res);
-
+          this.openSnackBar('Se genero el proyecto exitosamente', 'success');
+          
           // Inserta categorias
           this.insertCategories();
         },
@@ -172,7 +174,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
         fecha_inicial_proyecto : moment(this.fecha_inicial_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
         fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
         responsable_proyecto : this.responsable_proyecto,
-        centro_de_costo_proyecto_id : this.centro_de_costo_proyecto,
+        centro_de_costo_proyecto : this.centro_de_costo_proyecto,
         almacen_id : this.almacen,
         codigo_proyecto : this.codigo_proyecto};
 
@@ -183,8 +185,8 @@ export class ProjectCaptureDetailComponent implements OnInit {
         },
         error => console.log("error consulta regiones",error)
         )
-        this.dialogRef.close();
     }
+    this.dialogRef.close();
   }
 
 insertCategories(){
@@ -234,6 +236,40 @@ insertCategories(){
 
   cancel(event){
     this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration : 3000});
+  }
+
+  _keyUp(event: any) {
+    let ultimoCaracter : any;
+    let valido : boolean = false;
+
+    console.log('presione : ', (event.target as HTMLInputElement).value);
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if(this.presupuesto_proyecto.length > 0){
+      ultimoCaracter = this.presupuesto_proyecto.slice(-1);
+
+      for(let i = 0; i < 10; i++)
+      {
+        if(ultimoCaracter == i){
+          valido = true;
+        }
+      }
+
+      if(ultimoCaracter == '.'){
+        valido = true;
+      }
+
+      if(valido == false)
+      {
+        this.presupuesto_proyecto = this.presupuesto_proyecto.substring(0,this.presupuesto_proyecto.length-1)
+      }
+
+    }
   }
 
 }

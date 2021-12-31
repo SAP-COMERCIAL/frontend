@@ -10,7 +10,7 @@ export class projectModel{
     responsable_proyecto: string
     presupuesto_proyecto: number
     almacen_id: number
-    centro_de_costo_proyecto_id: number
+    centro_de_costo_proyecto: number
     nombre_almacen: string
     nombre_centro_de_costo_proyecto: string
     ubicacion_almacen: string

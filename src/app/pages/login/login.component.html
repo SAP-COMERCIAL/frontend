@@ -6,7 +6,7 @@
         </div> -->
         <mat-card class="m-t-10">
         <mat-card-content>
-        <form id="loginform">
+        <form id="loginform" [formGroup]="loginform" (ngSubmit)="loginReq()">
             <div class="text-center">
                 <img alt="homepage" src="assets/images/logo-comercial20.jpeg">
                 <!-- <h4 class="m-t-0">Login to App</h4> -->
@@ -16,13 +16,13 @@
                 <!-- col full-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                    <input matInput placeholder="Usuario" required="" #u1>
+                    <input matInput placeholder="Usuario" formControlName="correo" required="" #u1>
                     </mat-form-field>
                 </div>
                 <!-- col full-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                    <input matInput type="password" placeholder="Clave" required="" #p2>
+                    <input matInput type="password" placeholder="Clave" formControlName="contrasegna" required="" #p2>
                     </mat-form-field>
                 </div>
                 <!-- col half-->

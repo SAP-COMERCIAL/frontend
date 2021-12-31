@@ -24,6 +24,8 @@ import { AppConstants } from '../../../shared/app.constants';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { filter } from 'rxjs-compat/operator/filter';
+import { RequisitionDetailComponent } from '../../requisitions/requisition-detail/requisition-detail.component';
+import { umask } from 'process';
 
 @Component({
   selector: 'app-quotation-detail',
@@ -31,6 +33,10 @@ import { filter } from 'rxjs-compat/operator/filter';
   styleUrls: ['./quotation-detail.component.css']
 })
 export class QuotationDetailComponent implements OnInit {
+  // ====================
+  // DECLARACIONES
+  // ====================
+
   // Para paginación
   public pageIndex:number = 0;
   public pageSize:number = 20;
@@ -44,7 +50,7 @@ export class QuotationDetailComponent implements OnInit {
   fecha:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   requisicion_id : any = '';
   categoria_id : any = '';
-  // proyecto_id : any = 0;
+  proyecto_id : any = 0;
   requisicion_Numero : any = '';
   cotizacion_Numero : any = '';
   loadfile : any  = '';
@@ -52,8 +58,9 @@ export class QuotationDetailComponent implements OnInit {
   public nombreArchivo : any = 'selecciona archivo';
   dataSourceShow : MatTableDataSource<requisitionModel>;
   dataExcel: any[];
+  dataSourceDetail : MatTableDataSource<RequisitionDetailComponent>
   seleccionaRegistro : any;
-  displayedColumns = ['select', 'cantidad', 'um', 'descripcion'];
+  displayedColumns = ['select', 'sku', 'descripcion', 'medida', 'color', 'um', 'cantidad', 'cantidad_comprar' ];
 
   projectInfo : any;
   requisicionId : any = 0;
@@ -64,6 +71,7 @@ export class QuotationDetailComponent implements OnInit {
   datasourceRequisition : any;
   datasourceRequisitionDetail : any = []; // MatTableDataSource<requisitionModelDetail>;
   datasourceCotizaciones : any;
+  datasourceCotizacionesDet : any[] = [];
   arraytemp : any = [];
   
 
@@ -84,7 +92,7 @@ export class QuotationDetailComponent implements OnInit {
     this.quotationId = data.cotizacionId;
 
     this.newProject = this.formBuilder.group({
-      // proyecto_id : new FormControl(''),
+      proyecto_id : new FormControl(''),
       categoria_id: new FormControl(''),
       requisicion_id: new FormControl(''),
       fecha: new FormControl(''),
@@ -96,11 +104,10 @@ export class QuotationDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getCategories()
-    // this.getProyectos();
+    this.getProyectos();
     if(this.requisicionId != 0){
         this.newProject.patchValue({
-          // proyecto_id : this.projectInfo["proyecto_id"],
+          proyecto_id : this.projectInfo["proyecto_id"],
           requisicion_id : '', // this.projectInfo["requisicion_id"] ,
           requisicion_Numero : this.projectInfo["codigo"] ,
           categoria_id : '', // this.projectInfo["categoria_id"],
@@ -109,7 +116,7 @@ export class QuotationDetailComponent implements OnInit {
           
       })
       this.requisicion_Numero = this.projectInfo["codigo"];
-      // this.proyecto_id = this.projectInfo["proyecto_id"];
+      this.proyecto_id = this.projectInfo["proyecto_id"];
       this.requisicion_id = '' //this.projectInfo["requisicion_id"];
       this.categoria_id = this.projectInfo["categoria_id"];
       this.fecha = '', //this.projectInfo["fecha"];
@@ -118,24 +125,13 @@ export class QuotationDetailComponent implements OnInit {
 
   }
 
-  getProyectos(){
-    // Obtiene proyectos
-    this._projectService.getProjectAll().subscribe(
-      res=> {
-        this.datasourcePorjects = res;
-        console.log('PROYECTOS', res);
-      },
-      error => console.log("error consulta proyectos",error)
-    )
-  }
-
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {duration : 3000});
   }
 
   proyectoSelected(){
-    // console.log('Selecciona categorias', this.proyecto_id);
-    // this.getCategories(this.proyecto_id);
+    console.log('Selecciona categorias', this.proyecto_id);
+    this.getCategories(this.proyecto_id);
   }
 
   categorySelected(){
@@ -156,88 +152,19 @@ export class QuotationDetailComponent implements OnInit {
     this.getRequisitionDetail(this.requisicionId)
   }
 
-  getCotizacionesAll(requisicion_interna : any){
-    this._quotationservice.getQuotationAll().subscribe(
-      res=> {
-        this.datasourceCotizaciones = res;
-        console.log('COTIZACIONES TODAS', res);
-        this.cotizacion_Numero = this.cotizacion_Numero = requisicion_interna + '-' + (this.datasourceCotizaciones.filter(e => e.codigo_requisicioninterna == requisicion_interna).length + 1);
+  SeleccionarRegistro(cantidadOrdenar : any, requisicionDet_id : any, uom : any, descripcionOrdenar : any, event : Event){
 
-      },
-      error => console.log("error consulta proyectos",error)
-    )
-  }
+    let arrayRequisicioneDetalle : any[] = [];
 
-  getrequisitionAll(){
-    // Obtiene todas las requisiciones 
-    this._requisitionservice.getRequisitionAll().subscribe(
-      res=> {
-        // this.datasourceRequisition = [];
-        this.datasourceRequisition = res;
-          this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value)
+    if(event["checked"] == true && this.datasourceCotizacionesDet.filter(e => e.requisicionDetalle_id == requisicionDet_id).length == 0){
+        this.datasourceCotizacionesDet.push({requisicioninternaDetalle_id : requisicionDet_id, cantidad : cantidadOrdenar, um: uom, descripcion: descripcionOrdenar})
+    }
 
-          // // Consulta detalle de requisición
-          // this.getRequisitionDetail();
-      },
-      error => console.log("error consulta requisiciones",error)
-    )
-
-  }
-
-  getrequisition(){
-    // Obtiene las requisiciones 
-    this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(
-      res=> {
-        this.datasourceRequisition = [];
-        this.datasourceRequisition.push(res);
-          console.log('REQUISICIONES', this.datasourceRequisition);
-
-      //     // Consulta detalle de requisición
-      //     this.getRequisitionDetail();
-      },
-      error => console.log("error consulta requisiciones",error)
-    )
-  }
-
-  getRequisitionDetail(Requisition_Id : any){
-    // Obtiene requisiciones 
-    this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(
-      res=> {
-        this.datasourceRequisitionDetail = [(res)];
-  
-          console.log('REQUISICIONES DETALLE', this.datasourceRequisitionDetail);
-      },
-      error => console.log("error consulta requisiciones",error)
-    )
-  }
-
-  getCategories(){
-    // Obtiene categorias 
-    this._projectCategoryservice.getProjectCateogryAll().subscribe(
-      res=> {
-        this.datasourceCategories = res;
-        console.log('PROYECTOS - CATEGORIAS', res);
-      },
-      error => console.log("error consulta cateogorias",error)
-    )
-  }
-
-  find(form, event){
-    // Buscar requisiciones
-    console.log('requisiciones', this.requisicion_Numero)
-    // this._requisitionservice.getRequisitionById(this.cotizacion_Numero).subscribe(
-    //   res=> {
-    //     this.datasourceCategories = res;
-    //     console.log('PROYECTOS - CATEGORIAS', res);
-    //   },
-    //   error => console.log("error consulta cateogorias",error)
-    // )
-
-  }
-
-  SeleccionarRegistro(element : any, event : Event){
-    this.seleccionaRegistro = event["checked"]
-    console.log('Actualiza registro de activar y desactivar', event["checked"])
+    if(event["checked"] == false && this.datasourceCotizacionesDet.filter(e => e.requisicionDetalle_id == requisicionDet_id).length != 0){
+      arrayRequisicioneDetalle = this.datasourceCotizacionesDet.filter(e => e.requisicionDetalle_id != requisicionDet_id)
+      this.datasourceCotizacionesDet = [];
+      this.datasourceCotizacionesDet = arrayRequisicioneDetalle;
+    }
   }
 
   save(form, event){
@@ -253,15 +180,7 @@ export class QuotationDetailComponent implements OnInit {
                 };
 
       // INSERTA REQUISICION HDR
-      this._quotationservice.insertQuotation(arrayTodb).subscribe(
-        res=> {
-          console.log('Se inserto con éxito', res);
-
-          // INSERTA REQUISICIONES DET
-          this.insertQuotationDet(res);
-        },
-        error => console.log("error alta de proyectos",error)
-      )
+      this.insertQuotationHeader(arrayTodb);
     }
     else{
       arrayTodb = {
@@ -282,35 +201,7 @@ export class QuotationDetailComponent implements OnInit {
     }
   }
 
-  insertQuotationDet(cotizacionId : any){
 
-  console.log('para guardar')
-
-  // Obtiene Requisicion Registrada
-  let datasourceRequsition : MatTableDataSource<requisitionModel>
-  let requisitionIdMaximo : any = "0";
-  let arrayToDb : any;
-
-      this.datasourceRequisitionDetail.forEach(element => {
-        arrayToDb = { cotizacion_id : cotizacionId
-            , requisicioninternaDetalle_id : cotizacionId
-            , cantidad : element.cantidad
-            , um : element.um
-            , descripcion : element.descripcion
-        }
-
-        // Inserta Proyecto Categoria
-        this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
-          res=> {
-            console.log('INSERTA COTIZACION DETALLE', arrayToDb);
-          },
-          error => console.log("error al insertar proyectos categorias",error)
-        )
-        
-        arrayToDb = null;
-
-      });
-}
 
   fechaControl(event){
     console.log('fecha', this.fecha);
@@ -320,25 +211,176 @@ export class QuotationDetailComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public handlePage(e: any) {
-    this.currentPage = e.pageIndex;
-    this.pageSize = e.pageSize;
-    this.iterator();
-  }
 
-  private iterator() {
-    const end = (this.currentPage + 1) * this.pageSize;
-    const start = this.currentPage * this.pageSize;
-    const part = this.array.slice(0, this.totalSize);
-    this.dataSourceShow = new MatTableDataSource(part);
-    this.dataSourceShow.sort = this.sort;
-    this.dataSourceShow.paginator = this.paginator;
-  }
+// =============================
+// UTILERIAS
+// =============================
 
-  filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value;
-    this.dataSourceShow.filter = filtro.trim().toLowerCase();
-    console.log('filtro', filtro);
-  }
+find(form, event){
+  // Buscar requisiciones
+  console.log('requisiciones', this.requisicion_Numero)
+  // this._requisitionservice.getRequisitionById(this.cotizacion_Numero).subscribe(
+  //   res=> {
+  //     this.datasourceCategories = res;
+  //     console.log('PROYECTOS - CATEGORIAS', res);
+  //   },
+  //   error => console.log("error consulta cateogorias",error)
+  // )
+
+}
+
+public handlePage(e: any) {
+  this.currentPage = e.pageIndex;
+  this.pageSize = e.pageSize;
+  this.iterator();
+}
+
+private iterator() {
+  const end = (this.currentPage + 1) * this.pageSize;
+  const start = this.currentPage * this.pageSize;
+  const part = this.array.slice(0, this.totalSize);
+  this.dataSourceShow = new MatTableDataSource(part);
+  this.dataSourceShow.sort = this.sort;
+  this.dataSourceShow.paginator = this.paginator;
+}
+
+filtrar(event: Event) {
+  const filtro = (event.target as HTMLInputElement).value;
+  this.dataSourceShow.filter = filtro.trim().toLowerCase();
+  console.log('filtro', filtro);
+}
+
+// =============================
+// CONSUME SERVICIOS
+// =============================
+
+getProyectos(){
+  // Obtiene proyectos
+  this._projectService.getProjectAll().subscribe(
+    res=> {
+      this.datasourcePorjects = res;
+      console.log('PROYECTOS', res);
+    },
+    error => console.log("error consulta proyectos",error)
+  )
+}
+
+getCotizacionesAll(requisicion_interna : any){
+  this._quotationservice.getQuotationAll().subscribe(
+    res=> {
+      this.datasourceCotizaciones = res;
+      console.log('COTIZACIONES TODAS', res);
+      this.cotizacion_Numero = this.cotizacion_Numero = requisicion_interna + '-' + (this.datasourceCotizaciones.filter(e => e.codigo_requisicioninterna == requisicion_interna).length + 1);
+
+    },
+    error => console.log("error consulta proyectos",error)
+  )
+}
+
+getrequisitionAll(){
+  // Obtiene todas las requisiciones 
+  this._requisitionservice.getRequisitionAll().subscribe(
+    res=> {
+      // this.datasourceRequisition = [];
+      this.datasourceRequisition = res;
+        this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value)
+
+        // // Consulta detalle de requisición
+        // this.getRequisitionDetail();
+    },
+    error => console.log("error consulta requisiciones",error)
+  )
+
+}
+
+getrequisition(){
+  // Obtiene las requisiciones 
+  this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(
+    res=> {
+      this.datasourceRequisition = [];
+      this.datasourceRequisition.push(res);
+        console.log('REQUISICIONES', this.datasourceRequisition);
+
+    //     // Consulta detalle de requisición
+    //     this.getRequisitionDetail();
+    },
+    error => console.log("error consulta requisiciones",error)
+  )
+}
+
+getRequisitionDetail(Requisition_Id : any){
+  // Obtiene requisiciones 
+  this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(
+    res=> {
+      this.datasourceRequisitionDetail = (res);
+
+        console.log('REQUISICIONES DETALLE', this.datasourceRequisitionDetail);
+    },
+    error => console.log("error consulta requisiciones",error)
+  )
+}
+
+getCategories(proyecto : any){
+  // Obtiene categorias 
+    this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(
+      res=> {
+        this.datasourceCategories = res;
+        console.log('PROYECTOS - CATEGORIAS', res);
+      },
+      error => console.log("error consulta cateogorias",error)
+    )
+
+  // this._projectCategoryservice.getProjectCateogryAll().subscribe(
+  //   res=> {
+  //     this.datasourceCategories = res;
+  //     console.log('PROYECTOS - CATEGORIAS', res);
+  //   },
+  //   error => console.log("error consulta cateogorias",error)
+  // )
+}
+
+insertQuotationHeader(arrayTodb : any){
+  this._quotationservice.insertQuotation(arrayTodb).subscribe(
+    res=> {
+      console.log('Se inserto con éxito', res);
+
+      // INSERTA REQUISICIONES DET
+      this.insertQuotationDet(res);
+    },
+    error => console.log("error alta de proyectos",error)
+  )
+}
+
+insertQuotationDet(cotizacionId : any){
+
+  console.log('para guardar')
+
+  // Obtiene Requisicion Registrada
+  let datasourceRequsition : MatTableDataSource<requisitionModel>
+  let requisitionIdMaximo : any = "0";
+  let arrayToDb : any;
+
+    this.datasourceCotizacionesDet.forEach(element => {
+        arrayToDb = { cotizacion_id : cotizacionId
+            , requisicioninternaDetalle_id : element.requisicioninternaDetalle_id
+            , cantidad : element.cantidad
+            , um : element.um
+            , descripcion : element.descripcion
+        }
+
+        // Inserta Proyecto Categoria
+        this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
+          res=> {
+            console.log('INSERTA COTIZACION DETALLE', arrayToDb);
+            this.openSnackBar('Se genero el la cotización exitosamente', 'success');
+          },
+          error => console.log("error al insertar proyectos categorias",error)
+        )
+        
+        arrayToDb = null;
+
+      });
+}
+
 
 }
