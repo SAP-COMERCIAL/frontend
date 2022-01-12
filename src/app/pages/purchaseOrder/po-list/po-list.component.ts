@@ -2,9 +2,6 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { requisitionModel } from 'src/app/models/requisition.model';
-import { requisitionservice } from 'src/app/services/requisition/requisition.service';
-import { RequisitionDetailComponent } from 'src/app/components/requisitions/requisition-detail/requisition-detail.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import * as moment from 'moment';
@@ -15,9 +12,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { DataSource } from '@angular/cdk/table';
-import { ProjectCaptureDetailComponent } from 'src/app/components/project-capture-detail/project-capture-detail/project-capture-detail.component';
 import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
+import { getMatFormFieldPlaceholderConflictError } from '@angular/material/form-field';
+import { poModel } from 'src/app/models/po.model';
+import { purchaseOrderservice } from 'src/app/services/PurchaseOrder.service';
+import { PoDetailComponent } from 'src/app/components/po-detail/po-detail.component';
 
 @Component({
   selector: 'app-po-list',
@@ -25,29 +25,36 @@ import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
   styleUrls: ['./po-list.component.css']
 })
 export class PoListComponent implements OnInit {
+  // =====================
+  // DECLARACIONES
+  // =====================
+
 // Para paginación
 public pageIndex:number = 0;
 public pageSize:number = 20;
 public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
-dataSourceShow : MatTableDataSource<requisitionModel>
+dataSourceShow : MatTableDataSource<poModel>
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['ordenDeCompra_Id', 'proyecto_id', 'Categoria_Id', 'Requisicion_Id', 'Fecha_OrdenDeCompra', 'Estatus', 'editar'];
+  displayedColumns = ['ordendecompra_codigo', 'cotizacion_codigo', 'proveedor_nombre', 'ordendecompra_fecha', 'Estatus', 'editar'];
   
   constructor(public dialog: MatDialog
-          , private _excelService : ExcelServiceService) { }
+          , private _excelService : ExcelServiceService
+          , private _purchaseOrderService : purchaseOrderservice) { }
+
+
+  // =====================
+  // PROCEDIMIENTOS
+  // =====================
 
   ngOnInit(): void {
-    let arrayData : any;
 
-    arrayData = [{ordenDeCompra_Id : 1, proyecto_id : 1, Categoria_Id : 1, Requisicion_Id : 1, Fecha_OrdenDeCompra : '2020-01-01', Estatus : 'ACTIVO'}]
-    this.dataSourceShow = new MatTableDataSource(arrayData);
-
+    this.getPO_Hdr();
   }
 
   descargarExcel(){
@@ -73,7 +80,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
 
     dialogConfig.data = {
       id: 1,
-      title: 'REQUISICIONES',
+      title: 'ORDEN DE COMPRA',
       arrayData : null,
       requisicionId: 1
      
@@ -82,7 +89,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     dialogConfig.height = '9000px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();
@@ -105,12 +112,16 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     dialogConfig.height = '400px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();
     });
   }
+
+  // =====================
+  // UTILERIAS
+  // =====================
 
   filtrar(event){}
 
@@ -127,6 +138,27 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     this.dataSourceShow = new MatTableDataSource(part);
     this.dataSourceShow.sort = this.sort;
     this.dataSourceShow.paginator = this.paginator;
+  }
+
+  // =====================
+  // CONSILTA DE SERVICIOS
+  // =====================
+
+  getPO_Hdr(){
+    // Proyectos registrados
+    this._purchaseOrderService.getPOAll().subscribe(
+      res=> {
+        console.log('PurchaseOrder', res);
+        this.dataSourceShow = new MatTableDataSource(res);
+        this.array = res;
+        this.totalSize = this.array.length;
+        
+        this.iterator();
+        this.dataSourceShow.sort = this.sort;
+        
+      },
+      error => console.log("error consulta regiones",error)
+    )
   }
 
 }

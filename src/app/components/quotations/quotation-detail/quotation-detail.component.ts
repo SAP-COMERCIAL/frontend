@@ -11,7 +11,7 @@ import { projectservice } from '../../../services/projects/project.service';
 import { categoryModel } from '../../../models/category.model';
 import { categoryservice } from '../../../services/category/category.service';
 import { ProjectCaptureComponent } from 'src/app/pages/projects/project-capture/project-capture.component';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
@@ -26,6 +26,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { filter } from 'rxjs-compat/operator/filter';
 import { RequisitionDetailComponent } from '../../requisitions/requisition-detail/requisition-detail.component';
 import { umask } from 'process';
+import { MatTab } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-quotation-detail',
@@ -46,6 +47,8 @@ export class QuotationDetailComponent implements OnInit {
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
+  @ViewChild(MatTable) tabla1: MatTable<any>;
+  
   
   fecha:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   requisicion_id : any = '';
@@ -92,12 +95,12 @@ export class QuotationDetailComponent implements OnInit {
     this.quotationId = data.cotizacionId;
 
     this.newProject = this.formBuilder.group({
-      proyecto_id : new FormControl(''),
-      categoria_id: new FormControl(''),
-      requisicion_id: new FormControl(''),
-      fecha: new FormControl(''),
-      requisicion_Numero : new FormControl(''),
-      cotizacion_Numero : new FormControl(''),
+      proyecto_id : new FormControl('', [Validators.required]),
+      categoria_id: new FormControl('', [Validators.required]),
+      requisicion_id: new FormControl('', [Validators.required]),
+      fecha: new FormControl('', [Validators.required]),
+      requisicion_Numero : new FormControl('', [Validators.required]),
+      cotizacion_Numero : new FormControl('', [Validators.required]),
       seleccionar : new FormControl('')
   });
   }
@@ -167,9 +170,24 @@ export class QuotationDetailComponent implements OnInit {
     }
   }
 
+  validaCamposRequeridos() : boolean{
+    let valido : boolean = true;
+    valido = (this.newProject.get('proyecto_id').status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("categoria_id").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("requisicion_Numero").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("cotizacion_Numero").status == 'INVALID') ? false : valido;
+
+    return valido;
+  }
+
   save(form, event){
 
     let arrayTodb : any;
+
+    if(this.validaCamposRequeridos() == false){
+      this.openSnackBar('debe capturar los campos requeridos', 'success');
+      return;
+    }
 
     if(this.quotationId == 0){
       arrayTodb = { 
@@ -353,33 +371,74 @@ insertQuotationHeader(arrayTodb : any){
 
 insertQuotationDet(cotizacionId : any){
 
-  console.log('para guardar')
+  console.log('para guardar', this.datasourceCotizacionesDet);
 
   // Obtiene Requisicion Registrada
   let datasourceRequsition : MatTableDataSource<requisitionModel>
   let requisitionIdMaximo : any = "0";
   let arrayToDb : any;
 
-    this.datasourceCotizacionesDet.forEach(element => {
-        arrayToDb = { cotizacion_id : cotizacionId
-            , requisicioninternaDetalle_id : element.requisicioninternaDetalle_id
-            , cantidad : element.cantidad
-            , um : element.um
-            , descripcion : element.descripcion
-        }
+  this.tabla1["_data"].forEach(element => {
+    console.log('elemento', element);
+    if(element.activo == true){
+      arrayToDb = { cotizaciondetalle_id: 0
+        , codigo_cotizacion : ''
+        , requisicioninternadetalle_id : element.requisicioninternadetalle_id
+        , cotizacion_id : cotizacionId
+        , sku : element.sku
+        , medida : element.medida
+        , color : element.color
+        , otras_especificaciones : element.otras_especificaciones
+        , cantidad : element.cantidad
+        , unidad_medida : element.unidad_medida
+        , descripcion : element.descripcion
+        , descuento : 0
+        , costo : 0
+      }
+    
+    // Inserta Proyecto Categoria
+    this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
+      res=> {
+        console.log('INSERTA COTIZACION DETALLE', arrayToDb);
+        this.openSnackBar('Se genero el la cotización exitosamente', 'success');
+      },
+      error => console.log("error al insertar proyectos categorias",error)
+    )
+  }
+
+    arrayToDb = null;
+
+  });
+
+    // this.datasourceCotizacionesDet.forEach(element => {
+        // arrayToDb = { cotizaciondetalle_id: 0
+        //     , codigo_cotizacion : ''
+        //     , requisicioninternaDetalle_id : element.requisicioninternaDetalle_id
+        //     , cotizacion_id : cotizacionId
+        //     , sku : element.sku
+        //     , medida : ''
+        //     , color : ''
+        //     , otras_especificaciones : ''
+        //     , almacen_id : 1
+        //     , cantidad : element.cantidad
+        //     , unidad_medida : element.um
+        //     , descripcion : element.descripcion
+        //     , descuento : 0
+        //     , costo : 0
+        // }
 
         // Inserta Proyecto Categoria
-        this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
-          res=> {
-            console.log('INSERTA COTIZACION DETALLE', arrayToDb);
-            this.openSnackBar('Se genero el la cotización exitosamente', 'success');
-          },
-          error => console.log("error al insertar proyectos categorias",error)
-        )
+      //   this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
+      //     res=> {
+      //       console.log('INSERTA COTIZACION DETALLE', arrayToDb);
+      //       this.openSnackBar('Se genero el la cotización exitosamente', 'success');
+      //     },
+      //     error => console.log("error al insertar proyectos categorias",error)
+      //   )
         
-        arrayToDb = null;
+      //   arrayToDb = null;
 
-      });
+      // });
 }
 
 

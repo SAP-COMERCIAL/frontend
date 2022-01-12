@@ -42,34 +42,33 @@
               <mat-table [dataSource]="dataSourceShow" matSort class="mat-elevation-z8" style="width: 95%;">
       
                 <!-- ID Column -->
-                <ng-container matColumnDef="ordenDeCompra_Id">
+                <ng-container matColumnDef="ordendecompra_codigo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Orden de compra</span> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ordenDeCompra_Id}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.ordendecompra_codigo}} </td>
                 </ng-container>
                 
                 <!-- ID Column -->
-                <ng-container matColumnDef="proyecto_id">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Proyecto</span> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.proyecto_id}} </td>
+                <ng-container matColumnDef="cotizacion_codigo">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cotización</span> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cotizacion_codigo}} </td>
                 </ng-container>
                 
                 <!-- Name Column -->
-                <ng-container matColumnDef="Categoria_Id">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Categoria </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Categoria_Id}} </td>
+                <ng-container matColumnDef="proveedor_nombre">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Proveedor </th>
+                  <td mat-cell *matCellDef="let element"> {{element.proveedor_nombre}} </td>
                 </ng-container>
                 
-                <!-- Email Column -->
-                <ng-container matColumnDef="Requisicion_Id">
+                
+                <!-- <ng-container matColumnDef="Requisicion_Id">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Requisición </th>
                   <td mat-cell *matCellDef="let element"> {{element.Requisicion_Id}} </td>
-                </ng-container>
+                </ng-container> -->
 
-                <!-- Email Column -->
-                <ng-container matColumnDef="Fecha_OrdenDeCompra">
+                <ng-container matColumnDef="ordendecompra_fecha">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha </th>
-                  <td mat-cell *matCellDef="let element"> {{element.Fecha_OrdenDeCompra | date: ' dd-MM-yyyy'}} </td>
-                </ng-container>
+                  <td mat-cell *matCellDef="let element"> {{element.ordendecompra_fecha | date: ' dd-MM-yyyy'}} </td>
+                </ng-container> 
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="Estatus">

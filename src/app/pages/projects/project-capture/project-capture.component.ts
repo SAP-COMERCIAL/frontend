@@ -115,7 +115,7 @@ public array: any;
     dialogConfig.data = {
       id: 1,
       title: 'CATEGORIAS',
-      arrayData : null,
+      arrayData : this.dataSourceShow,
       projectId: proyectoId
      
     }

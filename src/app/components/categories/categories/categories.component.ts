@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { MatSelectChange } from '@angular/material/select';
+import { MatTab } from '@angular/material/tabs';
+import { parse } from 'path';
 
 @Component({
   selector: 'app-categories',
@@ -36,6 +38,8 @@ export class CategoriesComponent implements OnInit {
   fechaEdicion : any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   presupuesto : any = 0;
   activo : any = true;
+  presupuestoTotal : any;
+  presupuestoRestante : any;
 
   displayedColumns: string[] = ['select','codigo_proyectocategoria', 'nombre_categoria', 'responsable', 'presupuesto', 'fecha_inicial', 'almacen_id', 'actualizar'];
   datasourceProjectCategories : MatTableDataSource<projectCategoryModel>
@@ -43,6 +47,7 @@ export class CategoriesComponent implements OnInit {
   
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
+  @ViewChild(MatTable) tabla1: MatTable<any>;
 
   constructor(public dialogRef: MatDialogRef<projectCategoryModel>
       , @Inject(MAT_DIALOG_DATA) public data,public snackBar: MatSnackBar
@@ -63,6 +68,11 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     
+    let arrayPoryectoActual : any = [] 
+    arrayPoryectoActual = this.projectInfo.filteredData.filter(e => e.proyecto_id == this.projectId);
+    this.presupuestoTotal = arrayPoryectoActual[0]['presupuesto_proyecto'];
+    this.presupuestoRestante = this.presupuestoTotal;
+
     this.getproyectosCategorias();
   }
 
@@ -91,7 +101,7 @@ export class CategoriesComponent implements OnInit {
 
   save(element : any, camporesponsable : any, event : Event){
     let arraySaveData : any;
-    console.log('frfrfr', element);
+    console.log('element', element);
     console.log('ENTRADA', event);
 
     arraySaveData = {proyectocategoria_id : element.proyectocategoria_id
@@ -127,6 +137,20 @@ export class CategoriesComponent implements OnInit {
         break;
     }
     console.log('filtro', this.responsableEdicion);
+  }
+
+  onBlurMethod(event : Event){
+    let x : any = (event.target as HTMLInputElement).value;
+    let CalculaPresupuesto : any = 0;
+    let presupuestoCategoria : any = 0;
+
+    this.tabla1["_data"].forEach(element => {
+      presupuestoCategoria = parseInt(element.presupuesto);
+      CalculaPresupuesto = CalculaPresupuesto + presupuestoCategoria;
+
+    });
+    this.presupuestoRestante = this.presupuestoTotal - CalculaPresupuesto;
+
   }
 
   insertProjectCategoryDet(arrayToDb : any){

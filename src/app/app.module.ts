@@ -37,6 +37,7 @@ import { QuotationDetailComponent } from './components/quotations/quotation-deta
 import { QuotationDetailFilesComponent } from './components/quotations/quotation-detail-files/quotation-detail-files.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { WarehouseReviewComponent } from './pages/warehouse-review/warehouse-review.component';
+import { PoDetailComponent } from './components/po-detail/po-detail.component';
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
 
@@ -60,7 +61,8 @@ import { WarehouseReviewComponent } from './pages/warehouse-review/warehouse-rev
     QuotationDetailComponent,
     QuotationDetailFilesComponent,
     AuthComponent,
-    WarehouseReviewComponent
+    WarehouseReviewComponent,
+    PoDetailComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

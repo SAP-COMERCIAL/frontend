@@ -70,8 +70,8 @@ export class ProjectCaptureDetailComponent implements OnInit {
       // presupuesto_proyecto: new FormControl('', Validators.required),
       fecha_inicial_proyecto: new FormControl(''),
       fecha_final_proyecto: new FormControl(''),
-      responsable_proyecto: new FormControl(''),
-      centroDeCostos: new FormControl(''),
+      responsable_proyecto: new FormControl('', [Validators.required]),
+      centroDeCostos: new FormControl('', [Validators.required]),
       almacen: new FormControl('')  
     });
   }
@@ -135,9 +135,30 @@ export class ProjectCaptureDetailComponent implements OnInit {
     )
   }
 
+  validaCamposRequeridos() : boolean{
+    let valido : boolean = true;
+    valido = (this.newProject.get('codigo_proyecto').status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("nombre_proyecto").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("cliente").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("presupuesto_proyecto").status == 'INVALID' || this.newProject.get("presupuesto_proyecto").value <= 0) ? false : valido;
+    valido = (this.newProject.get("fecha_inicial_proyecto").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("fecha_final_proyecto").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("responsable_proyecto").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("centroDeCostos").status == 'INVALID') ? false : valido;
+    valido = (this.newProject.get("almacen").status == 'INVALID') ? false : valido;
+
+    return valido;
+
+  }
+
   save(form, event){
 
     let arrayTodb : any;
+
+    if(this.validaCamposRequeridos() == false){
+      this.openSnackBar('debe capturar los campos requeridos', 'success');
+      return;
+    }
 
     if(this.projectId == 0){
 

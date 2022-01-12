@@ -23,6 +23,10 @@ export class quotationservice {
         return this.http.get<quotationListModel[]>(environment.urlapi + environment.apiContextDrivers + 'Quote/' + id);
     }
 
+    getQuotationDetail(id : any) {
+        return this.http.get<quotationListModel[]>(environment.urlapi + environment.apiContextDrivers + 'Quote/detalle/' + id);
+    }
+
     insertQuotation(arrayToDb : any) {
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'Quote/registrar',arrayToDb);
     }
