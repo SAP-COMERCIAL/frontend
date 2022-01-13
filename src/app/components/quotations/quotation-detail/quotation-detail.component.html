@@ -1,0 +1,195 @@
+<div fxLayout="row">
+  <h4>Nueva Cotización</h4>
+</div>
+<br>
+<div mat-dialog-content-example [formGroup]="newProject">
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <!-- <div><br>Proyecto</div> -->
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div>
+        <mat-form-field>
+          <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
+            <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
+              {{op.codigo_proyecto}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span *ngIf="!newProject.get('proyecto_id').valid && newProject.get('proyecto_id').touched" class="help-block" style="color: red;"> seleccione un proyecto</span>
+      </div>
+    </div>
+    <div fxFlex.gt-sm="10%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><br>Proyecto-Categoria</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <mat-select class="form-control control" formControlName="categoria_id" [(ngModel)]="categoria_id" (selectionChange)="categorySelected()" >
+              <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
+                {{opx.codigo_proyectocategoria}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span *ngIf="!newProject.get('categoria_id').valid && newProject.get('categoria_id').touched" class="help-block" style="color: red;"> seleccione una categotía</span>
+        </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div><br>Requisición</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div>
+      <mat-form-field>
+        <mat-select class="form-control control" formControlName="requisicion_Numero" [(ngModel)]="requisicion_Numero" (selectionChange)="RequisitionSelected()" >
+          <mat-option *ngFor="let op of datasourceRequisition" [value]="op.requisicioninterna_id">
+            {{op.codigo}}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <span *ngIf="!newProject.get('requisicion_Numero').valid && newProject.get('requisicion_Numero').touched" class="help-block" style="color: red;"> seleccione una requisición</span>
+      </div>
+    </div>
+    <div fxFlex.gt-sm="10%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>Fecha</div>
+    </div>
+    <div fxFlex.gt-sm="25%" >
+      <div><mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaControl($event)" class="control">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field></div>
+    </div>
+  </div>
+  <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div><br>Cotización</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+          <div>
+            <mat-form-field>
+              <input [type]="cotizacion_Numero" matInput class="form-control form-control-line control" formControlName="cotizacion_Numero" [(ngModel)]="cotizacion_Numero">
+            </mat-form-field>
+            <span *ngIf="!newProject.get('cotizacion_Numero').valid && newProject.get('cotizacion_Numero').touched" class="help-block" style="color: red;"> capture una cotización</span>
+          </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <!-- <div><button mat-raised-button color="accent" (click)="find(newProject, $event)">Buscar</button></div> -->
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+      </div>
+  </div>
+  <br>
+  <!--Tabla de captura-->
+  <div fxLayout="row" class="division">      
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Generar Cotización</button></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+    </div>
+  </div>
+  
+   <!-- INICIA CUERPO DE LA PÁGINA-->
+   <div class="col-12 col-md-12 p-0">
+    <div class="card">
+      <div class="card-body card-body-table">
+        <mat-table [dataSource]="datasourceRequisitionDetail" matSort class="mat-elevation-z8" style="width: 95%;" #tabla1>
+
+          <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                  <div style="width: 100%; text-align: left; vertical-align: middle;">
+                      SELECCIONAR
+              </div>
+                </th>
+                <div style="width: 50px;">
+                <td mat-cell *matCellDef="let element; let i = index">
+                  <mat-checkbox color="warn"
+                              formControlName="seleccionar" 
+                              (click)="$event.stopPropagation()"
+                              (change)="SeleccionarRegistro(element.cantidad, element.requisicioninternadetalle_id, element.um, element.descripcion, $event)"
+                              [checked]="element.activo"
+                              [(ngModel)]="element.activo"
+                              >
+                              <!--[checked]="selection.isSelected(element.proyecto_id)"-->
+                              <!--[(ngModel)]="element.activo" -->
+                  </mat-checkbox>
+                </td>
+              </div>
+          </ng-container>
+
+          <!-- SKU Column -->
+          <ng-container matColumnDef="sku">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>sku</span> </th>
+            <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
+          </ng-container>
+
+          <!-- descripción Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <!-- descripción Column -->
+          <ng-container matColumnDef="medida">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Medida </th>
+            <td mat-cell *matCellDef="let element"> {{element.medida}} </td>
+          </ng-container>
+
+          <!-- descripción Column -->
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Color </th>
+            <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="um">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Unidad de Medida </th>
+            <td mat-cell *matCellDef="let element"> {{element.unidad_de_medida}} </td>
+          </ng-container>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad</span> </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+          </ng-container>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="cantidad_comprar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad a comprar</span> </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidad_comprar}} </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </mat-table>
+  
+      </div>
+      <!-- <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator> -->
+    </div>
+    </div>
+  </div>
