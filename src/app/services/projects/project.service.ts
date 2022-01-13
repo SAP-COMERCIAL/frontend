@@ -6,6 +6,9 @@ import { environment } from 'src/environments/environment';
 import { from } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
+const headers : HttpHeaders = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
 @Injectable({
     providedIn: 'root'
@@ -13,18 +16,20 @@ import { Subject } from 'rxjs/Subject';
 
 export class projectservice {
 
-  constructor(protected http: HttpClient) { }
+  constructor(protected http: HttpClient) { 
+      
+  }
 
     getProjectAll() {
-        return this.http.get<projectModel[]>(environment.urlapi + environment.apiContextDrivers + 'Project/lista');
+        return this.http.get<projectModel[]>(environment.urlapi + environment.apiContextDrivers + 'Project/lista', {headers});
     }
 
     updateProjects(arrayToDb : any) {
-        return this.http.put(environment.urlapi+environment.apiContextDrivers+'Project/actualizar',arrayToDb);
+        return this.http.put(environment.urlapi+environment.apiContextDrivers+'Project/actualizar',arrayToDb, {headers});
     }
 
     insertProjects(arrayToDb : any) {
-        return this.http.post(environment.urlapi+environment.apiContextDrivers+'Project/registrar',arrayToDb);
+        return this.http.post(environment.urlapi+environment.apiContextDrivers+'Project/registrar',arrayToDb, {headers});
     }
 
 }

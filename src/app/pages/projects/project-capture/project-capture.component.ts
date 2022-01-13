@@ -23,6 +23,11 @@ import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
   styleUrls: ['./project-capture.component.css'],
 })
 export class ProjectCaptureComponent implements OnInit {
+
+// ====================
+// DECLARACIONES
+// ====================
+
 // Para paginación
 public pageIndex:number = 0;
 public pageSize:number = 20;
@@ -48,6 +53,9 @@ public array: any;
     // this.displayedColumns = ['proyecto']
   }
 
+// ====================
+// PROCEDIMIENTOS
+// ====================
   ngOnInit(): void {
     this.getProjects();
   }
@@ -171,6 +179,9 @@ public array: any;
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Proyectos');  
   }
 
+// ====================
+// UTILERIAS
+// ====================
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;

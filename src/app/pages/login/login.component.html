@@ -16,7 +16,7 @@
                 <!-- col full-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
                     <mat-form-field>
-                    <input matInput placeholder="Usuario" formControlName="correo" required="" #u1>
+                    <input matInput placeholder="Usuario" formControlName="nombreusuario" required="" #u1>
                     </mat-form-field>
                 </div>
                 <!-- col full-->
@@ -35,7 +35,8 @@
                 </div> -->
                 <!-- col full-->
                 <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-                    <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" (click)="check(u1.value, p2.value)" type="button">Acceder</button>
+                    <!-- <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" (click)="check(u1.value, p2.value)" type="button">Acceder</button> -->
+                    <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" (click)="loginReq()" type="button">Acceder</button>
                 </div>
                 <!-- col full-->
                 <!-- <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="text-center">

@@ -38,6 +38,7 @@ import { QuotationDetailFilesComponent } from './components/quotations/quotation
 import { AuthComponent } from './components/auth/auth.component';
 import { WarehouseReviewComponent } from './pages/warehouse-review/warehouse-review.component';
 import { PoDetailComponent } from './components/po-detail/po-detail.component';
+import { AuthSigninComponent } from './components/auth-signin/auth-signin.component';
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
 
@@ -62,7 +63,8 @@ import { PoDetailComponent } from './components/po-detail/po-detail.component';
     QuotationDetailFilesComponent,
     AuthComponent,
     WarehouseReviewComponent,
-    PoDetailComponent
+    PoDetailComponent,
+    AuthSigninComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

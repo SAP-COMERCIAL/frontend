@@ -6,6 +6,10 @@ import { environment } from 'src/environments/environment';
 import { from } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
+const headers : HttpHeaders = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+    
 @Injectable({
     providedIn: 'root'
 })
@@ -15,23 +19,23 @@ export class purchaseOrderservice {
   constructor(protected http: HttpClient) { }
 
     getPOAll() {
-        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/lista');
+        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/lista', {headers});
     }
 
     getPOById(id : any) {
-        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/' + id);
+        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/' + id, {headers});
     }
 
     getPODetail(id : any) {
-        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id);
+        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id, {headers});
     }
 
     insertPO_Hdr(arrayToDb : any) {
-        return this.http.post(environment.urlapi+environment.apiContextDrivers+'PurchaseOrder/registrar',arrayToDb);
+        return this.http.post(environment.urlapi+environment.apiContextDrivers+'PurchaseOrder/registrar',arrayToDb, {headers});
     }
 
     insertPODetail(arrayToDb : any) {
-        return this.http.post(environment.urlapi+environment.apiContextDrivers+'PurchaseOrder/registrar/detalle',arrayToDb);
+        return this.http.post(environment.urlapi+environment.apiContextDrivers+'PurchaseOrder/registrar/detalle',arrayToDb, {headers});
     }
 
     insertPOCancel(id : any) {

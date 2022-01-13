@@ -134,31 +134,31 @@
       /* harmony import */
 
 
-      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
+      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! @angular/platform-browser */
       39075);
       /* harmony import */
 
 
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(
       /*! ngx-toastr */
       19699);
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
       /*! @angular/forms */
       3679);
       /* harmony import */
 
 
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
       /*! @angular/common/http */
       91841);
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
       /*! @angular/common */
       38583);
       /* harmony import */
@@ -176,7 +176,7 @@
       /* harmony import */
 
 
-      var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
+      var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
       /*! @angular/flex-layout */
       25830);
       /* harmony import */
@@ -200,7 +200,7 @@
       /* harmony import */
 
 
-      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
+      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
       75835);
       /* harmony import */
@@ -230,25 +230,25 @@
       /* harmony import */
 
 
-      var _angular_material_table__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
+      var _angular_material_table__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
       /*! @angular/material/table */
       32091);
       /* harmony import */
 
 
-      var _angular_material_sort__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
+      var _angular_material_sort__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
       /*! @angular/material/sort */
       11494);
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
       /*! @angular/material/form-field */
       98295);
       /* harmony import */
 
 
-      var _angular_material_input__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
+      var _angular_material_input__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
       /*! @angular/material/input */
       83166);
       /* harmony import */
@@ -338,7 +338,13 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
+      var _components_auth_signin_auth_signin_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
+      /*! ./components/auth-signin/auth-signin.component */
+      36682);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @angular/core */
       37716); // import { Notification } from './components/notification/notification.component/notification.component.component';
       // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -352,31 +358,31 @@
         return new (t || _AppModule)();
       };
 
-      _AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineNgModule"]({
+      _AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineNgModule"]({
         type: _AppModule,
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent]
       });
-      _AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjector"]({
+      _AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineInjector"]({
         providers: [{
-          provide: _angular_common__WEBPACK_IMPORTED_MODULE_24__.LocationStrategy,
-          useClass: _angular_common__WEBPACK_IMPORTED_MODULE_24__.PathLocationStrategy
+          provide: _angular_common__WEBPACK_IMPORTED_MODULE_25__.LocationStrategy,
+          useClass: _angular_common__WEBPACK_IMPORTED_MODULE_25__.PathLocationStrategy
         }],
-        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_25__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_26__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_27__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_28__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_29__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_30__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_31__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_32__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_33__.MatInputModule, _angular_forms__WEBPACK_IMPORTED_MODULE_27__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_34__.ToastrModule.forRoot({
+        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_26__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_27__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_28__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_29__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_30__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_31__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_32__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_33__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_34__.MatInputModule, _angular_forms__WEBPACK_IMPORTED_MODULE_28__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_35__.ToastrModule.forRoot({
           timeOut: 5000,
           positionClass: 'toast-bottom-center',
           preventDuplicates: true
         }) // RouterModule.forRoot(AppRoutingModule, {useHash: true}) // AppRoutes
-        ], _angular_material_table__WEBPACK_IMPORTED_MODULE_30__.MatTableModule]
+        ], _angular_material_table__WEBPACK_IMPORTED_MODULE_31__.MatTableModule]
       });
 
       (function () {
-        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵsetNgModuleScope"](_AppModule, {
-          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent, _layouts_full_full_component__WEBPACK_IMPORTED_MODULE_2__.FullComponent, _layouts_full_header_header_component__WEBPACK_IMPORTED_MODULE_3__.AppHeaderComponent, _shared_spinner_component__WEBPACK_IMPORTED_MODULE_8__.SpinnerComponent, _layouts_full_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_4__.AppSidebarComponent, _components_categories_categories_categories_component__WEBPACK_IMPORTED_MODULE_9__.CategoriesComponent, _pages_login_login_component__WEBPACK_IMPORTED_MODULE_6__.LoginComponent, _pages_categories_categories_list_categories_list_component__WEBPACK_IMPORTED_MODULE_10__.CategoriesListComponent, _app_components_project_capture_detail_project_capture_detail_project_capture_detail_component__WEBPACK_IMPORTED_MODULE_11__.ProjectCaptureDetailComponent, _app_pages_projects_project_capture_project_capture_component__WEBPACK_IMPORTED_MODULE_12__.ProjectCaptureComponent, _pages_requisition_requisition_list_requisition_list_component__WEBPACK_IMPORTED_MODULE_13__.RequisitionListComponent, _components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_14__.RequisitionDetailComponent, _pages_quotation_quotation_list_quotation_list_component__WEBPACK_IMPORTED_MODULE_15__.QuotationListComponent, _pages_purchaseOrder_po_list_po_list_component__WEBPACK_IMPORTED_MODULE_16__.PoListComponent, _pages_storageInvoice_storage_invoice_list_storage_invoice_list_component__WEBPACK_IMPORTED_MODULE_17__.StorageInvoiceListComponent, _components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_18__.QuotationDetailComponent, _components_quotations_quotation_detail_files_quotation_detail_files_component__WEBPACK_IMPORTED_MODULE_19__.QuotationDetailFilesComponent, _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_20__.AuthComponent, _pages_warehouse_review_warehouse_review_component__WEBPACK_IMPORTED_MODULE_21__.WarehouseReviewComponent, _components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_22__.PoDetailComponent // ,
+        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵsetNgModuleScope"](_AppModule, {
+          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent, _layouts_full_full_component__WEBPACK_IMPORTED_MODULE_2__.FullComponent, _layouts_full_header_header_component__WEBPACK_IMPORTED_MODULE_3__.AppHeaderComponent, _shared_spinner_component__WEBPACK_IMPORTED_MODULE_8__.SpinnerComponent, _layouts_full_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_4__.AppSidebarComponent, _components_categories_categories_categories_component__WEBPACK_IMPORTED_MODULE_9__.CategoriesComponent, _pages_login_login_component__WEBPACK_IMPORTED_MODULE_6__.LoginComponent, _pages_categories_categories_list_categories_list_component__WEBPACK_IMPORTED_MODULE_10__.CategoriesListComponent, _app_components_project_capture_detail_project_capture_detail_project_capture_detail_component__WEBPACK_IMPORTED_MODULE_11__.ProjectCaptureDetailComponent, _app_pages_projects_project_capture_project_capture_component__WEBPACK_IMPORTED_MODULE_12__.ProjectCaptureComponent, _pages_requisition_requisition_list_requisition_list_component__WEBPACK_IMPORTED_MODULE_13__.RequisitionListComponent, _components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_14__.RequisitionDetailComponent, _pages_quotation_quotation_list_quotation_list_component__WEBPACK_IMPORTED_MODULE_15__.QuotationListComponent, _pages_purchaseOrder_po_list_po_list_component__WEBPACK_IMPORTED_MODULE_16__.PoListComponent, _pages_storageInvoice_storage_invoice_list_storage_invoice_list_component__WEBPACK_IMPORTED_MODULE_17__.StorageInvoiceListComponent, _components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_18__.QuotationDetailComponent, _components_quotations_quotation_detail_files_quotation_detail_files_component__WEBPACK_IMPORTED_MODULE_19__.QuotationDetailFilesComponent, _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_20__.AuthComponent, _pages_warehouse_review_warehouse_review_component__WEBPACK_IMPORTED_MODULE_21__.WarehouseReviewComponent, _components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_22__.PoDetailComponent, _components_auth_signin_auth_signin_component__WEBPACK_IMPORTED_MODULE_23__.AuthSigninComponent // ,
           // Notification.ComponentComponent,
           // NotificationComponent
           ],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_25__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_26__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_27__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_28__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_29__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_30__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_31__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_32__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_33__.MatInputModule, _angular_forms__WEBPACK_IMPORTED_MODULE_27__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_34__.ToastrModule],
-          exports: [_angular_material_table__WEBPACK_IMPORTED_MODULE_30__.MatTableModule]
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_26__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_27__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_28__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_29__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_30__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_31__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_32__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_33__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_34__.MatInputModule, _angular_forms__WEBPACK_IMPORTED_MODULE_28__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_35__.ToastrModule],
+          exports: [_angular_material_table__WEBPACK_IMPORTED_MODULE_31__.MatTableModule]
         });
       })();
       /***/
@@ -679,6 +685,166 @@
       })();
       /***/
 
+    },
+
+    /***/
+    36682:
+    /*!*****************************************************************!*\
+      !*** ./src/app/components/auth-signin/auth-signin.component.ts ***!
+      \*****************************************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "AuthSigninComponent": function AuthSigninComponent() {
+          return (
+            /* binding */
+            _AuthSigninComponent
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var _models_auth_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ../../models/auth.model */
+      67312);
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @angular/forms */
+      3679);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @angular/core */
+      37716);
+      /* harmony import */
+
+
+      var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ../../services/auth.service */
+      37556);
+      /* harmony import */
+
+
+      var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! src/app/services/user.service */
+      73071);
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/router */
+      39895);
+      /* harmony import */
+
+
+      var _services_aesencrypt_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../../services/aesencrypt.service */
+      25405);
+      /* harmony import */
+
+
+      var _services_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../../services/data.service */
+      52468);
+
+      var _AuthSigninComponent = /*#__PURE__*/function () {
+        function _AuthSigninComponent(authservice, userS, fb, route, cryptojs, dataService) {
+          _classCallCheck(this, _AuthSigninComponent);
+
+          this.authservice = authservice;
+          this.userS = userS;
+          this.fb = fb;
+          this.route = route;
+          this.cryptojs = cryptojs;
+          this.dataService = dataService;
+          this.spinerShow = false;
+          this.authmodel = new _models_auth_model__WEBPACK_IMPORTED_MODULE_0__.AuthC();
+        }
+
+        _createClass(_AuthSigninComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.clearForm();
+          }
+        }, {
+          key: "signinReq",
+          value: function signinReq() {
+            var _this = this;
+
+            this.spinerShow = true;
+            var pswdEncryp = this.cryptojs.encrypt(this.signinForm.value.password);
+            this.signinForm.value.password = pswdEncryp.substring(0, 50);
+            this.authservice.loginReq(this.signinForm.value).subscribe(function (response) {
+              localStorage.setItem('token_access', response.token); // Llama para guardar las variables en localstprage
+
+              _this.dataService.DecodeToken();
+
+              _this.spinerShow = false; // Notificacion de nuevo login
+
+              _this.dataService.loginChanged.emit(true);
+
+              _this.route.navigate(['/dashboard/analytics']);
+            }, function (err) {
+              if (err.status === 401) {
+                alertify.warning('Credenciales de acceso inválidas', 'ERROR');
+              }
+
+              if (err.status === 0 || err.status === 500) {
+                alertify.error('No se puede comunicar con el servidor', 'ERROR');
+              }
+
+              console.error(err.error);
+              _this.spinerShow = false;
+            });
+          }
+        }, {
+          key: "clearForm",
+          value: function clearForm() {
+            this.signinForm = this.fb.group({
+              username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required],
+              password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]
+            });
+          }
+        }]);
+
+        return _AuthSigninComponent;
+      }();
+
+      _AuthSigninComponent.ɵfac = function AuthSigninComponent_Factory(t) {
+        return new (t || _AuthSigninComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_services_auth_service__WEBPACK_IMPORTED_MODULE_1__.AuthService), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](src_app_services_user_service__WEBPACK_IMPORTED_MODULE_2__.UserService), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_services_aesencrypt_service__WEBPACK_IMPORTED_MODULE_3__.AESEncryptService), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdirectiveInject"](_services_data_service__WEBPACK_IMPORTED_MODULE_4__.DataService));
+      };
+
+      _AuthSigninComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineComponent"]({
+        type: _AuthSigninComponent,
+        selectors: [["app-auth-signin"]],
+        decls: 2,
+        vars: 0,
+        template: function AuthSigninComponent_Template(rf, ctx) {
+          if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "p");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](1, "auth-signin works!");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
+          }
+        },
+        styles: [".col10[_ngcontent-%COMP%]{\r\n    width: 10%;\r\n    vertical-align: middle;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImF1dGgtc2lnbmluLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCIiwiZmlsZSI6ImF1dGgtc2lnbmluLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29sMTB7XHJcbiAgICB3aWR0aDogMTAlO1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufSJdfQ== */"]
+      });
+      /***/
     },
 
     /***/
@@ -1379,11 +1545,11 @@
         _createClass(_CategoriesComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this = this;
+            var _this2 = this;
 
             var arrayPoryectoActual = [];
             arrayPoryectoActual = this.projectInfo.filteredData.filter(function (e) {
-              return e.proyecto_id == _this.projectId;
+              return e.proyecto_id == _this2.projectId;
             });
             this.presupuestoTotal = arrayPoryectoActual[0]['presupuesto_proyecto'];
             this.presupuestoRestante = this.presupuestoTotal;
@@ -1392,16 +1558,16 @@
         }, {
           key: "getproyectosCategorias",
           value: function getproyectosCategorias() {
-            var _this2 = this;
+            var _this3 = this;
 
             // Proyectos categorias
             this._projectCategoryservice.getProjectCateogryById(this.projectId).subscribe(function (res) {
               // console.log('this.datasourceProjectCategories.filteredData["responsable"]', this.datasourceProjectCategories.filteredData["responsable"]);
               console.log('Proyectos', res);
-              _this2.datasourceProjectCategories = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTableDataSource(res);
-              _this2.array = res;
-              _this2.totalSize = _this2.array.length;
-              _this2.datasourceProjectCategories.sort = _this2.sort; // this.newProject.controls["responsable"].setValue = this.datasourceProjectCategories.filteredData["responsable"];
+              _this3.datasourceProjectCategories = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTableDataSource(res);
+              _this3.array = res;
+              _this3.totalSize = _this3.array.length;
+              _this3.datasourceProjectCategories.sort = _this3.sort; // this.newProject.controls["responsable"].setValue = this.datasourceProjectCategories.filteredData["responsable"];
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -1475,13 +1641,13 @@
         }, {
           key: "insertProjectCategoryDet",
           value: function insertProjectCategoryDet(arrayToDb) {
-            var _this3 = this;
+            var _this4 = this;
 
             // Inserta Proyecto Categoria
             this._projectCategoryservice.updateProjectCatgory(arrayToDb).subscribe(function (res) {
               console.log('ACTUALIZA PROYECO CATEGORIA', arrayToDb);
 
-              _this3.openSnackBar('El registro se actualizó con éxito', '');
+              _this4.openSnackBar('El registro se actualizó con éxito', '');
             }, function (error) {
               return console.log("error al insertar proyectos categorias", error);
             });
@@ -2373,19 +2539,19 @@
         }, {
           key: "getPO_Hdr",
           value: function getPO_Hdr(codigo_cotizacion) {
-            var _this4 = this;
+            var _this5 = this;
 
             // ordenes de compra Todas
             var arrayPO_Hdr;
 
             this._purchaseOrderservice.getPOAll().subscribe(function (res) {
               console.log('PurchaseOrder', res);
-              _this4.podatasource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this5.podatasource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
               arrayPO_Hdr = res.filter(function (e) {
                 return e.codigo_cotizacion == codigo_cotizacion;
               });
-              _this4.po_count = arrayPO_Hdr.length + 1;
-              _this4.odc_Numero = codigo_cotizacion + '-' + _this4.po_count.toString();
+              _this5.po_count = arrayPO_Hdr.length + 1;
+              _this5.odc_Numero = codigo_cotizacion + '-' + _this5.po_count.toString();
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -2393,10 +2559,10 @@
         }, {
           key: "getCotizacionesAll",
           value: function getCotizacionesAll() {
-            var _this5 = this;
+            var _this6 = this;
 
             this._quotationservice.getQuotationAll().subscribe(function (res) {
-              _this5.datasourceCotizaciones = res;
+              _this6.datasourceCotizaciones = res;
               console.log('COTIZACIONES TODAS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -2405,13 +2571,13 @@
         }, {
           key: "getcotizacionesDetail",
           value: function getcotizacionesDetail(cotizacion_id) {
-            var _this6 = this;
+            var _this7 = this;
 
             this._quotationservice.getQuotationDetail(cotizacion_id).subscribe(function (res) {
-              _this6.datasourceCotizacionesDetalle = res;
+              _this7.datasourceCotizacionesDetalle = res;
               console.log('COTIZACIONES TODAS', res);
 
-              _this6.getPO_Hdr(res[0]["codigo_cotizacion"]);
+              _this7.getPO_Hdr(res[0]["codigo_cotizacion"]);
             }, function (error) {
               return console.log("error consulta proyectos", error);
             });
@@ -2419,7 +2585,7 @@
         }, {
           key: "insertPOHdr",
           value: function insertPOHdr(table) {
-            var _this7 = this;
+            var _this8 = this;
 
             var arrayTodb;
             var arrayDetail = [];
@@ -2428,9 +2594,9 @@
               //Hdr
               if (conteo == 0) {
                 arrayTodb = {
-                  codigo: _this7.odc_Numero,
+                  codigo: _this8.odc_Numero,
                   cotizacion_id: element.cotizacion_id,
-                  proveedor_id: _this7.proveedor_id,
+                  proveedor_id: _this8.proveedor_id,
                   fecha: moment__WEBPACK_IMPORTED_MODULE_0__(new Date(), 'YYYY-M-DD')
                 };
               } //Detalle
@@ -2459,7 +2625,7 @@
             this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this7.insertPODet(res, arrayDetail);
+              _this8.insertPODet(res, arrayDetail);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -2467,7 +2633,7 @@
         }, {
           key: "insertPODet",
           value: function insertPODet(po_id, arrayDetail) {
-            var _this8 = this;
+            var _this9 = this;
 
             var arrayTodbDetail;
             console.log('detalledet_para insertar', arrayDetail);
@@ -2489,7 +2655,7 @@
               };
               console.log('detalle', arrayTodbDetail);
 
-              _this8._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(function (res) {
+              _this9._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(function (res) {
                 console.log('Se inserto con éxito', res);
               }, function (error) {
                 return console.log("error alta de proyectos", error);
@@ -3242,17 +3408,17 @@
         }, {
           key: "getAllProjects",
           value: function getAllProjects() {
-            var _this9 = this;
+            var _this10 = this;
 
             // Actualiza registro NUEVO
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this9.datasourceProyects = res;
+              _this10.datasourceProyects = res;
 
-              if (_this9.projectId == 0) {
-                _this9.codigo_proyecto = Number(_this9.datasourceProyects[_this9.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
-                console.log('PROEYCTOS TODOS', _this9.proeycto_numero_mayor);
+              if (_this10.projectId == 0) {
+                _this10.codigo_proyecto = Number(_this10.datasourceProyects[_this10.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
+                console.log('PROEYCTOS TODOS', _this10.proeycto_numero_mayor);
               } else {
-                _this9.codigo_proyecto = _this9.projectInfo["codigo_proyecto"];
+                _this10.codigo_proyecto = _this10.projectInfo["codigo_proyecto"];
               }
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -3261,12 +3427,12 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this10 = this;
+            var _this11 = this;
 
             // Actualiza registro NUEVO
             this._categoryService.getCategoryAll().subscribe(function (res) {
-              _this10.datasourceCategories = res;
-              console.log('CATEGORIAS', _this10.datasourceCategories);
+              _this11.datasourceCategories = res;
+              console.log('CATEGORIAS', _this11.datasourceCategories);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -3289,7 +3455,7 @@
         }, {
           key: "save",
           value: function save(form, event) {
-            var _this11 = this;
+            var _this12 = this;
 
             var arrayTodb;
 
@@ -3314,10 +3480,10 @@
               this._projectService.insertProjects(arrayTodb).subscribe(function (res) {
                 console.log('Se inserto con éxito', res);
 
-                _this11.openSnackBar('Se genero el proyecto exitosamente', 'success'); // Inserta categorias
+                _this12.openSnackBar('Se genero el proyecto exitosamente', 'success'); // Inserta categorias
 
 
-                _this11.insertCategories();
+                _this12.insertCategories();
               }, function (error) {
                 return console.log("error alta de proyectos", error);
               }); // Inserta categorias
@@ -3350,7 +3516,7 @@
         }, {
           key: "insertCategories",
           value: function insertCategories() {
-            var _this12 = this;
+            var _this13 = this;
 
             // Obtiene Proyecto Registrado
             var datasourceProyectos;
@@ -3365,7 +3531,7 @@
                 return e.proyecto_id == proyectoIdMaximo;
               });
 
-              _this12.datasourceCategories.forEach(function (element) {
+              _this13.datasourceCategories.forEach(function (element) {
                 arrayProjectCategories = {
                   proyecto_id: proyectoIdMaximo,
                   categoria_id: element.categoria_id,
@@ -3376,8 +3542,8 @@
                   codigo_proyectocategoria: codigoProyecto["codigo_proyecto"] + '-' + element.codigo_categoria
                 }; // Inserta Proyecto Categoria
 
-                _this12._projectCategoryservice.insertProjects(arrayProjectCategories).subscribe(function (res) {
-                  console.log('CATEGORIAS', _this12.datasourceCategories);
+                _this13._projectCategoryservice.insertProjects(arrayProjectCategories).subscribe(function (res) {
+                  console.log('CATEGORIAS', _this13.datasourceCategories);
                 }, function (error) {
                   return console.log("error al insertar proyectos categorias", error);
                 });
@@ -5338,13 +5504,13 @@
         }, {
           key: "RequisitionSelected",
           value: function RequisitionSelected() {
-            var _this13 = this;
+            var _this14 = this;
 
             var arrayRequisicion_interna;
             var codigoRequisicion_interna;
             this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
             arrayRequisicion_interna = this.datasourceRequisition.filter(function (e) {
-              return e.requisicioninterna_id == _this13.requisicionId;
+              return e.requisicioninterna_id == _this14.requisicionId;
             });
             this.getCotizacionesAll(arrayRequisicion_interna[0]["codigo"]); // Busca cotizaciones y arma nuevo numero de cotización
 
@@ -5476,11 +5642,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this14 = this;
+            var _this15 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this14.datasourcePorjects = res;
+              _this15.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -5489,12 +5655,12 @@
         }, {
           key: "getCotizacionesAll",
           value: function getCotizacionesAll(requisicion_interna) {
-            var _this15 = this;
+            var _this16 = this;
 
             this._quotationservice.getQuotationAll().subscribe(function (res) {
-              _this15.datasourceCotizaciones = res;
+              _this16.datasourceCotizaciones = res;
               console.log('COTIZACIONES TODAS', res);
-              _this15.cotizacion_Numero = _this15.cotizacion_Numero = requisicion_interna + '-' + (_this15.datasourceCotizaciones.filter(function (e) {
+              _this16.cotizacion_Numero = _this16.cotizacion_Numero = requisicion_interna + '-' + (_this16.datasourceCotizaciones.filter(function (e) {
                 return e.codigo_requisicioninterna == requisicion_interna;
               }).length + 1);
             }, function (error) {
@@ -5504,14 +5670,14 @@
         }, {
           key: "getrequisitionAll",
           value: function getrequisitionAll() {
-            var _this16 = this;
+            var _this17 = this;
 
             // Obtiene todas las requisiciones 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
               // this.datasourceRequisition = [];
-              _this16.datasourceRequisition = res;
-              _this16.datasourceRequisition = _this16.datasourceRequisition.filter(function (e) {
-                return e.proyectocategoria_id == _this16.newProject.controls["categoria_id"].value;
+              _this17.datasourceRequisition = res;
+              _this17.datasourceRequisition = _this17.datasourceRequisition.filter(function (e) {
+                return e.proyectocategoria_id == _this17.newProject.controls["categoria_id"].value;
               }); // // Consulta detalle de requisición
               // this.getRequisitionDetail();
             }, function (error) {
@@ -5521,15 +5687,15 @@
         }, {
           key: "getrequisition",
           value: function getrequisition() {
-            var _this17 = this;
+            var _this18 = this;
 
             // Obtiene las requisiciones 
             this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(function (res) {
-              _this17.datasourceRequisition = [];
+              _this18.datasourceRequisition = [];
 
-              _this17.datasourceRequisition.push(res);
+              _this18.datasourceRequisition.push(res);
 
-              console.log('REQUISICIONES', _this17.datasourceRequisition); //     // Consulta detalle de requisición
+              console.log('REQUISICIONES', _this18.datasourceRequisition); //     // Consulta detalle de requisición
               //     this.getRequisitionDetail();
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -5538,12 +5704,12 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(Requisition_Id) {
-            var _this18 = this;
+            var _this19 = this;
 
             // Obtiene requisiciones 
             this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(function (res) {
-              _this18.datasourceRequisitionDetail = res;
-              console.log('REQUISICIONES DETALLE', _this18.datasourceRequisitionDetail);
+              _this19.datasourceRequisitionDetail = res;
+              console.log('REQUISICIONES DETALLE', _this19.datasourceRequisitionDetail);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
             });
@@ -5551,11 +5717,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this19 = this;
+            var _this20 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this19.datasourceCategories = res;
+              _this20.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -5571,12 +5737,12 @@
         }, {
           key: "insertQuotationHeader",
           value: function insertQuotationHeader(arrayTodb) {
-            var _this20 = this;
+            var _this21 = this;
 
             this._quotationservice.insertQuotation(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this20.insertQuotationDet(res);
+              _this21.insertQuotationDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -5584,7 +5750,7 @@
         }, {
           key: "insertQuotationDet",
           value: function insertQuotationDet(cotizacionId) {
-            var _this21 = this;
+            var _this22 = this;
 
             console.log('para guardar', this.datasourceCotizacionesDet); // Obtiene Requisicion Registrada
 
@@ -5611,10 +5777,10 @@
                   costo: 0
                 }; // Inserta Proyecto Categoria
 
-                _this21._quotationservice.insertQuotationDetail(arrayToDb).subscribe(function (res) {
+                _this22._quotationservice.insertQuotationDetail(arrayToDb).subscribe(function (res) {
                   console.log('INSERTA COTIZACION DETALLE', arrayToDb);
 
-                  _this21.openSnackBar('Se genero el la cotización exitosamente', 'success');
+                  _this22.openSnackBar('Se genero el la cotización exitosamente', 'success');
                 }, function (error) {
                   return console.log("error al insertar proyectos categorias", error);
                 });
@@ -6732,7 +6898,7 @@
         }, {
           key: "onFileChange",
           value: function onFileChange(event) {
-            var _this22 = this;
+            var _this23 = this;
 
             /* wire up file reader */
             var target = event.target;
@@ -6764,8 +6930,8 @@
                 /* save data */
 
                 var data = xlsx__WEBPACK_IMPORTED_MODULE_1__.utils.sheet_to_json(ws);
-                _this22.dataExcel = _this22.validate(data);
-                _this22.dataExcel = data;
+                _this23.dataExcel = _this23.validate(data);
+                _this23.dataExcel = data;
                 var arrayErrores = [];
                 var arrayExcel = [];
                 var valido = true; // Validadores de campos
@@ -6777,7 +6943,7 @@
                 var DescripcionAnt = '';
                 var Descripcion = ''; // Ordena los descuentos por cr + produto + plataforma
 
-                _this22.dataExcel.sort(function (a, b) {
+                _this23.dataExcel.sort(function (a, b) {
                   if (a.DESCRIPCION > b.DESCRIPCION) {
                     return 1;
                   }
@@ -6790,11 +6956,11 @@
                   return 0;
                 });
 
-                DescripcionAnt = _this22.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
+                DescripcionAnt = _this23.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
 
                 var contador = 0;
 
-                _this22.dataExcel.forEach(function (element) {
+                _this23.dataExcel.forEach(function (element) {
                   // Reinicia valores
                   valido = true;
                   errorDescripcion = false;
@@ -6844,16 +7010,16 @@
                 });
 
                 if (arrayErrores.length > 0) {
-                  _this22.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
+                  _this23.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
 
 
-                  _this22.dataExcel = null; // this.openErrorDialog(arrayErroresEstacion);
+                  _this23.dataExcel = null; // this.openErrorDialog(arrayErroresEstacion);
 
                   return;
                 }
 
-                _this22.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
-                console.log('datos del excel', _this22.UploadDataExcel);
+                _this23.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
+                console.log('datos del excel', _this23.UploadDataExcel);
               };
             } else {
               this.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'No es un archivo de excel válido', 'warn');
@@ -6984,11 +7150,11 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this23 = this;
+            var _this24 = this;
 
             // Actualiza registro NUEVO
             this._projectCategoryservice.getProjectCateogryById(1).subscribe(function (res) {
-              _this23.datasourceCategories = res;
+              _this24.datasourceCategories = res;
               console.log('CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta categorias", error);
@@ -6997,11 +7163,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this24 = this;
+            var _this25 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this24.datasourcePorjects = res;
+              _this25.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -7010,7 +7176,7 @@
         }, {
           key: "getrequisition",
           value: function getrequisition(codigo_categoria) {
-            var _this25 = this;
+            var _this26 = this;
 
             var categoria_id = this.newProject.controls["categoria_id"].value;
             var codigo_requisicion = 0;
@@ -7018,13 +7184,13 @@
             var arrayCodigoCategoria; // Proyectos registrados
 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
-              _this25.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
+              _this26.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
 
-              if (_this25.datasourceRequisition.filteredData.length == 0) {
+              if (_this26.datasourceRequisition.filteredData.length == 0) {
                 codigo_requisicion = codigo_categoria + '-1';
               } else {
                 // Obtener requisicion en la que se mas alta y determinar cual sigue
-                arrayRequisition = _this25.datasourceRequisition.filteredData.filter(function (e) {
+                arrayRequisition = _this26.datasourceRequisition.filteredData.filter(function (e) {
                   return e.proyectocategoria_id == categoria_id;
                 });
 
@@ -7039,7 +7205,7 @@
               } // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
 
 
-              _this25.requisicion_Numero = codigo_requisicion;
+              _this26.requisicion_Numero = codigo_requisicion;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -7047,11 +7213,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this26 = this;
+            var _this27 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this26.datasourceCategories = res;
+              _this27.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -7060,12 +7226,12 @@
         }, {
           key: "insertRequisition",
           value: function insertRequisition(arrayTodb) {
-            var _this27 = this;
+            var _this28 = this;
 
             this._requisitionservice.insertRequisition(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this27.insertRequisitionDet(res);
+              _this28.insertRequisitionDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -7073,7 +7239,7 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(arrayTodb) {
-            var _this28 = this;
+            var _this29 = this;
 
             var arrayRequsitionDetail;
             var arrayRequsitionToTable = []; //MatTableDataSource<requisitionModelDetail>;
@@ -7090,7 +7256,7 @@
                   medida: element.medida
                 });
               });
-              _this28.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
+              _this29.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
               console.log('Se obtiene detalle de requisición', res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
@@ -7110,7 +7276,7 @@
         }, {
           key: "insertRequisitionDet",
           value: function insertRequisitionDet(requisicionId) {
-            var _this29 = this;
+            var _this30 = this;
 
             // Obtiene Requisicion Registrada
             var datasourceRequsition;
@@ -7135,10 +7301,10 @@
               };
               console.log('DETALLE DETALLE DETALLE', arrayToDb); // Inserta Proyecto Categoria
 
-              _this29._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
+              _this30._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
                 console.log('REQUISICIONES DETALLE', res);
 
-                _this29.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
+                _this30.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
 
               }, function (error) {
                 return console.log("error al insertar proyectos categorias", error);
@@ -8794,6 +8960,47 @@
     },
 
     /***/
+    67312:
+    /*!**************************************!*\
+      !*** ./src/app/models/auth.model.ts ***!
+      \**************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "AuthC": function AuthC() {
+          return (
+            /* binding */
+            _AuthC
+          );
+        }
+        /* harmony export */
+
+      });
+
+      var _AuthC = function _AuthC() {
+        _classCallCheck(this, _AuthC);
+
+        this.id = null;
+        this.nombreusuario = '';
+        this.correo = '';
+        this.contrasegna = '';
+        this.perfilid = null;
+        this.perfil = '';
+        this.token = '';
+      };
+      /***/
+
+    },
+
+    /***/
     70649:
     /*!*********************************!*\
       !*** ./src/app/models/users.ts ***!
@@ -8950,102 +9157,92 @@
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/forms */
       3679);
       /* harmony import */
 
 
-      var sha_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! sha.js */
-      45829);
-      /* harmony import */
-
-
-      var sha_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sha_js__WEBPACK_IMPORTED_MODULE_2__);
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/core */
       37716);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
       39895);
       /* harmony import */
 
 
-      var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! src/app/services/auth.service */
       37556);
       /* harmony import */
 
 
-      var src_app_services_aesencrypt_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var src_app_services_aesencrypt_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! src/app/services/aesencrypt.service */
       25405);
       /* harmony import */
 
 
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ngx-toastr */
       19699);
       /* harmony import */
 
 
-      var _angular_material_card__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _angular_material_card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/card */
       93738);
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/common */
       38583);
       /* harmony import */
 
 
-      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/flex-layout/flex */
       35618);
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/material/form-field */
       98295);
       /* harmony import */
 
 
-      var _angular_material_input__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      var _angular_material_input__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/material/input */
       83166);
       /* harmony import */
 
 
-      var _angular_material_button__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/material/button */
       51095); // './../../../../models/user';
 
 
       function LoginComponent_div_7_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
-          var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnextContext"]();
+          var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtextInterpolate"](ctx_r0.msg);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx_r0.msg);
         }
       }
 
@@ -9066,49 +9263,6 @@
         }
 
         _createClass(_LoginComponent, [{
-          key: "check",
-          value: function check(uname, p) {
-            var _this30 = this;
-
-            var encryptedMessage;
-            var claves;
-            claves = this.loginform.value;
-            console.log('aaa', claves.correo.trim(), claves.contrasegna.trim()); // encryptedMessage = CryptoJS.AES.encrypt( claves.contrasegna.trim()).toString();
-            // encryptedMessage = CryptoJS.createHmac('sha256', "key");
-            // encryptedMessage = CryptoJS.HmacSha256Signature( claves.correo.trim(), claves.contrasegna.trim()).toString();
-            // encryptedMessage = CryptoJS.HmacSha256Signature( this.loginform.value).toString(CryptoJS.enc.Base64);
-            //     var hash = CryptoJS.SHA256("123456789");
-            // ​         hash.toString(CryptoJS.enc.Base64)
-            //     console.log('encriptado',hash.toString(CryptoJS.enc.Base64));
-
-            var hash = sha_js__WEBPACK_IMPORTED_MODULE_2__('sha256').update('root' + claves.contrasegna.trim()).digest('hex');
-            console.log(hash);
-            this.routes.navigate(['/dashboard']);
-            this.authService.loginReq(this.loginform.value).subscribe(function (response) {
-              localStorage.setItem('token_access', response);
-              _this30.spinerShow = false;
-
-              _this30.routes.navigate(['/dashboard']);
-            }, function (err) {
-              if (err.status === 401) {
-                _this30.toastr.error('Credenciales de acceso inválidas', 'ERROR');
-              }
-
-              if (err.status === 0 || err.status === 500) {
-                _this30.toastr.error('No se puede comunicar con el servidor', 'ERROR');
-              }
-
-              console.error(err);
-              _this30.spinerShow = false;
-            }); // const output = this.service.checkusernameandpassword(uname, p);
-            // if (output == true) {
-            //   console.log(output);
-            //   this.routes.navigate(['/dashboard']);
-            // } else {  
-            //   this.msg = 'Usuario o Clave inválido';
-            // }
-          }
-        }, {
           key: "ngOnInit",
           value: function ngOnInit() {
             this.clearForm();
@@ -9118,14 +9272,14 @@
           value: function loginReq() {
             var _this31 = this;
 
-            this.spinerShow = true; // const pswdEncryp = this.cryptService.encrypt(this.loginForm.value.contrasegna);
-            // this.loginForm.value.contrasegna = pswdEncryp;
-
+            this.spinerShow = true;
+            var pswdEncryp = this.cryptService.encrypt(this.loginform.value.contrasegna);
+            this.loginform.value.contrasegna = pswdEncryp;
             this.authService.loginReq(this.loginform.value).subscribe(function (response) {
-              localStorage.setItem('token_access', response);
+              localStorage.setItem('token_access', response.token);
               _this31.spinerShow = false;
 
-              _this31.route.navigate(['/tablero/estadistica']);
+              _this31.route.navigate(['/dashboard']);
             }, function (err) {
               if (err.status === 401) {
                 _this31.toastr.error('Credenciales de acceso inválidas', 'ERROR');
@@ -9143,8 +9297,8 @@
           key: "clearForm",
           value: function clearForm() {
             this.loginform = this.formBuilder.group({
-              correo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required],
-              contrasegna: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]
+              nombreusuario: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required],
+              contrasegna: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__.Validators.required]
             });
           }
         }]);
@@ -9153,108 +9307,100 @@
       }();
 
       _LoginComponent.ɵfac = function LoginComponent_Factory(t) {
-        return new (t || _LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_services_login_login_service__WEBPACK_IMPORTED_MODULE_0__.loginservice), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_3__.AuthService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_aesencrypt_service__WEBPACK_IMPORTED_MODULE_4__.AESEncryptService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_8__.ToastrService));
+        return new (t || _LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_services_login_login_service__WEBPACK_IMPORTED_MODULE_0__.loginservice), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__.AuthService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_aesencrypt_service__WEBPACK_IMPORTED_MODULE_3__.AESEncryptService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_7__.ToastrService));
       };
 
-      _LoginComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
+      _LoginComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
         type: _LoginComponent,
         selectors: [["app-login"]],
-        features: [_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵProvidersFeature"]([_services_login_login_service__WEBPACK_IMPORTED_MODULE_0__.loginservice])],
+        features: [_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵProvidersFeature"]([_services_login_login_service__WEBPACK_IMPORTED_MODULE_0__.loginservice])],
         decls: 20,
         vars: 2,
-        consts: [[1, "login-register", 2, "background-image", "url(assets/images/background/login-register.jpg)"], [1, "login-register-box"], [1, "m-t-10"], ["id", "loginform", 3, "formGroup", "ngSubmit"], [1, "text-center"], ["alt", "homepage", "src", "assets/images/logo-comercial20.jpeg"], ["class", "bg-danger p-10 text-white", 4, "ngIf"], ["fxLayout", "row wrap"], ["fxFlex.gt-sm", "100", "fxFlex.gt-xs", "100", "fxFlex", "100"], ["matInput", "", "placeholder", "Usuario", "formControlName", "correo", "required", ""], ["u1", ""], ["matInput", "", "type", "password", "placeholder", "Clave", "formControlName", "contrasegna", "required", ""], ["p2", ""], ["mat-raised-button", "", "color", "primary", "type", "button", 1, "btn-block", "btn-lg", "m-t-20", "m-b-20", 3, "click"], [1, "bg-danger", "p-10", "text-white"]],
+        consts: [[1, "login-register", 2, "background-image", "url(assets/images/background/login-register.jpg)"], [1, "login-register-box"], [1, "m-t-10"], ["id", "loginform", 3, "formGroup", "ngSubmit"], [1, "text-center"], ["alt", "homepage", "src", "assets/images/logo-comercial20.jpeg"], ["class", "bg-danger p-10 text-white", 4, "ngIf"], ["fxLayout", "row wrap"], ["fxFlex.gt-sm", "100", "fxFlex.gt-xs", "100", "fxFlex", "100"], ["matInput", "", "placeholder", "Usuario", "formControlName", "nombreusuario", "required", ""], ["u1", ""], ["matInput", "", "type", "password", "placeholder", "Clave", "formControlName", "contrasegna", "required", ""], ["p2", ""], ["mat-raised-button", "", "color", "primary", "type", "button", 1, "btn-block", "btn-lg", "m-t-20", "m-b-20", 3, "click"], [1, "bg-danger", "p-10", "text-white"]],
         template: function LoginComponent_Template(rf, ctx) {
           if (rf & 1) {
-            var _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵgetCurrentView"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](1, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "mat-card", 2);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "mat-card", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "mat-card-content");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](3, "mat-card-content");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](4, "form", 3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](4, "form", 3);
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_4_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_4_listener() {
               return ctx.loginReq();
             });
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](5, "div", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](5, "div", 4);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](6, "img", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](6, "img", 5);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtemplate"](7, LoginComponent_div_7_Template, 2, 1, "div", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](7, LoginComponent_div_7_Template, 2, 1, "div", 6);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](8, "div", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](8, "div", 7);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](9, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](9, "div", 8);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](10, "mat-form-field");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](10, "mat-form-field");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](11, "input", 9, 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](11, "input", 9, 10);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](13, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](13, "div", 8);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](14, "mat-form-field");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](14, "mat-form-field");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](15, "input", 11, 12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](15, "input", 11, 12);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](17, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](17, "div", 8);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](18, "button", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](18, "button", 13);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_18_listener() {
-              _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵrestoreView"](_r3);
-
-              var _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](12);
-
-              var _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵreference"](16);
-
-              return ctx.check(_r1.value, _r2.value);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_18_listener() {
+              return ctx.loginReq();
             });
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](19, "Acceder");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](19, "Acceder");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](4);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("formGroup", ctx.loginform);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("formGroup", ctx.loginform);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("ngIf", ctx.msg);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx.msg);
           }
         },
-        directives: [_angular_material_card__WEBPACK_IMPORTED_MODULE_9__.MatCard, _angular_material_card__WEBPACK_IMPORTED_MODULE_9__.MatCardContent, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroupDirective, _angular_common__WEBPACK_IMPORTED_MODULE_10__.NgIf, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultLayoutDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_13__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControlName, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.RequiredValidator, _angular_material_button__WEBPACK_IMPORTED_MODULE_14__.MatButton],
+        directives: [_angular_material_card__WEBPACK_IMPORTED_MODULE_8__.MatCard, _angular_material_card__WEBPACK_IMPORTED_MODULE_8__.MatCardContent, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroupDirective, _angular_common__WEBPACK_IMPORTED_MODULE_9__.NgIf, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__.DefaultLayoutDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_12__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControlName, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.RequiredValidator, _angular_material_button__WEBPACK_IMPORTED_MODULE_13__.MatButton],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsb2dpbi5jb21wb25lbnQuc2NzcyJ9 */"]
       });
       /***/
@@ -9688,7 +9834,10 @@
 
           this.dialog = dialog;
           this._projectService = _projectService;
-          this._excelService = _excelService; // Para paginación
+          this._excelService = _excelService; // ====================
+          // DECLARACIONES
+          // ====================
+          // Para paginación
 
           this.pageIndex = 0;
           this.pageSize = 20;
@@ -9697,7 +9846,10 @@
           this.displayedColumns = ['codigo_proyecto', 'nombre_proyecto', 'fecha_inicial_proyecto', 'fecha_final_proyecto', 'nombre_cliente', 'responsable_proyecto', 'presupuesto_proyecto', 'proyect_id', 'editar', 'categorias'];
           this.projectData = [];
           this.filterChange = new _angular_core__WEBPACK_IMPORTED_MODULE_5__.EventEmitter(); // this.displayedColumns = ['proyecto']
-        }
+        } // ====================
+        // PROCEDIMIENTOS
+        // ====================
+
 
         _createClass(_ProjectCaptureComponent, [{
           key: "ngOnInit",
@@ -9805,7 +9957,10 @@
             });
 
             this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Proyectos');
-          }
+          } // ====================
+          // UTILERIAS
+          // ====================
+
         }, {
           key: "handlePage",
           value: function handlePage(e) {
@@ -13075,21 +13230,23 @@
       /* harmony import */
 
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/environments/environment */
       92340);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       37716);
-      /* harmony import */
 
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      91841);
+      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
       var _purchaseOrderservice2 = /*#__PURE__*/function () {
         function _purchaseOrderservice2(http) {
@@ -13101,27 +13258,37 @@
         _createClass(_purchaseOrderservice2, [{
           key: "getPOAll",
           value: function getPOAll() {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/lista');
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/lista', {
+              headers: headers
+            });
           }
         }, {
           key: "getPOById",
           value: function getPOById(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "getPODetail",
           value: function getPODetail(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "insertPO_Hdr",
           value: function insertPO_Hdr(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertPODetail",
           value: function insertPODetail(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar/detalle', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar/detalle', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertPOCancel",
@@ -13133,10 +13300,10 @@
       }();
 
       _purchaseOrderservice2.ɵfac = function purchaseOrderservice_Factory(t) {
-        return new (t || _purchaseOrderservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+        return new (t || _purchaseOrderservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
 
-      _purchaseOrderservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      _purchaseOrderservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
         token: _purchaseOrderservice2,
         factory: _purchaseOrderservice2.ɵfac,
         providedIn: 'root'
@@ -13196,8 +13363,7 @@
         _createClass(_AESEncryptService, [{
           key: "encrypt",
           value: function encrypt(value) {
-            return crypto_js__WEBPACK_IMPORTED_MODULE_0__.HmacSHA256(value, this.secretKey.trim()).toString(); // return CryptoJS.AES.encrypt(value, this.secretKey.trim()).toString();
-            // return CryptoJS.AES.encrypt(value, this.secretKey.trim()).toString();
+            return crypto_js__WEBPACK_IMPORTED_MODULE_0__.HmacSHA256(value, this.secretKey.trim()).toString();
           }
         }]);
 
@@ -13244,9 +13410,9 @@
       /* harmony import */
 
 
-      var _webapiurl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./webapiurl */
-      91269);
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! src/environments/environment */
+      92340);
       /* harmony import */
 
 
@@ -13264,24 +13430,25 @@
         function _AuthService(http) {
           _classCallCheck(this, _AuthService);
 
-          this.http = http;
-          this.url = _webapiurl__WEBPACK_IMPORTED_MODULE_0__.GlobalUrl.url_webapi;
+          this.http = http; // this.url = GlobalUrl.url_webapi;
+
+          this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers;
         }
 
         _createClass(_AuthService, [{
           key: "loginReq",
-          value: function loginReq(userLoginReq) {
-            return this.http.post(this.url + 'login/authenticate', userLoginReq);
+          value: function loginReq(auth) {
+            return this.http.post(this.url + 'auth/login', auth);
           }
         }, {
           key: "resetPasswordReq",
           value: function resetPasswordReq(_resetPasswordReq) {
-            return this.http.post(this.url + 'login/resetpassword', _resetPasswordReq);
+            return this.http.post(this.url + 'auth/resetpasswordrequest', _resetPasswordReq);
           }
         }, {
           key: "changePasswordReq",
           value: function changePasswordReq(_changePasswordReq) {
-            return this.http.put(this.url + 'login/changepassword', _changePasswordReq);
+            return this.http.post(this.url + 'auth/changepassword', _changePasswordReq);
           }
         }]);
 
@@ -13328,21 +13495,23 @@
       /* harmony import */
 
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/environments/environment */
       92340);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       37716);
-      /* harmony import */
 
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      91841);
+      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
       var _categoryservice = /*#__PURE__*/function () {
         function _categoryservice(http) {
@@ -13354,22 +13523,30 @@
         _createClass(_categoryservice, [{
           key: "getCategoryAll",
           value: function getCategoryAll() {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/lista');
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/lista', {
+              headers: headers
+            });
           }
         }, {
           key: "getCategoryById",
           value: function getCategoryById(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "updateProjects",
           value: function updateProjects(arrayToDb) {
-            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/actualizar', arrayToDb);
+            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/actualizar', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/registrar', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/registrar', arrayToDb, {
+              headers: headers
+            });
           }
         }]);
 
@@ -13377,12 +13554,95 @@
       }();
 
       _categoryservice.ɵfac = function categoryservice_Factory(t) {
-        return new (t || _categoryservice)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+        return new (t || _categoryservice)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
 
-      _categoryservice.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      _categoryservice.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
         token: _categoryservice,
         factory: _categoryservice.ɵfac,
+        providedIn: 'root'
+      });
+      /***/
+    },
+
+    /***/
+    52468:
+    /*!******************************************!*\
+      !*** ./src/app/services/data.service.ts ***!
+      \******************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "DataService": function DataService() {
+          return (
+            /* binding */
+            _DataService
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      37716);
+      /* harmony import */
+
+
+      var jwt_decode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! jwt-decode */
+      48248);
+
+      var _DataService = /*#__PURE__*/function () {
+        function _DataService() {
+          _classCallCheck(this, _DataService);
+
+          this.loginChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
+          this.DecodeToken();
+        }
+
+        _createClass(_DataService, [{
+          key: "DecodeToken",
+          value: function DecodeToken() {
+            if (localStorage.getItem('token_access') !== null) {
+              var decodeJWT = (0, jwt_decode__WEBPACK_IMPORTED_MODULE_0__["default"])(localStorage.getItem('token_access'));
+              this.userid = decodeJWT['usuario_id'];
+              this.username = decodeJWT['usuario'];
+              this.fullname = decodeJWT['nombre_completo'];
+              this.email = decodeJWT['correo'];
+              this.branchofficeid = decodeJWT['oficina_principalid'];
+              this.branchoffice = decodeJWT['oficina_principal'];
+              this.profileid = decodeJWT['perfil_usuarioid'];
+              this.profile = decodeJWT['perfil_usuario'];
+              this.employid = decodeJWT['empleado_id'];
+              this.employcategory = decodeJWT['categoria_empleado'];
+              this.companyid = decodeJWT['empresa'];
+              this.country = decodeJWT['pais'];
+              localStorage.setItem('perfil_usuario', this.profile);
+            }
+          }
+        }]);
+
+        return _DataService;
+      }();
+
+      _DataService.ɵfac = function DataService_Factory(t) {
+        return new (t || _DataService)();
+      };
+
+      _DataService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+        token: _DataService,
+        factory: _DataService.ɵfac,
         providedIn: 'root'
       });
       /***/
@@ -13479,21 +13739,23 @@
       /* harmony import */
 
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/environments/environment */
       92340);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       37716);
-      /* harmony import */
 
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      91841);
+      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
       var _projectCategoryservice2 = /*#__PURE__*/function () {
         function _projectCategoryservice2(http) {
@@ -13505,7 +13767,9 @@
         _createClass(_projectCategoryservice2, [{
           key: "getProjectCateogryAll",
           value: function getProjectCateogryAll() {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/lista');
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/lista', {
+              headers: headers
+            });
           } // getProjectCateogryById(proyectoId : any) {
           //     return this.http.get<projectCategoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
           // }
@@ -13513,18 +13777,23 @@
         }, {
           key: "getProjectCateogryById",
           value: function getProjectCateogryById(proyectoId) {
-            console.log('vvv', src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/' + proyectoId, {
+              headers: headers
+            });
           }
         }, {
           key: "updateProjectCatgory",
           value: function updateProjectCatgory(arrayToDb) {
-            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/actualizar', arrayToDb);
+            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/actualizar', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/registrar', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/registrar', arrayToDb, {
+              headers: headers
+            });
           }
         }]);
 
@@ -13532,10 +13801,10 @@
       }();
 
       _projectCategoryservice2.ɵfac = function projectCategoryservice_Factory(t) {
-        return new (t || _projectCategoryservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+        return new (t || _projectCategoryservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
 
-      _projectCategoryservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      _projectCategoryservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
         token: _projectCategoryservice2,
         factory: _projectCategoryservice2.ɵfac,
         providedIn: 'root'
@@ -13571,21 +13840,23 @@
       /* harmony import */
 
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/environments/environment */
       92340);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       37716);
-      /* harmony import */
 
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      91841);
+      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
       var _projectservice = /*#__PURE__*/function () {
         function _projectservice(http) {
@@ -13597,17 +13868,23 @@
         _createClass(_projectservice, [{
           key: "getProjectAll",
           value: function getProjectAll() {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/lista');
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/lista', {
+              headers: headers
+            });
           }
         }, {
           key: "updateProjects",
           value: function updateProjects(arrayToDb) {
-            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/actualizar', arrayToDb);
+            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/actualizar', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/registrar', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/registrar', arrayToDb, {
+              headers: headers
+            });
           }
         }]);
 
@@ -13615,10 +13892,10 @@
       }();
 
       _projectservice.ɵfac = function projectservice_Factory(t) {
-        return new (t || _projectservice)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+        return new (t || _projectservice)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
 
-      _projectservice.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      _projectservice.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
         token: _projectservice,
         factory: _projectservice.ɵfac,
         providedIn: 'root'
@@ -13654,21 +13931,23 @@
       /* harmony import */
 
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/environments/environment */
       92340);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       37716);
-      /* harmony import */
 
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      91841);
+      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
       var _quotationservice2 = /*#__PURE__*/function () {
         function _quotationservice2(http) {
@@ -13680,27 +13959,37 @@
         _createClass(_quotationservice2, [{
           key: "getQuotationAll",
           value: function getQuotationAll() {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/lista');
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/lista', {
+              headers: headers
+            });
           }
         }, {
           key: "getQuotationById",
           value: function getQuotationById(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "getQuotationDetail",
           value: function getQuotationDetail(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/detalle/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/detalle/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "insertQuotation",
           value: function insertQuotation(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertQuotationDetail",
           value: function insertQuotationDetail(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar/detalle', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar/detalle', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertQuotationCancel",
@@ -13712,10 +14001,10 @@
       }();
 
       _quotationservice2.ɵfac = function quotationservice_Factory(t) {
-        return new (t || _quotationservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+        return new (t || _quotationservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
 
-      _quotationservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      _quotationservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
         token: _quotationservice2,
         factory: _quotationservice2.ɵfac,
         providedIn: 'root'
@@ -13751,21 +14040,23 @@
       /* harmony import */
 
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! src/environments/environment */
       92340);
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/core */
       37716);
-      /* harmony import */
 
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      91841);
+      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
       var _requisitionservice2 = /*#__PURE__*/function () {
         function _requisitionservice2(http) {
@@ -13777,27 +14068,37 @@
         _createClass(_requisitionservice2, [{
           key: "getRequisitionAll",
           value: function getRequisitionAll() {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/lista');
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/lista', {
+              headers: headers
+            });
           }
         }, {
           key: "getRequisitionById",
           value: function getRequisitionById(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(id) {
-            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/detalle/' + id);
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/detalle/' + id, {
+              headers: headers
+            });
           }
         }, {
           key: "insertRequisition",
           value: function insertRequisition(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertRequisitionDetail",
           value: function insertRequisitionDetail(arrayToDb) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar/detalle', arrayToDb);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar/detalle', arrayToDb, {
+              headers: headers
+            });
           }
         }, {
           key: "insertRequisitionCancel",
@@ -13809,10 +14110,10 @@
       }();
 
       _requisitionservice2.ɵfac = function requisitionservice_Factory(t) {
-        return new (t || _requisitionservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient));
+        return new (t || _requisitionservice2)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
 
-      _requisitionservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+      _requisitionservice2.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
         token: _requisitionservice2,
         factory: _requisitionservice2.ɵfac,
         providedIn: 'root'
@@ -13821,10 +14122,10 @@
     },
 
     /***/
-    91269:
-    /*!***************************************!*\
-      !*** ./src/app/services/webapiurl.ts ***!
-      \***************************************/
+    73071:
+    /*!******************************************!*\
+      !*** ./src/app/services/user.service.ts ***!
+      \******************************************/
 
     /***/
     function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
@@ -13836,21 +14137,162 @@
 
       __webpack_require__.d(__webpack_exports__, {
         /* harmony export */
-        "GlobalUrl": function GlobalUrl() {
+        "UserService": function UserService() {
           return (
             /* binding */
-            _GlobalUrl
+            _UserService
           );
         }
         /* harmony export */
 
       });
+      /* harmony import */
 
-      var _GlobalUrl = {
-        // url_webapi: 'http://127.0.0.1:8080/api/'
-        url_webapi: 'https://localhost:44342/api/' // url_webapi: 'https://apiconacoha.brandingpublicity.com.mx/api/'
 
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      91841);
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! src/environments/environment */
+      92340);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      37716);
+
+      var _UserService = /*#__PURE__*/function () {
+        function _UserService(http) {
+          _classCallCheck(this, _UserService);
+
+          this.http = http; // this.url = GlobalUrl.url_webapi;
+
+          this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers;
+        }
+
+        _createClass(_UserService, [{
+          key: "getAllUser",
+          value: function getAllUser() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.get(this.url + 'empleado/listar/todos/', {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getAllUserGP",
+          value: function getAllUserGP() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.get(this.url + 'empleado/listar/todos/nombres', {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getAllEmployee",
+          value: function getAllEmployee() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.get(this.url + 'empleado/listar/brasil/', {
+              headers: headers
+            });
+          }
+        }, {
+          key: "postRegisterEmployee",
+          value: function postRegisterEmployee(employeeObj) {
+            var params = JSON.stringify(employeeObj);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/registrar/', params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "postUpdateEmployee",
+          value: function postUpdateEmployee(employeeObj) {
+            var params = JSON.stringify(employeeObj);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/actualizar/' + employeeObj.resourceid, params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "postDeleteEmployee",
+          value: function postDeleteEmployee(resourceid) {
+            var params = JSON.stringify(resourceid);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/eliminar/' + resourceid, params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "postRegisterUser",
+          value: function postRegisterUser(userObj) {
+            var params = JSON.stringify(userObj);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/registrar/usuario/', params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "postUpdateUser",
+          value: function postUpdateUser(userObj) {
+            var params = JSON.stringify(userObj);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/actualizar/usuario/' + userObj.resourceid, params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "postDeleteUser",
+          value: function postDeleteUser(userid) {
+            var params = JSON.stringify(userid);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/eliminar/usuario/' + userid, params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getPermission",
+          value: function getPermission(userid) {
+            var params = JSON.stringify(userid);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/permiso/listar/' + userid, params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getCountry",
+          value: function getCountry(userid) {
+            var params = JSON.stringify(userid);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/pais/listar/' + userid, params, {
+              headers: headers
+            });
+          }
+        }, {
+          key: "getSubProjectJoinUser",
+          value: function getSubProjectJoinUser(userid) {
+            var params = JSON.stringify(userid);
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            return this.http.post(this.url + 'empleado/buscar_subproyecto/' + userid, params, {
+              headers: headers
+            });
+          }
+        }]);
+
+        return _UserService;
+      }();
+
+      _UserService.ɵfac = function UserService_Factory(t) {
+        return new (t || _UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
       };
+
+      _UserService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
+        token: _UserService,
+        factory: _UserService.ɵfac,
+        providedIn: 'root'
+      });
       /***/
     },
 
