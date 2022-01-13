@@ -453,7 +453,7 @@
         children: [{
           path: '',
           // redirectTo: 'login',
-          redirectTo: '/auth/signin',
+          redirectTo: '/login',
           pathMatch: 'full'
         }, {
           path: '',
