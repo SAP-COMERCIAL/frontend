@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'signin',
+        path: 'login',
         loadChildren: () => import('./login/login.module').then(module => module.LoginModule)
       }
     //   ,
@@ -23,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LoginRoutingModule { }
+export class AuthenticationRoutingModule { }

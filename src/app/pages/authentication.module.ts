@@ -2,16 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from '../pages/login/login-routing.module';
-import { WarehouseReviewComponent } from './warehouse-review/warehouse-review.component';
+import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 @NgModule({
   declarations: [
-  
-           WarehouseReviewComponent
   ],
   imports: [
   CommonModule,
-  LoginRoutingModule
+  AuthenticationRoutingModule
   ]
 })
 export class AuthenticationModule { }

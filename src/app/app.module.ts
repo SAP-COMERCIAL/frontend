@@ -15,13 +15,16 @@ import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './demo-material-module';
-import { LoginComponent } from './pages/login/login.component';  
+// import { LoginComponent } from './pages/login/login.component';  
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+
 import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+
 import { MatInputModule } from '@angular/material/input';
 import { CategoriesComponent } from './components/categories/categories/categories.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
@@ -39,6 +42,9 @@ import { AuthComponent } from './components/auth/auth.component';
 import { WarehouseReviewComponent } from './pages/warehouse-review/warehouse-review.component';
 import { PoDetailComponent } from './components/po-detail/po-detail.component';
 import { AuthSigninComponent } from './components/auth-signin/auth-signin.component';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
 
@@ -50,7 +56,7 @@ import { AuthSigninComponent } from './components/auth-signin/auth-signin.compon
     SpinnerComponent,
     AppSidebarComponent,
     CategoriesComponent,
-    LoginComponent,
+    // LoginComponent,
     CategoriesListComponent,
     ProjectCaptureDetailComponent,
     ProjectCaptureComponent,
@@ -81,6 +87,7 @@ import { AuthSigninComponent } from './components/auth-signin/auth-signin.compon
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
     ReactiveFormsModule,
     AppRoutingModule,
     ToastrModule.forRoot({

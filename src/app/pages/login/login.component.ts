@@ -6,8 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AESEncryptService } from 'src/app/services/aesencrypt.service';
 import { ToastrService } from 'ngx-toastr';
-import * as CryptoJS from 'crypto-js';
-import * as shajs from 'sha.js';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +16,7 @@ import * as shajs from 'sha.js';
 export class LoginComponent implements OnInit {
   msg = '';
   public userinterface: UserI;
-  public spinerShow: boolean;
+  public spinerShow: boolean; 
   loginform: FormGroup;
 
   constructor(private service: loginservice,
