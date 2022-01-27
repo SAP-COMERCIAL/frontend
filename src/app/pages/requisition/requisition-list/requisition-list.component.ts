@@ -88,7 +88,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 
@@ -111,7 +111,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 

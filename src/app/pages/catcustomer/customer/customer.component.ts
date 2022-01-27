@@ -94,7 +94,7 @@ dataSourceShow : MatTableDataSource<customerModel>
     const dialogRef = this.dialog.open(CustomerDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 

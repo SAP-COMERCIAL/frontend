@@ -94,7 +94,7 @@ dataSourceShow : MatTableDataSource<poModel>
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 
@@ -118,7 +118,7 @@ dataSourceShow : MatTableDataSource<poModel>
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 
@@ -143,7 +143,7 @@ dataSourceShow : MatTableDataSource<poModel>
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 

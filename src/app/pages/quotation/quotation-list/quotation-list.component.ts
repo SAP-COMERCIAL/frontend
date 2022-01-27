@@ -109,7 +109,7 @@ dataSourceShow : MatTableDataSource<quotationListModel>
     const dialogRef = this.dialog.open(QuotationDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 
@@ -133,7 +133,7 @@ dataSourceShow : MatTableDataSource<quotationListModel>
     const dialogRef = this.dialog.open(QuotationDetailFilesComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      // window.location.reload();
     });
   }
 
