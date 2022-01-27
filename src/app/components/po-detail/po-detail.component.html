@@ -8,10 +8,9 @@
           <div><br>Cotización</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-        <div>
+        <div><br>
           <mat-form-field>
-            <!-- [(ngModel)]="proyecto_id" (selectionChange)="emitFilters($event, 'Enviado')"  -->
-            <mat-select class="form-control control" formControlName="cotizacion_id" [(ngModel)]="cotizacion_id" (selectionChange)="cotizacionSelected(newProject, $event)" >
+            <mat-select class="form-control control" formControlName="cotizacion_id" (selectionChange)="cotizacionSelected(newProject, $event)" > <!-- [(ngModel)]="cotizacion_id"-->
               <mat-option *ngFor="let op of datasourceCotizaciones" [value]="op.cotizacion_id" >
                 {{op.codigo}}
               </mat-option>
@@ -27,9 +26,9 @@
         <div><br>Detalle</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-            <div>
+            <div><br>
               <mat-form-field>
-                <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna" [(ngModel)]="codigo_requisicioninterna">
+                <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna"> <!--[(ngModel)]="codigo_requisicioninterna"-->
             </mat-form-field>
             <span *ngIf="!newProject.get('codigo_requisicioninterna').valid && newProject.get('codigo_requisicioninterna').touched" class="help-block" style="color: red;"> seleccione una requisición</span>
           </div>
@@ -43,7 +42,7 @@
       <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="odc_Numero" matInput class="form-control form-control-line control" formControlName="odc_Numero" [(ngModel)]="odc_Numero">
+              <input [type]="odc_Numero" matInput class="form-control form-control-line control" formControlName="odc_Numero"> <!-- [(ngModel)]="odc_Numero"-->
             </mat-form-field>
             <span *ngIf="!newProject.get('odc_Numero').valid && newProject.get('odc_Numero').touched" class="help-block" style="color: red;"> seleccione un número de órden de compra</span>
           </div>
@@ -56,10 +55,10 @@
       </div>
       <div fxFlex.gt-sm="25%" >
         <div>
-          <mat-form-field appearance="fill">
-            <mat-select class="form-control control" formControlName="proveedor_id" [(ngModel)]="proveedor_id" >
-                <mat-option *ngFor="let op of datasourcePoveedores" [value]="op.proveedor_id" >
-                  {{op.proveedor_nombre}}
+          <mat-form-field>
+            <mat-select class="form-control control" formControlName="proveedor_id" ><!--[(ngModel)]="proveedor_id"-->
+                <mat-option *ngFor="let op of datasourcesupplier" [value]="op.proveedorid" (selectionChange)="selectsupplier($event)">
+                  {{op.nombre}}
                 </mat-option>
               </mat-select>
           </mat-form-field>
@@ -67,15 +66,76 @@
         </div>
       </div>
     </div>
+    
     <div fxLayout="row" class="division">
-        <div fxFlex.gt-sm="20%">
+      <div fxFlex.gt-sm="20%">
+          <div><br>IVA</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <mat-select class="form-control control" formControlName="iva" (selectionChange)="ivaSelected(newProject, $event)" > <!--[(ngModel)]="iva"-->
+              <mat-option value= "16" selected="selected">16%</mat-option>
+              <mat-option value= "10">10%</mat-option>
+              <mat-option value= "0">0</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span *ngIf="!newProject.get('iva').valid && newProject.get('iva').touched" class="help-block" style="color: red;"> seleccione un iva</span>
         </div>
-        <div fxFlex.gt-sm="20%">
-        </div>
-        <div fxFlex.gt-sm="20%">
-            <div></div>
-        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div>
+              <button mat-raised-button color="accent" (click)="addSupplier(newProject, $event)"> + </button>
+              <button mat-raised-button color="accent" (click)="reloadSupplier(newProject, $event)"> o </button>
+          </div>
+      </div>
     </div>
+
+
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div><br>Moneda</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <mat-select class="form-control control" formControlName="moneda" > <!--[(ngModel)]="moneda"-->
+              <mat-option value= "MXN" selected="selected">MXN</mat-option>
+              <mat-option value= "USD">USD</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span *ngIf="!newProject.get('moneda').valid && newProject.get('moneda').touched" class="help-block" style="color: red;"> seleccione una moneda</span>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div></div>
+      </div>
+    </div>
+
+
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+        Subtotal: {{subtotal | currency}}
+      </div>
+      <div fxFlex.gt-sm="20%">
+        IVA: {{ivaSubtotal | currency}}
+      </div>
+      <div fxFlex.gt-sm="20%">
+          Total: {{total | currency}}
+      </div>
+  </div>
 
     <br>
     <!--Tabla de captura-->
@@ -89,22 +149,23 @@
           <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-          <div></div>
+        <div *ngIf="ordendecompra_id"><button mat-raised-button color="accent" (click)="downloadAsPDF()">PDF</button></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div></div>
+        <div *ngIf="ordendecompra_id"><button mat-raised-button color="accent" (click)="Authoriza(newProject, $event)">Autorizar</button></div>
       </div>
       <div fxFlex.gt-sm="20%" >
         <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
       </div>
       <div fxFlex.gt-sm="20%" >
         <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+        <!-- <div><button mat-raised-button color="warn" (click)="htmlToPDF()($event)">ToPDF</button></div> -->
       </div>
     </div>
      <!-- INICIA CUERPO DE LA PÁGINA-->
      <div class="col-12 col-md-12 p-0">
       <div class="card">
-        <div class="card-body card-body-table">
+        <div class="card-body card-body-table" id="AllTable" #AllTable>
           <mat-table [dataSource]="datasourceCotizacionesDetalle" matSort class="mat-elevation-z8" style="width: 95%;" #tabla1>
 
             <ng-container matColumnDef="select">
@@ -172,16 +233,101 @@
             <ng-container matColumnDef="cantidad_Ordenar">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Cantidad seleccionada </th>
                 <td mat-cell *matCellDef="let element"> 
-                    <input type='cantidad_Ordenar' [(ngModel)]="element.cantidad" (keyup)="checkEnterKey($event, 'presupuesto')">    
+                    <input type='cantidad_Ordenar' [(ngModel)]="element.cantidad" (keyup)="checkEnterKey($event, 'presupuesto')" (blur)="onBlurMethod($event)">
                 </td>
               </ng-container>
+
+            <!-- precio column -->
+            <ng-container matColumnDef="precio_unitario">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Precio Unitario</th>
+              <td mat-cell *matCellDef="let element"> 
+                  <input type='precio_unitario' [(ngModel)]="element.precio_unitario" (keyup)="checkEnterKey($event, 'precio_unitario')" (blur)="onBlurMethod($event)"> 
+              </td>
+            </ng-container>
+
+            <!-- descuento column -->
+            <ng-container matColumnDef="descuento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descuento </th>
+              <td mat-cell *matCellDef="let element"> 
+                  <input type='descuento' [(ngModel)]="element.descuento" (keyup)="checkEnterKey($event, 'descuento')" (blur)="onBlurMethod($event)">
+              </td>
+            </ng-container>
             
+            <!-- descuento column -->
+            <!-- <ng-container matColumnDef="importe" hidden>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Importe </th>
+              <td mat-cell *matCellDef="let element"> {{importe | currency}}
+              </td>
+            </ng-container> -->
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </mat-table>
     
         </div>
         <!-- <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator> -->
+      </div>
+
+      <!-- REPORTE DE ORDEN DE COMPRA -->
+
+      <div class="container" hidden>
+        <div id="pdfTable" #pdfTable>
+          <!-- <h4>COMERCIAL CONTINENTAL SA DE CV</h4> -->
+
+          <table width="100%">
+            <tr>
+              <td width="20%">LOGO</td>
+              <td width="60%">COMERCIAL SA DE CV</td>
+              <td width="20%">Orden de compra</td>
+            </tr>
+          </table>
+
+          <table  id="contentToConvert" width="100%" border="0">
+            <tr>
+              <td style="width: 300px;">LOGO</td><!--LOGO-->
+              <td style="width: 1000px;">COMERCIAL DE MEXICO</td><!--LOGO-->
+              <td style="width: 300px;">ORDEN DE COMPRA</td><!--ORDEN DE COMPRA-->
+            </tr>
+            <tr>
+              <td style="width: 300px;">LOGO</td><!--LOGO-->
+              <td style="width: 1000px;">COMERCIAL DE MEXICO</td><!--LOGO-->
+              <td style="width: 300px;">ORDEN DE COMPRA</td><!--ORDEN DE COMPRA-->
+            </tr>
+            <tr>
+              <td style="width: 300px;">LOGO</td><!--LOGO-->
+              <td style="width: 1000px;">COMERCIAL DE MEXICO</td><!--LOGO-->
+              <td style="width: 300px;">ORDEN DE COMPRA</td><!--ORDEN DE COMPRA-->
+            </tr>
+          </table>
+
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Website</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hardik</td>
+                <td>Savani</td>
+                <td>itsolutionstuff.com</td>
+              </tr>
+              <tr>
+                <td>Vimal</td>
+                <td>Kashiyani</td>
+                <td>hdtuto.com</td>
+              </tr>
+              <tr>
+                <td>Harshad</td>
+                <td>Pathak</td>
+                <td>nicesnippets.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   

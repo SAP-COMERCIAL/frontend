@@ -2,22 +2,32 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { requisitionModel } from 'src/app/models/requisition.model';
-import { requisitionservice } from 'src/app/services/requisition/requisition.service';
-import { RequisitionDetailComponent } from 'src/app/components/requisitions/requisition-detail/requisition-detail.component';
+import { customerModel } from 'src/app/models/customer.model';
+import { customerservice } from 'src/app/services/customer.service';
+import { CustomerDetailComponent } from 'src/app/components/customer-detail/customer-detail.component';
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import * as moment from 'moment';
+import { AbstractControl, FormBuilder } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { DataSource } from '@angular/cdk/table';
+import { ProjectCaptureDetailComponent } from 'src/app/components/project-capture-detail/project-capture-detail/project-capture-detail.component';
+import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
-
+import { getMatFormFieldPlaceholderConflictError } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-requisition-list',
-  templateUrl: './requisition-list.component.html',
-  styleUrls: ['./requisition-list.component.css']
+  selector: 'app-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css']
 })
-export class RequisitionListComponent implements OnInit {
+
+export class CustomerComponent implements OnInit {
+
 // =================
 // DECLARACIONES
 // =================
@@ -28,19 +38,17 @@ public pageSize:number = 20;
 public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
-dataSourceShow : MatTableDataSource<requisitionModel>
+dataSourceShow : MatTableDataSource<customerModel>
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  // displayedColumns = ['proyecto_id', 'Categoria_Id', 'Requisicion_Id', 'Fecha_Requisicion', 'Estatus', 'editar'];
-  displayedColumns = ['codigo_proyectocategoria', 'codigo', 'fecha', 'estado', 'editar'];
-  
-  constructor(public dialog: MatDialog
-          , private _excelService : ExcelServiceService
-          , private _requisitionService : requisitionservice) { }
+  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estado', 'edit'];
 
+  constructor(public dialog: MatDialog
+    , private _excelService : ExcelServiceService
+    , private _customerservice : customerservice) { }
 
   // =================
   // PROCEDIMIENTOS
@@ -48,8 +56,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
 
   ngOnInit(): void {
 
-    this.getrequisition();
-      
+    this.getcustomer();
   }
 
   descargarExcel(){
@@ -58,25 +65,24 @@ dataSourceShow : MatTableDataSource<requisitionModel>
 
   this.dataSourceShow.filteredData.forEach(element => {
     dataSourceShowToExcel.push({
-                              // proyecto_id : element.proyecto_id
-                              categoria : element.codigo_proyectocategoria
-                              , requisicion : element.requisicioninterna_id
-                              , Fecha_Requisicion : moment(element.Fecha_Requisicion, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                              nombre : element.nombre
+                              , direccion : element.direccion
+                              , RFC : element.rfc
                               , estatus : element.estado
       })
     });
 
-    this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Requisicones');  
+    this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Clientes');  
   }
 
-  nuevaRequisicion(evetn){
-    console.log('Alta de requisiciones');
+  newcustomer(evetn){
+    console.log('Alta de cliente');
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id: 1,
-      title: 'REQUISICIONES',
+      title: 'CLIENTE',
       arrayData : null,
       requisicionId: 0
      
@@ -85,30 +91,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
-    });
-  }
-
-  editRequisicion(element){
-    console.log('Editar de requisiciones');
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.data = {
-      id: 1,
-      title: 'REQUISICIONES',
-      arrayData : element,
-      requisicionId: element.requisicioninterna_id
-     
-    }
-    dialogConfig.width = '1200px';
-    dialogConfig.height = '900px';
-    dialogConfig.disableClose = true;
-
-    const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CustomerDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       window.location.reload();
@@ -144,11 +127,11 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   // SERVICIOS
   // =================
 
-  getrequisition(){
+  getcustomer(){
     // Proyectos registrados
-    this._requisitionService.getRequisitionAll().subscribe(
+    this._customerservice.getcustomerAll().subscribe(
       res=> {
-        console.log('Requisiciones', res);
+        console.log('Clientes', res);
         this.dataSourceShow = new MatTableDataSource(res);
         this.array = res;
         this.totalSize = this.array.length;

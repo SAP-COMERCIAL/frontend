@@ -1,0 +1,107 @@
+<div fxLayout="row">
+    <h4>Catálogo de proveedores</h4>
+  </div>
+  <br>
+  <div mat-dialog-content-example [formGroup]="newProject">
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div><br>Nombre</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div>
+              <mat-form-field>
+              <input [type]="nombre" matInput class="form-control form-control-line control" formControlName="nombre" [(ngModel)]="nombre" disabled >
+            </mat-form-field>
+            <span *ngIf="!newProject.get('nombre').valid && newProject.get('nombre').touched" class="help-block" style="color: red;"> El nombre es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="10%" >
+          <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+          <div><br>Dirección</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+          <div>
+            <mat-form-field>
+              <input [type]="direccion" matInput class="form-control form-control-line control" placeholder="" formControlName="direccion" [(ngModel)]="direccion">
+            </mat-form-field>
+            <span *ngIf="!newProject.get('direccion').valid && newProject.get('direccion').touched" class="help-block" style="color: red;"> La dirección es requerida</span>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div><br>RFC</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div>
+              <mat-form-field>
+              <input [type]="rfc" matInput class="form-control form-control-line control" formControlName="rfc" [(ngModel)]="rfc" disabled >
+            </mat-form-field>
+            <span *ngIf="!newProject.get('rfc').valid && newProject.get('rfc').touched" class="help-block" style="color: red;"> El RFC es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="10%" >
+          <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+          <div><br>Contacto</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+          <div>
+            <mat-form-field>
+              <input [type]="contacto" matInput class="form-control form-control-line control" placeholder="" formControlName="contacto" [(ngModel)]="contacto">
+            </mat-form-field>
+            <span *ngIf="!newProject.get('contacto').valid && newProject.get('contacto').touched" class="help-block" style="color: red;"> El contacto es requerido</span>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div><br>Ciudad</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div>
+              <mat-form-field>
+              <input [type]="ciudad" matInput class="form-control form-control-line control" formControlName="ciudad" [(ngModel)]="ciudad" disabled >
+            </mat-form-field>
+            <span *ngIf="!newProject.get('ciudad').valid && newProject.get('ciudad').touched" class="help-block" style="color: red;"> La ciudad es requerida</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="10%" >
+          <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+          <div><br>Estado</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+          <div>
+            <mat-form-field>
+              <input [type]="estado" matInput class="form-control form-control-line control" placeholder="" formControlName="estado" [(ngModel)]="estado">
+            </mat-form-field>
+            <span *ngIf="!newProject.get('estado').valid && newProject.get('estado').touched" class="help-block" style="color: red;"> El estado es requerido</span>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+    </div>
+  </div>

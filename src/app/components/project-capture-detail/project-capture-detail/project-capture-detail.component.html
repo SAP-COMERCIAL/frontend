@@ -41,15 +41,16 @@
     <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <mat-select class="form-control control" formControlName="cliente" [(ngModel)]="cliente"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
-              <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
-              <mat-option value= "1">Javier Peña y asociados</mat-option>
-              <mat-option value= "2">Ragasa</mat-option>
-              <mat-option value= "3">Cemex</mat-option>
+            <mat-select class="form-control control" formControlName="cliente" [(ngModel)]="cliente" (selectionChange)="selectcustommer($event)"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
+              <mat-option *ngFor="let op of datasourceCustomers" [value]="op.clienteid">
+                {{op.nombre}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
           <span *ngIf="!newProject.get('cliente').valid && newProject.get('cliente').touched" class="help-block" style="color: red;"> Seleccione un cliente</span>
         </div>
+        <button mat-raised-button color="accent" (click)="addClient(newProject, $event)"> + </button>
+        <button mat-raised-button color="accent" (click)="reloadClient(newProject, $event)"> o </button>
     </div>
     <div fxFlex.gt-sm="10%" >
       <div></div>

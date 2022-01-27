@@ -55,6 +55,14 @@ const routes: Routes = [
         loadChildren: () => import('./pages/storageInvoice/storage-invoice-list/storage.module').then(m => m.StorageModule)
       },
       {
+        path: 'customer',
+        loadChildren: () => import('./pages/catcustomer/customer/customer.module').then(m => m.CustomerModule)
+      },
+      {
+        path: 'supplier',
+        loadChildren: () => import('./pages/supplier/supplier.module').then(m => m.SupplierModule)
+      },
+      {
           path: 'login',
           component: LoginComponent,
       }

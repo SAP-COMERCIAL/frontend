@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { observable, Observable, of } from 'rxjs';
 import { poModel } from 'src/app/models/po.model';
 import { environment } from 'src/environments/environment';
-import { from } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
 
 const headers : HttpHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')
@@ -38,8 +35,13 @@ export class purchaseOrderservice {
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'PurchaseOrder/registrar/detalle',arrayToDb, {headers});
     }
 
-    insertPOCancel(id : any) {
-        // return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Quotation/cancelar' + id);
+    putPOCancel(id : any) {
+        return this.http.put(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/cancelar/' + id, '', {headers});
     }
+
+    updatePOStatus(arrayToDb : any) {
+        return this.http.post(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/estado', arrayToDb, {headers});
+    }
+
 
 }

@@ -1,16 +1,10 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import * as moment from 'moment';
-import { AbstractControl, FormBuilder } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { DataSource } from '@angular/cdk/table';
 import { ProjectCaptureDetailComponent } from 'src/app/components/project-capture-detail/project-capture-detail/project-capture-detail.component';
 import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { projectservice } from '../../../services/projects/project.service';

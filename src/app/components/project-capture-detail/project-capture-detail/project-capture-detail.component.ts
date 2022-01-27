@@ -14,6 +14,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
 import { coerceStringArray } from '@angular/cdk/coercion';
+import { CustomerDetailComponent } from '../../customer-detail/customer-detail.component';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { customerservice } from '../../../services/customer.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-project-capture-detail',
@@ -22,6 +27,10 @@ import { coerceStringArray } from '@angular/cdk/coercion';
 })
 export class ProjectCaptureDetailComponent implements OnInit {
 	
+// =========================
+// DECLARACIONES
+// =========================
+
   fecha_inicial_proyecto:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   fecha_final_proyecto:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   nombre_proyecto : any = ''  
@@ -48,13 +57,16 @@ export class ProjectCaptureDetailComponent implements OnInit {
   public newProject: FormGroup;
   datasourceCategories : any[] = [];
   datasourceProyects : any[] = [];
+  datasourceCustomers : any;
 
   constructor(
     public dialogRef: MatDialogRef<projectModel>
     , private _projectService : projectservice
     , private _categoryService : categoryservice
     , private _projectCategoryservice : projectCategoryservice
+    , private _customerservice : customerservice
     , @Inject(MAT_DIALOG_DATA) public data,public _snackBar: MatSnackBar
+    , public dialog: MatDialog
     , private formBuilder: FormBuilder
   ) { 
     this.projectInfo = data.arrayData;
@@ -76,8 +88,13 @@ export class ProjectCaptureDetailComponent implements OnInit {
     });
   }
 
+// =========================
+// PROCEDIMIENTOS
+// =========================
+
   ngOnInit(): void {
 
+    this.getcustomerAll();
     this.getAllProjects();
     this.getEnabledCategories();
 
@@ -105,34 +122,6 @@ export class ProjectCaptureDetailComponent implements OnInit {
       this.codigo_proyecto = '';
     }
 
-  }
-
-  getAllProjects(){
-    // Actualiza registro NUEVO
-    this._projectService.getProjectAll().subscribe(
-      res=> {
-        this.datasourceProyects = res;
-        if(this.projectId == 0){
-          this.codigo_proyecto = Number(this.datasourceProyects[this.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
-          console.log('PROEYCTOS TODOS', this.proeycto_numero_mayor);
-        }else{
-          this.codigo_proyecto = this.projectInfo["codigo_proyecto"];
-        }
-
-      },
-      error => console.log("error consulta proyectos",error)
-    )
-  }
-
-  getEnabledCategories(){
-    // Actualiza registro NUEVO
-    this._categoryService.getCategoryAll().subscribe(
-      res=> {
-        this.datasourceCategories = res;
-        console.log('CATEGORIAS', this.datasourceCategories);
-      },
-      error => console.log("error consulta categorias",error)
-    )
   }
 
   validaCamposRequeridos() : boolean{
@@ -251,13 +240,42 @@ insertCategories(){
 
 }
 
-  fechaInicial(event){
-    console.log('fecha', this.fecha_inicial_proyecto);
-  }
+fechaInicial(event){
+  console.log('fecha', this.fecha_inicial_proyecto);
+}
 
-  cancel(event){
-    this.dialogRef.close();
-  }
+cancel(event){
+  this.dialogRef.close();
+}
+
+addClient(form, event){
+  // Catálogo de clientes
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.width = '1400px';
+  dialogConfig.height = '700px';
+  dialogConfig.disableClose = true;
+
+  const dialogRef = this.dialog.open(CustomerDetailComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(result => {
+    // window.location.reload();
+  });
+}
+
+reloadClient(form, event){
+  // Carga clientes
+  this.getcustomerAll();
+}
+
+
+selectcustommer(event){
+  this.cliente = event.value;
+}
+
+  // =========================
+  // UTILERIAS
+  // =========================
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {duration : 3000});
@@ -291,6 +309,49 @@ insertCategories(){
       }
 
     }
+  }
+
+  // =========================
+  // SERVICIOS
+  // =========================
+
+  getAllProjects(){
+    // Actualiza registro NUEVO
+    this._projectService.getProjectAll().subscribe(
+      res=> {
+        this.datasourceProyects = res;
+        if(this.projectId == 0){
+          this.codigo_proyecto = Number(this.datasourceProyects[this.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
+          console.log('PROEYCTOS TODOS', this.proeycto_numero_mayor);
+        }else{
+          this.codigo_proyecto = this.projectInfo["codigo_proyecto"];
+        }
+
+      },
+      error => console.log("error consulta proyectos",error)
+    )
+  }
+
+  getEnabledCategories(){
+    // Selecciona todas las categorías
+    this._categoryService.getCategoryAll().subscribe(
+      res=> {
+        this.datasourceCategories = res;
+        console.log('CATEGORIAS', this.datasourceCategories);
+      },
+      error => console.log("error consulta categorias",error)
+    )
+  }
+
+  getcustomerAll(){
+    // Selecciona todos los clientes
+    this._customerservice.getcustomerAll().subscribe(
+      res=> {
+        this.datasourceCustomers = res;
+        console.log('CLIENTES', this.datasourceCustomers);
+      },
+      error => console.log("error consulta categorias",error)
+    )
   }
 
 }

@@ -44,6 +44,8 @@ import { PoDetailComponent } from './components/po-detail/po-detail.component';
 import { AuthSigninComponent } from './components/auth-signin/auth-signin.component';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import { SupplierDetailComponent } from './components/supplier-detail/supplier-detail.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -70,7 +72,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AuthComponent,
     WarehouseReviewComponent,
     PoDetailComponent,
-    AuthSigninComponent
+    AuthSigninComponent,
+    CustomerDetailComponent,
+    SupplierDetailComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

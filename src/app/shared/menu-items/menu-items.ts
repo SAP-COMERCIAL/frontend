@@ -15,6 +15,8 @@ const MENUITEMS = [
   { state: 'po', name: 'Orden de compra', type: 'link', icon: 'tab' },
   { state: 'storage', name: 'Almacén', type: 'link', icon: 'assignment_turned_in' },
   { state: 'warehouse-review', name: 'Revisión en Almacén', type: 'link', icon: 'assignment_turned_in' },
+  { state: 'customer', name: 'Clientes', type: 'link', icon: 'assignment_turned_in' },
+  { state: 'supplier', name: 'Proveedores', type: 'link', icon: 'assignment_turned_in' },
   // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   // { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
   // { state: 'lists', type: 'link', name: 'Lists', icon: 'view_list' },

@@ -41,8 +41,10 @@ dataSourceShow : MatTableDataSource<poModel>
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['ordendecompra_codigo', 'cotizacion_codigo', 'proveedor_nombre', 'ordendecompra_fecha', 'Estatus', 'editar'];
+  displayedColumns = ['ordendecompra_id', 'ordendecompra_codigo', 'cotizacion_codigo', 'proveedor_nombre', 'ordendecompra_fecha', 'Estatus', 'editar', 'cancelar', 'autorizar'];
   
+  buscar:any;
+
   constructor(public dialog: MatDialog
           , private _excelService : ExcelServiceService
           , private _purchaseOrderService : purchaseOrderservice) { }
@@ -73,7 +75,7 @@ dataSourceShow : MatTableDataSource<poModel>
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Requisicones');  
   }
 
-  nuevaOrdenDeCompra(evetn){
+  nuevaOrdenDeCompra(event){
     console.log('Alta de requisiciones');
 
     const dialogConfig = new MatDialogConfig();
@@ -96,15 +98,16 @@ dataSourceShow : MatTableDataSource<poModel>
     });
   }
 
-  editRequisicion(event){
+  editRequisicion(element, event){
     console.log('Alta de requisiciones');
 
     const dialogConfig = new MatDialogConfig();
 
+    console.log('autoriza registro', element);
     dialogConfig.data = {
       id: 1,
       title: 'REQUISICIONES',
-      arrayData : null,
+      arrayData : element,
       requisicionId: 1
      
     }
@@ -119,11 +122,45 @@ dataSourceShow : MatTableDataSource<poModel>
     });
   }
 
+  aproveODC(element, event){
+    console.log('Aprueba orden de compra');
+
+    const dialogConfig = new MatDialogConfig();
+
+    console.log('aprueba odc', element)
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'ORDEN DE COMPRA',
+      arrayData : element,
+      requisicionId: 1
+     
+    }
+    dialogConfig.width = '1500px';
+    dialogConfig.height = '9000px';
+    dialogConfig.disableClose = true;
+
+    const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
+
+  cancelaODC(element, event : Event){
+    this.updateODCStatus(element, 4);
+  }
+
   // =====================
   // UTILERIAS
   // =====================
 
-  filtrar(event){}
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSourceShow.filter = filtro.trim().toLowerCase();
+    console.log('filtro', filtro);
+  }
 
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
@@ -158,6 +195,32 @@ dataSourceShow : MatTableDataSource<poModel>
         
       },
       error => console.log("error consulta regiones",error)
+    )
+  }
+
+  cancelODCToDB(element){
+    this._purchaseOrderService.putPOCancel(element.ordendecompra_id).subscribe(
+      res=> {
+        console.log('Se inserto con éxito', res);
+        
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+  }
+
+  updateODCStatus(element, statusToDb){
+    let arrayToDb : any;
+
+    arrayToDb = ({ordendecompra_id : element.ordendecompra_id, estatus : statusToDb, usuario : 1})
+
+console.log('cancelado', element)
+
+    this._purchaseOrderService.updatePOStatus(arrayToDb).subscribe(
+      res=> {
+        console.log('Se inserto con éxito', res);
+        
+      },
+      error => console.log("error alta de proyectos",error)
     )
   }
 
