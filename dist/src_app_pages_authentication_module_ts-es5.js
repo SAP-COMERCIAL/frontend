@@ -114,7 +114,7 @@
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/common */
       38583);
       /* harmony import */
@@ -126,7 +126,19 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _catcustomer_customer_customer_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./catcustomer/customer/customer.component */
+      81723);
+      /* harmony import */
+
+
+      var _supplier_supplier_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./supplier/supplier.component */
+      22284);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       37716);
 
@@ -138,16 +150,17 @@
         return new (t || _AuthenticationModule)();
       };
 
-      _AuthenticationModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({
+      _AuthenticationModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({
         type: _AuthenticationModule
       });
-      _AuthenticationModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({
-        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _authentication_routing_module__WEBPACK_IMPORTED_MODULE_0__.AuthenticationRoutingModule]]
+      _AuthenticationModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({
+        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule, _authentication_routing_module__WEBPACK_IMPORTED_MODULE_0__.AuthenticationRoutingModule]]
       });
 
       (function () {
-        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](_AuthenticationModule, {
-          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _authentication_routing_module__WEBPACK_IMPORTED_MODULE_0__.AuthenticationRoutingModule]
+        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](_AuthenticationModule, {
+          declarations: [_catcustomer_customer_customer_component__WEBPACK_IMPORTED_MODULE_1__.CustomerComponent, _supplier_supplier_component__WEBPACK_IMPORTED_MODULE_2__.SupplierComponent],
+          imports: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule, _authentication_routing_module__WEBPACK_IMPORTED_MODULE_0__.AuthenticationRoutingModule]
         });
       })();
       /***/
