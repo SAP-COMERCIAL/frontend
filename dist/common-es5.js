@@ -138,8 +138,7 @@
             dialogConfig.height = '900px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_customer_detail_customer_detail_component__WEBPACK_IMPORTED_MODULE_0__.CustomerDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {

@@ -78,7 +78,7 @@ class CustomerComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_customer_detail_customer_detail_component__WEBPACK_IMPORTED_MODULE_0__.CustomerDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     filtrar(event) {

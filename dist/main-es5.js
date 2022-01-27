@@ -12777,8 +12777,7 @@
             dialogConfig.height = '9000px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -12797,8 +12796,7 @@
             dialogConfig.height = '400px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -12817,8 +12815,7 @@
             dialogConfig.height = '9000px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -13506,8 +13503,7 @@
             dialogConfig.height = '900px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_1__.QuotationDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -13526,8 +13522,7 @@
             dialogConfig.height = '700px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_files_quotation_detail_files_component__WEBPACK_IMPORTED_MODULE_2__.QuotationDetailFilesComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -14128,8 +14123,7 @@
             dialogConfig.height = '900px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -14147,8 +14141,7 @@
             dialogConfig.height = '900px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -14774,8 +14767,7 @@
             dialogConfig.height = '400px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {
@@ -14793,8 +14785,7 @@
             dialogConfig.height = '400px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {
-              window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
             });
           }
         }, {

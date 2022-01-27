@@ -6579,7 +6579,7 @@ class PoListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     editRequisicion(element, event) {
@@ -6597,7 +6597,7 @@ class PoListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     aproveODC(element, event) {
@@ -6615,7 +6615,7 @@ class PoListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     cancelaODC(element, event) {
@@ -6967,7 +6967,7 @@ class QuotationListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_1__.QuotationDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     editCotizacion(element, event) {
@@ -6985,7 +6985,7 @@ class QuotationListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_files_quotation_detail_files_component__WEBPACK_IMPORTED_MODULE_2__.QuotationDetailFilesComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     filtrar(event) {
@@ -7290,7 +7290,7 @@ class RequisitionListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     editRequisicion(element) {
@@ -7307,7 +7307,7 @@ class RequisitionListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     filtrar(event) {
@@ -7623,7 +7623,7 @@ class StorageInvoiceListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     editRequisicion(event) {
@@ -7640,7 +7640,7 @@ class StorageInvoiceListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();
+            // window.location.reload();
         });
     }
     filtrar(event) { }
