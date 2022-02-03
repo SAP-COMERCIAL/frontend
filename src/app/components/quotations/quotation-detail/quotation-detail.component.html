@@ -5,12 +5,12 @@
 <div mat-dialog-content-example [formGroup]="newProject">
   <div fxLayout="row" class="division">
     <div fxFlex.gt-sm="20%">
-        <!-- <div><br>Proyecto</div> -->
+        <div><br>Proyecto</div>
     </div>
     <div fxFlex.gt-sm="25%" >
       <div>
         <mat-form-field>
-          <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
+          <mat-select class="form-control control" formControlName="proyecto_id" (selectionChange)="proyectoSelected()" ><!--[(ngModel)]="proyecto_id" -->
             <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
               {{op.codigo_proyecto}}
             </mat-option>
@@ -28,7 +28,7 @@
     <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <mat-select class="form-control control" formControlName="categoria_id" [(ngModel)]="categoria_id" (selectionChange)="categorySelected()" >
+            <mat-select class="form-control control" formControlName="categoria_id" (selectionChange)="categorySelected()" ><!-- [(ngModel)]="categoria_id"-->
               <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
                 {{opx.codigo_proyectocategoria}}
               </mat-option>
@@ -46,7 +46,7 @@
     <div fxFlex.gt-sm="25%" >
       <div>
       <mat-form-field>
-        <mat-select class="form-control control" formControlName="requisicion_Numero" [(ngModel)]="requisicion_Numero" (selectionChange)="RequisitionSelected()" >
+        <mat-select class="form-control control" formControlName="requisicion_Numero" (selectionChange)="RequisitionSelected()" ><!-- [(ngModel)]="requisicion_Numero"-->
           <mat-option *ngFor="let op of datasourceRequisition" [value]="op.requisicioninterna_id">
             {{op.codigo}}
           </mat-option>
@@ -77,7 +77,7 @@
       <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="cotizacion_Numero" matInput class="form-control form-control-line control" formControlName="cotizacion_Numero" [(ngModel)]="cotizacion_Numero">
+              <input [type]="cotizacion_Numero" matInput class="form-control form-control-line control" formControlName="cotizacion_Numero" ><!--[(ngModel)]="cotizacion_Numero"-->
             </mat-form-field>
             <span *ngIf="!newProject.get('cotizacion_Numero').valid && newProject.get('cotizacion_Numero').touched" class="help-block" style="color: red;"> capture una cotización</span>
           </div>

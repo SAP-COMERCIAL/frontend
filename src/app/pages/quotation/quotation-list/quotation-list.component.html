@@ -62,7 +62,11 @@
                 <!-- Estado Column -->
                 <ng-container matColumnDef="estado">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estado </th>
-                  <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.estado == 0">EN PROCESO</ng-container>
+                    <ng-container *ngIf="element.estado == 1">CANCELADO</ng-container>
+                    <ng-container *ngIf="element.estado == 2">ORDEN DE COMPRA</ng-container>
+                  </td>
                 </ng-container>
 
                 <!-- Email Column -->

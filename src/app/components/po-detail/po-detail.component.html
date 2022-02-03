@@ -149,10 +149,10 @@
           <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div *ngIf="ordendecompra_id"><button mat-raised-button color="accent" (click)="downloadAsPDF()">PDF</button></div>
+        <div *ngIf="estadoPantalla == 'aprove'"><button mat-raised-button color="accent" (click)="downloadAsPDF()">PDF</button></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div *ngIf="ordendecompra_id"><button mat-raised-button color="accent" (click)="Authoriza(newProject, $event)">Autorizar</button></div>
+        <div *ngIf="estadoPantalla == 'aprove'"><button mat-raised-button color="accent" (click)="Authoriza(newProject, $event)">Autorizar</button></div>
       </div>
       <div fxFlex.gt-sm="20%" >
         <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
@@ -301,32 +301,100 @@
           </table>
 
 
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Website</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Hardik</td>
-                <td>Savani</td>
-                <td>itsolutionstuff.com</td>
-              </tr>
-              <tr>
-                <td>Vimal</td>
-                <td>Kashiyani</td>
-                <td>hdtuto.com</td>
-              </tr>
-              <tr>
-                <td>Harshad</td>
-                <td>Pathak</td>
-                <td>nicesnippets.com</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="card-body card-body-table" id="AllTable" #AllTable>
+            <mat-table [dataSource]="datasourceCotizacionesDetalle" matSort class="mat-elevation-z8" style="width: 95%;">
+  
+              <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                      <div style="width: 100%; text-align: left; vertical-align: middle;">
+                          ACTIVAR
+                  </div>
+                    </th>
+                    <div style="width: 50px;">
+                    <td mat-cell *matCellDef="let element; let i = index">
+                      <mat-checkbox color="warn"
+                                  [checked]="element.activo"
+                                  (click)="$event.stopPropagation()"
+                                  (change)="ActivarDesactivar(element.activo, $event)"
+                                  [(ngModel)]="element.activo"
+                                  >
+                      </mat-checkbox>
+                    </td>
+                  </div>
+              </ng-container>
+                
+              <!-- ID Column -->
+              <ng-container matColumnDef="SKU">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>SKU</span> </th>
+                <td mat-cell *matCellDef="let element"> {{element.SKU}} </td>
+              </ng-container>
+  
+              <!-- ID Column -->
+              <ng-container matColumnDef="cantidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> <span>Cantidad</span> </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+              </ng-container>
+              
+              <!-- Name Column -->
+              <ng-container matColumnDef="unidad_de_medida">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Unidad de Medida </th>
+                <td mat-cell *matCellDef="let element"> {{element.um}} </td>
+              </ng-container>
+  
+              <!-- Email Column -->
+              <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
+                <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+              </ng-container>
+  
+              <!-- Email Column -->
+              <ng-container matColumnDef="medida">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Medida </th>
+                <td mat-cell *matCellDef="let element"> {{element.medida}} </td>
+              </ng-container>
+  
+              <!-- Email Column -->
+              <ng-container matColumnDef="color">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Color </th>
+                <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+              </ng-container>
+  
+              <!-- Email Column -->
+              <ng-container matColumnDef="otras_Especificaciones">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Otras especificaciones </th>
+                <td mat-cell *matCellDef="let element"> {{element.otras_especificaciones}} </td>
+              </ng-container>
+  
+              <!-- cantidad_Ordenar Column -->
+              <ng-container matColumnDef="cantidad_Ordenar">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Cantidad seleccionada </th>
+                  <td mat-cell *matCellDef="let element"> 
+                      <input type='cantidad_Ordenar' [(ngModel)]="element.cantidad" (keyup)="checkEnterKey($event, 'presupuesto')" (blur)="onBlurMethod($event)">
+                  </td>
+                </ng-container>
+  
+              <!-- precio column -->
+              <ng-container matColumnDef="precio_unitario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Precio Unitario</th>
+                <td mat-cell *matCellDef="let element"> 
+                    <input type='precio_unitario' [(ngModel)]="element.precio_unitario" (keyup)="checkEnterKey($event, 'precio_unitario')" (blur)="onBlurMethod($event)"> 
+                </td>
+              </ng-container>
+  
+              <!-- descuento column -->
+              <ng-container matColumnDef="descuento">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descuento </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <input type='descuento' [(ngModel)]="element.descuento" (keyup)="checkEnterKey($event, 'descuento')" (blur)="onBlurMethod($event)">
+                </td>
+              </ng-container>
+
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </mat-table>
+      
+          </div>
         </div>
       </div>
     </div>

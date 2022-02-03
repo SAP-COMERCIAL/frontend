@@ -5,13 +5,13 @@
   <div mat-dialog-content-example [formGroup]="newProject">
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
-          <div><br>Proyecto</div>
+          <div *ngIf="requisicionId == 0"><br>Proyecto</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-        <div>
+        <div *ngIf="requisicionId == 0">
           <mat-form-field>
             <!-- [(ngModel)]="proyecto_id" (selectionChange)="emitFilters($event, 'Enviado')"  -->
-            <mat-select class="form-control control" formControlName="proyecto_id" [(ngModel)]="proyecto_id" (selectionChange)="proyectoSelected()" >
+            <mat-select class="form-control control" formControlName="proyecto_id" (selectionChange)="proyectoSelected()" ><!--[(ngModel)]="proyecto_id" -->
               <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
                 {{op.codigo_proyecto}}
               </mat-option>
@@ -24,12 +24,12 @@
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div><br>Proyecto-Categoría</div>
+        <div *ngIf="requisicionId == 0"><br>Proyecto-Categoría</div>
       </div>
       <div fxFlex.gt-sm="25%" >
-            <div>
+            <div *ngIf="requisicionId == 0">
               <mat-form-field>
-                <mat-select class="form-control control" formControlName="categoria_id" [(ngModel)]="categoria_id" (selectionChange)="categorySelected()"><!-- (selectionChange)="emitFilters($event, 'Enviado')"-->
+                <mat-select class="form-control control" formControlName="categoria_id" (selectionChange)="categorySelected()"><!-- (selectionChange)="emitFilters($event, 'Enviado')" [(ngModel)]="categoria_id" -->
                   <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
                     {{opx.codigo_proyectocategoria}}
                   </mat-option>
@@ -47,7 +47,7 @@
       <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero" [(ngModel)]="requisicion_Numero">
+              <input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero" ><!--[(ngModel)]="requisicion_Numero"-->
             </mat-form-field>
             <span *ngIf="!newProject.get('requisicion_Numero').valid && newProject.get('requisicion_Numero').touched" class="help-block" style="color: red;"> capture un número de Requisición</span>
           </div>
@@ -62,13 +62,13 @@
         <div>
           <mat-form-field appearance="fill">
             <mat-label>{{fecha | date: 'dd-MM-yyyy'}}</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control" [(ngModel)]="fecha"> <!--[(ngModel)]="fecha" -->
+            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control" > <!--[(ngModel)]="fecha" -->
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker [startAt]="fecha" #picker></mat-datepicker>
           </mat-form-field></div>
       </div>
     </div>
-    <div fxLayout="row" class="division">
+    <div fxLayout="row" class="division" *ngIf="requisicionId == 0">
         <div fxFlex.gt-sm="20%">
             <div class="input-group mb-3">
                             <input type="file" name="loadFile" id="loadFile" class="form-control form-control-line" placeholder="SELECCIONA ARCHIVO" style="display: none;" (change)="onFileChange($event)" onclick="this.value=null;"> <!--[(ngModel)]="buscar" -->

@@ -27,6 +27,7 @@ import { filter } from 'rxjs-compat/operator/filter';
 import { RequisitionDetailComponent } from '../../requisitions/requisition-detail/requisition-detail.component';
 import { umask } from 'process';
 import { MatTab } from '@angular/material/tabs';
+import { K } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-quotation-detail',
@@ -107,14 +108,17 @@ export class QuotationDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log('this.projectInfo', this.projectInfo);
+
     this.getProyectos();
-    if(this.requisicionId != 0){
+    if(this.projectInfo["cotizacion_id"] != 0){
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
           requisicion_id : '', // this.projectInfo["requisicion_id"] ,
-          requisicion_Numero : this.projectInfo["codigo"] ,
+          requisicion_Numero : this.projectInfo["codigo_requisicioninterna"] ,
           categoria_id : '', // this.projectInfo["categoria_id"],
-          fecha : '', // this.projectInfo["fecha"]
+          fecha : this.projectInfo["fecha"] , // this.projectInfo["fecha"]
+          cotizacion_Numero : this.projectInfo["codigo"] ,
           loadfile : ''
           
       })
@@ -124,6 +128,8 @@ export class QuotationDetailComponent implements OnInit {
       this.categoria_id = this.projectInfo["categoria_id"];
       this.fecha = '', //this.projectInfo["fecha"];
       this.loadfile = ''
+      
+      this.getQuotationDetail(this.projectInfo["cotizacion_id"]);
     }
 
   }
@@ -133,8 +139,8 @@ export class QuotationDetailComponent implements OnInit {
   }
 
   proyectoSelected(){
-    console.log('Selecciona categorias', this.proyecto_id);
-    this.getCategories(this.proyecto_id);
+    console.log('Selecciona categorias', this.newProject.controls["proyecto_id"].value);
+    this.getCategories(this.newProject.controls["proyecto_id"].value);
   }
 
   categorySelected(){
@@ -192,7 +198,7 @@ export class QuotationDetailComponent implements OnInit {
     if(this.quotationId == 0){
       arrayTodb = { 
         // proyecto_id : this.proyecto_id,
-                  requisicioninterna_id : this.requisicionId,
+                  requisicioninterna_id : this.newProject.controls["requisicion_Numero"].value, // this.requisicionId,
                   codigo : this.newProject.controls["cotizacion_Numero"].value,
                   fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 };
@@ -203,8 +209,8 @@ export class QuotationDetailComponent implements OnInit {
     else{
       arrayTodb = {
         // proyecto_id : this.proyecto_id,
-        categoria_id : this.categoria_id,
-        requisicioninterna_id : this.requisicionId,
+        categoria_id : this.newProject.controls["categoria_id"].value, // this.categoria_id,
+        requisicioninterna_id : this.newProject.controls["requisicionId"].value, //this.requisicionId,
         fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
       };
 
@@ -289,10 +295,23 @@ getCotizacionesAll(requisicion_interna : any){
       this.datasourceCotizaciones = res;
       console.log('COTIZACIONES TODAS', res);
       this.cotizacion_Numero = this.cotizacion_Numero = requisicion_interna + '-' + (this.datasourceCotizaciones.filter(e => e.codigo_requisicioninterna == requisicion_interna).length + 1);
+      this.newProject.controls["cotizacion_Numero"].setValue(this.cotizacion_Numero = requisicion_interna + '-' + (this.datasourceCotizaciones.filter(e => e.codigo_requisicioninterna == requisicion_interna).length + 1));
 
     },
     error => console.log("error consulta proyectos",error)
   )
+}
+
+getQuotationDetail(cotizacionId : number){
+// Obtiene el detalle de la cotización
+this._quotationservice.getQuotationDetail(cotizacionId).subscribe(
+  res=> {
+    this.datasourceRequisitionDetail = res;
+    console.log('datasourde cotizacion', res);
+
+  },
+  error => console.log("error consulta requisiciones",error)
+)
 }
 
 getrequisitionAll(){

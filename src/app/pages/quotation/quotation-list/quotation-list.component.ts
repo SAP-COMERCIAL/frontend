@@ -123,14 +123,14 @@ dataSourceShow : MatTableDataSource<quotationListModel>
       title: 'COTIZACIONES',
       arrayData : element,
       requisicionId: 0,
-      cotizacionId : 0
+      cotizacionId : element.cotizacion_id
      
     }
     dialogConfig.width = '1200px';
     dialogConfig.height = '700px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(QuotationDetailFilesComponent, dialogConfig);
+    const dialogRef = this.dialog.open(QuotationDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();

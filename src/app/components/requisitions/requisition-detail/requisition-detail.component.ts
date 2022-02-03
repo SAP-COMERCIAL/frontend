@@ -249,8 +249,8 @@ export class RequisitionDetailComponent implements OnInit {
   }
 
   proyectoSelected(){
-    console.log('Selecciona categorias', this.proyecto_id);
-    this.getCategories(this.proyecto_id);
+    console.log('Selecciona categorias', this.newProject.controls["proyecto_id"].value );
+    this.getCategories(this.newProject.controls["proyecto_id"].value);
   }
 
   categorySelected(){
@@ -283,21 +283,18 @@ export class RequisitionDetailComponent implements OnInit {
     }
 
     if(this.requisicionId == 0){
-      arrayTodb = { proyecto_id : this.proyecto_id,
-                  proyectocategoria_id : this.categoria_id,
-                  codigo : this.requisicion_Numero,
-                  fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-                  fo : this.fo,
-                  cargo : this.cargo,
-                  no_pym : this.no_pym
+      arrayTodb = {
+                  proyectocategoria_id : this.newProject.controls["categoria_id"].value, // this.categoria_id,
+                  codigo : this.newProject.controls["requisicion_Numero"].value, // this.requisicion_Numero,
+                  fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD') //,
                 };
 
       // INSERTA REQUISICION HDR
       this.insertRequisition(arrayTodb)
     }
     else{
-      arrayTodb = {proyecto_id : this.proyecto_id,
-        proyectocategoria_id : this.categoria_id,
+      arrayTodb = {proyecto_id : this.newProject.controls["requisicion_Numero"].value, // this.proyecto_id,
+        proyectocategoria_id : this.newProject.controls["categoria_id"].value, // this.categoria_id,
         requisicion_id : this.requisicion_id,
         fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
       };
@@ -400,6 +397,7 @@ export class RequisitionDetailComponent implements OnInit {
 
         // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
         this.requisicion_Numero = codigo_requisicion;
+        this.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
       },
       error => console.log("error consulta regiones",error)
     )

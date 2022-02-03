@@ -11,7 +11,7 @@
         <div>
           <mat-form-field>
           <!-- <input type="text" class="form-control form-control-line control" formControlName="codigo_proyecto" [(ngModel)]="codigo_proyecto" disabled > -->
-          <input [type]="codigo_proyecto" matInput class="form-control form-control-line control" formControlName="codigo_proyecto" [(ngModel)]="codigo_proyecto" disabled >
+          <input [type]="codigo_proyecto" matInput class="form-control form-control-line control" formControlName="codigo_proyecto" disabled > <!--[(ngModel)]="codigo_proyecto" -->
         </mat-form-field>
         <span *ngIf="!newProject.get('codigo_proyecto').valid && newProject.get('codigo_proyecto').touched" class="help-block" style="color: red;"> Capture un código</span>
         </div>
@@ -27,7 +27,7 @@
         <mat-form-field>
           <!--[(ngModel)]="nombretxt" -->
           <!-- <input type="text" class="form-control form-control-line control" placeholder="" formControlName="nombre_proyecto" [(ngModel)]="nombre_proyecto"> -->
-          <input [type]="nombre_proyecto" matInput class="form-control form-control-line control" placeholder="" formControlName="nombre_proyecto" [(ngModel)]="nombre_proyecto">
+          <input [type]="nombre_proyecto" matInput class="form-control form-control-line control" placeholder="" formControlName="nombre_proyecto" > <!--[(ngModel)]="nombre_proyecto"-->
         </mat-form-field>
         <span *ngIf="!newProject.get('nombre_proyecto').valid && newProject.get('nombre_proyecto').touched" class="help-block" style="color: red;"> Debe capturar un nombre</span>
       </div>
@@ -41,7 +41,7 @@
     <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <mat-select class="form-control control" formControlName="cliente" [(ngModel)]="cliente" (selectionChange)="selectcustommer($event)"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
+            <mat-select class="form-control control" formControlName="cliente" (selectionChange)="selectcustommer($event)"><!--(selectionChange)="emitFilters($event, 'Enviado')" [(ngModel)]="cliente" -->
               <mat-option *ngFor="let op of datasourceCustomers" [value]="op.clienteid">
                 {{op.nombre}}
               </mat-option>
@@ -61,7 +61,7 @@
     <div fxFlex.gt-sm="25%" >
       <div>
         <mat-form-field>
-          <input [type]="presupuesto_proyecto" matInput class="form-control form-control-line control" formControlName="presupuesto_proyecto" [(ngModel)]="presupuesto_proyecto" step="any" (keyup)="_keyUp($event)" > <!--required="required" min="0" max="999999999"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"-->
+          <input [type]="presupuesto_proyecto" matInput class="form-control form-control-line control" formControlName="presupuesto_proyecto" step="any" (keyup)="_keyUp($event)" > <!--required="required" min="0" max="999999999"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" [(ngModel)]="presupuesto_proyecto" -->
         </mat-form-field>
         <span *ngIf="!newProject.get('presupuesto_proyecto').valid && newProject.get('presupuesto_proyecto').touched" class="help-block" style="color: red;"> capture  un presupuesto</span>
       </div>
@@ -75,7 +75,7 @@
     <div fxFlex.gt-sm="25%" >
         <div><mat-form-field appearance="fill">
           <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha_inicial_proyecto" (dateChange)="fechaInicial($event)" [(ngModel)]="fecha_inicial_proyecto" class="control">
+          <input matInput [matDatepicker]="picker" formControlName="fecha_inicial_proyecto" (dateChange)="fechaInicial($event)" class="control"><!--[(ngModel)]="fecha_inicial_proyecto" -->
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -91,7 +91,7 @@
     <div fxFlex.gt-sm="25%" >
       <div><mat-form-field appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="pickerf" formControlName="fecha_final_proyecto" [(ngModel)]="fecha_final_proyecto" class="control">
+        <input matInput [matDatepicker]="pickerf" formControlName="fecha_final_proyecto" class="control"><!--[(ngModel)]="fecha_final_proyecto" -->
         <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
         <mat-datepicker #pickerf></mat-datepicker>
       </mat-form-field>
@@ -107,7 +107,7 @@
     <div fxFlex.gt-sm="25%">
         <div>
           <mat-form-field>
-            <input [type]="responsable_proyecto" matInput class="form-control form-control-line control" placeholder="Responsable" formControlName="responsable_proyecto" [(ngModel)]="responsable_proyecto">
+            <input [type]="responsable_proyecto" matInput class="form-control form-control-line control" placeholder="Responsable" formControlName="responsable_proyecto" ><!--[(ngModel)]="responsable_proyecto"-->
           </mat-form-field>
           <span *ngIf="!newProject.get('responsable_proyecto').valid && newProject.get('responsable_proyecto').touched" class="help-block" style="color: red;"> Capture un responsable</span>
         </div>
@@ -121,7 +121,7 @@
     <div fxFlex.gt-sm="25%">
       <div>
         <mat-form-field>
-          <input [type]="centro_de_costo_proyecto" matInput class="form-control form-control-line control" placeholder="centroDeCostos" formControlName="centroDeCostos" [(ngModel)]="centro_de_costo_proyecto">
+          <input [type]="centro_de_costo_proyecto" matInput class="form-control form-control-line control" placeholder="centroDeCostos" formControlName="centroDeCostos" ><!--[(ngModel)]="centro_de_costo_proyecto"-->
         </mat-form-field>
         <span *ngIf="!newProject.get('centroDeCostos').valid && newProject.get('centroDeCostos').touched" class="help-block" style="color: red;"> Capture un centro de costos</span>
       </div>
@@ -135,7 +135,7 @@
     <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <mat-select class="form-control"  formControlName="almacen" [(ngModel)]="almacen"><!--(selectionChange)="emitFilters($event, 'Enviado')"-->
+            <mat-select class="form-control"  formControlName="almacen"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
               <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
               <mat-option value= "1">California</mat-option>
               <mat-option value= "2">Norte</mat-option>

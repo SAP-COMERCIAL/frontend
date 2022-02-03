@@ -98,12 +98,14 @@ export class ProjectCaptureDetailComponent implements OnInit {
     this.getAllProjects();
     this.getEnabledCategories();
 
+console.log('data de entrada', this.projectInfo);
+
     if(this.projectId != 0){
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
           codigo_proyecto : this.projectInfo["codigo_proyecto"],
           nombre_proyecto : this.projectInfo["nombre_proyecto"] ,
-          cliente : this.projectInfo["cliente_id"].toString(),
+          cliente : this.projectInfo["cliente_id"],
           presupuesto_proyecto : this.projectInfo["presupuesto_proyecto"] ,
           fecha_inicial_proyecto : this.projectInfo["fecha_inicial_proyecto"],
           fecha_final_proyecto : this.projectInfo["fecha_final_proyecto"] ,
@@ -151,15 +153,15 @@ export class ProjectCaptureDetailComponent implements OnInit {
 
     if(this.projectId == 0){
 
-      arrayTodb = { codigo_proyecto : this.codigo_proyecto,
-                  nombre_proyecto : this.nombre_proyecto,
-                  cliente_id : this.cliente,
-                  presupuesto_proyecto : this.presupuesto_proyecto,
+      arrayTodb = { codigo_proyecto : this.newProject.controls["codigo_proyecto"].value, // this.codigo_proyecto,
+                  nombre_proyecto : this.newProject.controls["nombre_proyecto"].value, //this.nombre_proyecto,
+                  cliente_id : this.newProject.controls["cliente"].value, //this.cliente,
+                  presupuesto_proyecto : this.newProject.controls["presupuesto_proyecto"].value, //this.presupuesto_proyecto,
                   fecha_inicial_proyecto : moment(this.fecha_inicial_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
                   fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-                  responsable_proyecto : this.responsable_proyecto,
-                  centro_de_costo_proyecto : '', //this.centro_de_costo_proyecto,
-                  almacen_id : this.almacen};
+                  responsable_proyecto : this.newProject.controls["responsable_proyecto"].value, //this.responsable_proyecto,
+                  centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value, //this.centro_de_costo_proyecto,
+                  almacen_id : this.newProject.controls["almacen"].value}; //this.almacen};
 
       // Actualiza registro NUEVO
       this._projectService.insertProjects(arrayTodb).subscribe(
@@ -178,15 +180,15 @@ export class ProjectCaptureDetailComponent implements OnInit {
     }
     else{
       arrayTodb = {proyecto_id : this.projectId,
-        nombre_proyecto : this.nombre_proyecto,
-        cliente_id : this.cliente,
-        presupuesto_proyecto : this.presupuesto_proyecto,
+        nombre_proyecto : this.newProject.controls["nombre_proyecto"].value, //this.nombre_proyecto,
+        cliente_id : this.newProject.controls["cliente"].value, //this.cliente,
+        presupuesto_proyecto : this.newProject.controls["presupuesto_proyecto"].value, //this.presupuesto_proyecto,
         fecha_inicial_proyecto : moment(this.fecha_inicial_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
         fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-        responsable_proyecto : this.responsable_proyecto,
-        centro_de_costo_proyecto : this.centro_de_costo_proyecto,
-        almacen_id : this.almacen,
-        codigo_proyecto : this.codigo_proyecto};
+        responsable_proyecto : this.newProject.controls["centroDeCostos"].value, //this.newProject.controls["responsable_proyecto"].value, //this.responsable_proyecto,
+        centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value, //this.centro_de_costo_proyecto,
+        almacen_id : this.newProject.controls["almacen"].value, //this.almacen,
+        codigo_proyecto : this.newProject.controls["codigo_proyecto"].value}; // this.codigo_proyecto};
 
         // Actualiza registro EDICION
         this._projectService.updateProjects(arrayTodb).subscribe(
@@ -322,6 +324,7 @@ selectcustommer(event){
         this.datasourceProyects = res;
         if(this.projectId == 0){
           this.codigo_proyecto = Number(this.datasourceProyects[this.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
+          this.newProject.controls["codigo_proyecto"].setValue(Number(this.datasourceProyects[this.datasourceProyects.length - 1]["codigo_proyecto"]) + 1);
           console.log('PROEYCTOS TODOS', this.proeycto_numero_mayor);
         }else{
           this.codigo_proyecto = this.projectInfo["codigo_proyecto"];

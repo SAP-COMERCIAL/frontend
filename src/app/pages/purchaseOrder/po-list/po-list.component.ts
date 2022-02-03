@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,6 +19,12 @@ import { poModel } from 'src/app/models/po.model';
 import { purchaseOrderservice } from 'src/app/services/PurchaseOrder.service';
 import { PoDetailComponent } from 'src/app/components/po-detail/po-detail.component';
 
+import jsPDF from 'jspdf';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
+
 @Component({
   selector: 'app-po-list',
   templateUrl: './po-list.component.html',
@@ -37,11 +43,12 @@ public totalSize:number = 0;
 public array: any;
 dataSourceShow : MatTableDataSource<poModel>
 
+  @ViewChild('pdfTable') pdfTable: ElementRef;
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['ordendecompra_id', 'ordendecompra_codigo', 'cotizacion_codigo', 'proveedor_nombre', 'ordendecompra_fecha', 'Estatus', 'editar', 'cancelar', 'autorizar'];
+  displayedColumns = ['ordendecompra_id', 'ordendecompra_codigo', 'cotizacion_codigo', 'proveedor_nombre', 'ordendecompra_fecha', 'Estatus', 'editar', 'cancelar', 'autorizar', 'pdf'];
   
   buscar:any;
 
@@ -84,7 +91,8 @@ dataSourceShow : MatTableDataSource<poModel>
       id: 1,
       title: 'ORDEN DE COMPRA',
       arrayData : null,
-      requisicionId: 1
+      requisicionId: 1,
+      estadoPantalla : 'new'
      
     }
     dialogConfig.width = '1500px';
@@ -108,11 +116,12 @@ dataSourceShow : MatTableDataSource<poModel>
       id: 1,
       title: 'REQUISICIONES',
       arrayData : element,
-      requisicionId: 1
+      requisicionId: 1,
+      estadoPantalla : 'edition'
      
     }
-    dialogConfig.width = '900px';
-    dialogConfig.height = '400px';
+    dialogConfig.width = '1500px';
+    dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
@@ -133,7 +142,8 @@ dataSourceShow : MatTableDataSource<poModel>
       id: 1,
       title: 'ORDEN DE COMPRA',
       arrayData : element,
-      requisicionId: 1
+      requisicionId: 1,
+      estadoPantalla : 'aprove',
      
     }
     dialogConfig.width = '1500px';
@@ -151,10 +161,26 @@ dataSourceShow : MatTableDataSource<poModel>
     this.updateODCStatus(element, 4);
   }
 
+  printPDF(){
+    this.downloadAsPDF();
+  }
+
   // =====================
   // UTILERIAS
   // =====================
 
+  public downloadAsPDF() {
+    const doc = new jsPDF();
+   
+    const pdfTable = this.pdfTable.nativeElement;
+   
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    // var html = htmlToPdfmake(AllTable.innerHTML);
+     
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).open(); 
+     
+  }
 
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;

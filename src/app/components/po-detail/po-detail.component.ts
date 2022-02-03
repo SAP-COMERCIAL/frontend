@@ -15,7 +15,7 @@ import { purchaseOrderservice } from 'src/app/services/PurchaseOrder.service';
 import { supplyservice } from '../../services/supplier.service';
 import { SupplierDetailComponent } from '../supplier-detail/supplier-detail.component';
 import { I } from '@angular/cdk/keycodes';
-import { ThrowStmt } from '@angular/compiler';
+import { CompileShallowModuleMetadata, ThrowStmt } from '@angular/compiler';
 
 import jsPDF from 'jspdf';
 import pdfMake from "pdfmake/build/pdfmake";
@@ -57,6 +57,7 @@ export class PoDetailComponent implements OnInit {
   displayedColumns = ['select', 'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento']; // , 'importe'
 
   projectInfo : any;
+  estadoPantalla : string;
   cotizacionId : any = 0;
   newProject: FormGroup;
   datasourceCotizaciones : any;
@@ -86,6 +87,7 @@ export class PoDetailComponent implements OnInit {
     , public dialog: MatDialog
   ) { 
     this.projectInfo = data.arrayData;
+    this.estadoPantalla = data.estadoPantalla;
 
     this.newProject = this.formBuilder.group({
       cotizacion_id : new FormControl('', [Validators.required]),
@@ -241,15 +243,465 @@ export class PoDetailComponent implements OnInit {
   }
 
   public downloadAsPDF() {
-    const doc = new jsPDF();
-   
+
+    let subTotal : any = 0;
+    let iva : any = 0;
+    let total : any = 0;
+
+    const doc = new jsPDF();   
     const pdfTable = this.pdfTable.nativeElement;
    
     var html = htmlToPdfmake(pdfTable.innerHTML);
-    // var html = htmlToPdfmake(AllTable.innerHTML);
-     
-    const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).open(); 
+    
+    var headers = {
+      0:{
+          col_1:{ text: 'Cantidad', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 },
+          col_2:{ text: 'Unidad', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 },
+          col_3:{ text: 'Descripción', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 90 },
+          col_4:{ text: 'Precio Unitario', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20  },
+          col_5:{ text: 'Importe', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20  },
+          // col_6:{ text: 'SKU', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 }
+      },
+      1:{
+          col_1:{ text: 'Header 1', style: 'tableHeader', alignment: 'center' },
+          col_2:{ text: 'Header 2', style: 'tableHeader', alignment: 'center' }, 
+          col_3:{ text: 'Header 3', style: 'tableHeader', alignment: 'center' },
+          col_4:{ text: 'Citación', style: 'tableHeader', alignment: 'center' },
+          col_5:{ text: 'Cumplimiento', style: 'tableHeader', alignment: 'center'},
+          col_6:{ text: 'Cumplimiento', style: 'tableHeader', alignment: 'center'}
+      }
+    //   ,
+    //   2:{
+    //     col_1:{ text: 'Header 1x', style: 'tableHeader', alignment: 'center' },
+    //     col_2:{ text: 'Header 2x', style: 'tableHeader', alignment: 'center' }, 
+    //     col_3:{ text: 'Header 3x', style: 'tableHeader', alignment: 'center' },
+    //     col_4:{ text: 'Citaciónx', style: 'tableHeader', alignment: 'center' },
+    //     col_5:{ text: 'Cumplimientox', style: 'tableHeader', alignment: 'center'}
+    // },
+    // 4:{
+    //   col_1:{ text: 'texto en 1', style: 'tableHeader', alignment: 'center' },
+    //   col_2:{ text: 'texto en 2', style: 'tableHeader', alignment: 'center' }, 
+    //   col_3:{ text: 'texto en 3', style: 'tableHeader', alignment: 'center' },
+    //   col_4:{ text: 'texto en Citación', style: 'tableHeader', alignment: 'center' },
+    //   col_5:{ text: 'texto en Cumplimiento', style: 'tableHeader', alignment: 'center'}
+    // }
+  }
+
+    let bodyx = [];
+    var body = [];
+    for (var key in headers){
+        if (headers.hasOwnProperty(key)){
+            var header = headers[key];
+            var row = new Array();
+            row.push( header.col_1 );
+            row.push( header.col_2 );
+            row.push( header.col_3 );
+            row.push( header.col_4 );
+            row.push( header.col_5 );
+            // row.push( header.col_6 );
+            body.push(row);
+        }
+    }
+
+    for (var key in this.datasourceCotizacionesDetalle) {
+      console.log('renglones', this.datasourceCotizacionesDetalle);
+        if (this.datasourceCotizacionesDetalle.hasOwnProperty(key))
+        {
+            var data = this.datasourceCotizacionesDetalle[key];
+            var row = new Array();
+            row.push( data.cantidad.toString() );
+            row.push( data.unidad_medida.toString()  );
+            row.push( data.descripcion.toString() );
+            row.push( data.precio_unitario.toString()  );
+            row.push( (data.precio_unitario * data.cantidad).toString() );
+            // row.push( data.medida.toString() );
+            body.push(row);
+            bodyx.push(row);
+
+            // Calcula Totales
+            this.subtotal = this.subtotal + (data.precio_unitario * data.cantidad);
+        }
+    }
+
+    this.iva = this.subtotal * (this.newProject.controls["iva"].value / 100);
+    this.total = this.subtotal + this.iva;
+
+    const documentDefinition = {
+      content: [
+        
+        {
+          columns: [
+            {
+              text: 'LOGO DE ORDEN DE COMPRA', fontSize:8
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: 'COMERCIAL ... S. DE R.L. DE C.V. RFC: CCM95033..A Carretera a Saltillo-Monterrey Km. 18 Parque Industrial Santa María 25900 Ramos Arízpe, Coahuila Telefono: (844) 866 9030', fontSize:8
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: 'ORDEN DE COMPRA No. 1791-SUB232', fontSize:8
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: '*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Proveedor:', fontSize:8, bold:true
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: '', fontSize:8
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: 'Enviar a:', fontSize:8, bold:true
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Nombre: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'EXPLORACIÓN GEOFÍSICA Y ESTUDIOS DEL SUBSUELO DEL CENTRO', fontSize:8, width: '*'
+            },
+            {
+              text: 'Nombre: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'GM SILAO', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Dirección: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'RIO LERMA NO 705, COLINAS DEL RIO', fontSize:8, width: '*'
+            },
+            {
+              text: 'Dirección: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: '', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'R.F.C. ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'EGE160527A29', fontSize:8, width: '*'
+            },
+            {
+              text: 'Cd./Edo: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'SILAO GTO', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Cd./Edo: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'AGUASCALIENTES, AGUASCALIENTES', fontSize:8, width: '*'
+            },
+            {
+              text: 'Requisitor: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'FERNANDO ARMENDARIZ', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Contacto ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: 'ARTURO GONZALEZ OLVERA', fontSize:8, width: '*'
+            },
+            {
+              text: 'Teléfono: ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: '', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ': ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: '', fontSize:8, width: '*'
+            },
+            {
+              text: '', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: '4200680361', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          style: 'tableHeader', fontSize:8, width:'100%',
+          table: {
+            body: [
+              ['FECHA ODC', 'TERMINOS Y CONDICIONES'],
+              ['13-ene-22', 'Estimación por avance']
+            ]
+          }
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          fontSize:8, width:'100%',
+          table: {
+            widths: [ '*', '*', '*', '*', '*' ],
+            headerRows: 2,
+            // keepWithHeaderRows: 1,
+            body: body
+        }
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '', fontSize:8, bold:true
+            },
+            {
+              text: 'CIEN MIL PESOS 00/100 MN', fontSize:8, width: '*'
+            },
+            {
+              text: '', fontSize:8, bold:true
+            },
+            {
+              text: 'Subtotal', fontSize:8, bold:true, width: '*'
+            },
+            {
+              text: '$ ' + this.subtotal, fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '', fontSize:8, bold:true
+            },
+            {
+              text: '', fontSize:8, width: '*'
+            },
+            {
+              text: '', fontSize:8, bold:true
+            },
+            {
+              text: 'IVA', fontSize:8, bold:true, width: '*'
+            },
+            {
+              text: '$ ' + this.iva , fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '', fontSize:8, bold:true
+            },
+            {
+              text: '', fontSize:8, width: '*'
+            },
+            {
+              text: '', fontSize:8, bold:true
+            },
+            {
+              text: 'Total', fontSize:8, bold:true, width: '*'
+            },
+            {
+              text: '$ ' + this.total , fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '_________________', fontSize:8, bold:true
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: '_________________', fontSize:8
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: '_________________', fontSize:8, bold:true
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Compras', fontSize:8, bold:true
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: 'Control de proyectos', fontSize:8
+            },
+            {
+              text: '', fontSize:8, width: 20
+            },
+            {
+              text: 'Autoriza', fontSize:8, bold:true
+            }
+          ]
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5]
+        },
+        tableExample: {
+          margin: [0, 5, 0, 15]
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 11,
+          color: 'black'
+        },
+        tableFooter: {
+          bold: true,
+          fontSize: 13,
+          color: 'black',
+          border: false
+        }
+      },
+      defaultStyle: {
+        // alignment: 'justify'
+      }
+    };
+
+    console.log('documentDefinition', documentDefinition);
+
+    pdfMake.createPdf(documentDefinition).open();
      
   }
 
@@ -282,6 +734,7 @@ export class PoDetailComponent implements OnInit {
         arrayPO_Hdr = res.filter(e => e.codigo_cotizacion == codigo_cotizacion)
         this.po_count = arrayPO_Hdr.length + 1;
         this.odc_Numero = codigo_cotizacion + '-' + this.po_count.toString();
+        this.newProject.controls["odc_Numero"].setValue(codigo_cotizacion + '-' + this.po_count.toString());
         
         
       },
@@ -329,7 +782,7 @@ export class PoDetailComponent implements OnInit {
                   , fecha : moment(new Date, 'YYYY-M-DD')
                   , iva : this.iva
                   , iva_moneda : this.ivaSubtotal
-                  , tipo_moneda : 'mxp'
+                  , tipo_moneda : 'MXN'
                   , sub_total : this.subtotal
                   , total : this.total
                 }
@@ -375,9 +828,6 @@ export class PoDetailComponent implements OnInit {
   insertPODet(po_id : any, arrayDetail : any){
 
     let arrayTodbDetail : any;
-
-    console.log('detalledet_para insertar', arrayDetail);
-    console.log('po_id', po_id);
 
     arrayDetail.forEach(element => {
 
