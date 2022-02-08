@@ -10,7 +10,7 @@
         <div fxFlex.gt-sm="25%" >
             <div>
               <mat-form-field>
-              <input [type]="nombre" matInput class="form-control form-control-line control" formControlName="nombre" [(ngModel)]="nombre" disabled >
+              <input [type]="nombre" matInput class="form-control form-control-line control" formControlName="nombre" disabled >
             </mat-form-field>
             <span *ngIf="!newProject.get('nombre').valid && newProject.get('nombre').touched" class="help-block" style="color: red;"> El nombre es requerido</span>
             </div>
@@ -24,7 +24,7 @@
         <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="direccion" matInput class="form-control form-control-line control" placeholder="" formControlName="direccion" [(ngModel)]="direccion">
+              <input [type]="direccion" matInput class="form-control form-control-line control" placeholder="" formControlName="direccion">
             </mat-form-field>
             <span *ngIf="!newProject.get('direccion').valid && newProject.get('direccion').touched" class="help-block" style="color: red;"> La dirección es requerida</span>
           </div>
@@ -38,7 +38,7 @@
         <div fxFlex.gt-sm="25%" >
             <div>
               <mat-form-field>
-              <input [type]="ciudad" matInput class="form-control form-control-line control" formControlName="ciudad" [(ngModel)]="ciudad" disabled >
+              <input [type]="ciudad" matInput class="form-control form-control-line control" formControlName="ciudad" disabled >
             </mat-form-field>
             <span *ngIf="!newProject.get('ciudad').valid && newProject.get('ciudad').touched" class="help-block" style="color: red;"> La ciudad es requerida</span>
             </div>
@@ -52,7 +52,7 @@
         <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="estado" matInput class="form-control form-control-line control" placeholder="" formControlName="estado" [(ngModel)]="estado">
+              <input [type]="estado" matInput class="form-control form-control-line control" placeholder="" formControlName="estado">
             </mat-form-field>
             <span *ngIf="!newProject.get('estado').valid && newProject.get('estado').touched" class="help-block" style="color: red;"> El Estado es requerido</span>
           </div>
@@ -66,7 +66,7 @@
         <div fxFlex.gt-sm="25%" >
             <div>
               <mat-form-field>
-              <input [type]="responsable" matInput class="form-control form-control-line control" formControlName="responsable" [(ngModel)]="responsable" >
+              <input [type]="responsable" matInput class="form-control form-control-line control" formControlName="responsable" >
             </mat-form-field>
             <span *ngIf="!newProject.get('responsable').valid && newProject.get('responsable').touched" class="help-block" style="color: red;"> El responsable es requerido</span>
             </div>
@@ -80,7 +80,7 @@
         <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="telefono" matInput class="form-control form-control-line control" placeholder="" formControlName="telefono" [(ngModel)]="telefono">
+              <input [type]="telefono" matInput class="form-control form-control-line control" placeholder="" formControlName="telefono">
             </mat-form-field>
             <span *ngIf="!newProject.get('telefono').valid && newProject.get('telefono').touched" class="help-block" style="color: red;"> El telefono es requerido</span>
           </div>
@@ -94,7 +94,7 @@
         <div fxFlex.gt-sm="25%" >
             <div>
               <mat-form-field>
-                <input [type]="rfc" matInput class="form-control form-control-line control" placeholder="" formControlName="rfc" [(ngModel)]="rfc">
+                <input [type]="rfc" matInput class="form-control form-control-line control" placeholder="" formControlName="rfc">
             </mat-form-field>
             <span *ngIf="!newProject.get('rfc').valid && newProject.get('rfc').touched" class="help-block" style="color: red;"> El RFC es requerido</span>
             </div>
@@ -103,7 +103,7 @@
           <div></div>
         </div>
         <div fxFlex.gt-sm="20%" >
-          <div><br>RFC</div>
+          <div><br></div>
         </div>
         <div fxFlex.gt-sm="25%" >
           <div>

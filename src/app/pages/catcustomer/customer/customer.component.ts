@@ -5,20 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { customerModel } from 'src/app/models/customer.model';
 import { customerservice } from 'src/app/services/customer.service';
 import { CustomerDetailComponent } from 'src/app/components/customer-detail/customer-detail.component';
-
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import * as moment from 'moment';
-import { AbstractControl, FormBuilder } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { DataSource } from '@angular/cdk/table';
-import { ProjectCaptureDetailComponent } from 'src/app/components/project-capture-detail/project-capture-detail/project-capture-detail.component';
-import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
-import { getMatFormFieldPlaceholderConflictError } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-customer',
@@ -84,7 +73,32 @@ dataSourceShow : MatTableDataSource<customerModel>
       id: 1,
       title: 'CLIENTE',
       arrayData : null,
-      requisicionId: 0
+      clienteId: 0,
+      estadoPantalla: 'New'
+     
+    }
+    dialogConfig.width = '1300px';
+    dialogConfig.height = '900px';
+    dialogConfig.disableClose = true;
+
+    const dialogRef = this.dialog.open(CustomerDetailComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      // window.location.reload();
+    });
+  }
+
+  edit(element, event){
+    console.log('Editar un cliente', element.clienteid);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'CLIENTE',
+      arrayData : element,
+      clienteId: element.clienteid,
+      estadoPantalla: 'Edit'
      
     }
     dialogConfig.width = '1300px';

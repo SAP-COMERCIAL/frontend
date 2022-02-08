@@ -6,7 +6,6 @@ import { ChartistModule } from 'ng-chartist';
 import { CustomerRoutes } from './customer.routing';
 import { DemoMaterialModule } from '../../../demo-material-module';
 
-
 @NgModule({
   imports: [
     CommonModule,

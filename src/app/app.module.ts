@@ -46,6 +46,9 @@ import { AuthSigninComponent } from './components/auth-signin/auth-signin.compon
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
 import { SupplierDetailComponent } from './components/supplier-detail/supplier-detail.component';
+import { CustomerComponent } from './pages/catcustomer/customer/customer.component';
+import { SupplierComponent } from './pages/supplier/supplier.component';
+
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -74,7 +77,9 @@ import { SupplierDetailComponent } from './components/supplier-detail/supplier-d
     PoDetailComponent,
     AuthSigninComponent,
     CustomerDetailComponent,
-    SupplierDetailComponent
+    SupplierDetailComponent,
+    CustomerComponent,
+    SupplierComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

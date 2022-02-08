@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { customerModel } from 'src/app/models/customer.model';
@@ -22,14 +22,21 @@ responsable : string;
 telefono : string;
 estado : string;
 
+projectInfo : any;
+estadoPantalla : string;
+
 public newProject: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<customerModel>
     , private _customerservice : customerservice
     , private formBuilder: FormBuilder
+    , @Inject(MAT_DIALOG_DATA) public data
 
   ) {
+
+    this.projectInfo = data.arrayData;
+    this.estadoPantalla = data.estadoPantalla;
 
     this.newProject = this.formBuilder.group({
       nombre :  new FormControl('', [Validators.required]),
@@ -47,6 +54,15 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    if(this.estadoPantalla == 'Edit'){
+      this.newProject.controls['nombre'].setValue(this.projectInfo['nombre']);
+      this.newProject.controls['direccion'].setValue(this.projectInfo['direccion']);
+      this.newProject.controls['ciudad'].setValue(this.projectInfo['ciudad']);
+      this.newProject.controls['rfc'].setValue(this.projectInfo['rfc']);
+      // this.newProject.controls['responsable'].setValue(this.projectInfo['responsable']);
+      // this.newProject.controls['telefono'].setValue(this.projectInfo['telefono']);
+      // this.newProject.controls['estado'].setValue(this.projectInfo['estado']);
+    }
   }
 
   cancel(event){
@@ -63,8 +79,8 @@ public newProject: FormGroup;
         , direccion : form.controls["direccion"].value
         , rfc : form.controls["rfc"].value 
         , ciudad : form.controls["ciudad"].value
-        , estado : form.controls["estado"].value
-        , contacto : form.controls["responsable"].value
+        , estado : '' //form.controls["estado"].value
+        , contacto : '' //form.controls["responsable"].value
         , vigencia : '2050-01-01'
         , estatus : 1
       });
