@@ -63,6 +63,18 @@ const routes: Routes = [
         loadChildren: () => import('./pages/supplier/supplier.module').then(m => m.SupplierModule)
       },
       {
+        path: 'reportMaster',
+        loadChildren: () => import('./pages/report-master/report-master/report-master.module').then(m => m.ReportMasterModule)
+      },
+      {
+        path: 'repseCapture',
+        loadChildren: () => import('./pages/repse-supplier-capture/repse-supplier-capture/repse-supplier-capture.module').then(m => m.RepseSupplierCaptureModule)
+      },
+      {
+        path: 'repseReview',
+        loadChildren: () => import('./pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.module').then(m => m.RepseSupplierReviewModule)
+      },
+      {
           path: 'login',
           component: LoginComponent,
       }

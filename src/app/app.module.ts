@@ -48,7 +48,8 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import { SupplierDetailComponent } from './components/supplier-detail/supplier-detail.component';
 import { CustomerComponent } from './pages/catcustomer/customer/customer.component';
 import { SupplierComponent } from './pages/supplier/supplier.component';
-
+import { RepseSupplierCaptureComponent } from './pages/repse-supplier-capture/repse-supplier-capture/repse-supplier-capture.component';
+import { RepseSupplierReviewComponent } from './pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -79,7 +80,9 @@ import { SupplierComponent } from './pages/supplier/supplier.component';
     CustomerDetailComponent,
     SupplierDetailComponent,
     CustomerComponent,
-    SupplierComponent
+    SupplierComponent,
+    RepseSupplierCaptureComponent,
+    RepseSupplierReviewComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

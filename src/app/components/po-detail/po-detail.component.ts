@@ -16,6 +16,7 @@ import { supplyservice } from '../../services/supplier.service';
 import { SupplierDetailComponent } from '../supplier-detail/supplier-detail.component';
 import { I } from '@angular/cdk/keycodes';
 import { CompileShallowModuleMetadata, ThrowStmt } from '@angular/compiler';
+import jwt_decode from "jwt-decode";
 
 import jsPDF from 'jspdf';
 import pdfMake from "pdfmake/build/pdfmake";
@@ -74,6 +75,7 @@ export class PoDetailComponent implements OnInit {
   total:number = 0;
   precio_unitario : number = 0;
   importe : number = 0;
+  decodedSign : any;
 
   constructor(
     public dialogRef: MatDialogRef<quotationDetailModel>
@@ -109,6 +111,9 @@ export class PoDetailComponent implements OnInit {
   // =====================
 
   ngOnInit(): void {
+    
+    this.decode();
+
     this.getsupplierAll();
     this.getProveedores();
     this.getCotizacionesAll();
@@ -192,7 +197,14 @@ export class PoDetailComponent implements OnInit {
   addSupplier(form, event){
     // Catálogo de clientes
     const dialogConfig = new MatDialogConfig();
-  
+    dialogConfig.data = {
+      id: 1,
+      title: 'PROVEEDOR',
+      arrayData : null,
+      proveedorId: 0,
+      estadoPantalla: 'New'
+     
+    }
     dialogConfig.width = '1400px';
     dialogConfig.height = '700px';
     dialogConfig.disableClose = true;
@@ -242,6 +254,27 @@ export class PoDetailComponent implements OnInit {
     this._snackBar.open(message, action, {duration : 3000});
   }
 
+  decode(){
+    let token = localStorage.getItem('token_access');
+    this.decodedSign = jwt_decode(token)["firma"] + '?alt=media&token='; 
+    let decodeUser = jwt_decode(token)["usuario"]; 
+    console.log(jwt_decode(token));
+
+    switch(decodeUser){
+      case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
+        break;
+      case('alejandro'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
+        break;
+      case('bernardo'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
+        break;
+      case('fernando'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
+        break;
+      default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
+        break;
+    }
+    console.log(this.decodedSign)
+  }
+  
   public downloadAsPDF() {
 
     let subTotal : any = 0;
@@ -663,10 +696,15 @@ export class PoDetailComponent implements OnInit {
               text: '', fontSize:8, width: 20
             },
             {
-              text: 'Autoriza', fontSize:8, bold:true
+              text: 'Autorizar', fontSize:8, bold:true
             }
+            // ,
+            // {
+            
+            //   image: this.decodedSign
+            // }
           ]
-        }
+        },
       ],
       styles: {
         header: {

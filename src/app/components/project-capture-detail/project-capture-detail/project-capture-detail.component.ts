@@ -254,6 +254,15 @@ addClient(form, event){
   // Catálogo de clientes
   const dialogConfig = new MatDialogConfig();
 
+  dialogConfig.data = {
+    id: 1,
+    title: 'CLIENTE',
+    arrayData : null,
+    clienteId: 0,
+    estadoPantalla: 'New'
+   
+  }
+  
   dialogConfig.width = '1400px';
   dialogConfig.height = '700px';
   dialogConfig.disableClose = true;
