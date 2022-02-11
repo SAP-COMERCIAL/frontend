@@ -18,6 +18,10 @@ import { I } from '@angular/cdk/keycodes';
 import { CompileShallowModuleMetadata, ThrowStmt } from '@angular/compiler';
 import jwt_decode from "jwt-decode";
 
+import { HttpClient } from "@angular/common/http";
+import { tap } from "rxjs/operators";
+import { Observable, Observer } from "rxjs";
+
 import jsPDF from 'jspdf';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -45,6 +49,10 @@ export class PoDetailComponent implements OnInit {
   public currentPage = 0;
   public totalSize:number = 0;
   public array: any;
+
+  logoDataUrl : string;
+  logoDataCompras : string;
+  logoDataControlProy : string;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -112,8 +120,19 @@ export class PoDetailComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.decode();
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+      result => this.logoDataUrl = result
+    )
 
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgCompras.PNG').then(
+      result => this.logoDataCompras = result
+    )
+
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgControlProyectos.PNG').then(
+      result => this.logoDataControlProy = result
+    )
+
+    this.decode();
     this.getsupplierAll();
     this.getProveedores();
     this.getCotizacionesAll();
@@ -262,20 +281,35 @@ export class PoDetailComponent implements OnInit {
 
     switch(decodeUser){
       case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+                        result => this.logoDataUrl = result
+                      )
         break;
       case('alejandro'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(
+                        result => this.logoDataUrl = result
+                      )
         break;
       case('bernardo'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(
+                        result => this.logoDataUrl = result
+                      )        
         break;
       case('fernando'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(
+                        result => this.logoDataUrl = result
+                      )   
         break;
       default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
+                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+                      result => this.logoDataUrl = result
+                    )
         break;
     }
     console.log(this.decodedSign)
   }
   
-  public downloadAsPDF() {
+  public async downloadAsPDF() {
 
     let subTotal : any = 0;
     let iva : any = 0;
@@ -303,21 +337,6 @@ export class PoDetailComponent implements OnInit {
           col_5:{ text: 'Cumplimiento', style: 'tableHeader', alignment: 'center'},
           col_6:{ text: 'Cumplimiento', style: 'tableHeader', alignment: 'center'}
       }
-    //   ,
-    //   2:{
-    //     col_1:{ text: 'Header 1x', style: 'tableHeader', alignment: 'center' },
-    //     col_2:{ text: 'Header 2x', style: 'tableHeader', alignment: 'center' }, 
-    //     col_3:{ text: 'Header 3x', style: 'tableHeader', alignment: 'center' },
-    //     col_4:{ text: 'Citaciónx', style: 'tableHeader', alignment: 'center' },
-    //     col_5:{ text: 'Cumplimientox', style: 'tableHeader', alignment: 'center'}
-    // },
-    // 4:{
-    //   col_1:{ text: 'texto en 1', style: 'tableHeader', alignment: 'center' },
-    //   col_2:{ text: 'texto en 2', style: 'tableHeader', alignment: 'center' }, 
-    //   col_3:{ text: 'texto en 3', style: 'tableHeader', alignment: 'center' },
-    //   col_4:{ text: 'texto en Citación', style: 'tableHeader', alignment: 'center' },
-    //   col_5:{ text: 'texto en Cumplimiento', style: 'tableHeader', alignment: 'center'}
-    // }
   }
 
     let bodyx = [];
@@ -361,7 +380,6 @@ export class PoDetailComponent implements OnInit {
 
     const documentDefinition = {
       content: [
-        
         {
           columns: [
             {
@@ -662,47 +680,71 @@ export class PoDetailComponent implements OnInit {
             }
           ]
         },
+        // {
+        //   columns: [
+        //     {
+        //       text: '_________________', fontSize:8, bold:true
+        //     },
+        //     {
+        //       text: '', fontSize:8, width: 20
+        //     },
+        //     {
+        //       text: '_________________', fontSize:8
+        //     },
+        //     {
+        //       text: '', fontSize:8, width: 20
+        //     },
+        //     {
+        //       text: '_________________', fontSize:8, bold:true
+        //     }
+        //   ]
+        // },
+        // {
+        //   columns: [
+        //     {
+        //       text: 'Compras', fontSize:8, bold:true
+        //     },
+        //     {
+        //       text: '', fontSize:8, width: 20
+        //     },
+        //     {
+        //       text: 'Control de proyectos', fontSize:8
+        //     },
+        //     {
+        //       text: '', fontSize:8, width: 20
+        //     },
+        //     {
+        //       text: 'Autorizar', fontSize:8, bold:true
+        //     }
+        //   ]
+        // },
         {
           columns: [
             {
-              text: '_________________', fontSize:8, bold:true
+              text: '', fontSize:8, width: 20
+            },
+            { 
+              image: this.logoDataCompras,
+              width: 100,
+              height: 50,
             },
             {
               text: '', fontSize:8, width: 20
             },
-            {
-              text: '_________________', fontSize:8
+            { 
+              image: this.logoDataControlProy,
+              width: 100,
+              height: 50,
             },
             {
               text: '', fontSize:8, width: 20
             },
-            {
-              text: '_________________', fontSize:8, bold:true
+            { 
+              // image: this.getBase64ImageFromURL('https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be')
+              image: this.logoDataUrl,
+              width: 100,
+              height: 50,
             }
-          ]
-        },
-        {
-          columns: [
-            {
-              text: 'Compras', fontSize:8, bold:true
-            },
-            {
-              text: '', fontSize:8, width: 20
-            },
-            {
-              text: 'Control de proyectos', fontSize:8
-            },
-            {
-              text: '', fontSize:8, width: 20
-            },
-            {
-              text: 'Autorizar', fontSize:8, bold:true
-            }
-            // ,
-            // {
-            
-            //   image: this.decodedSign
-            // }
           ]
         },
       ],
@@ -917,5 +959,55 @@ export class PoDetailComponent implements OnInit {
       error => console.log("error consulta categorias",error)
     )
   }
+
+  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      // img.setAttribute("crossOrigin", "anonymous");
+
+      // var express = require('express')
+      // var cors = require('cors')
+      // var app = express()
+      // app.use(cors())
+      
+      img.crossOrigin = "Anonymous";
+
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+
+        resolve(dataURL);
+      };
+
+      img.onerror = error => {
+        reject(error);
+      };
+
+      img.src = url;
+
+    });
+  }
+
+  getImageDataUrlFromLocalPath1(localPath: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        let canvas = document.createElement('canvas');
+        let img = new Image();
+        img.onload = () => {
+            canvas.height = img.height;
+            canvas.width = img.width;
+            canvas.getContext("2d").drawImage(img, 0, 0);
+            resolve(canvas.toDataURL('image/png'));
+        }
+        img.onerror = () => reject('Imagen no disponible')
+        img.src = localPath;
+    })
+
+}
 
 }

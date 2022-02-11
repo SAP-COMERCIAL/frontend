@@ -59,7 +59,7 @@ public newProject: FormGroup;
       edoCtaBancario: new FormControl('', [Validators.required]),
       edoFinanciero: new FormControl('', [Validators.required]),
       contrato: new FormControl('', [Validators.required]),
-      registroPatronalProv: new FormControl('', [Validators.required]),
+      registroPatronalProv: new FormControl('', [Validators.required])
     });
   }
 

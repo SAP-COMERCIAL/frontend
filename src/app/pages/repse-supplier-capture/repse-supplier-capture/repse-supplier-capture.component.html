@@ -2,7 +2,7 @@
     <h4>Catálogo de proveedores</h4>
 </div>
 <br>
-<div mat-dialog-content-example [formGroup]="newProject">
+ <div mat-dialog-content-example [formGroup]="newProject">
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
             <div><br>Razón social</div>
@@ -30,7 +30,7 @@
         <div fxFlex.gt-sm="100px">
             <div><br>Dirección</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="direccion" matInput class="form-control form-control-line control" placeholder=""
@@ -79,7 +79,7 @@
         <div fxFlex.gt-sm="100px">
             <div><br>Contacto</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="contacto" matInput class="form-control form-control-line control" placeholder=""
@@ -128,7 +128,7 @@
         <div fxFlex.gt-sm="100px">
             <div><br>Estado</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="estado" matInput class="form-control form-control-line control" placeholder=""
@@ -177,7 +177,7 @@
         <div fxFlex.gt-sm="100px">
             <div><br>Tipo Persona</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <mat-select class="form-control" formControlName="tipoPersona">
@@ -229,7 +229,7 @@
         <div fxFlex.gt-sm="100px">
             <div><br>Correo electrónico</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="email" matInput class="form-control form-control-line control"
@@ -278,7 +278,7 @@
         <div fxFlex.gt-sm="100px">
             <div><br>INE</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="ine" matInput class="form-control form-control-line control" formControlName="ine"
@@ -325,9 +325,9 @@
             </div>
         </div>
         <div fxFlex.gt-sm="100px">
-            <div><br>INE</div>
+            <div><br>Alta Infonavit</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="altaINFONAVIT" matInput class="form-control form-control-line control"
@@ -374,9 +374,9 @@
             </div>
         </div>
         <div fxFlex.gt-sm="100px">
-            <div><br>INE</div>
+            <div><br>Estado de cuenta</div>
         </div>
-        <div fxFlex.gt-sm="300px">
+        <div fxFlex.gt-sm="400px">
             <div>
                 <mat-form-field>
                     <input [type]="edoCtaBancario" matInput class="form-control form-control-line control"
@@ -397,114 +397,120 @@
             </div>
         </div>
     </div>
-    <!-- 
-      <div fxLayout="row" class="division">
+
+    <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
             <div><br>Estado financiero</div>
         </div>
-        <div fxFlex.gt-sm="300px" >
+        <div fxFlex.gt-sm="300px">
             <div>
-              <mat-form-field>
-              <input [type]="edoFinanciero" matInput class="form-control form-control-line control" formControlName="edoFinanciero" disabled >
-            </mat-form-field>
-            <span *ngIf="!newProject.get('edoFinanciero').valid && newProject.get('edoFinanciero').touched" class="help-block" style="color: red;">El estado financiero es requerido</span>
+                <mat-form-field>
+                    <input [type]="edoFinanciero" matInput class="form-control form-control-line control"
+                        formControlName="edoFinanciero" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('edoFinanciero').valid && newProject.get('edoFinanciero').touched"
+                    class="help-block" style="color: red;">El estado financiero es requerido</span>
             </div>
         </div>
-        <div fxFlex.gt-sm="50px" >
+        <div fxFlex.gt-sm="50px">
             <div>
                 <ng-container><button>subir</button></ng-container>
-              </div>
-          </div>
-          <div fxFlex.gt-sm="50px" >
-              <div>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
                 <ng-container><button>ver</button></ng-container>
-                </div>
             </div>
-        <div fxFlex.gt-sm="100px" >
-          <div><br>¿Es usted prestador de servicios especializados?</div>
         </div>
-        <div fxFlex.gt-sm="300px" >
-          <div>
-            <mat-form-field>
-                <mat-select class="form-control"  formControlName="edoFinanciero">
-                    <mat-option value= "0" selected="selected">SELECCIONA</mat-option>
-                    <mat-option value= "1">Sí</mat-option>
-                    <mat-option value= "2">No</mat-option>
-                  </mat-select>
-            </mat-form-field>
-            </mat-form-field>
-            <span *ngIf="!newProject.get('edoCtaBancario').valid && newProject.get('edoCtaBancario').touched" class="help-block" style="color: red;"> El esstado de cuenta bancario es requerido</span>
-          </div>
+        <div fxFlex.gt-sm="300px">
+            <div><br>¿Es usted prestador de servicios especializados?</div>
         </div>
-        <div fxFlex.gt-sm="50px" >
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <mat-select class="form-control" formControlName="edoFinanciero">
+                        <mat-option value="0" selected="selected">SELECCIONA</mat-option>
+                        <mat-option value="1">Sí</mat-option>
+                        <mat-option value="2">No</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('edoCtaBancario').valid && newProject.get('edoCtaBancario').touched"
+                    class="help-block" style="color: red;"> El esstado de cuenta bancario es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
             <div></div>
-          </div>
-          <div fxFlex.gt-sm="50px" >
-              <div></div>
-            </div>
-      </div> -->
-    <!-- </div> -->
-    <!-- 
-  <div fxLayout="row" class="division">
-    <div fxFlex.gt-sm="150px">
-        <div><br>Contrato</div>
-    </div>
-    <div fxFlex.gt-sm="300px" >
-        <div>
-          <mat-form-field>
-          <input [type]="contrato" matInput class="form-control form-control-line control" formControlName="contrato" disabled >
-        </mat-form-field>
-        <span *ngIf="!newProject.get('contrato').valid && newProject.get('contrato').touched" class="help-block" style="color: red;">El contrato es requerido</span>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div></div>
         </div>
     </div>
-    <div fxFlex.gt-sm="50px" >
-        <div>
-            <ng-container><button>subir</button></ng-container>
-          </div>
-      </div>
-      <div fxFlex.gt-sm="50px" >
-          <div>
-            <ng-container><button>ver</button></ng-container>
-            </div>
-        </div>
-    <div fxFlex.gt-sm="100px" >
-      <div><br>INE</div>
-    </div>
-    <div fxFlex.gt-sm="300px" >
-      <div>
-        <mat-form-field>
-            <input [type]="registroPatronalProv" matInput class="form-control form-control-line control" formControlName="registroPatronalProv" disabled >
-        </mat-form-field>
-        <span *ngIf="!newProject.get('registroPatronalProv').valid && newProject.get('registroPatronalProv').touched" class="help-block" style="color: red;"> El registro patronal del proveedor es requerido</span>
-      </div>
-    </div>
-    <div fxFlex.gt-sm="50px" >
-        <div>
-            <ng-container><button>subir</button></ng-container>
-          </div>
-      </div>
-      <div fxFlex.gt-sm="50px" >
-          <div>
-            <ng-container><button>ver</button></ng-container>
-            </div>
-        </div>
-  </div> -->
-
 
     <div fxLayout="row" class="division">
-        <div fxFlex.gt-sm="20%">
-            <div></div>
+        <div fxFlex.gt-sm="150px">
+            <div><br>Contrato</div>
         </div>
-        <div fxFlex.gt-sm="20%">
-            <div></div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <input [type]="contrato" matInput class="form-control form-control-line control"
+                        formControlName="contrato" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('contrato').valid && newProject.get('contrato').touched" class="help-block"
+                    style="color: red;">El contrato es requerido</span>
+            </div>
         </div>
-        <div fxFlex.gt-sm="20%">
-            <div></div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container><button>subir</button></ng-container>
+            </div>
         </div>
-        <div fxFlex.gt-sm="20%">
-            <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container><button>ver</button></ng-container>
+            </div>
         </div>
-        <div fxFlex.gt-sm="20%">
-            <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+        <div fxFlex.gt-sm="300px">
+            <div><br>Registro patronal del proveedor</div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>
+                <mat-form-field>
+                    <input [type]="registroPatronalProv" matInput class="form-control form-control-line control"
+                        formControlName="registroPatronalProv" disabled>
+                </mat-form-field>
+                <span
+                    *ngIf="!newProject.get('registroPatronalProv').valid && newProject.get('registroPatronalProv').touched"
+                    class="help-block" style="color: red;"> El registro patronal del proveedor es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container><button>subir</button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container><button>ver</button></ng-container>
+            </div>
         </div>
     </div>
+</div>
+
+<div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+    </div>
+</div> 
