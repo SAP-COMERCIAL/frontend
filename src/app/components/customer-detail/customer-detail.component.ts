@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { customerModel } from 'src/app/models/customer.model';
 import { customerservice } from '../../services/customer.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-customer-detail',
@@ -32,7 +33,7 @@ public newProject: FormGroup;
     , private _customerservice : customerservice
     , private formBuilder: FormBuilder
     , @Inject(MAT_DIALOG_DATA) public data
-
+    , private _snackBar : MatSnackBar
   ) {
 
     this.projectInfo = data.arrayData;
@@ -92,6 +93,9 @@ public newProject: FormGroup;
 // UTILERIAS
 // =========================
 
+openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {duration : 3000});
+}
 
 // =========================
 // SERVICIOS
@@ -104,6 +108,7 @@ insertCustommer(arrayToDb : any){
   this._customerservice.insertcustomer(arrayToDb).subscribe(
     res=> {
       console.log('CLIENTES', res);
+      this.openSnackBar('El registro se actualizó con éxito', '');      
     },
     error => console.log("error al insertar clientes",error)
   )

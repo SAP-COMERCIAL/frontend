@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../services/supplier.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-supplier-detail',
@@ -31,7 +32,7 @@ public newProject: FormGroup;
     , private _supplyservice : supplyservice
     , private formBuilder: FormBuilder
     , @Inject(MAT_DIALOG_DATA) public data
-
+    , private _snackBar : MatSnackBar
   ) {
 
     this.projectInfo = data.arrayData;
@@ -89,7 +90,9 @@ public newProject: FormGroup;
 // =========================
 // UTILERIAS
 // =========================
-
+openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {duration : 3000});
+}
 
 // =========================
 // SERVICIOS
@@ -101,6 +104,7 @@ insertSupplier(arrayToDb : any){
   this._supplyservice.insertsupply(arrayToDb).subscribe(
     res=> {
       console.log('PROVEEDORES', res);
+      this.openSnackBar('El registro se actualizó con éxito', '');      
     },
     error => console.log("error al insertar proveedores",error)
   )
