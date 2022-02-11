@@ -1937,31 +1937,37 @@
       /* harmony import */
 
 
-      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/material/snack-bar */
+      77001);
+      /* harmony import */
+
+
+      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/flex-layout/flex */
       35618);
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
       98295);
       /* harmony import */
 
 
-      var _angular_material_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
       83166);
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
       38583);
       /* harmony import */
 
 
-      var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/button */
       51095);
 
@@ -2036,13 +2042,14 @@
       }
 
       var _CustomerDetailComponent = /*#__PURE__*/function () {
-        function _CustomerDetailComponent(dialogRef, _customerservice, formBuilder, data) {
+        function _CustomerDetailComponent(dialogRef, _customerservice, formBuilder, data, _snackBar) {
           _classCallCheck(this, _CustomerDetailComponent);
 
           this.dialogRef = dialogRef;
           this._customerservice = _customerservice;
           this.formBuilder = formBuilder;
           this.data = data;
+          this._snackBar = _snackBar;
           this.projectInfo = data.arrayData;
           this.estadoPantalla = data.estadoPantalla;
           this.newProject = this.formBuilder.group({
@@ -2097,17 +2104,28 @@
           } // =========================
           // UTILERIAS
           // =========================
-          // =========================
+
+        }, {
+          key: "openSnackBar",
+          value: function openSnackBar(message, action) {
+            this._snackBar.open(message, action, {
+              duration: 3000
+            });
+          } // =========================
           // SERVICIOS
           // =========================
 
         }, {
           key: "insertCustommer",
           value: function insertCustommer(arrayToDb) {
+            var _this5 = this;
+
             console.log('aqui esta log', arrayToDb); // Inserta clientes
 
             this._customerservice.insertcustomer(arrayToDb).subscribe(function (res) {
               console.log('CLIENTES', res);
+
+              _this5.openSnackBar('El registro se actualizó con éxito', '');
             }, function (error) {
               return console.log("error al insertar clientes", error);
             });
@@ -2128,7 +2146,7 @@
       }();
 
       _CustomerDetailComponent.ɵfac = function CustomerDetailComponent_Factory(t) {
-        return new (t || _CustomerDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_customer_service__WEBPACK_IMPORTED_MODULE_0__.customerservice), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MAT_DIALOG_DATA));
+        return new (t || _CustomerDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_customer_service__WEBPACK_IMPORTED_MODULE_0__.customerservice), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MAT_DIALOG_DATA), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__.MatSnackBar));
       };
 
       _CustomerDetailComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
@@ -2528,7 +2546,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.newProject.get("rfc").valid && ctx.newProject.get("rfc").touched);
           }
         },
-        directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_6__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_7__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_8__.MatButton],
+        directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_7__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_9__.MatButton],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjdXN0b21lci1kZXRhaWwuY29tcG9uZW50LmNzcyJ9 */"]
       });
       /***/
@@ -3805,16 +3823,16 @@
         _createClass(_PoDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(function (result) {
-              return _this5.logoDataUrl = result;
+              return _this6.logoDataUrl = result;
             });
             this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgCompras.PNG').then(function (result) {
-              return _this5.logoDataCompras = result;
+              return _this6.logoDataCompras = result;
             });
             this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgControlProyectos.PNG').then(function (result) {
-              return _this5.logoDataControlProy = result;
+              return _this6.logoDataControlProy = result;
             });
             this.decode();
             this.getsupplierAll();
@@ -3930,7 +3948,7 @@
         }, {
           key: "onBlurMethod",
           value: function onBlurMethod() {
-            var _this6 = this;
+            var _this7 = this;
 
             if (this.tabla1["_data"][0]["activo"] != undefined && this.tabla1["_data"][0]["precio_unitario"] != undefined) {
               // && this.tabla1["_data"][0]["activo"] == true 
@@ -3940,7 +3958,7 @@
               this.total = 0;
               this.tabla1["_data"].forEach(function (element) {
                 if (element.activo != undefined && element.activo == true && element.precio_unitario != undefined) {
-                  _this6.subtotal = _this6.subtotal + element.cantidad * (element.precio_unitario - element.descuento);
+                  _this7.subtotal = _this7.subtotal + element.cantidad * (element.precio_unitario - element.descuento);
                 }
               });
               this.ivaSubtotal = this.ivaSubtotal + this.subtotal * (this.iva / 100);
@@ -3960,7 +3978,7 @@
         }, {
           key: "decode",
           value: function decode() {
-            var _this7 = this;
+            var _this8 = this;
 
             var token = localStorage.getItem('token_access');
             this.decodedSign = (0, jwt_decode__WEBPACK_IMPORTED_MODULE_2__["default"])(token)["firma"] + '?alt=media&token=';
@@ -3972,28 +3990,28 @@
                 this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
 
                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(function (result) {
-                  return _this7.logoDataUrl = result;
+                  return _this8.logoDataUrl = result;
                 });
                 break;
 
               case 'alejandro':
                 this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999';
                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(function (result) {
-                  return _this7.logoDataUrl = result;
+                  return _this8.logoDataUrl = result;
                 });
                 break;
 
               case 'bernardo':
                 this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636';
                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(function (result) {
-                  return _this7.logoDataUrl = result;
+                  return _this8.logoDataUrl = result;
                 });
                 break;
 
               case 'fernando':
                 this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8';
                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(function (result) {
-                  return _this7.logoDataUrl = result;
+                  return _this8.logoDataUrl = result;
                 });
                 break;
 
@@ -4001,7 +4019,7 @@
                 this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
 
                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(function (result) {
-                  return _this7.logoDataUrl = result;
+                  return _this8.logoDataUrl = result;
                 });
                 break;
             }
@@ -4602,21 +4620,21 @@
         }, {
           key: "getPO_Hdr",
           value: function getPO_Hdr(codigo_cotizacion) {
-            var _this8 = this;
+            var _this9 = this;
 
             // ordenes de compra Todas
             var arrayPO_Hdr;
 
             this._purchaseOrderservice.getPOAll().subscribe(function (res) {
               console.log('PurchaseOrder', res);
-              _this8.podatasource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatTableDataSource(res);
+              _this9.podatasource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatTableDataSource(res);
               arrayPO_Hdr = res.filter(function (e) {
                 return e.codigo_cotizacion == codigo_cotizacion;
               });
-              _this8.po_count = arrayPO_Hdr.length + 1;
-              _this8.odc_Numero = codigo_cotizacion + '-' + _this8.po_count.toString();
+              _this9.po_count = arrayPO_Hdr.length + 1;
+              _this9.odc_Numero = codigo_cotizacion + '-' + _this9.po_count.toString();
 
-              _this8.newProject.controls["odc_Numero"].setValue(codigo_cotizacion + '-' + _this8.po_count.toString());
+              _this9.newProject.controls["odc_Numero"].setValue(codigo_cotizacion + '-' + _this9.po_count.toString());
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -4624,10 +4642,10 @@
         }, {
           key: "getCotizacionesAll",
           value: function getCotizacionesAll() {
-            var _this9 = this;
+            var _this10 = this;
 
             this._quotationservice.getQuotationAll().subscribe(function (res) {
-              _this9.datasourceCotizaciones = res;
+              _this10.datasourceCotizaciones = res;
               console.log('COTIZACIONES TODAS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -4636,13 +4654,13 @@
         }, {
           key: "getcotizacionesDetail",
           value: function getcotizacionesDetail(cotizacion_id) {
-            var _this10 = this;
+            var _this11 = this;
 
             this._quotationservice.getQuotationDetail(cotizacion_id).subscribe(function (res) {
-              _this10.datasourceCotizacionesDetalle = res;
+              _this11.datasourceCotizacionesDetalle = res;
               console.log('COTIZACIONES TODAS', res);
 
-              _this10.getPO_Hdr(res[0]["codigo_cotizacion"]);
+              _this11.getPO_Hdr(res[0]["codigo_cotizacion"]);
             }, function (error) {
               return console.log("error consulta proyectos", error);
             });
@@ -4650,7 +4668,7 @@
         }, {
           key: "insertPOHdr",
           value: function insertPOHdr(table) {
-            var _this11 = this;
+            var _this12 = this;
 
             var arrayTodb;
             var arrayDetail = [];
@@ -4659,16 +4677,16 @@
               //Hdr
               if (conteo == 0) {
                 arrayTodb = {
-                  codigo: _this11.odc_Numero,
+                  codigo: _this12.odc_Numero,
                   cotizacion_id: element.cotizacion_id,
-                  proveedor_id: _this11.newProject.controls["proveedor_id"].value // this.proveedor_id
+                  proveedor_id: _this12.newProject.controls["proveedor_id"].value // this.proveedor_id
                   ,
                   fecha: moment__WEBPACK_IMPORTED_MODULE_0__(new Date(), 'YYYY-M-DD'),
-                  iva: _this11.iva,
-                  iva_moneda: _this11.ivaSubtotal,
+                  iva: _this12.iva,
+                  iva_moneda: _this12.ivaSubtotal,
                   tipo_moneda: 'MXN',
-                  sub_total: _this11.subtotal,
-                  total: _this11.total
+                  sub_total: _this12.subtotal,
+                  total: _this12.total
                 };
               } //Detalle
 
@@ -4678,7 +4696,7 @@
                 console.log('pu', element.precio_unitario);
                 arrayDetail.push({
                   ordendecompradetalle_id: 0,
-                  ordendecompra_id: _this11.ordendecompra_id,
+                  ordendecompra_id: _this12.ordendecompra_id,
                   cotizaciondetalle_id: element.cotizaciondetalle_id,
                   sku: element.sku,
                   medida: element.medida,
@@ -4701,7 +4719,7 @@
             this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this11.insertPODet(res, arrayDetail);
+              _this12.insertPODet(res, arrayDetail);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -4709,7 +4727,7 @@
         }, {
           key: "insertPODet",
           value: function insertPODet(po_id, arrayDetail) {
-            var _this12 = this;
+            var _this13 = this;
 
             var arrayTodbDetail;
             arrayDetail.forEach(function (element) {
@@ -4731,7 +4749,7 @@
               };
               console.log('detalle', arrayTodbDetail);
 
-              _this12._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(function (res) {
+              _this13._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(function (res) {
                 console.log('Se inserto con éxito', res);
               }, function (error) {
                 return console.log("error alta de proyectos", error);
@@ -4741,12 +4759,12 @@
         }, {
           key: "getsupplierAll",
           value: function getsupplierAll() {
-            var _this13 = this;
+            var _this14 = this;
 
             // Selecciona todos los proveedores
             this._supplyservice.getsupplyAll().subscribe(function (res) {
-              _this13.datasourcesupplier = res;
-              console.log('PROVEEDORES', _this13.datasourcesupplier);
+              _this14.datasourcesupplier = res;
+              console.log('PROVEEDORES', _this14.datasourcesupplier);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -4754,12 +4772,12 @@
         }, {
           key: "getPO_Detail",
           value: function getPO_Detail(po_id) {
-            var _this14 = this;
+            var _this15 = this;
 
             // Selecciona ordenes de compra
             this._purchaseOrderservice.getPODetail(po_id).subscribe(function (res) {
-              _this14.datasourceCotizacionesDetalle = res;
-              console.log('ORDENES DE COMPRA DET', _this14.datasourceCotizacionesDetalle);
+              _this15.datasourceCotizacionesDetalle = res;
+              console.log('ORDENES DE COMPRA DET', _this15.datasourceCotizacionesDetalle);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -6033,7 +6051,7 @@
         }, {
           key: "save",
           value: function save(form, event) {
-            var _this15 = this;
+            var _this16 = this;
 
             var arrayTodb;
 
@@ -6059,10 +6077,10 @@
               this._projectService.insertProjects(arrayTodb).subscribe(function (res) {
                 console.log('Se inserto con éxito', res);
 
-                _this15.openSnackBar('Se genero el proyecto exitosamente', 'success'); // Inserta categorias
+                _this16.openSnackBar('Se genero el proyecto exitosamente', 'success'); // Inserta categorias
 
 
-                _this15.insertCategories();
+                _this16.insertCategories();
               }, function (error) {
                 return console.log("error alta de proyectos", error);
               }); // Inserta categorias
@@ -6096,7 +6114,7 @@
         }, {
           key: "insertCategories",
           value: function insertCategories() {
-            var _this16 = this;
+            var _this17 = this;
 
             // Obtiene Proyecto Registrado
             var datasourceProyectos;
@@ -6111,7 +6129,7 @@
                 return e.proyecto_id == proyectoIdMaximo;
               });
 
-              _this16.datasourceCategories.forEach(function (element) {
+              _this17.datasourceCategories.forEach(function (element) {
                 arrayProjectCategories = {
                   proyecto_id: proyectoIdMaximo,
                   categoria_id: element.categoria_id,
@@ -6122,8 +6140,8 @@
                   codigo_proyectocategoria: codigoProyecto["codigo_proyecto"] + '-' + element.codigo_categoria
                 }; // Inserta Proyecto Categoria
 
-                _this16._projectCategoryservice.insertProjects(arrayProjectCategories).subscribe(function (res) {
-                  console.log('CATEGORIAS', _this16.datasourceCategories);
+                _this17._projectCategoryservice.insertProjects(arrayProjectCategories).subscribe(function (res) {
+                  console.log('CATEGORIAS', _this17.datasourceCategories);
                 }, function (error) {
                   return console.log("error al insertar proyectos categorias", error);
                 });
@@ -6217,20 +6235,20 @@
         }, {
           key: "getAllProjects",
           value: function getAllProjects() {
-            var _this17 = this;
+            var _this18 = this;
 
             // Actualiza registro NUEVO
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this17.datasourceProyects = res;
+              _this18.datasourceProyects = res;
 
-              if (_this17.projectId == 0) {
-                _this17.codigo_proyecto = Number(_this17.datasourceProyects[_this17.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
+              if (_this18.projectId == 0) {
+                _this18.codigo_proyecto = Number(_this18.datasourceProyects[_this18.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
 
-                _this17.newProject.controls["codigo_proyecto"].setValue(Number(_this17.datasourceProyects[_this17.datasourceProyects.length - 1]["codigo_proyecto"]) + 1);
+                _this18.newProject.controls["codigo_proyecto"].setValue(Number(_this18.datasourceProyects[_this18.datasourceProyects.length - 1]["codigo_proyecto"]) + 1);
 
-                console.log('PROEYCTOS TODOS', _this17.proeycto_numero_mayor);
+                console.log('PROEYCTOS TODOS', _this18.proeycto_numero_mayor);
               } else {
-                _this17.codigo_proyecto = _this17.projectInfo["codigo_proyecto"];
+                _this18.codigo_proyecto = _this18.projectInfo["codigo_proyecto"];
               }
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -6239,12 +6257,12 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this18 = this;
+            var _this19 = this;
 
             // Selecciona todas las categorías
             this._categoryService.getCategoryAll().subscribe(function (res) {
-              _this18.datasourceCategories = res;
-              console.log('CATEGORIAS', _this18.datasourceCategories);
+              _this19.datasourceCategories = res;
+              console.log('CATEGORIAS', _this19.datasourceCategories);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -6252,12 +6270,12 @@
         }, {
           key: "getcustomerAll",
           value: function getcustomerAll() {
-            var _this19 = this;
+            var _this20 = this;
 
             // Selecciona todos los clientes
             this._customerservice.getcustomerAll().subscribe(function (res) {
-              _this19.datasourceCustomers = res;
-              console.log('CLIENTES', _this19.datasourceCustomers);
+              _this20.datasourceCustomers = res;
+              console.log('CLIENTES', _this20.datasourceCustomers);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -8127,13 +8145,13 @@
         }, {
           key: "RequisitionSelected",
           value: function RequisitionSelected() {
-            var _this20 = this;
+            var _this21 = this;
 
             var arrayRequisicion_interna;
             var codigoRequisicion_interna;
             this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
             arrayRequisicion_interna = this.datasourceRequisition.filter(function (e) {
-              return e.requisicioninterna_id == _this20.requisicionId;
+              return e.requisicioninterna_id == _this21.requisicionId;
             });
             this.getCotizacionesAll(arrayRequisicion_interna[0]["codigo"]); // Busca cotizaciones y arma nuevo numero de cotización
 
@@ -8265,11 +8283,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this21 = this;
+            var _this22 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this21.datasourcePorjects = res;
+              _this22.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -8278,16 +8296,16 @@
         }, {
           key: "getCotizacionesAll",
           value: function getCotizacionesAll(requisicion_interna) {
-            var _this22 = this;
+            var _this23 = this;
 
             this._quotationservice.getQuotationAll().subscribe(function (res) {
-              _this22.datasourceCotizaciones = res;
+              _this23.datasourceCotizaciones = res;
               console.log('COTIZACIONES TODAS', res);
-              _this22.cotizacion_Numero = _this22.cotizacion_Numero = requisicion_interna + '-' + (_this22.datasourceCotizaciones.filter(function (e) {
+              _this23.cotizacion_Numero = _this23.cotizacion_Numero = requisicion_interna + '-' + (_this23.datasourceCotizaciones.filter(function (e) {
                 return e.codigo_requisicioninterna == requisicion_interna;
               }).length + 1);
 
-              _this22.newProject.controls["cotizacion_Numero"].setValue(_this22.cotizacion_Numero = requisicion_interna + '-' + (_this22.datasourceCotizaciones.filter(function (e) {
+              _this23.newProject.controls["cotizacion_Numero"].setValue(_this23.cotizacion_Numero = requisicion_interna + '-' + (_this23.datasourceCotizaciones.filter(function (e) {
                 return e.codigo_requisicioninterna == requisicion_interna;
               }).length + 1));
             }, function (error) {
@@ -8297,11 +8315,11 @@
         }, {
           key: "getQuotationDetail",
           value: function getQuotationDetail(cotizacionId) {
-            var _this23 = this;
+            var _this24 = this;
 
             // Obtiene el detalle de la cotización
             this._quotationservice.getQuotationDetail(cotizacionId).subscribe(function (res) {
-              _this23.datasourceRequisitionDetail = res;
+              _this24.datasourceRequisitionDetail = res;
               console.log('datasourde cotizacion', res);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -8310,14 +8328,14 @@
         }, {
           key: "getrequisitionAll",
           value: function getrequisitionAll() {
-            var _this24 = this;
+            var _this25 = this;
 
             // Obtiene todas las requisiciones 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
               // this.datasourceRequisition = [];
-              _this24.datasourceRequisition = res;
-              _this24.datasourceRequisition = _this24.datasourceRequisition.filter(function (e) {
-                return e.proyectocategoria_id == _this24.newProject.controls["categoria_id"].value;
+              _this25.datasourceRequisition = res;
+              _this25.datasourceRequisition = _this25.datasourceRequisition.filter(function (e) {
+                return e.proyectocategoria_id == _this25.newProject.controls["categoria_id"].value;
               }); // // Consulta detalle de requisición
               // this.getRequisitionDetail();
             }, function (error) {
@@ -8327,15 +8345,15 @@
         }, {
           key: "getrequisition",
           value: function getrequisition() {
-            var _this25 = this;
+            var _this26 = this;
 
             // Obtiene las requisiciones 
             this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(function (res) {
-              _this25.datasourceRequisition = [];
+              _this26.datasourceRequisition = [];
 
-              _this25.datasourceRequisition.push(res);
+              _this26.datasourceRequisition.push(res);
 
-              console.log('REQUISICIONES', _this25.datasourceRequisition); //     // Consulta detalle de requisición
+              console.log('REQUISICIONES', _this26.datasourceRequisition); //     // Consulta detalle de requisición
               //     this.getRequisitionDetail();
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -8344,12 +8362,12 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(Requisition_Id) {
-            var _this26 = this;
+            var _this27 = this;
 
             // Obtiene requisiciones 
             this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(function (res) {
-              _this26.datasourceRequisitionDetail = res;
-              console.log('REQUISICIONES DETALLE', _this26.datasourceRequisitionDetail);
+              _this27.datasourceRequisitionDetail = res;
+              console.log('REQUISICIONES DETALLE', _this27.datasourceRequisitionDetail);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
             });
@@ -8357,11 +8375,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this27 = this;
+            var _this28 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this27.datasourceCategories = res;
+              _this28.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -8377,12 +8395,12 @@
         }, {
           key: "insertQuotationHeader",
           value: function insertQuotationHeader(arrayTodb) {
-            var _this28 = this;
+            var _this29 = this;
 
             this._quotationservice.insertQuotation(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this28.insertQuotationDet(res);
+              _this29.insertQuotationDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -8390,7 +8408,7 @@
         }, {
           key: "insertQuotationDet",
           value: function insertQuotationDet(cotizacionId) {
-            var _this29 = this;
+            var _this30 = this;
 
             console.log('para guardar', this.datasourceCotizacionesDet); // Obtiene Requisicion Registrada
 
@@ -8417,10 +8435,10 @@
                   costo: 0
                 }; // Inserta Proyecto Categoria
 
-                _this29._quotationservice.insertQuotationDetail(arrayToDb).subscribe(function (res) {
+                _this30._quotationservice.insertQuotationDetail(arrayToDb).subscribe(function (res) {
                   console.log('INSERTA COTIZACION DETALLE', arrayToDb);
 
-                  _this29.openSnackBar('Se genero el la cotización exitosamente', 'success');
+                  _this30.openSnackBar('Se genero el la cotización exitosamente', 'success');
                 }, function (error) {
                   return console.log("error al insertar proyectos categorias", error);
                 });
@@ -9690,7 +9708,7 @@
         }, {
           key: "onFileChange",
           value: function onFileChange(event) {
-            var _this30 = this;
+            var _this31 = this;
 
             /* wire up file reader */
             var target = event.target;
@@ -9722,8 +9740,8 @@
                 /* save data */
 
                 var data = xlsx__WEBPACK_IMPORTED_MODULE_1__.utils.sheet_to_json(ws);
-                _this30.dataExcel = _this30.validate(data);
-                _this30.dataExcel = data;
+                _this31.dataExcel = _this31.validate(data);
+                _this31.dataExcel = data;
                 var arrayErrores = [];
                 var arrayExcel = [];
                 var valido = true; // Validadores de campos
@@ -9735,7 +9753,7 @@
                 var DescripcionAnt = '';
                 var Descripcion = ''; // Ordena los descuentos por cr + produto + plataforma
 
-                _this30.dataExcel.sort(function (a, b) {
+                _this31.dataExcel.sort(function (a, b) {
                   if (a.DESCRIPCION > b.DESCRIPCION) {
                     return 1;
                   }
@@ -9748,11 +9766,11 @@
                   return 0;
                 });
 
-                DescripcionAnt = _this30.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
+                DescripcionAnt = _this31.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
 
                 var contador = 0;
 
-                _this30.dataExcel.forEach(function (element) {
+                _this31.dataExcel.forEach(function (element) {
                   // Reinicia valores
                   valido = true;
                   errorDescripcion = false;
@@ -9802,16 +9820,16 @@
                 });
 
                 if (arrayErrores.length > 0) {
-                  _this30.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
+                  _this31.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
 
 
-                  _this30.dataExcel = null; // this.openErrorDialog(arrayErroresEstacion);
+                  _this31.dataExcel = null; // this.openErrorDialog(arrayErroresEstacion);
 
                   return;
                 }
 
-                _this30.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
-                console.log('datos del excel', _this30.UploadDataExcel);
+                _this31.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
+                console.log('datos del excel', _this31.UploadDataExcel);
               };
             } else {
               this.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'No es un archivo de excel válido', 'warn');
@@ -9939,11 +9957,11 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this31 = this;
+            var _this32 = this;
 
             // Actualiza registro NUEVO
             this._projectCategoryservice.getProjectCateogryById(1).subscribe(function (res) {
-              _this31.datasourceCategories = res;
+              _this32.datasourceCategories = res;
               console.log('CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta categorias", error);
@@ -9952,11 +9970,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this32 = this;
+            var _this33 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this32.datasourcePorjects = res;
+              _this33.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -9965,7 +9983,7 @@
         }, {
           key: "getrequisition",
           value: function getrequisition(codigo_categoria) {
-            var _this33 = this;
+            var _this34 = this;
 
             var categoria_id = this.newProject.controls["categoria_id"].value;
             var codigo_requisicion = 0;
@@ -9973,13 +9991,13 @@
             var arrayCodigoCategoria; // Proyectos registrados
 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
-              _this33.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
+              _this34.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
 
-              if (_this33.datasourceRequisition.filteredData.length == 0) {
+              if (_this34.datasourceRequisition.filteredData.length == 0) {
                 codigo_requisicion = codigo_categoria + '-1';
               } else {
                 // Obtener requisicion en la que se mas alta y determinar cual sigue
-                arrayRequisition = _this33.datasourceRequisition.filteredData.filter(function (e) {
+                arrayRequisition = _this34.datasourceRequisition.filteredData.filter(function (e) {
                   return e.proyectocategoria_id == categoria_id;
                 });
 
@@ -9994,9 +10012,9 @@
               } // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
 
 
-              _this33.requisicion_Numero = codigo_requisicion;
+              _this34.requisicion_Numero = codigo_requisicion;
 
-              _this33.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
+              _this34.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -10004,11 +10022,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this34 = this;
+            var _this35 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this34.datasourceCategories = res;
+              _this35.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -10017,12 +10035,12 @@
         }, {
           key: "insertRequisition",
           value: function insertRequisition(arrayTodb) {
-            var _this35 = this;
+            var _this36 = this;
 
             this._requisitionservice.insertRequisition(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this35.insertRequisitionDet(res);
+              _this36.insertRequisitionDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -10030,7 +10048,7 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(arrayTodb) {
-            var _this36 = this;
+            var _this37 = this;
 
             var arrayRequsitionDetail;
             var arrayRequsitionToTable = []; //MatTableDataSource<requisitionModelDetail>;
@@ -10047,7 +10065,7 @@
                   medida: element.medida
                 });
               });
-              _this36.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
+              _this37.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
               console.log('Se obtiene detalle de requisición', res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
@@ -10067,7 +10085,7 @@
         }, {
           key: "insertRequisitionDet",
           value: function insertRequisitionDet(requisicionId) {
-            var _this37 = this;
+            var _this38 = this;
 
             // Obtiene Requisicion Registrada
             var datasourceRequsition;
@@ -10092,10 +10110,10 @@
               };
               console.log('DETALLE DETALLE DETALLE', arrayToDb); // Inserta Proyecto Categoria
 
-              _this37._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
+              _this38._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
                 console.log('REQUISICIONES DETALLE', res);
 
-                _this37.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
+                _this38.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
 
               }, function (error) {
                 return console.log("error al insertar proyectos categorias", error);
@@ -10537,31 +10555,37 @@
       /* harmony import */
 
 
-      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/material/snack-bar */
+      77001);
+      /* harmony import */
+
+
+      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/flex-layout/flex */
       35618);
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/form-field */
       98295);
       /* harmony import */
 
 
-      var _angular_material_input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_material_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/material/input */
       83166);
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/common */
       38583);
       /* harmony import */
 
 
-      var _angular_material_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/button */
       51095);
 
@@ -10626,13 +10650,14 @@
       }
 
       var _SupplierDetailComponent = /*#__PURE__*/function () {
-        function _SupplierDetailComponent(dialogRef, _supplyservice, formBuilder, data) {
+        function _SupplierDetailComponent(dialogRef, _supplyservice, formBuilder, data, _snackBar) {
           _classCallCheck(this, _SupplierDetailComponent);
 
           this.dialogRef = dialogRef;
           this._supplyservice = _supplyservice;
           this.formBuilder = formBuilder;
           this.data = data;
+          this._snackBar = _snackBar;
           this.projectInfo = data.arrayData;
           this.estadoPantalla = data.estadoPantalla;
           this.newProject = this.formBuilder.group({
@@ -10683,16 +10708,27 @@
           } // =========================
           // UTILERIAS
           // =========================
-          // =========================
+
+        }, {
+          key: "openSnackBar",
+          value: function openSnackBar(message, action) {
+            this._snackBar.open(message, action, {
+              duration: 3000
+            });
+          } // =========================
           // SERVICIOS
           // =========================
 
         }, {
           key: "insertSupplier",
           value: function insertSupplier(arrayToDb) {
+            var _this39 = this;
+
             // Inserta Proveedores
             this._supplyservice.insertsupply(arrayToDb).subscribe(function (res) {
               console.log('PROVEEDORES', res);
+
+              _this39.openSnackBar('El registro se actualizó con éxito', '');
             }, function (error) {
               return console.log("error al insertar proveedores", error);
             });
@@ -10713,7 +10749,7 @@
       }();
 
       _SupplierDetailComponent.ɵfac = function SupplierDetailComponent_Factory(t) {
-        return new (t || _SupplierDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_supplier_service__WEBPACK_IMPORTED_MODULE_0__.supplyservice), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MAT_DIALOG_DATA));
+        return new (t || _SupplierDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_supplier_service__WEBPACK_IMPORTED_MODULE_0__.supplyservice), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__.MAT_DIALOG_DATA), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__.MatSnackBar));
       };
 
       _SupplierDetailComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
@@ -11051,7 +11087,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.newProject.get("estado").valid && ctx.newProject.get("estado").touched);
           }
         },
-        directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_4__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_5__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_6__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_7__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_8__.MatButton],
+        directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_7__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_9__.MatButton],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdXBwbGllci1kZXRhaWwuY29tcG9uZW50LmNzcyJ9 */"]
       });
       /***/
@@ -12720,18 +12756,18 @@
         }, {
           key: "getcustomer",
           value: function getcustomer() {
-            var _this38 = this;
+            var _this40 = this;
 
             // Proyectos registrados
             this._customerservice.getcustomerAll().subscribe(function (res) {
               console.log('Clientes', res);
-              _this38.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this38.array = res;
-              _this38.totalSize = _this38.array.length;
+              _this40.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this40.array = res;
+              _this40.totalSize = _this40.array.length;
 
-              _this38.iterator();
+              _this40.iterator();
 
-              _this38.dataSourceShow.sort = _this38.sort;
+              _this40.dataSourceShow.sort = _this40.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -13166,27 +13202,27 @@
         }, {
           key: "loginReq",
           value: function loginReq() {
-            var _this39 = this;
+            var _this41 = this;
 
             this.spinerShow = true;
             var pswdEncryp = this.cryptService.encrypt(this.loginform.value.contrasegna);
             this.loginform.value.contrasegna = pswdEncryp;
             this.authService.loginReq(this.loginform.value).subscribe(function (response) {
               localStorage.setItem('token_access', response.token);
-              _this39.spinerShow = false;
+              _this41.spinerShow = false;
 
-              _this39.route.navigate(['/dashboard']);
+              _this41.route.navigate(['/dashboard']);
             }, function (err) {
               if (err.status === 401) {
-                _this39.toastr.error('Credenciales de acceso inválidas', 'ERROR');
+                _this41.toastr.error('Credenciales de acceso inválidas', 'ERROR');
               }
 
               if (err.status === 0 || err.status === 500) {
-                _this39.toastr.error('No se puede comunicar con el servidor', 'ERROR');
+                _this41.toastr.error('No se puede comunicar con el servidor', 'ERROR');
               }
 
               console.error(err);
-              _this39.spinerShow = false;
+              _this41.spinerShow = false;
             });
           }
         }, {
@@ -13755,18 +13791,18 @@
         }, {
           key: "getProjects",
           value: function getProjects() {
-            var _this40 = this;
+            var _this42 = this;
 
             // Proyectos registrados
             this._projectService.getProjectAll().subscribe(function (res) {
               console.log('Proyectos', res);
-              _this40.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
-              _this40.array = res;
-              _this40.totalSize = _this40.array.length;
+              _this42.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+              _this42.array = res;
+              _this42.totalSize = _this42.array.length;
 
-              _this40.iterator();
+              _this42.iterator();
 
-              _this40.dataSourceShow.sort = _this40.sort;
+              _this42.dataSourceShow.sort = _this42.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -14853,18 +14889,18 @@
         }, {
           key: "getPO_Hdr",
           value: function getPO_Hdr() {
-            var _this41 = this;
+            var _this43 = this;
 
             // Proyectos registrados
             this._purchaseOrderService.getPOAll().subscribe(function (res) {
               console.log('PurchaseOrder', res);
-              _this41.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(res);
-              _this41.array = res;
-              _this41.totalSize = _this41.array.length;
+              _this43.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(res);
+              _this43.array = res;
+              _this43.totalSize = _this43.array.length;
 
-              _this41.iterator();
+              _this43.iterator();
 
-              _this41.dataSourceShow.sort = _this41.sort;
+              _this43.dataSourceShow.sort = _this43.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -15504,18 +15540,18 @@
         }, {
           key: "getQuotationAll",
           value: function getQuotationAll() {
-            var _this42 = this;
+            var _this44 = this;
 
             // Proyectos registrados
             this._quotationService.getQuotationAll().subscribe(function (res) {
               console.log('Cotizaciones', res);
-              _this42.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this42.array = res;
-              _this42.totalSize = _this42.array.length;
+              _this44.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this44.array = res;
+              _this44.totalSize = _this44.array.length;
 
-              _this42.iterator();
+              _this44.iterator();
 
-              _this42.dataSourceShow.sort = _this42.sort;
+              _this44.dataSourceShow.sort = _this44.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -18042,18 +18078,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this43 = this;
+            var _this45 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this43.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this43.array = res;
-              _this43.totalSize = _this43.array.length;
+              _this45.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this45.array = res;
+              _this45.totalSize = _this45.array.length;
 
-              _this43.iterator();
+              _this45.iterator();
 
-              _this43.dataSourceShow.sort = _this43.sort;
+              _this45.dataSourceShow.sort = _this45.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -18629,18 +18665,18 @@
         }, {
           key: "getrequisition",
           value: function getrequisition() {
-            var _this44 = this;
+            var _this46 = this;
 
             // Proyectos registrados
             this._requisitionService.getRequisitionAll().subscribe(function (res) {
               console.log('Requisiciones', res);
-              _this44.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
-              _this44.array = res;
-              _this44.totalSize = _this44.array.length;
+              _this46.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+              _this46.array = res;
+              _this46.totalSize = _this46.array.length;
 
-              _this44.iterator();
+              _this46.iterator();
 
-              _this44.dataSourceShow.sort = _this44.sort;
+              _this46.dataSourceShow.sort = _this46.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -19908,18 +19944,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this45 = this;
+            var _this47 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this45.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this45.array = res;
-              _this45.totalSize = _this45.array.length;
+              _this47.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this47.array = res;
+              _this47.totalSize = _this47.array.length;
 
-              _this45.iterator();
+              _this47.iterator();
 
-              _this45.dataSourceShow.sort = _this45.sort;
+              _this47.dataSourceShow.sort = _this47.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -21917,14 +21953,14 @@
 
       var _AccordionDirective = /*#__PURE__*/function () {
         function _AccordionDirective(router) {
-          var _this46 = this;
+          var _this48 = this;
 
           _classCallCheck(this, _AccordionDirective);
 
           this.router = router;
           this.navlinks = [];
           setTimeout(function () {
-            return _this46.checkOpenLinks();
+            return _this48.checkOpenLinks();
           });
         }
 
@@ -21954,17 +21990,17 @@
         }, {
           key: "checkOpenLinks",
           value: function checkOpenLinks() {
-            var _this47 = this;
+            var _this49 = this;
 
             this.navlinks.forEach(function (link) {
               if (link.group) {
-                var routeUrl = _this47.router.url;
+                var routeUrl = _this49.router.url;
                 var currentUrl = routeUrl.split('/');
 
                 if (currentUrl.indexOf(link.group) > 0) {
                   link.selected = true;
 
-                  _this47.closeOtherLinks(link);
+                  _this49.closeOtherLinks(link);
                 }
               }
             });
@@ -21972,12 +22008,12 @@
         }, {
           key: "ngAfterContentChecked",
           value: function ngAfterContentChecked() {
-            var _this48 = this;
+            var _this50 = this;
 
             this.router.events.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.filter)(function (event) {
               return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationEnd;
             })).subscribe(function (e) {
-              return _this48.checkOpenLinks();
+              return _this50.checkOpenLinks();
             });
           }
         }]);
@@ -22515,7 +22551,7 @@
 
       var _SpinnerComponent = /*#__PURE__*/function () {
         function _SpinnerComponent(router, document) {
-          var _this49 = this;
+          var _this51 = this;
 
           _classCallCheck(this, _SpinnerComponent);
 
@@ -22525,12 +22561,12 @@
           this.backgroundColor = 'rgba(0, 115, 170, 0.69)';
           this.router.events.subscribe(function (event) {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationStart) {
-              _this49.isSpinnerVisible = true;
+              _this51.isSpinnerVisible = true;
             } else if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationEnd || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationCancel || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationError) {
-              _this49.isSpinnerVisible = false;
+              _this51.isSpinnerVisible = false;
             }
           }, function () {
-            _this49.isSpinnerVisible = false;
+            _this51.isSpinnerVisible = false;
           });
         }
 
