@@ -3820,6 +3820,7 @@
             this.getsupplierAll();
             this.getProveedores();
             this.getCotizacionesAll();
+            console.log('this.projectInfo', this.projectInfo);
 
             if (this.projectInfo != undefined) {
               console.log('project info', this.projectInfo);
@@ -3999,7 +4000,7 @@
               default:
                 this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
 
-                this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(function (result) {
+                this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(function (result) {
                   return _this7.logoDataUrl = result;
                 });
                 break;

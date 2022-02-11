@@ -1826,6 +1826,7 @@ class PoDetailComponent {
         this.getsupplierAll();
         this.getProveedores();
         this.getCotizacionesAll();
+        console.log('this.projectInfo', this.projectInfo);
         if (this.projectInfo != undefined) {
             console.log('project info', this.projectInfo);
             console.log('podata', this.projectInfo.iva.toString());
@@ -1955,7 +1956,7 @@ class PoDetailComponent {
                 break;
             default:
                 this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
-                this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(result => this.logoDataUrl = result);
+                this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(result => this.logoDataUrl = result);
                 break;
         }
         console.log(this.decodedSign);
