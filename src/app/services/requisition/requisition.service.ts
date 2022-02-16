@@ -7,10 +7,6 @@ import { environment } from 'src/environments/environment';
 import { from } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
-const headers : HttpHeaders = new HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
 @Injectable({
     providedIn: 'root'
 })
@@ -20,22 +16,37 @@ export class requisitionservice {
   constructor(protected http: HttpClient) { }
 
     getRequisitionAll() {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/lista', {headers});
     }
 
     getRequisitionById(id : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get<requisitionModel[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/' + id, {headers});
     }
 
     getRequisitionDetail(id : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get<requisitionModelDetail[]>(environment.urlapi + environment.apiContextDrivers + 'InternalRequisition/detalle/' + id, {headers});
     }
 
     insertRequisition(arrayToDb : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'InternalRequisition/registrar',arrayToDb, {headers});
     }
 
     insertRequisitionDetail(arrayToDb : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'InternalRequisition/registrar/detalle',arrayToDb, {headers});
     }
 
