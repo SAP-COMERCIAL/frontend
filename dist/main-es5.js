@@ -21374,8 +21374,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _purchaseOrderservice2 = /*#__PURE__*/function () {
         function _purchaseOrderservice2(http) {
           _classCallCheck(this, _purchaseOrderservice2);
@@ -21386,6 +21384,7 @@
         _createClass(_purchaseOrderservice2, [{
           key: "getPOAll",
           value: function getPOAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/lista', {
               headers: headers
             });
@@ -21393,6 +21392,7 @@
         }, {
           key: "getPOById",
           value: function getPOById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/' + id, {
               headers: headers
             });
@@ -21400,6 +21400,7 @@
         }, {
           key: "getPODetail",
           value: function getPODetail(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id, {
               headers: headers
             });
@@ -21407,6 +21408,7 @@
         }, {
           key: "insertPO_Hdr",
           value: function insertPO_Hdr(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar', arrayToDb, {
               headers: headers
             });
@@ -21414,6 +21416,7 @@
         }, {
           key: "insertPODetail",
           value: function insertPODetail(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar/detalle', arrayToDb, {
               headers: headers
             });
@@ -21421,6 +21424,7 @@
         }, {
           key: "putPOCancel",
           value: function putPOCancel(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/cancelar/' + id, '', {
               headers: headers
             });
@@ -21428,6 +21432,7 @@
         }, {
           key: "updatePOStatus",
           value: function updatePOStatus(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/estado', arrayToDb, {
               headers: headers
             });
@@ -21649,8 +21654,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _categoryservice = /*#__PURE__*/function () {
         function _categoryservice(http) {
           _classCallCheck(this, _categoryservice);
@@ -21661,6 +21664,7 @@
         _createClass(_categoryservice, [{
           key: "getCategoryAll",
           value: function getCategoryAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/lista', {
               headers: headers
             });
@@ -21668,6 +21672,7 @@
         }, {
           key: "getCategoryById",
           value: function getCategoryById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/' + id, {
               headers: headers
             });
@@ -21675,6 +21680,7 @@
         }, {
           key: "updateProjects",
           value: function updateProjects(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/actualizar', arrayToDb, {
               headers: headers
             });
@@ -21682,6 +21688,7 @@
         }, {
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/registrar', arrayToDb, {
               headers: headers
             });
@@ -21747,8 +21754,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _customerservice2 = /*#__PURE__*/function () {
         function _customerservice2(http) {
           _classCallCheck(this, _customerservice2);
@@ -21759,6 +21764,7 @@
         _createClass(_customerservice2, [{
           key: "getcustomerAll",
           value: function getcustomerAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/lista', {
               headers: headers
             });
@@ -21766,6 +21772,7 @@
         }, {
           key: "getcustomerById",
           value: function getcustomerById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/' + id, {
               headers: headers
             });
@@ -21773,6 +21780,7 @@
         }, {
           key: "insertcustomer",
           value: function insertcustomer(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/registrar', arrayToDb, {
               headers: headers
             });
@@ -21780,6 +21788,7 @@
         }, {
           key: "updatecustomer",
           value: function updatecustomer(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/actualizar', arrayToDb, {
               headers: headers
             });
@@ -21787,6 +21796,7 @@
         }, {
           key: "putcustomerStatus",
           value: function putcustomerStatus(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/activoinactivo', arrayToDb, {
               headers: headers
             });
@@ -21932,7 +21942,7 @@
           key: "checkusernameandpassword",
           value: function checkusernameandpassword(uname, pwd) {
             if (uname === 'admin' && pwd === 'admin123') {
-              localStorage.setItem('username', 'admin');
+              // localStorage.setItem('username', 'admin');
               return true;
             } else {
               return false;
@@ -21998,8 +22008,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _projectCategoryservice2 = /*#__PURE__*/function () {
         function _projectCategoryservice2(http) {
           _classCallCheck(this, _projectCategoryservice2);
@@ -22010,6 +22018,7 @@
         _createClass(_projectCategoryservice2, [{
           key: "getProjectCateogryAll",
           value: function getProjectCateogryAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/lista', {
               headers: headers
             });
@@ -22020,6 +22029,7 @@
         }, {
           key: "getProjectCateogryById",
           value: function getProjectCateogryById(proyectoId) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/' + proyectoId, {
               headers: headers
             });
@@ -22027,6 +22037,7 @@
         }, {
           key: "updateProjectCatgory",
           value: function updateProjectCatgory(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/actualizar', arrayToDb, {
               headers: headers
             });
@@ -22034,6 +22045,7 @@
         }, {
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/registrar', arrayToDb, {
               headers: headers
             });
@@ -22099,8 +22111,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _projectservice = /*#__PURE__*/function () {
         function _projectservice(http) {
           _classCallCheck(this, _projectservice);
@@ -22111,6 +22121,7 @@
         _createClass(_projectservice, [{
           key: "getProjectAll",
           value: function getProjectAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/lista', {
               headers: headers
             });
@@ -22118,6 +22129,7 @@
         }, {
           key: "updateProjects",
           value: function updateProjects(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/actualizar', arrayToDb, {
               headers: headers
             });
@@ -22125,6 +22137,7 @@
         }, {
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/registrar', arrayToDb, {
               headers: headers
             });
@@ -22190,8 +22203,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _quotationservice2 = /*#__PURE__*/function () {
         function _quotationservice2(http) {
           _classCallCheck(this, _quotationservice2);
@@ -22202,6 +22213,7 @@
         _createClass(_quotationservice2, [{
           key: "getQuotationAll",
           value: function getQuotationAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/lista', {
               headers: headers
             });
@@ -22209,6 +22221,7 @@
         }, {
           key: "getQuotationById",
           value: function getQuotationById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/' + id, {
               headers: headers
             });
@@ -22216,6 +22229,7 @@
         }, {
           key: "getQuotationDetail",
           value: function getQuotationDetail(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/detalle/' + id, {
               headers: headers
             });
@@ -22223,6 +22237,7 @@
         }, {
           key: "insertQuotation",
           value: function insertQuotation(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar', arrayToDb, {
               headers: headers
             });
@@ -22230,6 +22245,7 @@
         }, {
           key: "insertQuotationDetail",
           value: function insertQuotationDetail(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar/detalle', arrayToDb, {
               headers: headers
             });
@@ -22299,8 +22315,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _requisitionservice2 = /*#__PURE__*/function () {
         function _requisitionservice2(http) {
           _classCallCheck(this, _requisitionservice2);
@@ -22311,6 +22325,7 @@
         _createClass(_requisitionservice2, [{
           key: "getRequisitionAll",
           value: function getRequisitionAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/lista', {
               headers: headers
             });
@@ -22318,6 +22333,7 @@
         }, {
           key: "getRequisitionById",
           value: function getRequisitionById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/' + id, {
               headers: headers
             });
@@ -22325,6 +22341,7 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/detalle/' + id, {
               headers: headers
             });
@@ -22332,6 +22349,7 @@
         }, {
           key: "insertRequisition",
           value: function insertRequisition(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar', arrayToDb, {
               headers: headers
             });
@@ -22339,6 +22357,7 @@
         }, {
           key: "insertRequisitionDetail",
           value: function insertRequisitionDetail(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar/detalle', arrayToDb, {
               headers: headers
             });
@@ -22408,8 +22427,6 @@
       /*! @angular/core */
       37716);
 
-      var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-
       var _supplyservice2 = /*#__PURE__*/function () {
         function _supplyservice2(http) {
           _classCallCheck(this, _supplyservice2);
@@ -22420,6 +22437,7 @@
         _createClass(_supplyservice2, [{
           key: "getsupplyAll",
           value: function getsupplyAll() {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/lista', {
               headers: headers
             });
@@ -22427,6 +22445,7 @@
         }, {
           key: "getsupplyById",
           value: function getsupplyById(id) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/' + id, {
               headers: headers
             });
@@ -22434,6 +22453,7 @@
         }, {
           key: "insertsupply",
           value: function insertsupply(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/registrar', arrayToDb, {
               headers: headers
             });
@@ -22441,6 +22461,7 @@
         }, {
           key: "updatesupply",
           value: function updatesupply(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/actualizar', arrayToDb, {
               headers: headers
             });
@@ -22448,6 +22469,7 @@
         }, {
           key: "putsupplyStatus",
           value: function putsupplyStatus(arrayToDb) {
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/activoinactivo', arrayToDb, {
               headers: headers
             });

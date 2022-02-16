@@ -11199,32 +11199,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class purchaseOrderservice {
     constructor(http) {
         this.http = http;
     }
     getPOAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/lista', { headers });
     }
     getPOById(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/' + id, { headers });
     }
     getPODetail(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id, { headers });
     }
     insertPO_Hdr(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar', arrayToDb, { headers });
     }
     insertPODetail(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/registrar/detalle', arrayToDb, { headers });
     }
     putPOCancel(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/cancelar/' + id, '', { headers });
     }
     updatePOStatus(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'PurchaseOrder/estado', arrayToDb, { headers });
     }
 }
@@ -11321,23 +11339,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class categoryservice {
     constructor(http) {
         this.http = http;
     }
     getCategoryAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/lista', { headers });
     }
     getCategoryById(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/' + id, { headers });
     }
     updateProjects(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/actualizar', arrayToDb, { headers });
     }
     insertProjects(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Category/registrar', arrayToDb, { headers });
     }
 }
@@ -11365,26 +11392,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class customerservice {
     constructor(http) {
         this.http = http;
     }
     getcustomerAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/lista', { headers });
     }
     getcustomerById(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/' + id, { headers });
     }
     insertcustomer(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/registrar', arrayToDb, { headers });
     }
     updatecustomer(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/actualizar', arrayToDb, { headers });
     }
     putcustomerStatus(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Customer/activoinactivo', arrayToDb, { headers });
     }
 }
@@ -11457,7 +11496,7 @@ class loginservice {
     constructor() { }
     checkusernameandpassword(uname, pwd) {
         if (uname === 'admin' && pwd === 'admin123') {
-            localStorage.setItem('username', 'admin');
+            // localStorage.setItem('username', 'admin');
             return true;
         }
         else {
@@ -11489,26 +11528,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class projectCategoryservice {
     constructor(http) {
         this.http = http;
     }
     getProjectCateogryAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/lista', { headers });
     }
     // getProjectCateogryById(proyectoId : any) {
     //     return this.http.get<projectCategoryModel[]>(environment.urlapi + environment.apiContextDrivers + 'ProjectCategory/' + proyectoId);
     // }
     getProjectCateogryById(proyectoId) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/' + proyectoId, { headers });
     }
     updateProjectCatgory(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/actualizar', arrayToDb, { headers });
     }
     insertProjects(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'ProjectCategory/registrar', arrayToDb, { headers });
     }
 }
@@ -11536,20 +11584,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class projectservice {
     constructor(http) {
         this.http = http;
     }
     getProjectAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/lista', { headers });
     }
     updateProjects(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/actualizar', arrayToDb, { headers });
     }
     insertProjects(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/registrar', arrayToDb, { headers });
     }
 }
@@ -11577,26 +11631,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class quotationservice {
     constructor(http) {
         this.http = http;
     }
     getQuotationAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/lista', { headers });
     }
     getQuotationById(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/' + id, { headers });
     }
     getQuotationDetail(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/detalle/' + id, { headers });
     }
     insertQuotation(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar', arrayToDb, { headers });
     }
     insertQuotationDetail(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Quote/registrar/detalle', arrayToDb, { headers });
     }
     insertQuotationCancel(id) {
@@ -11627,26 +11693,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class requisitionservice {
     constructor(http) {
         this.http = http;
     }
     getRequisitionAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/lista', { headers });
     }
     getRequisitionById(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/' + id, { headers });
     }
     getRequisitionDetail(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/detalle/' + id, { headers });
     }
     insertRequisition(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar', arrayToDb, { headers });
     }
     insertRequisitionDetail(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'InternalRequisition/registrar/detalle', arrayToDb, { headers });
     }
     insertRequisitionCancel(id) {
@@ -11677,26 +11755,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
-    .set('Content-Type', 'application/json')
-    .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 class supplyservice {
     constructor(http) {
         this.http = http;
     }
     getsupplyAll() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/lista', { headers });
     }
     getsupplyById(id) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/' + id, { headers });
     }
     insertsupply(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/registrar', arrayToDb, { headers });
     }
     updatesupply(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/actualizar', arrayToDb, { headers });
     }
     putsupplyStatus(arrayToDb) {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Provider/activoinactivo', arrayToDb, { headers });
     }
 }
