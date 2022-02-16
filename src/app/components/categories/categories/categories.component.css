@@ -1,6 +1,7 @@
 .col10{
     width: 10%;
     vertical-align: middle;
+    text-align: center;
 }
 
 .col20{
@@ -19,7 +20,7 @@
 }
 
 .colbuttons{
-    vertical-align: bottom;
+    vertical-align: middle;
     text-align: center;
 }
 

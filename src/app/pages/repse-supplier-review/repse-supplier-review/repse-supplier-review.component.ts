@@ -8,6 +8,7 @@ import { SupplierDetailComponent } from 'src/app/components/supplier-detail/supp
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
+import { RepseSupplierReviewDetailComponent } from '../../../components/repse-supplier-review-detail/repse-supplier-review-detail.component';
 
 @Component({
   selector: 'app-repse-supplier-review',
@@ -102,7 +103,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(SupplierDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(RepseSupplierReviewDetailComponent, dialogConfig);
+    // const dialogRef = this.dialog.open(SupplierDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();

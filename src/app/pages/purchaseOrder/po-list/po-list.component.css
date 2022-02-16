@@ -19,6 +19,22 @@
 }
 
 .colbuttons{
-    vertical-align: bottom;
+    vertical-align: middle;
     text-align: center;
+}
+
+.column{
+    vertical-align: middle;
+}
+
+.icon-cog {
+    color: orange;
+}
+
+.icon-cog-red {
+    color: red;
+}
+
+.icon-cog-wite {
+    color: white;
 }

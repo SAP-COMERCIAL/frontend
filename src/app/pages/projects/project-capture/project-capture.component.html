@@ -26,8 +26,8 @@
               <tr>
                 <td class="col20"><input type="text" class="form-control form-control-line" placeholder="BUSCAR" (keyup)="filtrar($event)"><!-- [(ngModel)]="buscar"--></td>
                 <td class="col70"></td>
-                <td class="col10"><button mat-raised-button color="primary" (click)="descargarProyectos()">Descargar</button></td>
-                <td class="col10"><button mat-raised-button color="accent" (click)="nuevoProyecto($event)">Nuevo Proyecto</button></td>
+                <td class="col10"><button mat-raised-button color="primary" (click)="descargarProyectos()"><i class="fa fa-arrow-down fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Descargar</button></td>
+                <td class="col10"><button mat-raised-button color="accent" (click)="nuevoProyecto($event)"><i class="fa fa-plus fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Nuevo Proyecto</button></td>
                 <td class="col10"></td>
               </tr>
             </table>
@@ -43,64 +43,64 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="codigo_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Proyecto</span> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.codigo_proyecto}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.codigo_proyecto}} </td>
                 </ng-container>
                 
                 <!-- Name Column -->
                 <ng-container matColumnDef="nombre_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre_proyecto}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.nombre_proyecto}} </td>
                 </ng-container>
                 
                 <!-- Email Column -->
                 <ng-container matColumnDef="fecha_inicial_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha Inicial </th>
-                  <td mat-cell *matCellDef="let element"> {{element.fecha_inicial_proyecto | date: ' dd-MM-yyyy'}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.fecha_inicial_proyecto | date: ' dd-MM-yyyy'}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="fecha_final_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha Final </th>
-                  <td mat-cell *matCellDef="let element"> {{element.fecha_final_proyecto | date: ' dd-MM-yyyy'}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.fecha_final_proyecto | date: ' dd-MM-yyyy'}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="nombre_cliente">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Cliente </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre_cliente}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.nombre_cliente}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="responsable_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Responable </th>
-                  <td mat-cell *matCellDef="let element"> {{element.responsable_proyecto}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.responsable_proyecto}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="presupuesto_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Presupuesto </th>
-                  <td mat-cell *matCellDef="let element"> {{element.presupuesto_proyecto}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.presupuesto_proyecto}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="proyect_id">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10" hidden> proyecto_id  </th>
-                  <td mat-cell *matCellDef="let element" hidden> {{element.proyecto_id}} </td>
+                  <td mat-cell *matCellDef="let element" hidden class="column"> {{element.proyecto_id}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="editar">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Editar </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="editProyecto(element, $event)">Editar</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> Editar </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="primary" (click)="editProyecto(element, $event)"><i class="fa fa-pencil fa-lg icon-cog"></i></button> </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="categorias">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Categorias </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="accent" (click)="addCategorias(element.proyecto_id, $event)">Agregar</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> Categorias </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="accent" (click)="addCategorias(element.proyecto_id, $event)"><i class="fa fa-plus fa-lg icon-cog"></i></button> </td>
                 </ng-container>
                 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class=" text-primary"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </mat-table>
         

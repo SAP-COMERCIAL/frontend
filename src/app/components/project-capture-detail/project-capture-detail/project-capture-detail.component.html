@@ -49,8 +49,8 @@
           </mat-form-field>
           <span *ngIf="!newProject.get('cliente').valid && newProject.get('cliente').touched" class="help-block" style="color: red;"> Seleccione un cliente</span>
         </div>
-        <button mat-raised-button color="accent" (click)="addClient(newProject, $event)"> + </button>
-        <button mat-raised-button color="accent" (click)="reloadClient(newProject, $event)"> o </button>
+        <button mat-raised-button color="primary" (click)="addClient(newProject, $event)"><i class="fa fa-plus icon-cog-wite"></i></button>
+        <button mat-raised-button color="accent" (click)="reloadClient(newProject, $event)"><i class="fa fa-repeat fa-lg icon-cog-wite"></i></button>
     </div>
     <div fxFlex.gt-sm="10%" >
       <div></div>
@@ -161,9 +161,9 @@
       <div></div>
     </div>
     <div fxFlex.gt-sm="20%" >
-      <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+      <div><button mat-raised-button color="accent" (click)="save(newProject, $event)"><i class="fa fa-check fa-lg icon-cog-wite"></i></button></div>
     </div>
     <div fxFlex.gt-sm="20%" >
-      <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+      <div><button mat-raised-button class="btn-bg-red" (click)="cancel($event)"><i class="fa fa-arrow-left fa-lg icon-cog-wite"></i></button></div>
     </div>
   </div>

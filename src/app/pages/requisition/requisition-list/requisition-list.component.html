@@ -26,8 +26,8 @@
               <tr>
                 <td class="col20"><input type="text" class="form-control form-control-line" placeholder="BUSCAR" (keyup)="filtrar($event)"><!-- [(ngModel)]="buscar"--></td>
                 <td class="col70"></td>
-                <td class="col10"><button mat-raised-button color="primary" (click)="descargarExcel()">Descargar</button></td>
-                <td class="col10"><button mat-raised-button color="accent" (click)="nuevaRequisicion($event)">Nueva Requisición</button></td>
+                <td class="col10"><button mat-raised-button color="primary" (click)="descargarExcel()"><i class="fa fa-arrow-down fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Descargar</button></td>
+                <td class="col10"><button mat-raised-button color="accent" (click)="nuevaRequisicion($event)"><i class="fa fa-plus fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Nueva Requisición</button></td>
                 <td class="col10"></td>
               </tr>
             </table>
@@ -49,25 +49,25 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="codigo_proyectocategoria">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Proyecto-Categoría </th>
-                  <td mat-cell *matCellDef="let element"> {{element.codigo_proyectocategoria}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.codigo_proyectocategoria}} </td>
                 </ng-container>
                 
                 <!-- Email Column -->
                 <ng-container matColumnDef="codigo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Requisición </th>
-                  <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.codigo}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="fecha">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha de Requisición </th>
-                  <td mat-cell *matCellDef="let element"> {{element.fecha | date: ' dd-MM-yyyy'}} </td>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Fecha de Requisición </th>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.fecha | date: ' dd-MM-yyyy'}} </td>
                 </ng-container>
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="estado">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estatus </th>
-                  <td mat-cell *matCellDef="let element">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Estatus </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons">
                     <ng-container *ngIf="element.estado == true">ACTIVO</ng-container>
                     <ng-container *ngIf="element.estado == false">INACTIVO</ng-container>
                   </td>
@@ -75,8 +75,8 @@
 
                 <!-- Email Column -->
                 <ng-container matColumnDef="editar">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Consultar </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="editRequisicion(element, $event)">Consultar</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> Consultar </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="primary" (click)="editRequisicion(element, $event)"><i class="fa fa-eye fa-lg icon-cog"></i></button> </td>
                 </ng-container>
 
                 <!-- Email Column -->

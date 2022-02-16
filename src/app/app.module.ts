@@ -50,6 +50,7 @@ import { CustomerComponent } from './pages/catcustomer/customer/customer.compone
 import { SupplierComponent } from './pages/supplier/supplier.component';
 import { RepseSupplierCaptureComponent } from './pages/repse-supplier-capture/repse-supplier-capture/repse-supplier-capture.component';
 import { RepseSupplierReviewComponent } from './pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.component';
+import { RepseSupplierReviewDetailComponent } from './components/repse-supplier-review-detail/repse-supplier-review-detail.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -82,7 +83,8 @@ import { RepseSupplierReviewComponent } from './pages/repse-supplier-review/reps
     CustomerComponent,
     SupplierComponent,
     RepseSupplierCaptureComponent,
-    RepseSupplierReviewComponent
+    RepseSupplierReviewComponent,
+    RepseSupplierReviewDetailComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

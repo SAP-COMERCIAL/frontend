@@ -26,8 +26,8 @@
               <tr>
                 <td class="col20"><input type="text" class="form-control form-control-line" placeholder="BUSCAR" (keyup)="filtrar($event)"><!-- [(ngModel)]="buscar"--></td>
                 <td class="col70"></td>
-                <td class="col10"><button mat-raised-button color="primary" (click)="descargarExcel()">Descargar</button></td>
-                <td class="col10"><button mat-raised-button color="accent" (click)="nuevaOrdenDeCompra($event)">Nueva Orde de Compra</button></td>
+                <td class="col10"><button mat-raised-button color="primary" (click)="descargarExcel()"><i class="fa fa-arrow-down fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Descargar</button></td>
+                <td class="col10"><button mat-raised-button color="accent" (click)="nuevaOrdenDeCompra($event)"><i class="fa fa-plus fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Nueva Orde de Compra</button></td>
                 <td class="col10"></td>
               </tr>
             </table>
@@ -44,25 +44,25 @@
                 <!-- Orden de compra Id -->
                 <ng-container matColumnDef="ordendecompra_id">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10" hidden> <span>Id</span> </th>
-                  <td mat-cell *matCellDef="let element" hidden> {{element.ordendecompra_id}} </td>
+                  <td mat-cell *matCellDef="let element" class="column" hidden> {{element.ordendecompra_id}} </td>
                 </ng-container>
 
                 <!-- Codigo orden de compra -->
                 <ng-container matColumnDef="ordendecompra_codigo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Orden de compra</span> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ordendecompra_codigo}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.ordendecompra_codigo}} </td>
                 </ng-container>
                 
                 <!-- ID Column -->
                 <ng-container matColumnDef="cotizacion_codigo">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cotización</span> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.cotizacion_codigo}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.cotizacion_codigo}} </td>
                 </ng-container>
                 
                 <!-- Name Column -->
                 <ng-container matColumnDef="proveedor_nombre">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Proveedor </th>
-                  <td mat-cell *matCellDef="let element"> {{element.proveedor_nombre}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.proveedor_nombre}} </td>
                 </ng-container>
                 
                 
@@ -73,7 +73,7 @@
 
                 <ng-container matColumnDef="ordendecompra_fecha">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Fecha </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ordendecompra_fecha | date: ' dd-MM-yyyy'}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.ordendecompra_fecha | date: ' dd-MM-yyyy'}} </td>
                 </ng-container> 
 
                 <!-- Email Column -->
@@ -90,26 +90,26 @@
 
                 <!-- Editar -->
                 <ng-container matColumnDef="editar">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Editar </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="editRequisicion(element, $event)">Editar</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> Editar </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="primary" (click)="editRequisicion(element, $event)"><i class="fa fa-pencil fa-lg icon-cog"></i></button> </td>
                 </ng-container>
 
                 <!-- Cancelar -->
                 <ng-container matColumnDef="cancelar">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Cancelar </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="cancelaODC(element, $event)">Cancelar</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> Cancelar </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="primary" (click)="cancelaODC(element, $event)"><i class="fa fa-ban fa-lg icon-cog-red"></i></button> </td>
                 </ng-container>
 
                 <!-- Autorizar -->
                 <ng-container matColumnDef="autorizar">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Autorizar </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="aproveODC(element, $event)">Autorizar</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> Autorizar </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="primary" (click)="aproveODC(element, $event)"><i class="fa fa-check fa-lg icon-cog"></i></button> </td>
                 </ng-container>
 
                 <!-- PDF -->
                 <ng-container matColumnDef="pdf">
-                  <th mat-header-cell *matHeaderCellDef class=".colbuttons"> PDF </th>
-                  <td mat-cell *matCellDef="let element"> <button mat-button color="primary" (click)="printPDF(element, $event)">PDF</button> </td>
+                  <th mat-header-cell *matHeaderCellDef class="colbuttons"> PDF </th>
+                  <td mat-cell *matCellDef="let element" class="colbuttons"> <button mat-button color="primary" (click)="printPDF(element, $event)"><i class="fa fa-file fa-lg icon-cog"></i></button> </td>
                 </ng-container>
                 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
