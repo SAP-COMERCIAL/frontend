@@ -2513,6 +2513,8 @@ class PoDetailComponent {
             console.log('Se inserto con éxito', res);
             // INSERTA REQUISICIONES DET
             this.insertPODet(res, arrayDetail);
+            //INSERTA EN BITACORA
+            this.updateODCStatus(res);
         }, error => console.log("error alta de proyectos", error));
     }
     insertPODet(po_id, arrayDetail) {
@@ -2589,6 +2591,13 @@ class PoDetailComponent {
             img.onerror = () => reject('Imagen no disponible');
             img.src = localPath;
         });
+    }
+    updateODCStatus(po_id) {
+        let arrayToDb;
+        arrayToDb = ({ ordendecompra_id: po_id, estatus: 1, usuario: 1 });
+        this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(res => {
+            console.log('Se inserto con éxito', res);
+        }, error => console.log("error alta de proyectos", error));
     }
 }
 PoDetailComponent.ɵfac = function PoDetailComponent_Factory(t) { return new (t || PoDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_12__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](src_app_services_quotation_quotation_service__WEBPACK_IMPORTED_MODULE_7__.quotationservice), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_services_supplier_service__WEBPACK_IMPORTED_MODULE_8__.supplyservice), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_12__.MAT_DIALOG_DATA), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_14__.MatSnackBar), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_14__.MatSnackBar), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](src_app_services_PurchaseOrder_service__WEBPACK_IMPORTED_MODULE_9__.purchaseOrderservice), _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_12__.MatDialog)); };
@@ -6108,7 +6117,8 @@ class SupplierDetailComponent {
             direccion: form.controls["direccion"].value,
             rfc: form.controls["rfc"].value,
             ciudad: form.controls["ciudad"].value,
-            estado: form.controls["estado"].value,
+            estado: 1 //form.controls["estado"].value
+            ,
             contacto: form.controls["contacto"].value
             // , vigencia : '2050-01-01'
         });

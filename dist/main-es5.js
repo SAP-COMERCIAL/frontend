@@ -4710,7 +4710,10 @@
             this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this12.insertPODet(res, arrayDetail);
+              _this12.insertPODet(res, arrayDetail); //INSERTA EN BITACORA
+
+
+              _this12.updateODCStatus(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -4821,6 +4824,22 @@
               };
 
               img.src = localPath;
+            });
+          }
+        }, {
+          key: "updateODCStatus",
+          value: function updateODCStatus(po_id) {
+            var arrayToDb;
+            arrayToDb = {
+              ordendecompra_id: po_id,
+              estatus: 1,
+              usuario: 1
+            };
+
+            this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(function (res) {
+              console.log('Se inserto con éxito', res);
+            }, function (error) {
+              return console.log("error alta de proyectos", error);
             });
           }
         }]);
@@ -11399,7 +11418,8 @@
               direccion: form.controls["direccion"].value,
               rfc: form.controls["rfc"].value,
               ciudad: form.controls["ciudad"].value,
-              estado: form.controls["estado"].value,
+              estado: 1 //form.controls["estado"].value
+              ,
               contacto: form.controls["contacto"].value // , vigencia : '2050-01-01'
 
             };
