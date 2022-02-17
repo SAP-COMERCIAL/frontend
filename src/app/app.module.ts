@@ -111,13 +111,13 @@ import { RepseSupplierReviewDetailComponent } from './components/repse-supplier-
     })
     // RouterModule.forRoot(AppRoutingModule, {useHash: true}) // AppRoutes
   ],
-  exports:[ MatTableModule ],
-  providers: [
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
-    }
-  ],
+  // exports:[ MatTableModule ],
+  // providers: [
+  //   {
+  //     provide: LocationStrategy,
+  //     useClass: PathLocationStrategy
+  //   }
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

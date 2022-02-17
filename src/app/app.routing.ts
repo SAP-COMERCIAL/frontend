@@ -4,6 +4,11 @@ import { FullComponent } from './layouts/full/full.component';
 import { AuthComponent } from  '../../src/app/components/auth/auth.component';
 import { AuthGuard } from './guards/auth.guards';
 import { LoginComponent } from './pages/login/login.component';
+import { RepseSupplierReviewComponent } from './pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.component';
+
+import { AppComponent }   from './app.component';
+import { BrowserModule  } from '@angular/platform-browser';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -71,7 +76,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/repse-supplier-capture/repse-supplier-capture/repse-supplier-capture.module').then(m => m.RepseSupplierCaptureModule)
       },
       {
-        path: 'repseReview',
+        path: 'repseReviewx',
         loadChildren: () => import('./pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.module').then(m => m.RepseSupplierReviewModule)
       },
       {
@@ -80,14 +85,25 @@ const routes: Routes = [
       }
     ],
     canActivate: [AuthGuard]
-  }
+  },
+  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [
+    RouterModule.forRoot(routes, {useHash: true})
+  ],
 exports: [RouterModule]
 })
 
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [BrowserModule],
+//   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+//   bootstrap: [AppComponent],
+// })
+
+// export class AppModule {}
 export class AppRoutingModule { }
 
 
