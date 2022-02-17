@@ -59,7 +59,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
   datasourceProyects : any[] = [];
   datasourceCustomers : any;
 
-  constructor(
+   constructor(
     public dialogRef: MatDialogRef<projectModel>
     , private _projectService : projectservice
     , private _categoryService : categoryservice
@@ -147,7 +147,7 @@ console.log('data de entrada', this.projectInfo);
     let arrayTodb : any;
 
     if(this.validaCamposRequeridos() == false){
-      this.openSnackBar('debe capturar los campos requeridos', 'success');
+      this.openSnackBar('debe capturar los campos requeridos', '');
       return;
     }
 
@@ -270,7 +270,7 @@ addClient(form, event){
   const dialogRef = this.dialog.open(CustomerDetailComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
-    // window.location.reload();
+    this.getcustomerAll();
   });
 }
 
@@ -289,7 +289,7 @@ selectcustommer(event){
   // =========================
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {duration : 3000});
+    this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 
   _keyUp(event: any) {

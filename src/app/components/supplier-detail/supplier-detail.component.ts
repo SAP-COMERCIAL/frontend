@@ -91,7 +91,7 @@ public newProject: FormGroup;
 // UTILERIAS
 // =========================
 openSnackBar(message: string, action: string) {
-  this._snackBar.open(message, action, {duration : 3000});
+  this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
 }
 
 // =========================
@@ -104,7 +104,8 @@ insertSupplier(arrayToDb : any){
   this._supplyservice.insertsupply(arrayToDb).subscribe(
     res=> {
       console.log('PROVEEDORES', res);
-      this.openSnackBar('El registro se actualizó con éxito', '');      
+      this.openSnackBar('El registro se actualizó con éxito', '');  
+      this.dialogRef.close();    
     },
     error => console.log("error al insertar proveedores",error)
   )

@@ -1,4 +1,4 @@
- <div fxLayout="row">
+<div fxLayout="row">
   <h4>Nuevo Proyecto</h4>
 </div>
 <br>
@@ -61,7 +61,7 @@
     <div fxFlex.gt-sm="25%" >
       <div>
         <mat-form-field>
-          <input [type]="presupuesto_proyecto" matInput class="form-control form-control-line control" formControlName="presupuesto_proyecto" step="any" (keyup)="_keyUp($event)" > <!--required="required" min="0" max="999999999"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" [(ngModel)]="presupuesto_proyecto" -->
+          <input [type]="presupuesto_proyecto" matInput class="form-control form-control-line control" formControlName="presupuesto_proyecto" step="any" (keyup)="_keyUp($event)" ui-money-mask> <!--required="required" min="0" max="999999999"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" [(ngModel)]="presupuesto_proyecto" -->
         </mat-form-field>
         <span *ngIf="!newProject.get('presupuesto_proyecto').valid && newProject.get('presupuesto_proyecto').touched" class="help-block" style="color: red;"> capture  un presupuesto</span>
       </div>

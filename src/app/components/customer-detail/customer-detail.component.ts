@@ -86,7 +86,11 @@ public newProject: FormGroup;
         , estatus : 1
       });
 
-    this.insertCustommer(arrayToDb);
+    if(form.controls["nombre"].value.length == 0 || form.controls["direccion"].value.length == 0 || form.controls["rfc"].value.length == 0 || form.controls["ciudad"].value.length == 0){
+      this.openSnackBar('Debe capturar los campos requeridos', '');
+    }else{
+      this.insertCustommer(arrayToDb);
+    }
   }
 
 // =========================
@@ -94,7 +98,7 @@ public newProject: FormGroup;
 // =========================
 
 openSnackBar(message: string, action: string) {
-  this._snackBar.open(message, action, {duration : 3000});
+  this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
 }
 
 // =========================
@@ -108,7 +112,8 @@ insertCustommer(arrayToDb : any){
   this._customerservice.insertcustomer(arrayToDb).subscribe(
     res=> {
       console.log('CLIENTES', res);
-      this.openSnackBar('El registro se actualizó con éxito', '');      
+      this.openSnackBar('El registro se actualizó con éxito', '');
+      this.dialogRef.close();     
     },
     error => console.log("error al insertar clientes",error)
   )
