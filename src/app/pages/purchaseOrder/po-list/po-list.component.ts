@@ -239,7 +239,7 @@ dataSourceShow : MatTableDataSource<poModel>
 
     arrayToDb = ({ordendecompra_id : element.ordendecompra_id, estatus : statusToDb, usuario : 1})
 
-console.log('cancelado', element)
+    console.log('cancelado', element)
 
     this._purchaseOrderService.updatePOStatus(arrayToDb).subscribe(
       res=> {

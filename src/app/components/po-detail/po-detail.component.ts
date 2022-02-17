@@ -900,6 +900,9 @@ console.log('this.projectInfo',this.projectInfo);
   
         // INSERTA REQUISICIONES DET
         this.insertPODet(res, arrayDetail);
+
+        //INSERTA EN BITACORA
+        this.updateODCStatus(res);
       },
       error => console.log("error alta de proyectos",error)
     )
@@ -1008,6 +1011,20 @@ console.log('this.projectInfo',this.projectInfo);
         img.src = localPath;
     })
 
-}
+  }
+
+  updateODCStatus(po_id){
+    let arrayToDb : any;
+
+    arrayToDb = ({ordendecompra_id : po_id, estatus : 1, usuario : 1})
+
+    this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(
+      res=> {
+        console.log('Se inserto con éxito', res);
+        
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+  }
 
 }

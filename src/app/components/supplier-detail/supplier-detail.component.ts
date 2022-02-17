@@ -78,7 +78,7 @@ public newProject: FormGroup;
         , direccion : form.controls["direccion"].value
         , rfc : form.controls["rfc"].value 
         , ciudad : form.controls["ciudad"].value
-        , estado : form.controls["estado"].value
+        , estado : 1 //form.controls["estado"].value
         , contacto : form.controls["contacto"].value
         // , vigencia : '2050-01-01'
       });
