@@ -2091,7 +2091,12 @@
               vigencia: '2050-01-01',
               estatus: 1
             };
-            this.insertCustommer(arrayToDb);
+
+            if (form.controls["nombre"].value.length == 0 || form.controls["direccion"].value.length == 0 || form.controls["rfc"].value.length == 0 || form.controls["ciudad"].value.length == 0) {
+              this.openSnackBar('Debe capturar los campos requeridos', '');
+            } else {
+              this.insertCustommer(arrayToDb);
+            }
           } // =========================
           // UTILERIAS
           // =========================
@@ -2100,7 +2105,10 @@
           key: "openSnackBar",
           value: function openSnackBar(message, action) {
             this._snackBar.open(message, action, {
-              duration: 3000
+              duration: 3000,
+              horizontalPosition: "center",
+              verticalPosition: "top",
+              panelClass: 'alert-snackbar'
             });
           } // =========================
           // SERVICIOS
@@ -2117,6 +2125,8 @@
               console.log('CLIENTES', res);
 
               _this5.openSnackBar('El registro se actualizó con éxito', '');
+
+              _this5.dialogRef.close();
             }, function (error) {
               return console.log("error al insertar clientes", error);
             });
@@ -2538,7 +2548,7 @@
           }
         },
         directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_7__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_9__.MatButton],
-        styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjdXN0b21lci1kZXRhaWwuY29tcG9uZW50LmNzcyJ9 */"]
+        styles: [".alert-snackbar{\r\n  background-color: rgb(106, 93, 83) !important;\r\n  color:rgb(255, 249, 246) !important;\r\n  height: 100px !important;\r\n  width: auto !important;\r\n  margin: 24px !important;\r\n  font-size: 32px;\r\n  align-items: center !important;\r\n}\r\n\r\n   .red-snackbar{\r\n    background-color: rgb(153, 50, 50);\r\n    color:lightgoldenrodyellow;\r\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImN1c3RvbWVyLWRldGFpbC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtFQUNFLDZDQUE2QztFQUM3QyxtQ0FBbUM7RUFDbkMsd0JBQXdCO0VBQ3hCLHNCQUFzQjtFQUN0Qix1QkFBdUI7RUFDdkIsZUFBZTtFQUNmLDhCQUE4QjtBQUNoQzs7RUFFRTtJQUNFLGtDQUFrQztJQUNsQywwQkFBMEI7RUFDNUIiLCJmaWxlIjoiY3VzdG9tZXItZGV0YWlsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuOjpuZy1kZWVwLmFsZXJ0LXNuYWNrYmFye1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHJnYigxMDYsIDkzLCA4MykgIWltcG9ydGFudDtcclxuICBjb2xvcjpyZ2IoMjU1LCAyNDksIDI0NikgIWltcG9ydGFudDtcclxuICBoZWlnaHQ6IDEwMHB4ICFpbXBvcnRhbnQ7XHJcbiAgd2lkdGg6IGF1dG8gIWltcG9ydGFudDtcclxuICBtYXJnaW46IDI0cHggIWltcG9ydGFudDtcclxuICBmb250LXNpemU6IDMycHg7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlciAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4gIDo6bmctZGVlcC5yZWQtc25hY2tiYXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTUzLCA1MCwgNTApO1xyXG4gICAgY29sb3I6bGlnaHRnb2xkZW5yb2R5ZWxsb3c7XHJcbiAgfVxyXG4iXX0= */"]
       });
       /***/
     },
@@ -6066,7 +6076,7 @@
             var arrayTodb;
 
             if (this.validaCamposRequeridos() == false) {
-              this.openSnackBar('debe capturar los campos requeridos', 'success');
+              this.openSnackBar('debe capturar los campos requeridos', '');
               return;
             }
 
@@ -6175,6 +6185,8 @@
         }, {
           key: "addClient",
           value: function addClient(form, event) {
+            var _this18 = this;
+
             // Catálogo de clientes
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialogConfig();
             dialogConfig.data = {
@@ -6188,7 +6200,8 @@
             dialogConfig.height = '700px';
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(_customer_detail_customer_detail_component__WEBPACK_IMPORTED_MODULE_1__.CustomerDetailComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(function (result) {// window.location.reload();
+            dialogRef.afterClosed().subscribe(function (result) {
+              _this18.getcustomerAll();
             });
           }
         }, {
@@ -6209,7 +6222,10 @@
           key: "openSnackBar",
           value: function openSnackBar(message, action) {
             this._snackBar.open(message, action, {
-              duration: 3000
+              duration: 3000,
+              horizontalPosition: "center",
+              verticalPosition: "top",
+              panelClass: 'alert-snackbar'
             });
           }
         }, {
@@ -6245,20 +6261,20 @@
         }, {
           key: "getAllProjects",
           value: function getAllProjects() {
-            var _this18 = this;
+            var _this19 = this;
 
             // Actualiza registro NUEVO
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this18.datasourceProyects = res;
+              _this19.datasourceProyects = res;
 
-              if (_this18.projectId == 0) {
-                _this18.codigo_proyecto = Number(_this18.datasourceProyects[_this18.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
+              if (_this19.projectId == 0) {
+                _this19.codigo_proyecto = Number(_this19.datasourceProyects[_this19.datasourceProyects.length - 1]["codigo_proyecto"]) + 1;
 
-                _this18.newProject.controls["codigo_proyecto"].setValue(Number(_this18.datasourceProyects[_this18.datasourceProyects.length - 1]["codigo_proyecto"]) + 1);
+                _this19.newProject.controls["codigo_proyecto"].setValue(Number(_this19.datasourceProyects[_this19.datasourceProyects.length - 1]["codigo_proyecto"]) + 1);
 
-                console.log('PROEYCTOS TODOS', _this18.proeycto_numero_mayor);
+                console.log('PROEYCTOS TODOS', _this19.proeycto_numero_mayor);
               } else {
-                _this18.codigo_proyecto = _this18.projectInfo["codigo_proyecto"];
+                _this19.codigo_proyecto = _this19.projectInfo["codigo_proyecto"];
               }
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -6267,12 +6283,12 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this19 = this;
+            var _this20 = this;
 
             // Selecciona todas las categorías
             this._categoryService.getCategoryAll().subscribe(function (res) {
-              _this19.datasourceCategories = res;
-              console.log('CATEGORIAS', _this19.datasourceCategories);
+              _this20.datasourceCategories = res;
+              console.log('CATEGORIAS', _this20.datasourceCategories);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -6280,12 +6296,12 @@
         }, {
           key: "getcustomerAll",
           value: function getcustomerAll() {
-            var _this20 = this;
+            var _this21 = this;
 
             // Selecciona todos los clientes
             this._customerservice.getcustomerAll().subscribe(function (res) {
-              _this20.datasourceCustomers = res;
-              console.log('CLIENTES', _this20.datasourceCustomers);
+              _this21.datasourceCustomers = res;
+              console.log('CLIENTES', _this21.datasourceCustomers);
             }, function (error) {
               return console.log("error consulta categorias", error);
             });
@@ -6304,7 +6320,7 @@
         selectors: [["app-project-capture-detail"]],
         decls: 139,
         vars: 20,
-        consts: [["fxLayout", "row"], ["mat-dialog-content-example", "", 3, "formGroup"], ["fxLayout", "row", 1, "division"], ["fxFlex.gt-sm", "20%"], ["fxFlex.gt-sm", "10%"], ["matInput", "", "formControlName", "codigo_proyecto", "disabled", "", 1, "form-control", "form-control-line", "control", 3, "type"], ["class", "help-block", "style", "color: red;", 4, "ngIf"], ["fxFlex.gt-sm", "25%"], ["matInput", "", "placeholder", "", "formControlName", "nombre_proyecto", 1, "form-control", "form-control-line", "control", 3, "type"], ["formControlName", "cliente", 1, "form-control", "control", 3, "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], ["mat-raised-button", "", "color", "primary", 3, "click"], [1, "fa", "fa-plus", "icon-cog-wite"], ["mat-raised-button", "", "color", "accent", 3, "click"], [1, "fa", "fa-repeat", "fa-lg", "icon-cog-wite"], ["matInput", "", "formControlName", "presupuesto_proyecto", "step", "any", 1, "form-control", "form-control-line", "control", 3, "type", "keyup"], ["appearance", "fill"], ["matInput", "", "formControlName", "fecha_inicial_proyecto", 1, "control", 3, "matDatepicker", "dateChange"], ["matSuffix", "", 3, "for"], ["picker", ""], ["matInput", "", "formControlName", "fecha_final_proyecto", 1, "control", 3, "matDatepicker"], ["pickerf", ""], ["matInput", "", "placeholder", "Responsable", "formControlName", "responsable_proyecto", 1, "form-control", "form-control-line", "control", 3, "type"], ["matInput", "", "placeholder", "centroDeCostos", "formControlName", "centroDeCostos", 1, "form-control", "form-control-line", "control", 3, "type"], ["formControlName", "almacen", 1, "form-control"], ["value", "0", "selected", "selected"], ["value", "1"], ["value", "2"], ["value", "3"], [1, "fa", "fa-check", "fa-lg", "icon-cog-wite"], ["mat-raised-button", "", 1, "btn-bg-red", 3, "click"], [1, "fa", "fa-arrow-left", "fa-lg", "icon-cog-wite"], [1, "help-block", 2, "color", "red"], [3, "value"]],
+        consts: [["fxLayout", "row"], ["mat-dialog-content-example", "", 3, "formGroup"], ["fxLayout", "row", 1, "division"], ["fxFlex.gt-sm", "20%"], ["fxFlex.gt-sm", "10%"], ["matInput", "", "formControlName", "codigo_proyecto", "disabled", "", 1, "form-control", "form-control-line", "control", 3, "type"], ["class", "help-block", "style", "color: red;", 4, "ngIf"], ["fxFlex.gt-sm", "25%"], ["matInput", "", "placeholder", "", "formControlName", "nombre_proyecto", 1, "form-control", "form-control-line", "control", 3, "type"], ["formControlName", "cliente", 1, "form-control", "control", 3, "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], ["mat-raised-button", "", "color", "primary", 3, "click"], [1, "fa", "fa-plus", "icon-cog-wite"], ["mat-raised-button", "", "color", "accent", 3, "click"], [1, "fa", "fa-repeat", "fa-lg", "icon-cog-wite"], ["matInput", "", "formControlName", "presupuesto_proyecto", "step", "any", "ui-money-mask", "", 1, "form-control", "form-control-line", "control", 3, "type", "keyup"], ["appearance", "fill"], ["matInput", "", "formControlName", "fecha_inicial_proyecto", 1, "control", 3, "matDatepicker", "dateChange"], ["matSuffix", "", 3, "for"], ["picker", ""], ["matInput", "", "formControlName", "fecha_final_proyecto", 1, "control", 3, "matDatepicker"], ["pickerf", ""], ["matInput", "", "placeholder", "Responsable", "formControlName", "responsable_proyecto", 1, "form-control", "form-control-line", "control", 3, "type"], ["matInput", "", "placeholder", "centroDeCostos", "formControlName", "centroDeCostos", 1, "form-control", "form-control-line", "control", 3, "type"], ["formControlName", "almacen", 1, "form-control"], ["value", "0", "selected", "selected"], ["value", "1"], ["value", "2"], ["value", "3"], [1, "fa", "fa-check", "fa-lg", "icon-cog-wite"], ["mat-raised-button", "", 1, "btn-bg-red", 3, "click"], [1, "fa", "fa-arrow-left", "fa-lg", "icon-cog-wite"], [1, "help-block", 2, "color", "red"], [3, "value"]],
         template: function ProjectCaptureDetailComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "div", 0);
@@ -6857,7 +6873,7 @@
           }
         },
         directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_13__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgIf, _angular_material_select__WEBPACK_IMPORTED_MODULE_15__.MatSelect, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgForOf, _angular_material_button__WEBPACK_IMPORTED_MODULE_16__.MatButton, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__.MatLabel, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepicker, _angular_material_core__WEBPACK_IMPORTED_MODULE_18__.MatOption],
-        styles: [".column[_ngcontent-%COMP%]{\nvertical-align: middle;\n}\n\n.control[_ngcontent-%COMP%]{\n    height: 35px;\n    vertical-align: middle;\n}\n\n.division[_ngcontent-%COMP%]{\n    padding-bottom: 1px;\n}\n\n.icon-cog[_ngcontent-%COMP%] {\n    color: orange;\n  }\n\n.icon-cog-wite[_ngcontent-%COMP%] {\n    color: white;\n  }\n\n.btn-bg-green[_ngcontent-%COMP%]{\n    background-color: forestgreen;\n}\n\n.btn-bg-orange[_ngcontent-%COMP%]{\n    background-color: orange;\n}\n\n.btn-bg-wite[_ngcontent-%COMP%]{\n    background-color: white;\n    border: none;\n}\n\n.btn-bg-red[_ngcontent-%COMP%]{\n    background-color: red;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByb2plY3QtY2FwdHVyZS1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBLHNCQUFzQjtBQUN0Qjs7QUFFQTtJQUNJLFlBQVk7SUFDWixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxhQUFhO0VBQ2Y7O0FBRUY7SUFDSSxZQUFZO0VBQ2Q7O0FBRUY7SUFDSSw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSx3QkFBd0I7QUFDNUI7O0FBRUE7SUFDSSx1QkFBdUI7SUFDdkIsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLHFCQUFxQjtBQUN6QiIsImZpbGUiOiJwcm9qZWN0LWNhcHR1cmUtZGV0YWlsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29sdW1ue1xudmVydGljYWwtYWxpZ246IG1pZGRsZTtcbn1cblxuLmNvbnRyb2x7XG4gICAgaGVpZ2h0OiAzNXB4O1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG5cbi5kaXZpc2lvbntcbiAgICBwYWRkaW5nLWJvdHRvbTogMXB4O1xufVxuXG4uaWNvbi1jb2cge1xuICAgIGNvbG9yOiBvcmFuZ2U7XG4gIH1cblxuLmljb24tY29nLXdpdGUge1xuICAgIGNvbG9yOiB3aGl0ZTtcbiAgfVxuXG4uYnRuLWJnLWdyZWVue1xuICAgIGJhY2tncm91bmQtY29sb3I6IGZvcmVzdGdyZWVuO1xufVxuXG4uYnRuLWJnLW9yYW5nZXtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBvcmFuZ2U7XG59XG5cbi5idG4tYmctd2l0ZXtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICBib3JkZXI6IG5vbmU7XG59XG5cbi5idG4tYmctcmVke1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJlZDtcbn0iXX0= */"]
+        styles: [".column[_ngcontent-%COMP%]{\nvertical-align: middle;\n}\n\n.control[_ngcontent-%COMP%]{\n    height: 35px;\n    vertical-align: middle;\n}\n\n.division[_ngcontent-%COMP%]{\n    padding-bottom: 1px;\n}\n\n.icon-cog[_ngcontent-%COMP%] {\n    color: orange;\n  }\n\n.icon-cog-wite[_ngcontent-%COMP%] {\n    color: white;\n  }\n\n.btn-bg-green[_ngcontent-%COMP%]{\n    background-color: forestgreen;\n}\n\n.btn-bg-orange[_ngcontent-%COMP%]{\n    background-color: orange;\n}\n\n.btn-bg-wite[_ngcontent-%COMP%]{\n    background-color: white;\n    border: none;\n}\n\n.btn-bg-red[_ngcontent-%COMP%]{\n    background-color: red;\n}\n\n .alert-snackbar{\n    background-color: rgb(106, 93, 83) !important;\n    color:rgb(255, 249, 246) !important;\n    height: 100px !important;\n    width: auto !important;\n    margin: 24px !important;\n    font-size: 32px;\n    align-items: center !important;\n  }\n\n .red-snackbar{\n    background-color: rgb(153, 50, 50);\n    color:lightgoldenrodyellow;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByb2plY3QtY2FwdHVyZS1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBLHNCQUFzQjtBQUN0Qjs7QUFFQTtJQUNJLFlBQVk7SUFDWixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxhQUFhO0VBQ2Y7O0FBRUY7SUFDSSxZQUFZO0VBQ2Q7O0FBRUY7SUFDSSw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSx3QkFBd0I7QUFDNUI7O0FBRUE7SUFDSSx1QkFBdUI7SUFDdkIsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLDZDQUE2QztJQUM3QyxtQ0FBbUM7SUFDbkMsd0JBQXdCO0lBQ3hCLHNCQUFzQjtJQUN0Qix1QkFBdUI7SUFDdkIsZUFBZTtJQUNmLDhCQUE4QjtFQUNoQzs7QUFFQTtJQUNFLGtDQUFrQztJQUNsQywwQkFBMEI7RUFDNUIiLCJmaWxlIjoicHJvamVjdC1jYXB0dXJlLWRldGFpbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbHVtbntcbnZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG5cbi5jb250cm9se1xuICAgIGhlaWdodDogMzVweDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uZGl2aXNpb257XG4gICAgcGFkZGluZy1ib3R0b206IDFweDtcbn1cblxuLmljb24tY29nIHtcbiAgICBjb2xvcjogb3JhbmdlO1xuICB9XG5cbi5pY29uLWNvZy13aXRlIHtcbiAgICBjb2xvcjogd2hpdGU7XG4gIH1cblxuLmJ0bi1iZy1ncmVlbntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBmb3Jlc3RncmVlbjtcbn1cblxuLmJ0bi1iZy1vcmFuZ2V7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogb3JhbmdlO1xufVxuXG4uYnRuLWJnLXdpdGV7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyOiBub25lO1xufVxuXG4uYnRuLWJnLXJlZHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XG59XG5cbjo6bmctZGVlcC5hbGVydC1zbmFja2JhcntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTA2LCA5MywgODMpICFpbXBvcnRhbnQ7XG4gICAgY29sb3I6cmdiKDI1NSwgMjQ5LCAyNDYpICFpbXBvcnRhbnQ7XG4gICAgaGVpZ2h0OiAxMDBweCAhaW1wb3J0YW50O1xuICAgIHdpZHRoOiBhdXRvICFpbXBvcnRhbnQ7XG4gICAgbWFyZ2luOiAyNHB4ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1zaXplOiAzMnB4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXIgIWltcG9ydGFudDtcbiAgfVxuXG4gIDo6bmctZGVlcC5yZWQtc25hY2tiYXJ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDE1MywgNTAsIDUwKTtcbiAgICBjb2xvcjpsaWdodGdvbGRlbnJvZHllbGxvdztcbiAgfVxuIl19 */"]
       });
       /***/
     },
@@ -8155,13 +8171,13 @@
         }, {
           key: "RequisitionSelected",
           value: function RequisitionSelected() {
-            var _this21 = this;
+            var _this22 = this;
 
             var arrayRequisicion_interna;
             var codigoRequisicion_interna;
             this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
             arrayRequisicion_interna = this.datasourceRequisition.filter(function (e) {
-              return e.requisicioninterna_id == _this21.requisicionId;
+              return e.requisicioninterna_id == _this22.requisicionId;
             });
             this.getCotizacionesAll(arrayRequisicion_interna[0]["codigo"]); // Busca cotizaciones y arma nuevo numero de cotización
 
@@ -8293,11 +8309,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this22 = this;
+            var _this23 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this22.datasourcePorjects = res;
+              _this23.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -8306,16 +8322,16 @@
         }, {
           key: "getCotizacionesAll",
           value: function getCotizacionesAll(requisicion_interna) {
-            var _this23 = this;
+            var _this24 = this;
 
             this._quotationservice.getQuotationAll().subscribe(function (res) {
-              _this23.datasourceCotizaciones = res;
+              _this24.datasourceCotizaciones = res;
               console.log('COTIZACIONES TODAS', res);
-              _this23.cotizacion_Numero = _this23.cotizacion_Numero = requisicion_interna + '-' + (_this23.datasourceCotizaciones.filter(function (e) {
+              _this24.cotizacion_Numero = _this24.cotizacion_Numero = requisicion_interna + '-' + (_this24.datasourceCotizaciones.filter(function (e) {
                 return e.codigo_requisicioninterna == requisicion_interna;
               }).length + 1);
 
-              _this23.newProject.controls["cotizacion_Numero"].setValue(_this23.cotizacion_Numero = requisicion_interna + '-' + (_this23.datasourceCotizaciones.filter(function (e) {
+              _this24.newProject.controls["cotizacion_Numero"].setValue(_this24.cotizacion_Numero = requisicion_interna + '-' + (_this24.datasourceCotizaciones.filter(function (e) {
                 return e.codigo_requisicioninterna == requisicion_interna;
               }).length + 1));
             }, function (error) {
@@ -8325,11 +8341,11 @@
         }, {
           key: "getQuotationDetail",
           value: function getQuotationDetail(cotizacionId) {
-            var _this24 = this;
+            var _this25 = this;
 
             // Obtiene el detalle de la cotización
             this._quotationservice.getQuotationDetail(cotizacionId).subscribe(function (res) {
-              _this24.datasourceRequisitionDetail = res;
+              _this25.datasourceRequisitionDetail = res;
               console.log('datasourde cotizacion', res);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -8338,14 +8354,14 @@
         }, {
           key: "getrequisitionAll",
           value: function getrequisitionAll() {
-            var _this25 = this;
+            var _this26 = this;
 
             // Obtiene todas las requisiciones 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
               // this.datasourceRequisition = [];
-              _this25.datasourceRequisition = res;
-              _this25.datasourceRequisition = _this25.datasourceRequisition.filter(function (e) {
-                return e.proyectocategoria_id == _this25.newProject.controls["categoria_id"].value;
+              _this26.datasourceRequisition = res;
+              _this26.datasourceRequisition = _this26.datasourceRequisition.filter(function (e) {
+                return e.proyectocategoria_id == _this26.newProject.controls["categoria_id"].value;
               }); // // Consulta detalle de requisición
               // this.getRequisitionDetail();
             }, function (error) {
@@ -8355,15 +8371,15 @@
         }, {
           key: "getrequisition",
           value: function getrequisition() {
-            var _this26 = this;
+            var _this27 = this;
 
             // Obtiene las requisiciones 
             this._requisitionservice.getRequisitionById(this.newProject.controls["categoria_id"].value).subscribe(function (res) {
-              _this26.datasourceRequisition = [];
+              _this27.datasourceRequisition = [];
 
-              _this26.datasourceRequisition.push(res);
+              _this27.datasourceRequisition.push(res);
 
-              console.log('REQUISICIONES', _this26.datasourceRequisition); //     // Consulta detalle de requisición
+              console.log('REQUISICIONES', _this27.datasourceRequisition); //     // Consulta detalle de requisición
               //     this.getRequisitionDetail();
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -8372,12 +8388,12 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(Requisition_Id) {
-            var _this27 = this;
+            var _this28 = this;
 
             // Obtiene requisiciones 
             this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(function (res) {
-              _this27.datasourceRequisitionDetail = res;
-              console.log('REQUISICIONES DETALLE', _this27.datasourceRequisitionDetail);
+              _this28.datasourceRequisitionDetail = res;
+              console.log('REQUISICIONES DETALLE', _this28.datasourceRequisitionDetail);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
             });
@@ -8385,11 +8401,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this28 = this;
+            var _this29 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this28.datasourceCategories = res;
+              _this29.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -8405,12 +8421,12 @@
         }, {
           key: "insertQuotationHeader",
           value: function insertQuotationHeader(arrayTodb) {
-            var _this29 = this;
+            var _this30 = this;
 
             this._quotationservice.insertQuotation(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this29.insertQuotationDet(res);
+              _this30.insertQuotationDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -8418,7 +8434,7 @@
         }, {
           key: "insertQuotationDet",
           value: function insertQuotationDet(cotizacionId) {
-            var _this30 = this;
+            var _this31 = this;
 
             console.log('para guardar', this.datasourceCotizacionesDet); // Obtiene Requisicion Registrada
 
@@ -8445,10 +8461,10 @@
                   costo: 0
                 }; // Inserta Proyecto Categoria
 
-                _this30._quotationservice.insertQuotationDetail(arrayToDb).subscribe(function (res) {
+                _this31._quotationservice.insertQuotationDetail(arrayToDb).subscribe(function (res) {
                   console.log('INSERTA COTIZACION DETALLE', arrayToDb);
 
-                  _this30.openSnackBar('Se genero el la cotización exitosamente', 'success');
+                  _this31.openSnackBar('Se genero el la cotización exitosamente', 'success');
                 }, function (error) {
                   return console.log("error al insertar proyectos categorias", error);
                 });
@@ -9466,18 +9482,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this31 = this;
+            var _this32 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this31.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this31.array = res;
-              _this31.totalSize = _this31.array.length;
+              _this32.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this32.array = res;
+              _this32.totalSize = _this32.array.length;
 
-              _this31.iterator();
+              _this32.iterator();
 
-              _this31.dataSourceShow.sort = _this31.sort;
+              _this32.dataSourceShow.sort = _this32.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -10426,7 +10442,7 @@
         }, {
           key: "onFileChange",
           value: function onFileChange(event) {
-            var _this32 = this;
+            var _this33 = this;
 
             /* wire up file reader */
             var target = event.target;
@@ -10458,8 +10474,8 @@
                 /* save data */
 
                 var data = xlsx__WEBPACK_IMPORTED_MODULE_1__.utils.sheet_to_json(ws);
-                _this32.dataExcel = _this32.validate(data);
-                _this32.dataExcel = data;
+                _this33.dataExcel = _this33.validate(data);
+                _this33.dataExcel = data;
                 var arrayErrores = [];
                 var arrayExcel = [];
                 var valido = true; // Validadores de campos
@@ -10471,7 +10487,7 @@
                 var DescripcionAnt = '';
                 var Descripcion = ''; // Ordena los descuentos por cr + produto + plataforma
 
-                _this32.dataExcel.sort(function (a, b) {
+                _this33.dataExcel.sort(function (a, b) {
                   if (a.DESCRIPCION > b.DESCRIPCION) {
                     return 1;
                   }
@@ -10484,11 +10500,11 @@
                   return 0;
                 });
 
-                DescripcionAnt = _this32.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
+                DescripcionAnt = _this33.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
 
                 var contador = 0;
 
-                _this32.dataExcel.forEach(function (element) {
+                _this33.dataExcel.forEach(function (element) {
                   // Reinicia valores
                   valido = true;
                   errorDescripcion = false;
@@ -10538,16 +10554,16 @@
                 });
 
                 if (arrayErrores.length > 0) {
-                  _this32.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
+                  _this33.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
 
 
-                  _this32.dataExcel = null; // this.openErrorDialog(arrayErroresEstacion);
+                  _this33.dataExcel = null; // this.openErrorDialog(arrayErroresEstacion);
 
                   return;
                 }
 
-                _this32.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
-                console.log('datos del excel', _this32.UploadDataExcel);
+                _this33.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
+                console.log('datos del excel', _this33.UploadDataExcel);
               };
             } else {
               this.openSnackBar('Los registros contienen datos incorrectos', ''); // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'No es un archivo de excel válido', 'warn');
@@ -10675,11 +10691,11 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this33 = this;
+            var _this34 = this;
 
             // Actualiza registro NUEVO
             this._projectCategoryservice.getProjectCateogryById(1).subscribe(function (res) {
-              _this33.datasourceCategories = res;
+              _this34.datasourceCategories = res;
               console.log('CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta categorias", error);
@@ -10688,11 +10704,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this34 = this;
+            var _this35 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this34.datasourcePorjects = res;
+              _this35.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -10701,7 +10717,7 @@
         }, {
           key: "getrequisition",
           value: function getrequisition(codigo_categoria) {
-            var _this35 = this;
+            var _this36 = this;
 
             var categoria_id = this.newProject.controls["categoria_id"].value;
             var codigo_requisicion = 0;
@@ -10709,13 +10725,13 @@
             var arrayCodigoCategoria; // Proyectos registrados
 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
-              _this35.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
+              _this36.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
 
-              if (_this35.datasourceRequisition.filteredData.length == 0) {
+              if (_this36.datasourceRequisition.filteredData.length == 0) {
                 codigo_requisicion = codigo_categoria + '-1';
               } else {
                 // Obtener requisicion en la que se mas alta y determinar cual sigue
-                arrayRequisition = _this35.datasourceRequisition.filteredData.filter(function (e) {
+                arrayRequisition = _this36.datasourceRequisition.filteredData.filter(function (e) {
                   return e.proyectocategoria_id == categoria_id;
                 });
 
@@ -10730,9 +10746,9 @@
               } // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
 
 
-              _this35.requisicion_Numero = codigo_requisicion;
+              _this36.requisicion_Numero = codigo_requisicion;
 
-              _this35.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
+              _this36.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -10740,11 +10756,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this36 = this;
+            var _this37 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this36.datasourceCategories = res;
+              _this37.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -10753,12 +10769,12 @@
         }, {
           key: "insertRequisition",
           value: function insertRequisition(arrayTodb) {
-            var _this37 = this;
+            var _this38 = this;
 
             this._requisitionservice.insertRequisition(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this37.insertRequisitionDet(res);
+              _this38.insertRequisitionDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -10766,7 +10782,7 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(arrayTodb) {
-            var _this38 = this;
+            var _this39 = this;
 
             var arrayRequsitionDetail;
             var arrayRequsitionToTable = []; //MatTableDataSource<requisitionModelDetail>;
@@ -10783,7 +10799,7 @@
                   medida: element.medida
                 });
               });
-              _this38.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
+              _this39.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
               console.log('Se obtiene detalle de requisición', res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
@@ -10803,7 +10819,7 @@
         }, {
           key: "insertRequisitionDet",
           value: function insertRequisitionDet(requisicionId) {
-            var _this39 = this;
+            var _this40 = this;
 
             // Obtiene Requisicion Registrada
             var datasourceRequsition;
@@ -10828,10 +10844,10 @@
               };
               console.log('DETALLE DETALLE DETALLE', arrayToDb); // Inserta Proyecto Categoria
 
-              _this39._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
+              _this40._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
                 console.log('REQUISICIONES DETALLE', res);
 
-                _this39.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
+                _this40.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
 
               }, function (error) {
                 return console.log("error al insertar proyectos categorias", error);
@@ -11432,7 +11448,10 @@
           key: "openSnackBar",
           value: function openSnackBar(message, action) {
             this._snackBar.open(message, action, {
-              duration: 3000
+              duration: 3000,
+              horizontalPosition: "center",
+              verticalPosition: "top",
+              panelClass: 'alert-snackbar'
             });
           } // =========================
           // SERVICIOS
@@ -11441,13 +11460,15 @@
         }, {
           key: "insertSupplier",
           value: function insertSupplier(arrayToDb) {
-            var _this40 = this;
+            var _this41 = this;
 
             // Inserta Proveedores
             this._supplyservice.insertsupply(arrayToDb).subscribe(function (res) {
               console.log('PROVEEDORES', res);
 
-              _this40.openSnackBar('El registro se actualizó con éxito', '');
+              _this41.openSnackBar('El registro se actualizó con éxito', '');
+
+              _this41.dialogRef.close();
             }, function (error) {
               return console.log("error al insertar proveedores", error);
             });
@@ -11807,7 +11828,7 @@
           }
         },
         directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_5__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_6__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_7__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgIf, _angular_material_button__WEBPACK_IMPORTED_MODULE_9__.MatButton],
-        styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdXBwbGllci1kZXRhaWwuY29tcG9uZW50LmNzcyJ9 */"]
+        styles: [".alert-snackbar{\r\n    background-color: rgb(106, 93, 83) !important;\r\n    color:rgb(255, 249, 246) !important;\r\n    height: 100px !important;\r\n    width: auto !important;\r\n    margin: 24px !important;\r\n    font-size: 32px;\r\n    align-items: center !important;\r\n  }\r\n  \r\n     .red-snackbar{\r\n      background-color: rgb(153, 50, 50);\r\n      color:lightgoldenrodyellow;\r\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN1cHBsaWVyLWRldGFpbC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLDZDQUE2QztJQUM3QyxtQ0FBbUM7SUFDbkMsd0JBQXdCO0lBQ3hCLHNCQUFzQjtJQUN0Qix1QkFBdUI7SUFDdkIsZUFBZTtJQUNmLDhCQUE4QjtFQUNoQzs7SUFFRTtNQUNFLGtDQUFrQztNQUNsQywwQkFBMEI7SUFDNUIiLCJmaWxlIjoic3VwcGxpZXItZGV0YWlsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuOjpuZy1kZWVwLmFsZXJ0LXNuYWNrYmFye1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDEwNiwgOTMsIDgzKSAhaW1wb3J0YW50O1xyXG4gICAgY29sb3I6cmdiKDI1NSwgMjQ5LCAyNDYpICFpbXBvcnRhbnQ7XHJcbiAgICBoZWlnaHQ6IDEwMHB4ICFpbXBvcnRhbnQ7XHJcbiAgICB3aWR0aDogYXV0byAhaW1wb3J0YW50O1xyXG4gICAgbWFyZ2luOiAyNHB4ICFpbXBvcnRhbnQ7XHJcbiAgICBmb250LXNpemU6IDMycHg7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIFxyXG4gICAgOjpuZy1kZWVwLnJlZC1zbmFja2JhcntcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDE1MywgNTAsIDUwKTtcclxuICAgICAgY29sb3I6bGlnaHRnb2xkZW5yb2R5ZWxsb3c7XHJcbiAgICB9XHJcbiAgIl19 */"]
       });
       /***/
     },
@@ -13475,18 +13496,18 @@
         }, {
           key: "getcustomer",
           value: function getcustomer() {
-            var _this41 = this;
+            var _this42 = this;
 
             // Proyectos registrados
             this._customerservice.getcustomerAll().subscribe(function (res) {
               console.log('Clientes', res);
-              _this41.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this41.array = res;
-              _this41.totalSize = _this41.array.length;
+              _this42.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this42.array = res;
+              _this42.totalSize = _this42.array.length;
 
-              _this41.iterator();
+              _this42.iterator();
 
-              _this41.dataSourceShow.sort = _this41.sort;
+              _this42.dataSourceShow.sort = _this42.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -13921,27 +13942,27 @@
         }, {
           key: "loginReq",
           value: function loginReq() {
-            var _this42 = this;
+            var _this43 = this;
 
             this.spinerShow = true;
             var pswdEncryp = this.cryptService.encrypt(this.loginform.value.contrasegna);
             this.loginform.value.contrasegna = pswdEncryp;
             this.authService.loginReq(this.loginform.value).subscribe(function (response) {
               localStorage.setItem('token_access', response.token);
-              _this42.spinerShow = false;
+              _this43.spinerShow = false;
 
-              _this42.route.navigate(['/dashboard']);
+              _this43.route.navigate(['/dashboard']);
             }, function (err) {
               if (err.status === 401) {
-                _this42.toastr.error('Credenciales de acceso inválidas', 'ERROR');
+                _this43.toastr.error('Credenciales de acceso inválidas', 'ERROR');
               }
 
               if (err.status === 0 || err.status === 500) {
-                _this42.toastr.error('No se puede comunicar con el servidor', 'ERROR');
+                _this43.toastr.error('No se puede comunicar con el servidor', 'ERROR');
               }
 
               console.error(err);
-              _this42.spinerShow = false;
+              _this43.spinerShow = false;
             });
           }
         }, {
@@ -14510,18 +14531,18 @@
         }, {
           key: "getProjects",
           value: function getProjects() {
-            var _this43 = this;
+            var _this44 = this;
 
             // Proyectos registrados
             this._projectService.getProjectAll().subscribe(function (res) {
               console.log('Proyectos', res);
-              _this43.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
-              _this43.array = res;
-              _this43.totalSize = _this43.array.length;
+              _this44.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+              _this44.array = res;
+              _this44.totalSize = _this44.array.length;
 
-              _this43.iterator();
+              _this44.iterator();
 
-              _this43.dataSourceShow.sort = _this43.sort;
+              _this44.dataSourceShow.sort = _this44.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -15612,18 +15633,18 @@
         }, {
           key: "getPO_Hdr",
           value: function getPO_Hdr() {
-            var _this44 = this;
+            var _this45 = this;
 
             // Proyectos registrados
             this._purchaseOrderService.getPOAll().subscribe(function (res) {
               console.log('PurchaseOrder', res);
-              _this44.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(res);
-              _this44.array = res;
-              _this44.totalSize = _this44.array.length;
+              _this45.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(res);
+              _this45.array = res;
+              _this45.totalSize = _this45.array.length;
 
-              _this44.iterator();
+              _this45.iterator();
 
-              _this44.dataSourceShow.sort = _this44.sort;
+              _this45.dataSourceShow.sort = _this45.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -16267,18 +16288,18 @@
         }, {
           key: "getQuotationAll",
           value: function getQuotationAll() {
-            var _this45 = this;
+            var _this46 = this;
 
             // Proyectos registrados
             this._quotationService.getQuotationAll().subscribe(function (res) {
               console.log('Cotizaciones', res);
-              _this45.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this45.array = res;
-              _this45.totalSize = _this45.array.length;
+              _this46.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this46.array = res;
+              _this46.totalSize = _this46.array.length;
 
-              _this45.iterator();
+              _this46.iterator();
 
-              _this45.dataSourceShow.sort = _this45.sort;
+              _this46.dataSourceShow.sort = _this46.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -18816,18 +18837,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this46 = this;
+            var _this47 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this46.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
-              _this46.array = res;
-              _this46.totalSize = _this46.array.length;
+              _this47.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+              _this47.array = res;
+              _this47.totalSize = _this47.array.length;
 
-              _this46.iterator();
+              _this47.iterator();
 
-              _this46.dataSourceShow.sort = _this46.sort;
+              _this47.dataSourceShow.sort = _this47.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -19403,18 +19424,18 @@
         }, {
           key: "getrequisition",
           value: function getrequisition() {
-            var _this47 = this;
+            var _this48 = this;
 
             // Proyectos registrados
             this._requisitionService.getRequisitionAll().subscribe(function (res) {
               console.log('Requisiciones', res);
-              _this47.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
-              _this47.array = res;
-              _this47.totalSize = _this47.array.length;
+              _this48.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+              _this48.array = res;
+              _this48.totalSize = _this48.array.length;
 
-              _this47.iterator();
+              _this48.iterator();
 
-              _this47.dataSourceShow.sort = _this47.sort;
+              _this48.dataSourceShow.sort = _this48.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -20686,18 +20707,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this48 = this;
+            var _this49 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this48.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this48.array = res;
-              _this48.totalSize = _this48.array.length;
+              _this49.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this49.array = res;
+              _this49.totalSize = _this49.array.length;
 
-              _this48.iterator();
+              _this49.iterator();
 
-              _this48.dataSourceShow.sort = _this48.sort;
+              _this49.dataSourceShow.sort = _this49.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -22719,14 +22740,14 @@
 
       var _AccordionDirective = /*#__PURE__*/function () {
         function _AccordionDirective(router) {
-          var _this49 = this;
+          var _this50 = this;
 
           _classCallCheck(this, _AccordionDirective);
 
           this.router = router;
           this.navlinks = [];
           setTimeout(function () {
-            return _this49.checkOpenLinks();
+            return _this50.checkOpenLinks();
           });
         }
 
@@ -22756,17 +22777,17 @@
         }, {
           key: "checkOpenLinks",
           value: function checkOpenLinks() {
-            var _this50 = this;
+            var _this51 = this;
 
             this.navlinks.forEach(function (link) {
               if (link.group) {
-                var routeUrl = _this50.router.url;
+                var routeUrl = _this51.router.url;
                 var currentUrl = routeUrl.split('/');
 
                 if (currentUrl.indexOf(link.group) > 0) {
                   link.selected = true;
 
-                  _this50.closeOtherLinks(link);
+                  _this51.closeOtherLinks(link);
                 }
               }
             });
@@ -22774,12 +22795,12 @@
         }, {
           key: "ngAfterContentChecked",
           value: function ngAfterContentChecked() {
-            var _this51 = this;
+            var _this52 = this;
 
             this.router.events.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.filter)(function (event) {
               return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationEnd;
             })).subscribe(function (e) {
-              return _this51.checkOpenLinks();
+              return _this52.checkOpenLinks();
             });
           }
         }]);
@@ -23317,7 +23338,7 @@
 
       var _SpinnerComponent = /*#__PURE__*/function () {
         function _SpinnerComponent(router, document) {
-          var _this52 = this;
+          var _this53 = this;
 
           _classCallCheck(this, _SpinnerComponent);
 
@@ -23327,12 +23348,12 @@
           this.backgroundColor = 'rgba(0, 115, 170, 0.69)';
           this.router.events.subscribe(function (event) {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationStart) {
-              _this52.isSpinnerVisible = true;
+              _this53.isSpinnerVisible = true;
             } else if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationEnd || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationCancel || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationError) {
-              _this52.isSpinnerVisible = false;
+              _this53.isSpinnerVisible = false;
             }
           }, function () {
-            _this52.isSpinnerVisible = false;
+            _this53.isSpinnerVisible = false;
           });
         }
 
