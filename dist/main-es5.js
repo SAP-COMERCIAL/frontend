@@ -62,21 +62,15 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! @angular/core */
       37716);
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @angular/router */
       39895);
-      /* harmony import */
-
-
-      var _shared_spinner_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./shared/spinner.component */
-      23812);
 
       var _AppComponent = function _AppComponent() {
         _classCallCheck(this, _AppComponent);
@@ -86,21 +80,17 @@
         return new (t || _AppComponent)();
       };
 
-      _AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+      _AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: _AppComponent,
         selectors: [["app-root"]],
-        decls: 2,
+        decls: 1,
         vars: 0,
         template: function AppComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "router-outlet");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "app-spinner");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "router-outlet");
           }
         },
-        directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__.RouterOutlet, _shared_spinner_component__WEBPACK_IMPORTED_MODULE_0__.SpinnerComponent],
+        directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterOutlet],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyJ9 */"]
       });
       /***/
@@ -134,33 +124,27 @@
       /* harmony import */
 
 
-      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
+      var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
       /*! @angular/platform-browser */
       39075);
       /* harmony import */
 
 
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
       /*! ngx-toastr */
       19699);
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
       /*! @angular/forms */
       3679);
       /* harmony import */
 
 
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(
       /*! @angular/common/http */
       91841);
-      /* harmony import */
-
-
-      var _angular_common__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(
-      /*! @angular/common */
-      38583);
       /* harmony import */
 
 
@@ -176,7 +160,7 @@
       /* harmony import */
 
 
-      var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(
+      var _angular_flex_layout__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(
       /*! @angular/flex-layout */
       25830);
       /* harmony import */
@@ -200,7 +184,7 @@
       /* harmony import */
 
 
-      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
+      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
       75835);
       /* harmony import */
@@ -224,31 +208,31 @@
       /* harmony import */
 
 
-      var _angular_material_table__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
+      var _angular_material_table__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(
       /*! @angular/material/table */
       32091);
       /* harmony import */
 
 
-      var _angular_material_sort__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
+      var _angular_material_sort__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(
       /*! @angular/material/sort */
       11494);
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(
       /*! @angular/material/form-field */
       98295);
       /* harmony import */
 
 
-      var _angular_material_card__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(
+      var _angular_material_card__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
       /*! @angular/material/card */
       93738);
       /* harmony import */
 
 
-      var _angular_material_input__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(
+      var _angular_material_input__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(
       /*! @angular/material/input */
       83166);
       /* harmony import */
@@ -406,16 +390,12 @@
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent]
       });
       _AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_30__["ɵɵdefineInjector"]({
-        providers: [{
-          provide: _angular_common__WEBPACK_IMPORTED_MODULE_31__.LocationStrategy,
-          useClass: _angular_common__WEBPACK_IMPORTED_MODULE_31__.PathLocationStrategy
-        }],
-        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_32__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_33__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_34__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_35__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_36__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_37__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_38__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_40__.MatInputModule, _angular_material_card__WEBPACK_IMPORTED_MODULE_41__.MatCardModule, _angular_forms__WEBPACK_IMPORTED_MODULE_34__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_42__.ToastrModule.forRoot({
+        imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_31__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_32__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_33__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_34__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_35__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_36__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_37__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_39__.MatInputModule, _angular_material_card__WEBPACK_IMPORTED_MODULE_40__.MatCardModule, _angular_forms__WEBPACK_IMPORTED_MODULE_33__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_41__.ToastrModule.forRoot({
           timeOut: 5000,
           positionClass: 'toast-bottom-center',
           preventDuplicates: true
         }) // RouterModule.forRoot(AppRoutingModule, {useHash: true}) // AppRoutes
-        ], _angular_material_table__WEBPACK_IMPORTED_MODULE_37__.MatTableModule]
+        ]]
       });
 
       (function () {
@@ -425,8 +405,7 @@
           // Notification.ComponentComponent,
           // NotificationComponent
           ],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_32__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_33__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_34__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_35__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_36__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_37__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_38__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_39__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_40__.MatInputModule, _angular_material_card__WEBPACK_IMPORTED_MODULE_41__.MatCardModule, _angular_forms__WEBPACK_IMPORTED_MODULE_34__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_42__.ToastrModule],
-          exports: [_angular_material_table__WEBPACK_IMPORTED_MODULE_37__.MatTableModule]
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_31__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_32__.BrowserAnimationsModule, _demo_material_module__WEBPACK_IMPORTED_MODULE_5__.DemoMaterialModule, _angular_forms__WEBPACK_IMPORTED_MODULE_33__.FormsModule, _angular_flex_layout__WEBPACK_IMPORTED_MODULE_34__.FlexLayoutModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_35__.HttpClientModule, _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__.SharedModule, _angular_material_table__WEBPACK_IMPORTED_MODULE_36__.MatTableModule, _angular_material_sort__WEBPACK_IMPORTED_MODULE_37__.MatSortModule, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_38__.MatFormFieldModule, _angular_material_input__WEBPACK_IMPORTED_MODULE_39__.MatInputModule, _angular_material_card__WEBPACK_IMPORTED_MODULE_40__.MatCardModule, _angular_forms__WEBPACK_IMPORTED_MODULE_33__.ReactiveFormsModule, _app_routing__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, ngx_toastr__WEBPACK_IMPORTED_MODULE_41__.ToastrModule]
         });
       })();
       /***/
@@ -640,7 +619,7 @@
             });
           }
         }, {
-          path: 'repseReview',
+          path: 'repseReviewx',
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() */
@@ -655,7 +634,13 @@
           component: _pages_login_login_component__WEBPACK_IMPORTED_MODULE_3__.LoginComponent
         }],
         canActivate: [_guards_auth_guards__WEBPACK_IMPORTED_MODULE_2__.AuthGuard]
-      }];
+      }]; // @NgModule({
+      //   declarations: [AppComponent],
+      //   imports: [BrowserModule],
+      //   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+      //   bootstrap: [AppComponent],
+      // })
+      // export class AppModule {}
 
       var _AppRoutingModule = function _AppRoutingModule() {
         _classCallCheck(this, _AppRoutingModule);
@@ -22130,6 +22115,7 @@
           key: "updateProjects",
           value: function updateProjects(arrayToDb) {
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            console.log('actualiza proyecto', arrayToDb);
             return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/actualizar', arrayToDb, {
               headers: headers
             });
@@ -22138,6 +22124,7 @@
           key: "insertProjects",
           value: function insertProjects(arrayToDb) {
             var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders().set('Content-Type', 'application/json').append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+            console.log('inserta proyecto', arrayToDb);
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/registrar', arrayToDb, {
               headers: headers
             });
