@@ -45,8 +45,16 @@
                             <span class="tabsEncabezado">Generales</span>
                         </ng-template>
                         <br><span class="tabsEncabezado">Datos Generales</span><br>
-                
-                        <app-repse-review-general></app-repse-review-general>
+                        <div>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 5%;"></td>
+                                <td style="width: 70%;"><app-repse-review-general></app-repse-review-general></td>
+                            </tr>
+                        </table>
+                    </div>
+                        
+                        
                     </mat-tab>
                 
                     <mat-tab>
@@ -54,7 +62,14 @@
                             <span class="tabsEncabezado">Mensuales</span>
                         </ng-template> 
                         <br><span class="tabsEncabezado">Datos Mensuales </span><br>
-                        <app-repse-review-mensual></app-repse-review-mensual>
+                        <div>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td style="width: 70%;"><app-repse-review-mensual></app-repse-review-mensual></td>
+                                </tr>
+                            </table>
+                        </div>
                     </mat-tab>
                 
                     <mat-tab>
@@ -62,7 +77,14 @@
                             <span class="tabsEncabezado">Bimestrales</span>
                         </ng-template> 
                         <br><span class="tabsEncabezado">Datos Bimestrales </span><br>
-                        <app-repse-review-bimestral></app-repse-review-bimestral>
+                        <div>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td style="width: 70%;"><app-repse-review-bimestral></app-repse-review-bimestral></td>
+                                </tr>
+                            </table>
+                        </div>
                     </mat-tab>
                 
                     <mat-tab>
@@ -70,76 +92,17 @@
                             <span class="tabsEncabezado">Cuatrimestrales</span>
                         </ng-template> 
                         <br><span class="tabsEncabezado">Datos Cuatrimestrales </span><br>
-                        <app-repse-review-cuatrimestral></app-repse-review-cuatrimestral>
+                        <div>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td style="width: 70%;"><app-repse-review-cuatrimestral></app-repse-review-cuatrimestral></td>
+                                </tr>
+                            </table>
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
 
-                <!-- INICIA CUERPO DE LA PÁGINA-->
-                <div class="col-12 col-md-12 p-0">
-                    <div class="card">
-                        <div class="card-body card-body-table">
-                            <mat-table [dataSource]="dataSourceShow" matSort class="mat-elevation-z8"
-                                style="width: 95%;">
-
-                                
-                                <ng-container matColumnDef="id">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30" hidden>id </th>
-                                    <td mat-cell *matCellDef="let element" hidden> {{element.proveedorid}} </td>
-                                </ng-container>
-
-                                
-                                <ng-container matColumnDef="nombre">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30">Nombre </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                                </ng-container>
-
-                                
-                                <ng-container matColumnDef="direccion">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Dirección</th>
-                                    <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
-                                </ng-container>
-
-                                
-                                <ng-container matColumnDef="rfc">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> rfc </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.rfc}}
-                                    </td>
-                                </ng-container>
-
-                                
-                                <ng-container matColumnDef="estado">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estatus </th>
-                                    <td mat-cell *matCellDef="let element">
-                                        <ng-container *ngIf="element.estado == true">ACTIVO</ng-container>
-                                        <ng-container *ngIf="element.estado == false">INACTIVO</ng-container>
-                                    </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="ver">
-                                    <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Ver </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="decline(element, $event)">Ver</button> </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="autorize">
-                                    <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Autorizar </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="accept(element, $event)">Autorizar</button> </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="declain">
-                                    <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Denegar </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="decline(element, $event)"><i class="fa fa-lock"></i></button> </td>
-                                </ng-container>
-
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </mat-table>
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

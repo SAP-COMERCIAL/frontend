@@ -81,9 +81,9 @@
 
                                 
                                 <ng-container matColumnDef="autorize">
-                                    <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Examinar </th>
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Examinar </th>
                                     <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="edit(element, $event)"><i class="fa fa-arrow-right fa-lg icon-cog"></i> </button> </td>
+                                            (click)="edit(element, $event)" class="colbuttons"><i class="fa fa-arrow-right fa-lg icon-cog"></i> </button> </td>
                                 </ng-container>
 
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

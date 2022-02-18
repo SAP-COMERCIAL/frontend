@@ -75,7 +75,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
       estadoPantalla: 'New'
      
     }
-    dialogConfig.width = '1300px';
+    dialogConfig.width = '1800px';
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
@@ -99,7 +99,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
       estadoPantalla: 'Edit'
      
     }
-    dialogConfig.width = '1300px';
+    dialogConfig.width = '1800px';
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 

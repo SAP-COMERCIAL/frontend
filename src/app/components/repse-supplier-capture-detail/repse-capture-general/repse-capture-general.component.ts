@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../../services/supplier.service';
 
+
 @Component({
   selector: 'app-repse-capture-general',
   templateUrl: './repse-capture-general.component.html',
@@ -37,6 +38,8 @@ registroPatronalProv : string;
 public newProject: FormGroup;
 
   constructor(
+    // public dialogRef: MatDialogRef<any>
+    // , 
     private _supplyservice : supplyservice
     , private formBuilder: FormBuilder
   ) { 
@@ -71,7 +74,7 @@ public newProject: FormGroup;
   }
   
   cancel(event){
-   
+  //  this.dialogRef.close();
   }
 
   save(form, event){

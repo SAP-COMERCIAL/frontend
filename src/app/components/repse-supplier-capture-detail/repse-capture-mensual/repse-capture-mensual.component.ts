@@ -65,7 +65,6 @@ public newProject: FormGroup;
   }
 
   cancel(event){
-   
   }
 
   save(form, event){
