@@ -13,7 +13,7 @@
         <div class="col">
             <div class="card shadow">
                 <div class="card-header border-0">
-                    <h3 class="mb-0">Proveedores</h3>
+                    <h3 class="mb-0">Revisión de proveedores</h3>
                 </div>
 
                 <!-- <form> -->
@@ -22,21 +22,57 @@
                 <hr class="my-4" />
                 <!-- </form> -->
                 <div class="card">
-                    <!-- <table>
+                    <table>
                         <tr>
-                            <td class="col20"><input type="text" class="form-control form-control-line"
-                                    placeholder="BUSCAR" (keyup)="filtrar($event)">
-                            </td>
+                            <td class="col20"></td>
                             <td class="col70"></td>
+                            <td class="col10"></td>
                             <td class="col10"><button mat-raised-button color="primary"
-                                    (click)="descargarExcel()">Descargar</button></td>
-                            <td class="col10"><button mat-raised-button color="accent"
-                                    (click)="newcustomer($event)">Nuevo Proveedor</button></td>
+                                (click)="descargarExcel()">Descargar</button></td>
                             <td class="col10"></td>
                         </tr>
-                    </table> -->
+                    </table>
                     <br>
                 </div>
+
+                <div fxLayout="row">
+                    <h4>REPSE Captura de proveedores</h4>
+                </div>
+                <br>
+                <mat-tab-group>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="tabsEncabezado">Generales</span>
+                        </ng-template>
+                        <br><span class="tabsEncabezado">Datos Generales</span><br>
+                
+                        <app-repse-review-general></app-repse-review-general>
+                    </mat-tab>
+                
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="tabsEncabezado">Mensuales</span>
+                        </ng-template> 
+                        <br><span class="tabsEncabezado">Datos Mensuales </span><br>
+                        <app-repse-review-mensual></app-repse-review-mensual>
+                    </mat-tab>
+                
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="tabsEncabezado">Bimestrales</span>
+                        </ng-template> 
+                        <br><span class="tabsEncabezado">Datos Bimestrales </span><br>
+                        <app-repse-review-bimestral></app-repse-review-bimestral>
+                    </mat-tab>
+                
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="tabsEncabezado">Cuatrimestrales</span>
+                        </ng-template> 
+                        <br><span class="tabsEncabezado">Datos Cuatrimestrales </span><br>
+                        <app-repse-review-cuatrimestral></app-repse-review-cuatrimestral>
+                    </mat-tab>
+                </mat-tab-group>
 
                 <!-- INICIA CUERPO DE LA PÁGINA-->
                 <div class="col-12 col-md-12 p-0">

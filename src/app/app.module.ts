@@ -55,6 +55,10 @@ import { RepseCaptureGeneralComponent } from './components/repse-supplier-captur
 import { RepseCaptureMensualComponent } from './components/repse-supplier-capture-detail/repse-capture-mensual/repse-capture-mensual.component';
 import { RepseCaptureBimestralComponent } from './components/repse-supplier-capture-detail/repse-capture-bimestral/repse-capture-bimestral.component';
 import { RepseCaptureCuatrimestralComponent } from './components/repse-supplier-capture-detail/repse-capture-cuatrimestral/repse-capture-cuatrimestral.component';
+import { RepseReviewGeneralComponent } from './components/repse-supplier-review-detail/repse-review-general/repse-review-general.component';
+import { RepseReviewMensualComponent } from './components/repse-supplier-review-detail/repse-review-mensual/repse-review-mensual.component';
+import { RepseReviewBimestralComponent } from './components/repse-supplier-review-detail/repse-review-bimestral/repse-review-bimestral.component';
+import { RepseReviewCuatrimestralComponent } from './components/repse-supplier-review-detail/repse-review-cuatrimestral/repse-review-cuatrimestral.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -92,7 +96,11 @@ import { RepseCaptureCuatrimestralComponent } from './components/repse-supplier-
     RepseCaptureGeneralComponent,
     RepseCaptureMensualComponent,
     RepseCaptureBimestralComponent,
-    RepseCaptureCuatrimestralComponent
+    RepseCaptureCuatrimestralComponent,
+    RepseReviewMensualComponent,
+    RepseReviewBimestralComponent,
+    RepseReviewGeneralComponent,
+    RepseReviewCuatrimestralComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent
