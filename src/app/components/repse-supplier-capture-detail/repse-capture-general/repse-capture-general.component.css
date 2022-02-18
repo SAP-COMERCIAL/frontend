@@ -1,0 +1,40 @@
+.button{
+    background-color: transparent; 
+    border: 0;
+}
+
+.button .unit{
+    
+}
+
+.icon-cog-orange{
+    color: orange;
+}
+
+.icon-cog-blue{
+    color: rgb(22, 22, 175);
+}
+
+.icon-cog-green{
+    color: rgb(15, 201, 46);
+}
+
+.btn-bg-wite{
+    background-color: white;
+    border: none;
+}
+
+::ng-deep.alert-snackbar{
+    background-color: rgb(106, 93, 83) !important;
+    color:rgb(255, 249, 246) !important;
+    height: 100px !important;
+    width: auto !important;
+    margin: 24px !important;
+    font-size: 32px;
+    align-items: center !important;
+  }
+
+  ::ng-deep.red-snackbar{
+    background-color: rgb(153, 50, 50);
+    color:lightgoldenrodyellow;
+  }

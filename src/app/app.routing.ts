@@ -76,7 +76,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/repse-supplier-capture/repse-supplier-capture/repse-supplier-capture.module').then(m => m.RepseSupplierCaptureModule)
       },
       {
-        path: 'repseReviewx',
+        path: 'repseReview',
         loadChildren: () => import('./pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.module').then(m => m.RepseSupplierReviewModule)
       },
       {

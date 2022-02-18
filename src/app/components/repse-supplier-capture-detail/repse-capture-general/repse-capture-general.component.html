@@ -1,0 +1,492 @@
+ <div mat-dialog-content-example [formGroup]="newProject">
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Razón social</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <input [type]="nombre" matInput class="form-control form-control-line control"
+                        formControlName="nombre" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('nombre').valid && newProject.get('nombre').touched" class="help-block"
+                    style="color: red;"> El nombre es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>Dirección</div>
+        </div>
+        <div fxFlex.gt-sm="400px">
+            <div>
+                <mat-form-field>
+                    <input [type]="direccion" matInput class="form-control form-control-line control" placeholder=""
+                        formControlName="direccion">
+                </mat-form-field>
+                <span *ngIf="!newProject.get('direccion').valid && newProject.get('direccion').touched"
+                    class="help-block" style="color: red;"> La dirección es requerida</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>RFC</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <input [type]="rfc" matInput class="form-control form-control-line control" formControlName="rfc"
+                        disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('rfc').valid && newProject.get('rfc').touched" class="help-block"
+                    style="color: red;"> El RFC es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>Contacto</div>
+        </div>
+        <div fxFlex.gt-sm="400px">
+            <div>
+                <mat-form-field>
+                    <input [type]="contacto" matInput class="form-control form-control-line control" placeholder=""
+                        formControlName="contacto">
+                </mat-form-field>
+                <span *ngIf="!newProject.get('contacto').valid && newProject.get('contacto').touched" class="help-block"
+                    style="color: red;"> El contacto es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Ciudad</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <input [type]="ciudad" matInput class="form-control form-control-line control"
+                        formControlName="ciudad" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('ciudad').valid && newProject.get('ciudad').touched" class="help-block"
+                    style="color: red;"> La ciudad es requerida</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>Estado</div>
+        </div>
+        <div fxFlex.gt-sm="400px">
+            <div>
+                <mat-form-field>
+                    <input [type]="estado" matInput class="form-control form-control-line control" placeholder=""
+                        formControlName="estado">
+                </mat-form-field>
+                <span *ngIf="!newProject.get('estado').valid && newProject.get('estado').touched" class="help-block"
+                    style="color: red;"> El estado es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Objetivo Social</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <input [type]="objetivoSocial" matInput class="form-control form-control-line control"
+                        formControlName="objetivoSocial" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('objetivoSocial').valid && newProject.get('objetivoSocial').touched"
+                    class="help-block" style="color: red;">El objetivo social es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>Tipo Persona</div>
+        </div>
+        <div fxFlex.gt-sm="400px">
+            <div>
+                <mat-form-field>
+                    <mat-select class="form-control" formControlName="tipoPersona">
+                        <mat-option value="0" selected="selected">SELECCIONA</mat-option>
+                        <mat-option value="1">Moral</mat-option>
+                        <mat-option value="2">Física</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('tipoPersona').valid && newProject.get('tipoPersona').touched"
+                    class="help-block" style="color: red;"> El tipo persona es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Teléfono contacto</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <input [type]="telefono" matInput class="form-control form-control-line control"
+                        formControlName="telefono" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('telefono').valid && newProject.get('telefono').touched" class="help-block"
+                    style="color: red;">El telefono es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>Correo electrónico</div>
+        </div>
+        <div fxFlex.gt-sm="400px">
+            <div>
+                <mat-form-field>
+                    <input [type]="email" matInput class="form-control form-control-line control"
+                        formControlName="email" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('tipoPersona').valid && newProject.get('tipoPersona').touched"
+                    class="help-block" style="color: red;"> El tipo persona es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+                <ng-container></ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Acta constitutiva</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="actaConstitutiva" matInput class="form-control form-control-line control"
+                        formControlName="actaConstitutiva" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('actaConstitutiva').valid && newProject.get('actaConstitutiva').touched"
+                    class="help-block" style="color: red;">El acta constitutiva es requerida</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>INE</div>
+        </div>
+        <div fxFlex.gt-sm="400px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="ine" matInput class="form-control form-control-line control" formControlName="ine"
+                        disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('ine').valid && newProject.get('ine').touched" class="help-block"
+                    style="color: red;"> El INE es requerido</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Alta IMSS</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="altaIMSS" matInput class="form-control form-control-line control"
+                        formControlName="altaIMSS" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('altaIMSS').valid && newProject.get('altaIMSS').touched" class="help-block"
+                    style="color: red;">El alta del IMSS es requerida</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div><br>Alta Infonavit</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="altaINFONAVIT" matInput class="form-control form-control-line control"
+                        formControlName="altaINFONAVIT" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('altaINFONAVIT').valid && newProject.get('altaINFONAVIT').touched"
+                    class="help-block" style="color: red;"> El Alta Infonavit es requerido</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="250px">
+            <div><br>Alta SAT</div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="altaSAT" matInput class="form-control form-control-line control"
+                        formControlName="altaSAT" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('altaSAT').valid && newProject.get('altaSAT').touched" class="help-block"
+                    style="color: red;">El alta del SAT es requerida</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div><br>Estado de cuenta</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="edoCtaBancario" matInput class="form-control form-control-line control"
+                        formControlName="edoCtaBancario" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('edoCtaBancario').valid && newProject.get('edoCtaBancario').touched"
+                    class="help-block" style="color: red;"> El esstado de cuenta bancario es requerido</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Estado financiero</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="edoFinanciero" matInput class="form-control form-control-line control"
+                        formControlName="edoFinanciero" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('edoFinanciero').valid && newProject.get('edoFinanciero').touched"
+                    class="help-block" style="color: red;">El estado financiero es requerido</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div><br>¿Es usted prestador de servicios especializados?</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <mat-form-field>
+                    <mat-select class="form-control" formControlName="edoFinanciero">
+                        <mat-option value="0" selected="selected">SELECCIONA</mat-option>
+                        <mat-option value="1">Sí</mat-option>
+                        <mat-option value="2">No</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('edoCtaBancario').valid && newProject.get('edoCtaBancario').touched"
+                    class="help-block" style="color: red;"> El esstado de cuenta bancario es requerido</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="50px">
+            <div></div>
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br>Contrato</div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="contrato" matInput class="form-control form-control-line control"
+                        formControlName="contrato" disabled>
+                </mat-form-field>
+                <span *ngIf="!newProject.get('contrato').valid && newProject.get('contrato').touched" class="help-block"
+                    style="color: red;">El contrato es requerido</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="300px">
+            <div><br>Registro patronal del proveedor</div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>
+                <!-- <mat-form-field>
+                    <input [type]="registroPatronalProv" matInput class="form-control form-control-line control"
+                        formControlName="registroPatronalProv" disabled>
+                </mat-form-field>
+                <span
+                    *ngIf="!newProject.get('registroPatronalProv').valid && newProject.get('registroPatronalProv').touched"
+                    class="help-block" style="color: red;"> El registro patronal del proveedor es requerido</span> -->
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div>
+                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<br><br>
+<div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div><button mat-raised-button color="accent" (click)="save(newProject, $event)"><i class="fa fa-check fa-lg icon-cog-wite"></i></button></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div><button mat-raised-button color="warn" (click)="cancel($event)"><i class="fa fa-arrow-left fa-lg icon-cog-wite"></i></button></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+</div> 

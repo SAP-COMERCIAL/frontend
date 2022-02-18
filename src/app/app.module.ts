@@ -51,6 +51,10 @@ import { SupplierComponent } from './pages/supplier/supplier.component';
 import { RepseSupplierCaptureComponent } from './pages/repse-supplier-capture/repse-supplier-capture/repse-supplier-capture.component';
 import { RepseSupplierReviewComponent } from './pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.component';
 import { RepseSupplierReviewDetailComponent } from './components/repse-supplier-review-detail/repse-supplier-review-detail.component';
+import { RepseCaptureGeneralComponent } from './components/repse-supplier-capture-detail/repse-capture-general/repse-capture-general.component';
+import { RepseCaptureMensualComponent } from './components/repse-supplier-capture-detail/repse-capture-mensual/repse-capture-mensual.component';
+import { RepseCaptureBimestralComponent } from './components/repse-supplier-capture-detail/repse-capture-bimestral/repse-capture-bimestral.component';
+import { RepseCaptureCuatrimestralComponent } from './components/repse-supplier-capture-detail/repse-capture-cuatrimestral/repse-capture-cuatrimestral.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -84,7 +88,11 @@ import { RepseSupplierReviewDetailComponent } from './components/repse-supplier-
     SupplierComponent,
     RepseSupplierCaptureComponent,
     RepseSupplierReviewComponent,
-    RepseSupplierReviewDetailComponent
+    RepseSupplierReviewDetailComponent,
+    RepseCaptureGeneralComponent,
+    RepseCaptureMensualComponent,
+    RepseCaptureBimestralComponent,
+    RepseCaptureCuatrimestralComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent
