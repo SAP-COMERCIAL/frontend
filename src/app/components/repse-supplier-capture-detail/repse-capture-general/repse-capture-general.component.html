@@ -53,8 +53,7 @@
         <div fxFlex.gt-sm="300px">
             <div>
                 <mat-form-field>
-                    <input [type]="rfc" matInput class="form-control form-control-line control" formControlName="rfc"
-                        disabled>
+                    <input [type]="rfc" matInput class="form-control form-control-line control" formControlName="rfc" disabled>
                 </mat-form-field>
                 <span *ngIf="!newProject.get('rfc').valid && newProject.get('rfc').touched" class="help-block"
                     style="color: red;"> El RFC es requerido</span>
@@ -62,7 +61,7 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div>
-                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container><button class="button" (click)="addFile('RFC', $event)"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button" (click)="addView('RFC', $event)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="50px">

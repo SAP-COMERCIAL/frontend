@@ -96,6 +96,14 @@ public newProject: FormGroup;
     
   }
 
+  addFile(concepto: any, event){
+    console.log('SE CARGA', concepto);
+  }
+
+  addView(concepto: any, event ){
+    console.log('VISUALIZA', concepto);
+  }
+
 // =========================
 // UTILERIAS
 // =========================
