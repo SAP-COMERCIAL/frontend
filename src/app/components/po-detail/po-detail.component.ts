@@ -3,31 +3,21 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
-import * as XLSX from 'xlsx';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { quotationservice  } from 'src/app/services/quotation/quotation.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
-import { timeStamp } from 'console';
 import { quotationDetailModel } from 'src/app/models/quotation-detail.model';
 import { purchaseOrderservice } from 'src/app/services/PurchaseOrder.service';
 import { supplyservice } from '../../services/supplier.service';
 import { SupplierDetailComponent } from '../supplier-detail/supplier-detail.component';
-import { I } from '@angular/cdk/keycodes';
-import { CompileShallowModuleMetadata, ThrowStmt } from '@angular/compiler';
 import jwt_decode from "jwt-decode";
-
-import { HttpClient } from "@angular/common/http";
-import { tap } from "rxjs/operators";
-import { Observable, Observer } from "rxjs";
-
 import jsPDF from 'jspdf';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
-
+import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-po-detail',
@@ -136,7 +126,8 @@ export class PoDetailComponent implements OnInit {
     this.getsupplierAll();
     this.getProveedores();
     this.getCotizacionesAll();
-console.log('this.projectInfo',this.projectInfo);
+
+    console.log('this.projectInfo',this.projectInfo);
     if(this.projectInfo != undefined){
       console.log('project info', this.projectInfo);
       console.log('podata', this.projectInfo.iva.toString());
@@ -155,10 +146,6 @@ console.log('this.projectInfo',this.projectInfo);
         proveedor_id : this.projectInfo.proveedor_id,
         iva : this.projectInfo.iva.toString(),
         moneda : this.projectInfo.tipo_moneda.toString(),
-        // subtotal : this.projectInfo.sub_total,
-        // ivaSubtotal : '10',
-        // total : '10010',
-        // precio_unitario : '100'
       })
       
     }
@@ -231,7 +218,7 @@ console.log('this.projectInfo',this.projectInfo);
     const dialogRef = this.dialog.open(SupplierDetailComponent, dialogConfig);
   
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getsupplierAll();
     });
   }
 
@@ -270,7 +257,7 @@ console.log('this.projectInfo',this.projectInfo);
   // =====================
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {duration : 3000});
+    this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 
   decode(){
@@ -903,6 +890,7 @@ console.log('this.projectInfo',this.projectInfo);
 
         //INSERTA EN BITACORA
         this.updateODCStatus(res);
+        this.dialogRef.close();
       },
       error => console.log("error alta de proyectos",error)
     )

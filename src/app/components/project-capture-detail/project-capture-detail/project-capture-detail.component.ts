@@ -153,15 +153,15 @@ console.log('data de entrada', this.projectInfo);
 
     if(this.projectId == 0){
 
-      arrayTodb = { codigo_proyecto : this.newProject.controls["codigo_proyecto"].value, // this.codigo_proyecto,
-                  nombre_proyecto : this.newProject.controls["nombre_proyecto"].value, //this.nombre_proyecto,
-                  cliente_id : this.newProject.controls["cliente"].value, //this.cliente,
-                  presupuesto_proyecto : this.newProject.controls["presupuesto_proyecto"].value, //this.presupuesto_proyecto,
+      arrayTodb = { codigo_proyecto : this.newProject.controls["codigo_proyecto"].value,
+                  nombre_proyecto : this.newProject.controls["nombre_proyecto"].value,
+                  cliente_id : this.newProject.controls["cliente"].value,
+                  presupuesto_proyecto : this.newProject.controls["presupuesto_proyecto"].value,
                   fecha_inicial_proyecto : moment(this.fecha_inicial_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
                   fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-                  responsable_proyecto : this.newProject.controls["responsable_proyecto"].value, //this.responsable_proyecto,
-                  centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value, //this.centro_de_costo_proyecto,
-                  almacen_id : this.newProject.controls["almacen"].value}; //this.almacen};
+                  responsable_proyecto : this.newProject.controls["responsable_proyecto"].value,
+                  centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value,
+                  almacen_id : this.newProject.controls["almacen"].value};
 
       // Actualiza registro NUEVO
       this._projectService.insertProjects(arrayTodb).subscribe(
@@ -174,21 +174,18 @@ console.log('data de entrada', this.projectInfo);
         },
         error => console.log("error alta de proyectos",error)
       )
-    // Inserta categorias
-    // this.insertCategories();
-    // this.dialogRef.close();
     }
     else{
       arrayTodb = {proyecto_id : this.projectId,
-        nombre_proyecto : this.newProject.controls["nombre_proyecto"].value, //this.nombre_proyecto,
-        cliente_id : this.newProject.controls["cliente"].value, //this.cliente,
-        presupuesto_proyecto : this.newProject.controls["presupuesto_proyecto"].value, //this.presupuesto_proyecto,
+        nombre_proyecto : this.newProject.controls["nombre_proyecto"].value,
+        cliente_id : this.newProject.controls["cliente"].value,
+        presupuesto_proyecto : this.newProject.controls["presupuesto_proyecto"].value,
         fecha_inicial_proyecto : moment(this.fecha_inicial_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
         fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
-        responsable_proyecto : this.newProject.controls["centroDeCostos"].value, //this.newProject.controls["responsable_proyecto"].value, //this.responsable_proyecto,
-        centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value, //this.centro_de_costo_proyecto,
-        almacen_id : this.newProject.controls["almacen"].value, //this.almacen,
-        codigo_proyecto : this.newProject.controls["codigo_proyecto"].value}; // this.codigo_proyecto};
+        responsable_proyecto : this.newProject.controls["centroDeCostos"].value,
+        centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value,
+        almacen_id : this.newProject.controls["almacen"].value,
+        codigo_proyecto : this.newProject.controls["codigo_proyecto"].value};
 
         // Actualiza registro EDICION
         this._projectService.updateProjects(arrayTodb).subscribe(

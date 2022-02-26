@@ -88,7 +88,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getrequisition();
     });
   }
 
@@ -111,7 +111,7 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     const dialogRef = this.dialog.open(RequisitionDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getrequisition();
     });
   }
 
@@ -145,11 +145,26 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   // =================
 
   getrequisition(){
+    
+    let arraySort: any;
+
     // Proyectos registrados
     this._requisitionService.getRequisitionAll().subscribe(
       res=> {
         console.log('Requisiciones', res);
-        this.dataSourceShow = new MatTableDataSource(res);
+        
+        // Ordenado de arreglo
+        arraySort = res.sort(function (a, b) {
+          if (a.requisicioninterna_id < b.requisicioninterna_id) {
+            return 1;
+          }
+          if (a.requisicioninterna_id > b.requisicioninterna_id) {
+            return -1;
+          }
+          return 0;
+        });
+
+        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
         

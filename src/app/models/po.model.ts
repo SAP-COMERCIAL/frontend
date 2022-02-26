@@ -26,6 +26,6 @@ export class poModel{
     costo: string
     total: string
     proveedor_id : string
-
+    ordendecompra_id: number
 }
 

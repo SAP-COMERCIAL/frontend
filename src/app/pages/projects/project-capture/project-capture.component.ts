@@ -44,7 +44,6 @@ public array: any;
           , MatTableModule : MatTableModule
           , private _projectService : projectservice
           , private _excelService : ExcelServiceService) { 
-    // this.displayedColumns = ['proyecto']
   }
 
 // ====================
@@ -56,14 +55,27 @@ public array: any;
 
   getProjects(){
 
+    let arraySort: any;
     // Proyectos registrados
     this._projectService.getProjectAll().subscribe(
       res=> {
         console.log('Proyectos', res);
-        this.dataSourceShow = new MatTableDataSource(res);
+        
+        // Ordenado de arreglo
+        arraySort = res.sort(function (a, b) {
+          if (a.proyecto_id < b.proyecto_id) {
+            return 1;
+          }
+          if (a.proyecto_id > b.proyecto_id) {
+            return -1;
+          }
+          return 0;
+        });
+
+        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
-        
+
         this.iterator();
         this.dataSourceShow.sort = this.sort;
         
@@ -106,6 +118,7 @@ public array: any;
     const dialogRef = this.dialog.open(ProjectCaptureDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getProjects();
     });
   }
 
@@ -128,7 +141,7 @@ public array: any;
     const dialogRef = this.dialog.open(CategoriesComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getProjects();
     });
   }
 
@@ -151,6 +164,7 @@ public array: any;
     const dialogRef = this.dialog.open(ProjectCaptureDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getProjects();
     });
   }
 

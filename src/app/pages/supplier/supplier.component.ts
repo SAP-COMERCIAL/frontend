@@ -139,11 +139,26 @@ dataSourceShow : MatTableDataSource<supplierModel>
   // =================
 
   getsupplier(){
+
+    let arraySort: any;
+
     // Proyectos registrados
     this._supplyservice.getsupplyAll().subscribe(
       res=> {
         console.log('Proveedores', res);
-        this.dataSourceShow = new MatTableDataSource(res);
+
+        // Ordenado de arreglo
+        arraySort = res.sort(function (a, b) {
+          if (a.supplier_id < b.supplier_id) {
+            return 1;
+          }
+          if (a.supplier_id > b.supplier_id) {
+            return -1;
+          }
+          return 0;
+        });
+        
+        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
         

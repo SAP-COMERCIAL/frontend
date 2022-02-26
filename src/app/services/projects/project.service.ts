@@ -17,16 +17,14 @@ export class projectservice {
     getProjectAll() {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
-            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'))
-            .append('X-Frame-Options', 'SAMEORIGIN');
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get<projectModel[]>(environment.urlapi + environment.apiContextDrivers + 'Project/lista', {headers});
     }
 
     updateProjects(arrayToDb : any) {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
-            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'))
-            .append('X-Frame-Options', 'SAMEORIGIN');
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
             
             console.log('actualiza proyecto' ,arrayToDb);
         return this.http.put(environment.urlapi+environment.apiContextDrivers+'Project/actualizar',arrayToDb, {headers});
@@ -35,8 +33,7 @@ export class projectservice {
     insertProjects(arrayToDb : any) {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
-            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'))
-            .append('X-Frame-Options', 'SAMEORIGIN');
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
 
             console.log('inserta proyecto' ,arrayToDb);
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'Project/registrar',arrayToDb, {headers});

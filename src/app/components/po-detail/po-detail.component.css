@@ -1,0 +1,80 @@
+.column{
+   vertical-align: middle;
+}
+    
+.control{
+    height: 35px;
+    vertical-align: middle;
+}
+
+.division{
+    padding-bottom: 1px;
+}
+
+.icon-cog {
+    color: orange;
+    }
+
+.icon-cog-wite {
+    color: white;
+    }
+
+.btn-bg-green{
+    background-color: forestgreen;
+}
+
+.btn-bg-orange{
+    background-color: orange;
+}
+
+.btn-bg-wite{
+    background-color: white;
+    border: none;
+}
+
+.btn-bg-red{
+    background-color: red;
+}
+
+::ng-deep.alert-snackbar{
+    background-color: rgb(106, 93, 83) !important;
+    color:rgb(255, 249, 246) !important;
+    height: 100px !important;
+    width: auto !important;
+    margin: 24px !important;
+    font-size: 32px;
+    align-items: center !important;
+    }
+
+    ::ng-deep.red-snackbar{
+    background-color: rgb(153, 50, 50);
+    color:lightgoldenrodyellow;
+}
+    
+.col10{
+    width: 10%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.col20{
+    width: 20%;
+    vertical-align: middle;
+}
+
+.col30{
+    width: 30%;
+    vertical-align: middle;
+}
+
+.col70{
+    width: 70%;
+    vertical-align: middle;
+}
+
+.colbuttons{
+    vertical-align: middle;
+    text-align: center;
+}
+
+    

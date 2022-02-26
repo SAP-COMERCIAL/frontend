@@ -4,21 +4,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { quotationListModel } from 'src/app/models/quotation-list.model';
 import { quotationservice } from 'src/app/services/quotation/quotation.service';
-
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import * as moment from 'moment';
-import { AbstractControl, FormBuilder } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { DataSource } from '@angular/cdk/table';
 import { QuotationDetailComponent } from 'src/app/components/quotations/quotation-detail/quotation-detail.component';
-import { QuotationDetailFilesComponent } from 'src/app/components/quotations/quotation-detail-files/quotation-detail-files.component';
-import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-quotation-list',
@@ -48,19 +38,29 @@ dataSourceShow : MatTableDataSource<quotationListModel>
 
     this.getQuotationAll();
 
-    // let arrayData : any;
-
-    // arrayData = [{codigo_requisicioninterna : 1, codigo : 1, fecha : '2020-01-01', estado : 'ACTIVO', requisicioninterna_id : 1, cotizacion_id : 1}]
-    // this.dataSourceShow = new MatTableDataSource(arrayData);
-
   }
 
   getQuotationAll(){
+    
+    let arraySort: any;
+
     // Proyectos registrados
     this._quotationService.getQuotationAll().subscribe(
       res=> {
+
+        // Ordenado de arreglo
+        arraySort = res.sort(function (a, b) {
+          if (a.cotizacion_id < b.cotizacion_id) {
+            return 1;
+          }
+          if (a.cotizacion_id > b.cotizacion_id) {
+            return -1;
+          }
+          return 0;
+        });
+
         console.log('Cotizaciones', res);
-        this.dataSourceShow = new MatTableDataSource(res);
+        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
         
@@ -109,7 +109,7 @@ dataSourceShow : MatTableDataSource<quotationListModel>
     const dialogRef = this.dialog.open(QuotationDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getQuotationAll();
     });
   }
 
@@ -133,7 +133,7 @@ dataSourceShow : MatTableDataSource<quotationListModel>
     const dialogRef = this.dialog.open(QuotationDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getQuotationAll();
     });
   }
 

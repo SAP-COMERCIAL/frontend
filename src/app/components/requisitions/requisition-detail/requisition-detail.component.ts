@@ -14,9 +14,6 @@ import { requisitionservice } from '../../../services/requisition/requisition.se
 import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
-import { skipUntil } from 'rxjs-compat/operator/skipUntil';
-// import { NotificationService } from '../../../services/common/notification.service';
 
 @Component({
   selector: 'app-requisition-detail',
@@ -96,7 +93,6 @@ export class RequisitionDetailComponent implements OnInit {
     this.getProyectos();
     this.getEnabledCategories();
     
-    console.log('this.projectInfo["codigo"]', this.requisicionId);
     this.newProject.controls["categoria_id"].setValue(this.projectInfo["codigo_proyectocategoria"]);
     
     if(this.requisicionId != 0){
@@ -249,7 +245,6 @@ export class RequisitionDetailComponent implements OnInit {
   }
 
   proyectoSelected(){
-    console.log('Selecciona categorias', this.newProject.controls["proyecto_id"].value );
     this.getCategories(this.newProject.controls["proyecto_id"].value);
   }
 
@@ -302,6 +297,7 @@ export class RequisitionDetailComponent implements OnInit {
         // Actualiza registro EDICION
         this.updateRequisition(arrayTodb);
     }
+    this.dialogRef.close();
   }
 
   fechaInicial(event){
@@ -317,7 +313,7 @@ export class RequisitionDetailComponent implements OnInit {
   // ====================
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {duration : 3000});
+    this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 
   public handlePage(e: any) {

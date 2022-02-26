@@ -142,11 +142,26 @@ dataSourceShow : MatTableDataSource<customerModel>
   // =================
 
   getcustomer(){
+    
+    let arraySort: any;
+
     // Proyectos registrados
     this._customerservice.getcustomerAll().subscribe(
       res=> {
         console.log('Clientes', res);
-        this.dataSourceShow = new MatTableDataSource(res);
+
+        // Ordenado de arreglo
+        arraySort = res.sort(function (a, b) {
+          if (a.customer_id < b.customer_id) {
+            return 1;
+          }
+          if (a.customer_id > b.customer_id) {
+            return -1;
+          }
+          return 0;
+        });
+
+        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
         

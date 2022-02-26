@@ -2,32 +2,18 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 import * as moment from 'moment';
-import * as XLSX from 'xlsx';
-import { from } from 'rxjs';
 import { projectModel } from 'src/app/models/project.model';
 import { projectservice } from '../../../services/projects/project.service';
-import { categoryModel } from '../../../models/category.model';
 import { categoryservice } from '../../../services/category/category.service';
-import { ProjectCaptureComponent } from 'src/app/pages/projects/project-capture/project-capture.component';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
-import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
 import { requisitionModel } from 'src/app/models/requisition.model';
 import { requisitionservice } from '../../../services/requisition/requisition.service';
-import { quotationListModel } from '../../../models/quotation-list.model'
 import { quotationservice } from '../../../services/quotation/quotation.service';
-import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
-import { AppConstants } from '../../../shared/app.constants';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { filter } from 'rxjs-compat/operator/filter';
 import { RequisitionDetailComponent } from '../../requisitions/requisition-detail/requisition-detail.component';
-import { umask } from 'process';
-import { MatTab } from '@angular/material/tabs';
-import { K } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-quotation-detail',
@@ -49,8 +35,7 @@ export class QuotationDetailComponent implements OnInit {
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @ViewChild(MatTable) tabla1: MatTable<any>;
-  
-  
+    
   fecha:any = moment(new Date, 'DD-MM-YYYY hh:mm').format('DD-MM-YYYY');
   requisicion_id : any = '';
   categoria_id : any = '';
@@ -89,7 +74,6 @@ export class QuotationDetailComponent implements OnInit {
     , private _snackBar : MatSnackBar
     , private _requisitionservice : requisitionservice
     , private _quotationservice : quotationservice
-    // , private notificationService: NotificationService,
   ) { 
     this.projectInfo = data.arrayData;
     this.requisicionId = data.requisicionId;
@@ -114,20 +98,20 @@ export class QuotationDetailComponent implements OnInit {
     if(this.projectInfo["cotizacion_id"] != 0){
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
-          requisicion_id : '', // this.projectInfo["requisicion_id"] ,
+          requisicion_id : '', 
           requisicion_Numero : this.projectInfo["codigo_requisicioninterna"] ,
-          categoria_id : '', // this.projectInfo["categoria_id"],
-          fecha : this.projectInfo["fecha"] , // this.projectInfo["fecha"]
+          categoria_id : '', 
+          fecha : this.projectInfo["fecha"] ,
           cotizacion_Numero : this.projectInfo["codigo"] ,
           loadfile : ''
           
       })
       this.requisicion_Numero = this.projectInfo["codigo"];
       this.proyecto_id = this.projectInfo["proyecto_id"];
-      this.requisicion_id = '' //this.projectInfo["requisicion_id"];
+      this.requisicion_id = '';
       this.categoria_id = this.projectInfo["categoria_id"];
-      this.fecha = '', //this.projectInfo["fecha"];
-      this.loadfile = ''
+      this.fecha = '';
+      this.loadfile = '';
       
       this.getQuotationDetail(this.projectInfo["cotizacion_id"]);
     }
@@ -135,11 +119,10 @@ export class QuotationDetailComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {duration : 3000});
+    this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 
   proyectoSelected(){
-    console.log('Selecciona categorias', this.newProject.controls["proyecto_id"].value);
     this.getCategories(this.newProject.controls["proyecto_id"].value);
   }
 
@@ -223,6 +206,7 @@ export class QuotationDetailComponent implements OnInit {
         // )
         // this.dialogRef.close();
     }
+    this.dialogRef.close();
   }
 
 
@@ -242,15 +226,6 @@ export class QuotationDetailComponent implements OnInit {
 
 find(form, event){
   // Buscar requisiciones
-  console.log('requisiciones', this.requisicion_Numero)
-  // this._requisitionservice.getRequisitionById(this.cotizacion_Numero).subscribe(
-  //   res=> {
-  //     this.datasourceCategories = res;
-  //     console.log('PROYECTOS - CATEGORIAS', res);
-  //   },
-  //   error => console.log("error consulta cateogorias",error)
-  // )
-
 }
 
 public handlePage(e: any) {
@@ -320,10 +295,7 @@ getrequisitionAll(){
     res=> {
       // this.datasourceRequisition = [];
       this.datasourceRequisition = res;
-        this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value)
-
-        // // Consulta detalle de requisición
-        // this.getRequisitionDetail();
+        this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value);
     },
     error => console.log("error consulta requisiciones",error)
   )
@@ -337,9 +309,6 @@ getrequisition(){
       this.datasourceRequisition = [];
       this.datasourceRequisition.push(res);
         console.log('REQUISICIONES', this.datasourceRequisition);
-
-    //     // Consulta detalle de requisición
-    //     this.getRequisitionDetail();
     },
     error => console.log("error consulta requisiciones",error)
   )
@@ -398,7 +367,6 @@ insertQuotationDet(cotizacionId : any){
   let arrayToDb : any;
 
   this.tabla1["_data"].forEach(element => {
-    console.log('elemento', element);
     if(element.activo == true){
       arrayToDb = { cotizaciondetalle_id: 0
         , codigo_cotizacion : ''

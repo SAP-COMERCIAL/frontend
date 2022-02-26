@@ -102,7 +102,7 @@ dataSourceShow : MatTableDataSource<poModel>
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getPO_Hdr();
     });
   }
 
@@ -127,7 +127,7 @@ dataSourceShow : MatTableDataSource<poModel>
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getPO_Hdr();
     });
   }
 
@@ -153,7 +153,7 @@ dataSourceShow : MatTableDataSource<poModel>
     const dialogRef = this.dialog.open(PoDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      this.getPO_Hdr();
     });
   }
 
@@ -208,11 +208,26 @@ dataSourceShow : MatTableDataSource<poModel>
   // =====================
 
   getPO_Hdr(){
+
+    let arraySort: any;
+
     // Proyectos registrados
     this._purchaseOrderService.getPOAll().subscribe(
       res=> {
         console.log('PurchaseOrder', res);
-        this.dataSourceShow = new MatTableDataSource(res);
+
+        // Ordenado de arreglo
+        arraySort = res.sort(function (a, b) {
+          if (a.ordendecompra_id < b.ordendecompra_id) {
+            return 1;
+          }
+          if (a.ordendecompra_id > b.ordendecompra_id) {
+            return -1;
+          }
+          return 0;
+        });
+        
+        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
         
@@ -244,7 +259,7 @@ dataSourceShow : MatTableDataSource<poModel>
     this._purchaseOrderService.updatePOStatus(arrayToDb).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
-        
+        this.getPO_Hdr();
       },
       error => console.log("error alta de proyectos",error)
     )
