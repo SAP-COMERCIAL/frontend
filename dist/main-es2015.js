@@ -849,7 +849,7 @@ class CategoriesComponent {
         console.log('almacen', this.almacenEdicion);
     }
     openSnackBar(message, action) {
-        this._snackBar.open(message, action, { duration: 3000 });
+        this._snackBar.open(message, action, { duration: 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar' });
     }
     salir() {
         this.dialogRef.close();
@@ -956,7 +956,7 @@ CategoriesComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](41, 5, ctx.presupuestoTotal));
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](7);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](48, 7, ctx.presupuestoRestante));
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_9__.DefaultLayoutDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_9__.DefaultFlexDirective, _angular_material_card__WEBPACK_IMPORTED_MODULE_10__.MatCard, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_7__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRowDef, _angular_material_button__WEBPACK_IMPORTED_MODULE_11__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCell, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_12__.MatCheckbox, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgModel, _angular_material_sort__WEBPACK_IMPORTED_MODULE_7__.MatSortHeader, _angular_material_icon__WEBPACK_IMPORTED_MODULE_13__.MatIcon, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatLabel, _angular_material_input__WEBPACK_IMPORTED_MODULE_15__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.DefaultValueAccessor, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_16__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_16__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_16__.MatDatepicker, _angular_material_select__WEBPACK_IMPORTED_MODULE_17__.MatSelect, _angular_material_core__WEBPACK_IMPORTED_MODULE_18__.MatOption, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRow], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_19__.CurrencyPipe, _angular_common__WEBPACK_IMPORTED_MODULE_19__.DatePipe], styles: [".col10[_ngcontent-%COMP%]{\n    width: 10%;\n    vertical-align: middle;\n    text-align: center;\n}\n\n.col20[_ngcontent-%COMP%]{\n    width: 20%;\n    vertical-align: middle;\n}\n\n.col30[_ngcontent-%COMP%]{\n    width: 30%;\n    vertical-align: middle;\n}\n\n.col70[_ngcontent-%COMP%]{\n    width: 70%;\n    vertical-align: middle;\n}\n\n.colbuttons[_ngcontent-%COMP%]{\n    vertical-align: middle;\n    text-align: center;\n}\n\n.controltable50[_ngcontent-%COMP%]{\n    width: 50px;\n}\n\n.controltable100[_ngcontent-%COMP%]{\n    width: 100px;\n}\n\n.column[_ngcontent-%COMP%]{\n    vertical-align: middle;\n}\n\n.control[_ngcontent-%COMP%]{\n    height: 35px;\n    vertical-align: middle;\n}\n\n.division[_ngcontent-%COMP%]{\n    padding-bottom: 1px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNhdGVnb3JpZXMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7SUFDdEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksVUFBVTtJQUNWLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksc0JBQXNCO0lBQ3RCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLFdBQVc7QUFDZjs7QUFFQTtJQUNJLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxZQUFZO0lBQ1osc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksbUJBQW1CO0FBQ3ZCIiwiZmlsZSI6ImNhdGVnb3JpZXMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb2wxMHtcbiAgICB3aWR0aDogMTAlO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uY29sMjB7XG4gICAgd2lkdGg6IDIwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29sMzB7XG4gICAgd2lkdGg6IDMwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29sNzB7XG4gICAgd2lkdGg6IDcwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29sYnV0dG9uc3tcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLmNvbnRyb2x0YWJsZTUwe1xuICAgIHdpZHRoOiA1MHB4O1xufVxuXG4uY29udHJvbHRhYmxlMTAwe1xuICAgIHdpZHRoOiAxMDBweDtcbn1cblxuLmNvbHVtbntcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29udHJvbHtcbiAgICBoZWlnaHQ6IDM1cHg7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbn1cblxuLmRpdmlzaW9ue1xuICAgIHBhZGRpbmctYm90dG9tOiAxcHg7XG59Il19 */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_9__.DefaultLayoutDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_9__.DefaultFlexDirective, _angular_material_card__WEBPACK_IMPORTED_MODULE_10__.MatCard, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_7__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRowDef, _angular_material_button__WEBPACK_IMPORTED_MODULE_11__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatCell, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_12__.MatCheckbox, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgModel, _angular_material_sort__WEBPACK_IMPORTED_MODULE_7__.MatSortHeader, _angular_material_icon__WEBPACK_IMPORTED_MODULE_13__.MatIcon, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatFormField, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatLabel, _angular_material_input__WEBPACK_IMPORTED_MODULE_15__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.DefaultValueAccessor, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_16__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_16__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_16__.MatDatepicker, _angular_material_select__WEBPACK_IMPORTED_MODULE_17__.MatSelect, _angular_material_core__WEBPACK_IMPORTED_MODULE_18__.MatOption, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_3__.MatRow], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_19__.CurrencyPipe, _angular_common__WEBPACK_IMPORTED_MODULE_19__.DatePipe], styles: [".col10[_ngcontent-%COMP%]{\n    width: 10%;\n    vertical-align: middle;\n    text-align: center;\n}\n\n.col20[_ngcontent-%COMP%]{\n    width: 20%;\n    vertical-align: middle;\n}\n\n.col30[_ngcontent-%COMP%]{\n    width: 30%;\n    vertical-align: middle;\n}\n\n.col70[_ngcontent-%COMP%]{\n    width: 70%;\n    vertical-align: middle;\n}\n\n.colbuttons[_ngcontent-%COMP%]{\n    vertical-align: middle;\n    text-align: center;\n}\n\n.controltable50[_ngcontent-%COMP%]{\n    width: 50px;\n}\n\n.controltable100[_ngcontent-%COMP%]{\n    width: 100px;\n}\n\n.column[_ngcontent-%COMP%]{\n    vertical-align: middle;\n}\n\n.control[_ngcontent-%COMP%]{\n    height: 35px;\n    vertical-align: middle;\n}\n\n.division[_ngcontent-%COMP%]{\n    padding-bottom: 1px;\n}\n\n.icon-cog[_ngcontent-%COMP%] {\n    color: orange;\n    }\n\n.icon-cog-wite[_ngcontent-%COMP%] {\n    color: white;\n    }\n\n.btn-bg-green[_ngcontent-%COMP%]{\n    background-color: forestgreen;\n}\n\n.btn-bg-orange[_ngcontent-%COMP%]{\n    background-color: orange;\n}\n\n.btn-bg-wite[_ngcontent-%COMP%]{\n    background-color: white;\n    border: none;\n}\n\n.btn-bg-red[_ngcontent-%COMP%]{\n    background-color: red;\n}\n\n .alert-snackbar{\n    background-color: rgb(106, 93, 83) !important;\n    color:rgb(255, 249, 246) !important;\n    height: 100px !important;\n    width: auto !important;\n    margin: 24px !important;\n    font-size: 32px;\n    align-items: center !important;\n    }\n\n .red-snackbar{\n    background-color: rgb(153, 50, 50);\n    color:lightgoldenrodyellow;\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNhdGVnb3JpZXMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7SUFDdEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksVUFBVTtJQUNWLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksc0JBQXNCO0lBQ3RCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLFdBQVc7QUFDZjs7QUFFQTtJQUNJLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxZQUFZO0lBQ1osc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksbUJBQW1CO0FBQ3ZCOztBQUdBO0lBQ0ksYUFBYTtJQUNiOztBQUVKO0lBQ0ksWUFBWTtJQUNaOztBQUVKO0lBQ0ksNkJBQTZCO0FBQ2pDOztBQUVBO0lBQ0ksd0JBQXdCO0FBQzVCOztBQUVBO0lBQ0ksdUJBQXVCO0lBQ3ZCLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxxQkFBcUI7QUFDekI7O0FBRUE7SUFDSSw2Q0FBNkM7SUFDN0MsbUNBQW1DO0lBQ25DLHdCQUF3QjtJQUN4QixzQkFBc0I7SUFDdEIsdUJBQXVCO0lBQ3ZCLGVBQWU7SUFDZiw4QkFBOEI7SUFDOUI7O0FBRUE7SUFDQSxrQ0FBa0M7SUFDbEMsMEJBQTBCO0lBQzFCIiwiZmlsZSI6ImNhdGVnb3JpZXMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb2wxMHtcbiAgICB3aWR0aDogMTAlO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uY29sMjB7XG4gICAgd2lkdGg6IDIwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29sMzB7XG4gICAgd2lkdGg6IDMwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29sNzB7XG4gICAgd2lkdGg6IDcwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29sYnV0dG9uc3tcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLmNvbnRyb2x0YWJsZTUwe1xuICAgIHdpZHRoOiA1MHB4O1xufVxuXG4uY29udHJvbHRhYmxlMTAwe1xuICAgIHdpZHRoOiAxMDBweDtcbn1cblxuLmNvbHVtbntcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuXG4uY29udHJvbHtcbiAgICBoZWlnaHQ6IDM1cHg7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbn1cblxuLmRpdmlzaW9ue1xuICAgIHBhZGRpbmctYm90dG9tOiAxcHg7XG59XG5cbiAgXG4uaWNvbi1jb2cge1xuICAgIGNvbG9yOiBvcmFuZ2U7XG4gICAgfVxuXG4uaWNvbi1jb2ctd2l0ZSB7XG4gICAgY29sb3I6IHdoaXRlO1xuICAgIH1cblxuLmJ0bi1iZy1ncmVlbntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBmb3Jlc3RncmVlbjtcbn1cblxuLmJ0bi1iZy1vcmFuZ2V7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogb3JhbmdlO1xufVxuXG4uYnRuLWJnLXdpdGV7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyOiBub25lO1xufVxuXG4uYnRuLWJnLXJlZHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XG59XG5cbjo6bmctZGVlcC5hbGVydC1zbmFja2JhcntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTA2LCA5MywgODMpICFpbXBvcnRhbnQ7XG4gICAgY29sb3I6cmdiKDI1NSwgMjQ5LCAyNDYpICFpbXBvcnRhbnQ7XG4gICAgaGVpZ2h0OiAxMDBweCAhaW1wb3J0YW50O1xuICAgIHdpZHRoOiBhdXRvICFpbXBvcnRhbnQ7XG4gICAgbWFyZ2luOiAyNHB4ICFpbXBvcnRhbnQ7XG4gICAgZm9udC1zaXplOiAzMnB4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXIgIWltcG9ydGFudDtcbiAgICB9XG5cbiAgICA6Om5nLWRlZXAucmVkLXNuYWNrYmFye1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigxNTMsIDUwLCA1MCk7XG4gICAgY29sb3I6bGlnaHRnb2xkZW5yb2R5ZWxsb3c7XG4gICAgfVxuIl19 */"] });
 
 
 /***/ }),
@@ -1895,10 +1895,6 @@ class PoDetailComponent {
                 proveedor_id: this.projectInfo.proveedor_id,
                 iva: this.projectInfo.iva.toString(),
                 moneda: this.projectInfo.tipo_moneda.toString(),
-                // subtotal : this.projectInfo.sub_total,
-                // ivaSubtotal : '10',
-                // total : '10010',
-                // precio_unitario : '100'
             });
         }
     }
@@ -1953,7 +1949,7 @@ class PoDetailComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(_supplier_detail_supplier_detail_component__WEBPACK_IMPORTED_MODULE_1__.SupplierDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getsupplierAll();
         });
     }
     reloadSupplier(form, event) {
@@ -1982,7 +1978,7 @@ class PoDetailComponent {
     // UTILERIAS
     // =====================
     openSnackBar(message, action) {
-        this._snackBar.open(message, action, { duration: 3000 });
+        this._snackBar.open(message, action, { duration: 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar' });
     }
     decode() {
         let token = localStorage.getItem('token_access');
@@ -2559,6 +2555,7 @@ class PoDetailComponent {
             this.insertPODet(res, arrayDetail);
             //INSERTA EN BITACORA
             this.updateODCStatus(res);
+            this.dialogRef.close();
         }, error => console.log("error alta de proyectos", error));
     }
     insertPODet(po_id, arrayDetail) {
@@ -3061,7 +3058,7 @@ PoDetailComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1
         _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
         _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_17__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_17__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__.MatFormField, _angular_material_select__WEBPACK_IMPORTED_MODULE_19__.MatSelect, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_20__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_20__.NgIf, _angular_material_input__WEBPACK_IMPORTED_MODULE_21__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.DefaultValueAccessor, _angular_material_core__WEBPACK_IMPORTED_MODULE_22__.MatOption, _angular_material_button__WEBPACK_IMPORTED_MODULE_23__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_15__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatCell, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_24__.MatCheckbox, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgModel, _angular_material_sort__WEBPACK_IMPORTED_MODULE_15__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatRow], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_20__.CurrencyPipe], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwby1kZXRhaWwuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_17__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_17__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__.MatFormField, _angular_material_select__WEBPACK_IMPORTED_MODULE_19__.MatSelect, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_20__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_20__.NgIf, _angular_material_input__WEBPACK_IMPORTED_MODULE_21__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.DefaultValueAccessor, _angular_material_core__WEBPACK_IMPORTED_MODULE_22__.MatOption, _angular_material_button__WEBPACK_IMPORTED_MODULE_23__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_15__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatCell, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_24__.MatCheckbox, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.NgModel, _angular_material_sort__WEBPACK_IMPORTED_MODULE_15__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_13__.MatRow], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_20__.CurrencyPipe], styles: [".column[_ngcontent-%COMP%]{\r\n   vertical-align: middle;\r\n}\r\n    \r\n.control[_ngcontent-%COMP%]{\r\n    height: 35px;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.division[_ngcontent-%COMP%]{\r\n    padding-bottom: 1px;\r\n}\r\n    \r\n.icon-cog[_ngcontent-%COMP%] {\r\n    color: orange;\r\n    }\r\n    \r\n.icon-cog-wite[_ngcontent-%COMP%] {\r\n    color: white;\r\n    }\r\n    \r\n.btn-bg-green[_ngcontent-%COMP%]{\r\n    background-color: forestgreen;\r\n}\r\n    \r\n.btn-bg-orange[_ngcontent-%COMP%]{\r\n    background-color: orange;\r\n}\r\n    \r\n.btn-bg-wite[_ngcontent-%COMP%]{\r\n    background-color: white;\r\n    border: none;\r\n}\r\n    \r\n.btn-bg-red[_ngcontent-%COMP%]{\r\n    background-color: red;\r\n}\r\n    \r\n .alert-snackbar{\r\n    background-color: rgb(106, 93, 83) !important;\r\n    color:rgb(255, 249, 246) !important;\r\n    height: 100px !important;\r\n    width: auto !important;\r\n    margin: 24px !important;\r\n    font-size: 32px;\r\n    align-items: center !important;\r\n    }\r\n    \r\n .red-snackbar{\r\n    background-color: rgb(153, 50, 50);\r\n    color:lightgoldenrodyellow;\r\n}\r\n    \r\n.col10[_ngcontent-%COMP%]{\r\n    width: 10%;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n    \r\n.col20[_ngcontent-%COMP%]{\r\n    width: 20%;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.col30[_ngcontent-%COMP%]{\r\n    width: 30%;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.col70[_ngcontent-%COMP%]{\r\n    width: 70%;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.colbuttons[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvLWRldGFpbC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0dBQ0csc0JBQXNCO0FBQ3pCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLGFBQWE7SUFDYjs7QUFFSjtJQUNJLFlBQVk7SUFDWjs7QUFFSjtJQUNJLDZCQUE2QjtBQUNqQzs7QUFFQTtJQUNJLHdCQUF3QjtBQUM1Qjs7QUFFQTtJQUNJLHVCQUF1QjtJQUN2QixZQUFZO0FBQ2hCOztBQUVBO0lBQ0kscUJBQXFCO0FBQ3pCOztBQUVBO0lBQ0ksNkNBQTZDO0lBQzdDLG1DQUFtQztJQUNuQyx3QkFBd0I7SUFDeEIsc0JBQXNCO0lBQ3RCLHVCQUF1QjtJQUN2QixlQUFlO0lBQ2YsOEJBQThCO0lBQzlCOztBQUVBO0lBQ0Esa0NBQWtDO0lBQ2xDLDBCQUEwQjtBQUM5Qjs7QUFFQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7SUFDdEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksVUFBVTtJQUNWLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksc0JBQXNCO0lBQ3RCLGtCQUFrQjtBQUN0QiIsImZpbGUiOiJwby1kZXRhaWwuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb2x1bW57XHJcbiAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbn1cclxuICAgIFxyXG4uY29udHJvbHtcclxuICAgIGhlaWdodDogMzVweDtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbn1cclxuXHJcbi5kaXZpc2lvbntcclxuICAgIHBhZGRpbmctYm90dG9tOiAxcHg7XHJcbn1cclxuXHJcbi5pY29uLWNvZyB7XHJcbiAgICBjb2xvcjogb3JhbmdlO1xyXG4gICAgfVxyXG5cclxuLmljb24tY29nLXdpdGUge1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG5cclxuLmJ0bi1iZy1ncmVlbntcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGZvcmVzdGdyZWVuO1xyXG59XHJcblxyXG4uYnRuLWJnLW9yYW5nZXtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IG9yYW5nZTtcclxufVxyXG5cclxuLmJ0bi1iZy13aXRle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbn1cclxuXHJcbi5idG4tYmctcmVke1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xyXG59XHJcblxyXG46Om5nLWRlZXAuYWxlcnQtc25hY2tiYXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTA2LCA5MywgODMpICFpbXBvcnRhbnQ7XHJcbiAgICBjb2xvcjpyZ2IoMjU1LCAyNDksIDI0NikgIWltcG9ydGFudDtcclxuICAgIGhlaWdodDogMTAwcHggIWltcG9ydGFudDtcclxuICAgIHdpZHRoOiBhdXRvICFpbXBvcnRhbnQ7XHJcbiAgICBtYXJnaW46IDI0cHggIWltcG9ydGFudDtcclxuICAgIGZvbnQtc2l6ZTogMzJweDtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXIgIWltcG9ydGFudDtcclxuICAgIH1cclxuXHJcbiAgICA6Om5nLWRlZXAucmVkLXNuYWNrYmFye1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDE1MywgNTAsIDUwKTtcclxuICAgIGNvbG9yOmxpZ2h0Z29sZGVucm9keWVsbG93O1xyXG59XHJcbiAgICBcclxuLmNvbDEwe1xyXG4gICAgd2lkdGg6IDEwJTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5jb2wyMHtcclxuICAgIHdpZHRoOiAyMCU7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG59XHJcblxyXG4uY29sMzB7XHJcbiAgICB3aWR0aDogMzAlO1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG5cclxuLmNvbDcwe1xyXG4gICAgd2lkdGg6IDcwJTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbn1cclxuXHJcbi5jb2xidXR0b25ze1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuICAgICJdfQ== */"] });
 
 
 /***/ }),
@@ -3278,7 +3275,7 @@ class ProjectCaptureDetailComponent {
                 fecha_final_proyecto: moment__WEBPACK_IMPORTED_MODULE_0__(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
                 responsable_proyecto: this.newProject.controls["responsable_proyecto"].value,
                 centro_de_costo_proyecto: this.newProject.controls["centroDeCostos"].value,
-                almacen_id: this.newProject.controls["almacen"].value }; //this.almacen};
+                almacen_id: this.newProject.controls["almacen"].value };
             // Actualiza registro NUEVO
             this._projectService.insertProjects(arrayTodb).subscribe(res => {
                 console.log('Se inserto con éxito', res);
@@ -3286,9 +3283,6 @@ class ProjectCaptureDetailComponent {
                 // Inserta categorias
                 this.insertCategories();
             }, error => console.log("error alta de proyectos", error));
-            // Inserta categorias
-            // this.insertCategories();
-            // this.dialogRef.close();
         }
         else {
             arrayTodb = { proyecto_id: this.projectId,
@@ -3300,7 +3294,7 @@ class ProjectCaptureDetailComponent {
                 responsable_proyecto: this.newProject.controls["centroDeCostos"].value,
                 centro_de_costo_proyecto: this.newProject.controls["centroDeCostos"].value,
                 almacen_id: this.newProject.controls["almacen"].value,
-                codigo_proyecto: this.newProject.controls["codigo_proyecto"].value }; // this.codigo_proyecto};
+                codigo_proyecto: this.newProject.controls["codigo_proyecto"].value };
             // Actualiza registro EDICION
             this._projectService.updateProjects(arrayTodb).subscribe(res => {
                 console.log('Se edito con éxito', res);
@@ -4027,7 +4021,7 @@ QuotationDetailFilesComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPOR
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_13__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControlName, _angular_material_select__WEBPACK_IMPORTED_MODULE_14__.MatSelect, _angular_common__WEBPACK_IMPORTED_MODULE_15__.NgForOf, _angular_material_button__WEBPACK_IMPORTED_MODULE_16__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_9__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatRowDef, _angular_material_core__WEBPACK_IMPORTED_MODULE_17__.MatOption, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderCell, _angular_material_sort__WEBPACK_IMPORTED_MODULE_9__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatRow], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJxdW90YXRpb24tZGV0YWlsLWZpbGVzLmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_11__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_13__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormControlName, _angular_material_select__WEBPACK_IMPORTED_MODULE_14__.MatSelect, _angular_common__WEBPACK_IMPORTED_MODULE_15__.NgForOf, _angular_material_button__WEBPACK_IMPORTED_MODULE_16__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_9__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatRowDef, _angular_material_core__WEBPACK_IMPORTED_MODULE_17__.MatOption, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderCell, _angular_material_sort__WEBPACK_IMPORTED_MODULE_9__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatRow], styles: [".column[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n    }\r\n    \r\n.control[_ngcontent-%COMP%]{\r\n    height: 35px;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.division[_ngcontent-%COMP%]{\r\n    padding-bottom: 1px;\r\n}\r\n    \r\n.icon-cog[_ngcontent-%COMP%] {\r\n    color: orange;\r\n    }\r\n    \r\n.icon-cog-wite[_ngcontent-%COMP%] {\r\n    color: white;\r\n    }\r\n    \r\n.btn-bg-green[_ngcontent-%COMP%]{\r\n    background-color: forestgreen;\r\n}\r\n    \r\n.btn-bg-orange[_ngcontent-%COMP%]{\r\n    background-color: orange;\r\n}\r\n    \r\n.btn-bg-wite[_ngcontent-%COMP%]{\r\n    background-color: white;\r\n    border: none;\r\n}\r\n    \r\n.btn-bg-red[_ngcontent-%COMP%]{\r\n    background-color: red;\r\n}\r\n    \r\n .alert-snackbar{\r\n    background-color: rgb(106, 93, 83) !important;\r\n    color:rgb(255, 249, 246) !important;\r\n    height: 100px !important;\r\n    width: auto !important;\r\n    margin: 24px !important;\r\n    font-size: 32px;\r\n    align-items: center !important;\r\n    }\r\n    \r\n .red-snackbar{\r\n    background-color: rgb(153, 50, 50);\r\n    color:lightgoldenrodyellow;\r\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInF1b3RhdGlvbi1kZXRhaWwtZmlsZXMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHNCQUFzQjtJQUN0Qjs7QUFFSjtJQUNJLFlBQVk7SUFDWixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxhQUFhO0lBQ2I7O0FBRUo7SUFDSSxZQUFZO0lBQ1o7O0FBRUo7SUFDSSw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSx3QkFBd0I7QUFDNUI7O0FBRUE7SUFDSSx1QkFBdUI7SUFDdkIsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLDZDQUE2QztJQUM3QyxtQ0FBbUM7SUFDbkMsd0JBQXdCO0lBQ3hCLHNCQUFzQjtJQUN0Qix1QkFBdUI7SUFDdkIsZUFBZTtJQUNmLDhCQUE4QjtJQUM5Qjs7QUFFQTtJQUNBLGtDQUFrQztJQUNsQywwQkFBMEI7SUFDMUIiLCJmaWxlIjoicXVvdGF0aW9uLWRldGFpbC1maWxlcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbHVtbntcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB9XHJcbiAgICBcclxuLmNvbnRyb2x7XHJcbiAgICBoZWlnaHQ6IDM1cHg7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG59XHJcbiAgICBcclxuLmRpdmlzaW9ue1xyXG4gICAgcGFkZGluZy1ib3R0b206IDFweDtcclxufVxyXG5cclxuLmljb24tY29nIHtcclxuICAgIGNvbG9yOiBvcmFuZ2U7XHJcbiAgICB9XHJcblxyXG4uaWNvbi1jb2ctd2l0ZSB7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcblxyXG4uYnRuLWJnLWdyZWVue1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogZm9yZXN0Z3JlZW47XHJcbn1cclxuXHJcbi5idG4tYmctb3Jhbmdle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogb3JhbmdlO1xyXG59XHJcblxyXG4uYnRuLWJnLXdpdGV7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICAgIGJvcmRlcjogbm9uZTtcclxufVxyXG5cclxuLmJ0bi1iZy1yZWR7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbjo6bmctZGVlcC5hbGVydC1zbmFja2JhcntcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigxMDYsIDkzLCA4MykgIWltcG9ydGFudDtcclxuICAgIGNvbG9yOnJnYigyNTUsIDI0OSwgMjQ2KSAhaW1wb3J0YW50O1xyXG4gICAgaGVpZ2h0OiAxMDBweCAhaW1wb3J0YW50O1xyXG4gICAgd2lkdGg6IGF1dG8gIWltcG9ydGFudDtcclxuICAgIG1hcmdpbjogMjRweCAhaW1wb3J0YW50O1xyXG4gICAgZm9udC1zaXplOiAzMnB4O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlciAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG5cclxuICAgIDo6bmctZGVlcC5yZWQtc25hY2tiYXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTUzLCA1MCwgNTApO1xyXG4gICAgY29sb3I6bGlnaHRnb2xkZW5yb2R5ZWxsb3c7XHJcbiAgICB9XHJcbiJdfQ== */"] });
 
 
 /***/ }),
@@ -4145,7 +4139,7 @@ function QuotationDetailComponent_span_62_Template(rf, ctx) { if (rf & 1) {
 function QuotationDetailComponent_th_90_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "th", 41);
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](1, "div", 42);
-    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](2, " SELECCIONAR ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtext"](2, " SELEC ");
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
 } }
@@ -4272,9 +4266,7 @@ function QuotationDetailComponent_tr_115_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](0, "tr", 49);
 } }
 class QuotationDetailComponent {
-    constructor(dialogRef, _projectService, _categoryService, _projectCategoryservice, data, snackBar, formBuilder, _snackBar, _requisitionservice, _quotationservice
-    // , private notificationService: NotificationService,
-    ) {
+    constructor(dialogRef, _projectService, _categoryService, _projectCategoryservice, data, snackBar, formBuilder, _snackBar, _requisitionservice, _quotationservice) {
         this.dialogRef = dialogRef;
         this._projectService = _projectService;
         this._categoryService = _categoryService;
@@ -4338,18 +4330,17 @@ class QuotationDetailComponent {
             });
             this.requisicion_Numero = this.projectInfo["codigo"];
             this.proyecto_id = this.projectInfo["proyecto_id"];
-            this.requisicion_id = ''; //this.projectInfo["requisicion_id"];
+            this.requisicion_id = '';
             this.categoria_id = this.projectInfo["categoria_id"];
-            this.fecha = '', //this.projectInfo["fecha"];
-                this.loadfile = '';
+            this.fecha = '';
+            this.loadfile = '';
             this.getQuotationDetail(this.projectInfo["cotizacion_id"]);
         }
     }
     openSnackBar(message, action) {
-        this._snackBar.open(message, action, { duration: 3000 });
+        this._snackBar.open(message, action, { duration: 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar' });
     }
     proyectoSelected() {
-        console.log('Selecciona categorias', this.newProject.controls["proyecto_id"].value);
         this.getCategories(this.newProject.controls["proyecto_id"].value);
     }
     categorySelected() {
@@ -4415,6 +4406,7 @@ class QuotationDetailComponent {
             // )
             // this.dialogRef.close();
         }
+        this.dialogRef.close();
     }
     fechaControl(event) {
         console.log('fecha', this.fecha);
@@ -4427,14 +4419,6 @@ class QuotationDetailComponent {
     // =============================
     find(form, event) {
         // Buscar requisiciones
-        console.log('requisiciones', this.requisicion_Numero);
-        // this._requisitionservice.getRequisitionById(this.cotizacion_Numero).subscribe(
-        //   res=> {
-        //     this.datasourceCategories = res;
-        //     console.log('PROYECTOS - CATEGORIAS', res);
-        //   },
-        //   error => console.log("error consulta cateogorias",error)
-        // )
     }
     handlePage(e) {
         this.currentPage = e.pageIndex;
@@ -4485,8 +4469,6 @@ class QuotationDetailComponent {
             // this.datasourceRequisition = [];
             this.datasourceRequisition = res;
             this.datasourceRequisition = this.datasourceRequisition.filter(e => e.proyectocategoria_id == this.newProject.controls["categoria_id"].value);
-            // // Consulta detalle de requisición
-            // this.getRequisitionDetail();
         }, error => console.log("error consulta requisiciones", error));
     }
     getrequisition() {
@@ -4495,8 +4477,6 @@ class QuotationDetailComponent {
             this.datasourceRequisition = [];
             this.datasourceRequisition.push(res);
             console.log('REQUISICIONES', this.datasourceRequisition);
-            //     // Consulta detalle de requisición
-            //     this.getRequisitionDetail();
         }, error => console.log("error consulta requisiciones", error));
     }
     getRequisitionDetail(Requisition_Id) {
@@ -4534,7 +4514,6 @@ class QuotationDetailComponent {
         let requisitionIdMaximo = "0";
         let arrayToDb;
         this.tabla1["_data"].forEach(element => {
-            console.log('elemento', element);
             if (element.activo == true) {
                 arrayToDb = { cotizaciondetalle_id: 0,
                     codigo_cotizacion: '',
@@ -4809,7 +4788,7 @@ QuotationDetailComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_M
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatFormField, _angular_material_select__WEBPACK_IMPORTED_MODULE_15__.MatSelect, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_16__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_16__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatLabel, _angular_material_input__WEBPACK_IMPORTED_MODULE_17__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.DefaultValueAccessor, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__.MatDatepicker, _angular_material_button__WEBPACK_IMPORTED_MODULE_19__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRowDef, _angular_material_core__WEBPACK_IMPORTED_MODULE_20__.MatOption, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCell, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_21__.MatCheckbox, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRow], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJxdW90YXRpb24tZGV0YWlsLmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultFlexDirective, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatFormField, _angular_material_select__WEBPACK_IMPORTED_MODULE_15__.MatSelect, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_16__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_16__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatLabel, _angular_material_input__WEBPACK_IMPORTED_MODULE_17__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.DefaultValueAccessor, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__.MatDatepicker, _angular_material_button__WEBPACK_IMPORTED_MODULE_19__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRowDef, _angular_material_core__WEBPACK_IMPORTED_MODULE_20__.MatOption, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCell, _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_21__.MatCheckbox, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRow], styles: [".column[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n    }\r\n    \r\n.control[_ngcontent-%COMP%]{\r\n    height: 35px;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.division[_ngcontent-%COMP%]{\r\n    padding-bottom: 1px;\r\n}\r\n    \r\n.icon-cog[_ngcontent-%COMP%] {\r\n    color: orange;\r\n    }\r\n    \r\n.icon-cog-wite[_ngcontent-%COMP%] {\r\n    color: white;\r\n    }\r\n    \r\n.btn-bg-green[_ngcontent-%COMP%]{\r\n    background-color: forestgreen;\r\n}\r\n    \r\n.btn-bg-orange[_ngcontent-%COMP%]{\r\n    background-color: orange;\r\n}\r\n    \r\n.btn-bg-wite[_ngcontent-%COMP%]{\r\n    background-color: white;\r\n    border: none;\r\n}\r\n    \r\n.btn-bg-red[_ngcontent-%COMP%]{\r\n    background-color: red;\r\n}\r\n    \r\n .alert-snackbar{\r\n    background-color: rgb(106, 93, 83) !important;\r\n    color:rgb(255, 249, 246) !important;\r\n    height: 100px !important;\r\n    width: auto !important;\r\n    margin: 24px !important;\r\n    font-size: 32px;\r\n    align-items: center !important;\r\n    }\r\n    \r\n .red-snackbar{\r\n    background-color: rgb(153, 50, 50);\r\n    color:lightgoldenrodyellow;\r\n    }\r\n    \r\n.col10[_ngcontent-%COMP%]{\r\n        width: 10%;\r\n        vertical-align: middle;\r\n        text-align: center;\r\n    }\r\n    \r\n.col20[_ngcontent-%COMP%]{\r\n        width: 20%;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n.col30[_ngcontent-%COMP%]{\r\n        width: 30%;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n.col70[_ngcontent-%COMP%]{\r\n        width: 70%;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n.colbuttons[_ngcontent-%COMP%]{\r\n        vertical-align: middle;\r\n        text-align: center;\r\n    }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInF1b3RhdGlvbi1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHNCQUFzQjtJQUN0Qjs7QUFFSjtJQUNJLFlBQVk7SUFDWixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxhQUFhO0lBQ2I7O0FBRUo7SUFDSSxZQUFZO0lBQ1o7O0FBRUo7SUFDSSw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSx3QkFBd0I7QUFDNUI7O0FBRUE7SUFDSSx1QkFBdUI7SUFDdkIsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLDZDQUE2QztJQUM3QyxtQ0FBbUM7SUFDbkMsd0JBQXdCO0lBQ3hCLHNCQUFzQjtJQUN0Qix1QkFBdUI7SUFDdkIsZUFBZTtJQUNmLDhCQUE4QjtJQUM5Qjs7QUFFQTtJQUNBLGtDQUFrQztJQUNsQywwQkFBMEI7SUFDMUI7O0FBRUE7UUFDSSxVQUFVO1FBQ1Ysc0JBQXNCO1FBQ3RCLGtCQUFrQjtJQUN0Qjs7QUFFQTtRQUNJLFVBQVU7UUFDVixzQkFBc0I7SUFDMUI7O0FBRUE7UUFDSSxVQUFVO1FBQ1Ysc0JBQXNCO0lBQzFCOztBQUVBO1FBQ0ksVUFBVTtRQUNWLHNCQUFzQjtJQUMxQjs7QUFFQTtRQUNJLHNCQUFzQjtRQUN0QixrQkFBa0I7SUFDdEIiLCJmaWxlIjoicXVvdGF0aW9uLWRldGFpbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbHVtbntcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB9XHJcbiAgICBcclxuLmNvbnRyb2x7XHJcbiAgICBoZWlnaHQ6IDM1cHg7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG59XHJcbiAgICBcclxuLmRpdmlzaW9ue1xyXG4gICAgcGFkZGluZy1ib3R0b206IDFweDtcclxufVxyXG5cclxuLmljb24tY29nIHtcclxuICAgIGNvbG9yOiBvcmFuZ2U7XHJcbiAgICB9XHJcblxyXG4uaWNvbi1jb2ctd2l0ZSB7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcblxyXG4uYnRuLWJnLWdyZWVue1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogZm9yZXN0Z3JlZW47XHJcbn1cclxuXHJcbi5idG4tYmctb3Jhbmdle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogb3JhbmdlO1xyXG59XHJcblxyXG4uYnRuLWJnLXdpdGV7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICAgIGJvcmRlcjogbm9uZTtcclxufVxyXG5cclxuLmJ0bi1iZy1yZWR7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbjo6bmctZGVlcC5hbGVydC1zbmFja2JhcntcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigxMDYsIDkzLCA4MykgIWltcG9ydGFudDtcclxuICAgIGNvbG9yOnJnYigyNTUsIDI0OSwgMjQ2KSAhaW1wb3J0YW50O1xyXG4gICAgaGVpZ2h0OiAxMDBweCAhaW1wb3J0YW50O1xyXG4gICAgd2lkdGg6IGF1dG8gIWltcG9ydGFudDtcclxuICAgIG1hcmdpbjogMjRweCAhaW1wb3J0YW50O1xyXG4gICAgZm9udC1zaXplOiAzMnB4O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlciAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG5cclxuICAgIDo6bmctZGVlcC5yZWQtc25hY2tiYXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTUzLCA1MCwgNTApO1xyXG4gICAgY29sb3I6bGlnaHRnb2xkZW5yb2R5ZWxsb3c7XHJcbiAgICB9XHJcblxyXG4gICAgLmNvbDEwe1xyXG4gICAgICAgIHdpZHRoOiAxMCU7XHJcbiAgICAgICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jb2wyMHtcclxuICAgICAgICB3aWR0aDogMjAlO1xyXG4gICAgICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jb2wzMHtcclxuICAgICAgICB3aWR0aDogMzAlO1xyXG4gICAgICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jb2w3MHtcclxuICAgICAgICB3aWR0aDogNzAlO1xyXG4gICAgICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jb2xidXR0b25ze1xyXG4gICAgICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgfVxyXG5cclxuICAgICJdfQ== */"] });
 
 
 /***/ }),
@@ -8142,7 +8121,6 @@ function RequisitionDetailComponent_tr_86_Template(rf, ctx) { if (rf & 1) {
 function RequisitionDetailComponent_tr_87_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](0, "tr", 46);
 } }
-// import { NotificationService } from '../../../services/common/notification.service';
 class RequisitionDetailComponent {
     constructor(dialogRef, _projectService, _categoryService, _projectCategoryservice, data, snackBar, formBuilder, _snackBar, _requisitionservice
     // , private notificationService: NotificationService,
@@ -8194,7 +8172,6 @@ class RequisitionDetailComponent {
     ngOnInit() {
         this.getProyectos();
         this.getEnabledCategories();
-        console.log('this.projectInfo["codigo"]', this.requisicionId);
         this.newProject.controls["categoria_id"].setValue(this.projectInfo["codigo_proyectocategoria"]);
         if (this.requisicionId != 0) {
             this.newProject.patchValue({
@@ -8333,7 +8310,6 @@ class RequisitionDetailComponent {
         this.UploadDataExcel = null;
     }
     proyectoSelected() {
-        console.log('Selecciona categorias', this.newProject.controls["proyecto_id"].value);
         this.getCategories(this.newProject.controls["proyecto_id"].value);
     }
     categorySelected() {
@@ -8376,6 +8352,7 @@ class RequisitionDetailComponent {
             // Actualiza registro EDICION
             this.updateRequisition(arrayTodb);
         }
+        this.dialogRef.close();
     }
     fechaInicial(event) {
         console.log('fecha', this.fecha);
@@ -8387,7 +8364,7 @@ class RequisitionDetailComponent {
     // UTILERIAS
     // ====================
     openSnackBar(message, action) {
-        this._snackBar.open(message, action, { duration: 3000 });
+        this._snackBar.open(message, action, { duration: 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar' });
     }
     handlePage(e) {
         this.currentPage = e.pageIndex;
@@ -8700,7 +8677,7 @@ RequisitionDetailComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
-    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultFlexDirective, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_16__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControlName, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__.MatLabel, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepicker, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRowDef, _angular_material_select__WEBPACK_IMPORTED_MODULE_18__.MatSelect, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgForOf, _angular_material_core__WEBPACK_IMPORTED_MODULE_19__.MatOption, _angular_material_button__WEBPACK_IMPORTED_MODULE_20__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCell, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRow], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_14__.DatePipe], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXF1aXNpdGlvbi1kZXRhaWwuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultLayoutDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroupDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_13__.DefaultFlexDirective, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgIf, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__.MatFormField, _angular_material_input__WEBPACK_IMPORTED_MODULE_16__.MatInput, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControlName, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__.MatLabel, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepickerInput, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepickerToggle, _angular_material_form_field__WEBPACK_IMPORTED_MODULE_15__.MatSuffix, _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_17__.MatDatepicker, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRowDef, _angular_material_select__WEBPACK_IMPORTED_MODULE_18__.MatSelect, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgForOf, _angular_material_core__WEBPACK_IMPORTED_MODULE_19__.MatOption, _angular_material_button__WEBPACK_IMPORTED_MODULE_20__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderCell, _angular_material_sort__WEBPACK_IMPORTED_MODULE_11__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatCell, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatRow], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_14__.DatePipe], styles: [".column[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n}\r\n    \r\n.control[_ngcontent-%COMP%]{\r\n    height: 35px;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.division[_ngcontent-%COMP%]{\r\n    padding-bottom: 1px;\r\n}\r\n    \r\n.icon-cog[_ngcontent-%COMP%] {\r\ncolor: orange;\r\n}\r\n    \r\n.icon-cog-wite[_ngcontent-%COMP%] {\r\n    color: white;\r\n    }\r\n    \r\n.btn-bg-green[_ngcontent-%COMP%]{\r\n    background-color: forestgreen;\r\n}\r\n    \r\n.btn-bg-orange[_ngcontent-%COMP%]{\r\n    background-color: orange;\r\n}\r\n    \r\n.btn-bg-wite[_ngcontent-%COMP%]{\r\n    background-color: white;\r\n    border: none;\r\n}\r\n    \r\n.btn-bg-red[_ngcontent-%COMP%]{\r\n    background-color: red;\r\n}\r\n    \r\n .alert-snackbar{\r\n    background-color: rgb(106, 93, 83) !important;\r\n    color:rgb(255, 249, 246) !important;\r\n    height: 100px !important;\r\n    width: auto !important;\r\n    margin: 24px !important;\r\n    font-size: 32px;\r\n    align-items: center !important;\r\n    }\r\n    \r\n .red-snackbar{\r\n    background-color: rgb(153, 50, 50);\r\n    color:lightgoldenrodyellow;\r\n    }\r\n    \r\n.col10[_ngcontent-%COMP%]{\r\n    width: 10%;\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n    \r\n.col20[_ngcontent-%COMP%]{\r\n    width: 20%;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.col30[_ngcontent-%COMP%]{\r\n    width: 30%;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.col70[_ngcontent-%COMP%]{\r\n    width: 70%;\r\n    vertical-align: middle;\r\n}\r\n    \r\n.colbuttons[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n    \r\n.column[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n}\r\n    \r\n.icon-cog[_ngcontent-%COMP%] {\r\n    color: orange;\r\n  }\r\n    \r\n.icon-cog-wite[_ngcontent-%COMP%] {\r\n    color: white;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlcXVpc2l0aW9uLWRldGFpbC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLG1CQUFtQjtBQUN2Qjs7QUFFQTtBQUNBLGFBQWE7QUFDYjs7QUFFQTtJQUNJLFlBQVk7SUFDWjs7QUFFSjtJQUNJLDZCQUE2QjtBQUNqQzs7QUFFQTtJQUNJLHdCQUF3QjtBQUM1Qjs7QUFFQTtJQUNJLHVCQUF1QjtJQUN2QixZQUFZO0FBQ2hCOztBQUVBO0lBQ0kscUJBQXFCO0FBQ3pCOztBQUVBO0lBQ0ksNkNBQTZDO0lBQzdDLG1DQUFtQztJQUNuQyx3QkFBd0I7SUFDeEIsc0JBQXNCO0lBQ3RCLHVCQUF1QjtJQUN2QixlQUFlO0lBQ2YsOEJBQThCO0lBQzlCOztBQUVBO0lBQ0Esa0NBQWtDO0lBQ2xDLDBCQUEwQjtJQUMxQjs7QUFFSjtJQUNJLFVBQVU7SUFDVixzQkFBc0I7SUFDdEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksVUFBVTtJQUNWLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksc0JBQXNCO0lBQ3RCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLGFBQWE7RUFDZjs7QUFFRjtJQUNJLFlBQVk7QUFDaEIiLCJmaWxlIjoicmVxdWlzaXRpb24tZGV0YWlsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29sdW1ue1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG4gICAgXHJcbi5jb250cm9se1xyXG4gICAgaGVpZ2h0OiAzNXB4O1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG5cclxuLmRpdmlzaW9ue1xyXG4gICAgcGFkZGluZy1ib3R0b206IDFweDtcclxufVxyXG5cclxuLmljb24tY29nIHtcclxuY29sb3I6IG9yYW5nZTtcclxufVxyXG5cclxuLmljb24tY29nLXdpdGUge1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG5cclxuLmJ0bi1iZy1ncmVlbntcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGZvcmVzdGdyZWVuO1xyXG59XHJcblxyXG4uYnRuLWJnLW9yYW5nZXtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IG9yYW5nZTtcclxufVxyXG5cclxuLmJ0bi1iZy13aXRle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbn1cclxuXHJcbi5idG4tYmctcmVke1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xyXG59XHJcblxyXG46Om5nLWRlZXAuYWxlcnQtc25hY2tiYXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTA2LCA5MywgODMpICFpbXBvcnRhbnQ7XHJcbiAgICBjb2xvcjpyZ2IoMjU1LCAyNDksIDI0NikgIWltcG9ydGFudDtcclxuICAgIGhlaWdodDogMTAwcHggIWltcG9ydGFudDtcclxuICAgIHdpZHRoOiBhdXRvICFpbXBvcnRhbnQ7XHJcbiAgICBtYXJnaW46IDI0cHggIWltcG9ydGFudDtcclxuICAgIGZvbnQtc2l6ZTogMzJweDtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXIgIWltcG9ydGFudDtcclxuICAgIH1cclxuXHJcbiAgICA6Om5nLWRlZXAucmVkLXNuYWNrYmFye1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDE1MywgNTAsIDUwKTtcclxuICAgIGNvbG9yOmxpZ2h0Z29sZGVucm9keWVsbG93O1xyXG4gICAgfVxyXG5cclxuLmNvbDEwe1xyXG4gICAgd2lkdGg6IDEwJTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5jb2wyMHtcclxuICAgIHdpZHRoOiAyMCU7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG59XHJcblxyXG4uY29sMzB7XHJcbiAgICB3aWR0aDogMzAlO1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG5cclxuLmNvbDcwe1xyXG4gICAgd2lkdGg6IDcwJTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbn1cclxuXHJcbi5jb2xidXR0b25ze1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLmNvbHVtbntcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbn1cclxuXHJcbi5pY29uLWNvZyB7XHJcbiAgICBjb2xvcjogb3JhbmdlO1xyXG4gIH1cclxuXHJcbi5pY29uLWNvZy13aXRlIHtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -9842,10 +9819,21 @@ class CustomerComponent {
     // SERVICIOS
     // =================
     getcustomer() {
+        let arraySort;
         // Proyectos registrados
         this._customerservice.getcustomerAll().subscribe(res => {
             console.log('Clientes', res);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+            // Ordenado de arreglo
+            arraySort = res.sort(function (a, b) {
+                if (a.customer_id < b.customer_id) {
+                    return 1;
+                }
+                if (a.customer_id > b.customer_id) {
+                    return -1;
+                }
+                return 0;
+            });
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
             this.array = res;
             this.totalSize = this.array.length;
             this.iterator();
@@ -10323,7 +10311,6 @@ class ProjectCaptureComponent {
         this.displayedColumns = ['codigo_proyecto', 'nombre_proyecto', 'fecha_inicial_proyecto', 'fecha_final_proyecto', 'nombre_cliente', 'responsable_proyecto', 'presupuesto_proyecto', 'proyect_id', 'editar', 'categorias'];
         this.projectData = [];
         this.filterChange = new _angular_core__WEBPACK_IMPORTED_MODULE_5__.EventEmitter();
-        // this.displayedColumns = ['proyecto']
     }
     // ====================
     // PROCEDIMIENTOS
@@ -10332,10 +10319,21 @@ class ProjectCaptureComponent {
         this.getProjects();
     }
     getProjects() {
+        let arraySort;
         // Proyectos registrados
         this._projectService.getProjectAll().subscribe(res => {
             console.log('Proyectos', res);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+            // Ordenado de arreglo
+            arraySort = res.sort(function (a, b) {
+                if (a.proyecto_id < b.proyecto_id) {
+                    return 1;
+                }
+                if (a.proyecto_id > b.proyecto_id) {
+                    return -1;
+                }
+                return 0;
+            });
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
             this.array = res;
             this.totalSize = this.array.length;
             this.iterator();
@@ -10366,6 +10364,7 @@ class ProjectCaptureComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_project_capture_detail_project_capture_detail_project_capture_detail_component__WEBPACK_IMPORTED_MODULE_1__.ProjectCaptureDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
+            this.getProjects();
         });
     }
     addCategorias(proyectoId, event) {
@@ -10382,7 +10381,7 @@ class ProjectCaptureComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_categories_categories_categories_component__WEBPACK_IMPORTED_MODULE_2__.CategoriesComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getProjects();
         });
     }
     nuevoProyecto(event) {
@@ -10399,6 +10398,7 @@ class ProjectCaptureComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_project_capture_detail_project_capture_detail_project_capture_detail_component__WEBPACK_IMPORTED_MODULE_1__.ProjectCaptureDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
+            this.getProjects();
         });
     }
     descargarProyectos() {
@@ -10854,7 +10854,7 @@ class PoListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getPO_Hdr();
         });
     }
     editRequisicion(element, event) {
@@ -10873,7 +10873,7 @@ class PoListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getPO_Hdr();
         });
     }
     aproveODC(element, event) {
@@ -10892,7 +10892,7 @@ class PoListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getPO_Hdr();
         });
     }
     cancelaODC(element, event) {
@@ -10934,10 +10934,21 @@ class PoListComponent {
     // CONSILTA DE SERVICIOS
     // =====================
     getPO_Hdr() {
+        let arraySort;
         // Proyectos registrados
         this._purchaseOrderService.getPOAll().subscribe(res => {
             console.log('PurchaseOrder', res);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(res);
+            // Ordenado de arreglo
+            arraySort = res.sort(function (a, b) {
+                if (a.ordendecompra_id < b.ordendecompra_id) {
+                    return 1;
+                }
+                if (a.ordendecompra_id > b.ordendecompra_id) {
+                    return -1;
+                }
+                return 0;
+            });
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(arraySort);
             this.array = res;
             this.totalSize = this.array.length;
             this.iterator();
@@ -10955,6 +10966,7 @@ class PoListComponent {
         console.log('cancelado', element);
         this._purchaseOrderService.updatePOStatus(arrayToDb).subscribe(res => {
             console.log('Se inserto con éxito', res);
+            this.getPO_Hdr();
         }, error => console.log("error alta de proyectos", error));
     }
 }
@@ -11242,15 +11254,23 @@ class QuotationListComponent {
     }
     ngOnInit() {
         this.getQuotationAll();
-        // let arrayData : any;
-        // arrayData = [{codigo_requisicioninterna : 1, codigo : 1, fecha : '2020-01-01', estado : 'ACTIVO', requisicioninterna_id : 1, cotizacion_id : 1}]
-        // this.dataSourceShow = new MatTableDataSource(arrayData);
     }
     getQuotationAll() {
+        let arraySort;
         // Proyectos registrados
         this._quotationService.getQuotationAll().subscribe(res => {
+            // Ordenado de arreglo
+            arraySort = res.sort(function (a, b) {
+                if (a.cotizacion_id < b.cotizacion_id) {
+                    return 1;
+                }
+                if (a.cotizacion_id > b.cotizacion_id) {
+                    return -1;
+                }
+                return 0;
+            });
             console.log('Cotizaciones', res);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
             this.array = res;
             this.totalSize = this.array.length;
             this.iterator();
@@ -11285,7 +11305,7 @@ class QuotationListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_1__.QuotationDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getQuotationAll();
         });
     }
     editCotizacion(element, event) {
@@ -11303,7 +11323,7 @@ class QuotationListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_1__.QuotationDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getQuotationAll();
         });
     }
     filtrar(event) {
@@ -12036,7 +12056,7 @@ class RequisitionListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getrequisition();
         });
     }
     editRequisicion(element) {
@@ -12053,7 +12073,7 @@ class RequisitionListComponent {
         dialogConfig.disableClose = true;
         const dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(result => {
-            // window.location.reload();
+            this.getrequisition();
         });
     }
     filtrar(event) {
@@ -12081,10 +12101,21 @@ class RequisitionListComponent {
     // SERVICIOS
     // =================
     getrequisition() {
+        let arraySort;
         // Proyectos registrados
         this._requisitionService.getRequisitionAll().subscribe(res => {
             console.log('Requisiciones', res);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+            // Ordenado de arreglo
+            arraySort = res.sort(function (a, b) {
+                if (a.requisicioninterna_id < b.requisicioninterna_id) {
+                    return 1;
+                }
+                if (a.requisicioninterna_id > b.requisicioninterna_id) {
+                    return -1;
+                }
+                return 0;
+            });
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
             this.array = res;
             this.totalSize = this.array.length;
             this.iterator();
@@ -12746,10 +12777,21 @@ class SupplierComponent {
     // SERVICIOS
     // =================
     getsupplier() {
+        let arraySort;
         // Proyectos registrados
         this._supplyservice.getsupplyAll().subscribe(res => {
             console.log('Proveedores', res);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+            // Ordenado de arreglo
+            arraySort = res.sort(function (a, b) {
+                if (a.supplier_id < b.supplier_id) {
+                    return 1;
+                }
+                if (a.supplier_id > b.supplier_id) {
+                    return -1;
+                }
+                return 0;
+            });
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
             this.array = res;
             this.totalSize = this.array.length;
             this.iterator();
@@ -13470,23 +13512,20 @@ class projectservice {
     getProjectAll() {
         const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
             .set('Content-Type', 'application/json')
-            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'))
-            .append('X-Frame-Options', 'SAMEORIGIN');
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/lista', { headers });
     }
     updateProjects(arrayToDb) {
         const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
             .set('Content-Type', 'application/json')
-            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'))
-            .append('X-Frame-Options', 'SAMEORIGIN');
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         console.log('actualiza proyecto', arrayToDb);
         return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/actualizar', arrayToDb, { headers });
     }
     insertProjects(arrayToDb) {
         const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders()
             .set('Content-Type', 'application/json')
-            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'))
-            .append('X-Frame-Options', 'SAMEORIGIN');
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         console.log('inserta proyecto', arrayToDb);
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlapi + src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiContextDrivers + 'Project/registrar', arrayToDb, { headers });
     }
