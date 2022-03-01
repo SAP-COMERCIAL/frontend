@@ -79,7 +79,7 @@
                 <!-- Email Column -->
                 <ng-container matColumnDef="presupuesto_proyecto">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Presupuesto </th>
-                  <td mat-cell *matCellDef="let element" class="column"> {{element.presupuesto_proyecto}} </td>
+                  <td mat-cell *matCellDef="let element" class="column"> {{element.presupuesto_proyecto | currency}} </td>
                 </ng-container>
 
                 <!-- Email Column -->

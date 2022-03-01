@@ -42,6 +42,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
   codigo_proyecto : any = '';
   proeycto_id_mayor : number = 0;
   proeycto_numero_mayor : number = 0;
+  myInput:any;
 
   numerotxt : any;
   nombretxt : any;
@@ -58,6 +59,8 @@ export class ProjectCaptureDetailComponent implements OnInit {
   datasourceCategories : any[] = [];
   datasourceProyects : any[] = [];
   datasourceCustomers : any;
+  public presupuestoFormato: any = 0;
+  public presupuestoFormatoLable: any = 0;
 
    constructor(
     public dialogRef: MatDialogRef<projectModel>
@@ -101,6 +104,11 @@ export class ProjectCaptureDetailComponent implements OnInit {
 console.log('data de entrada', this.projectInfo);
 
     if(this.projectId != 0){
+
+      this.presupuestoFormatoLable = this.projectInfo["presupuesto_proyecto"];
+      // this.presupuestoFormato = this.projectInfo["presupuesto_proyecto"];
+
+
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
           codigo_proyecto : this.projectInfo["codigo_proyecto"],
@@ -151,8 +159,9 @@ console.log('data de entrada', this.projectInfo);
       return;
     }
 
-    if(this.projectId == 0){
+    console.log("PRESUPUESTOS", this.newProject.controls["presupuesto_proyecto"].value);
 
+    if(this.projectId == 0){
       arrayTodb = { codigo_proyecto : this.newProject.controls["codigo_proyecto"].value,
                   nombre_proyecto : this.newProject.controls["nombre_proyecto"].value,
                   cliente_id : this.newProject.controls["cliente"].value,
@@ -289,9 +298,19 @@ selectcustommer(event){
     this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 
+  onChange(event: any){
+    console.log('onfilechange', event);
+    this.presupuestoFormato = (event.target as HTMLInputElement).value;
+    this.presupuestoFormatoLable = (event.target as HTMLInputElement).value;
+  }
+
   _keyUp(event: any) {
+
     let ultimoCaracter : any;
     let valido : boolean = false;
+
+    this.presupuestoFormato = (event.target as HTMLInputElement).value;
+    this.presupuestoFormatoLable = (event.target as HTMLInputElement).value;
 
     console.log('presione : ', (event.target as HTMLInputElement).value);
     const pattern = /[0-9\+\-\ ]/;
