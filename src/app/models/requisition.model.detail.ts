@@ -14,5 +14,4 @@ export class requisitionModelDetail{
     otras_especificaciones : string
     estado : boolean
     cotizado : boolean
-    
 }

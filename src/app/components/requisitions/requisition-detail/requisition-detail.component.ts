@@ -51,6 +51,7 @@ export class RequisitionDetailComponent implements OnInit {
   buscar : any = '';
   public nombreArchivo : any = 'selecciona archivo';
   UploadDataExcel : MatTableDataSource<requisitionModelDetail>;
+  UploadDataExcelManual : MatTableDataSource<requisitionModelDetail>;
   dataExcel: any[];
   // displayedColumns = ['SKU', 'cantidad', 'unidad_de_medida', 'descripcion'];
   displayedColumns = ['SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones'];
@@ -93,7 +94,6 @@ export class RequisitionDetailComponent implements OnInit {
       descripcion_Detalle : new FormControl(''),
       medida_Detalle : new FormControl(''),
       color_Detalle : new FormControl('')
-      // loadFile: new FormControl(''),
   });
   }
 
@@ -313,8 +313,35 @@ export class RequisitionDetailComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  add(){
-    console.log('AGREGAR A DATASOURCE DE CARGA');
+  add(form, event){
+    
+    let arrayExcel : any = [];
+
+    // arrayExcel.push({ 
+    //   requisition_Id : 0,
+    //   SKU : this.newProject.controls["sku_Detalle"].value
+    //   , cantidad : this.newProject.controls["cantidad_Detalle"].value
+    //   , um : this.newProject.controls["uom_Detalle"].value
+    //   , descripcion : this.newProject.controls["descripcion_Detalle"].value
+    //   , medida : this.newProject.controls["medida_Detalle"].value
+    //   , color : this.newProject.controls["color_Detalle"].value
+    //   , otras_especificaciones : ''
+    //  })
+
+    //  this.UploadDataExcel.filteredData.forEach(element => {
+       
+    //  });
+
+    //  this.UploadDataExcel.filteredData.push(arrayExcel)
+
+    //  arrayExcel.push(this.UploadDataExcel.filteredData);
+    //  console.log('arrayExcel', this.UploadDataExcel.filteredData)
+     
+    //  this.UploadDataExcel = new MatTableDataSource(arrayExcel);
+    
+    //  this.UploadDataExcelManual.filteredData.push(arrayExcel);
+    //  this.UploadDataExcel.filteredData.push(arrayExcel);
+
   }
 
   fechaInicial(event){
