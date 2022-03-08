@@ -90,30 +90,89 @@
     </div>
 
   </div>
-    <div fxLayout="row" class="division">
-      <div fxFlex.gt-sm="20%">
-          <div></div>
-      </div>
-      <div fxFlex.gt-sm="20%" >
-          <div></div>
-      </div>
-      <div fxFlex.gt-sm="20%" >
-        <div></div>
-      </div>
-      <div fxFlex.gt-sm="20%" >
+  <!-- SECCION CAPTURA MANUAL -->
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="10%">
         <div>
-          <ng-container *ngIf='requisicionId == 0' >
-            <button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button>
-          </ng-container>
-          </div>
-      </div>
-      <div fxFlex.gt-sm="20%" >
-        <div>
-          <ng-container><button *ngIf='requisicionId == 0' mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></ng-container>
-          <ng-container><button *ngIf='requisicionId != 0' mat-raised-button color="warn" (click)="cancel($event)">Regresar</button></ng-container>
+          <mat-form-field>
+            <input [type]="sku_Detalle" matInput class="form-control form-control-line control" formControlName="sku_Detalle" placeholder="SKU">
+          </mat-form-field>
         </div>
+    </div>
+    <div fxFlex.gt-sm="5%"></div>
+    <div fxFlex.gt-sm="10%">
+      <div>
+        <mat-form-field>
+          <input [type]="cantidad_Detalle" matInput class="form-control form-control-line control" formControlName="cantidad_Detalle" placeholder="Cantidad">
+        </mat-form-field>
+      </div>
+  </div>
+  <div fxFlex.gt-sm="5%"></div>
+  <div fxFlex.gt-sm="10%">
+    <div>
+      <mat-form-field>
+        <input [type]="uom_Detalle" matInput class="form-control form-control-line control" formControlName="uom_Detalle" placeholder="U de M">
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex.gt-sm="5%"></div>
+  <div fxFlex.gt-sm="10%">
+    <div>
+      <mat-form-field>
+        <input [type]="descripcion_Detalle" matInput class="form-control form-control-line control" formControlName="descripcion_Detalle" placeholder="Descripción">
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex.gt-sm="5%"></div>
+  <div fxFlex.gt-sm="10%">
+    <div>
+      <mat-form-field>
+        <input [type]="medida_Detalle" matInput class="form-control form-control-line control" formControlName="medida_Detalle" placeholder="Medida">
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxFlex.gt-sm="5%"></div>
+  <div fxFlex.gt-sm="10%">
+    <div>
+      <mat-form-field>
+        <input [type]="color_Detalle" matInput class="form-control form-control-line control" formControlName="color_Detalle" placeholder="Color">
+      </mat-form-field>
+    </div>
+  </div>
+    
+    <div fxFlex.gt-sm="20%" >
+      <div>
+        <ng-container *ngIf='requisicionId == 0' ><button mat-raised-button color="accent" (click)="add(newProject, $event)">Agregar</button></ng-container>
       </div>
     </div>
+  </div>
+  <br>
+  <!-- TERMINA SECCION CAPTURA MANUAL -->
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="20%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>
+        <ng-container *ngIf='requisicionId == 0' >
+          <button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button>
+        </ng-container>
+        </div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div>
+        <ng-container><button *ngIf='requisicionId == 0' mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></ng-container>
+        <ng-container><button *ngIf='requisicionId != 0' mat-raised-button color="warn" (click)="cancel($event)">Regresar</button></ng-container>
+      </div>
+    </div>
+  </div>
      <!-- INICIA CUERPO DE LA PÁGINA-->
      <div class="col-12 col-md-12 p-0">
       <div class="card">

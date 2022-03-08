@@ -3,22 +3,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
-import { from } from 'rxjs';
 import { projectModel } from 'src/app/models/project.model';
 import { projectservice } from '../../../services/projects/project.service';
-import { categoryModel } from '../../../models/category.model';
 import { categoryservice } from '../../../services/category/category.service';
-import { ProjectCaptureComponent } from 'src/app/pages/projects/project-capture/project-capture.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
-import { projectCategoryModel } from 'src/app/models/projectCategory.model';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
-import { coerceStringArray } from '@angular/cdk/coercion';
 import { CustomerDetailComponent } from '../../customer-detail/customer-detail.component';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { customerservice } from '../../../services/customer.service';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-project-capture-detail',

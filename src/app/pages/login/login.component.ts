@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { loginservice } from '../../services/login/login.service';
 import { UserI, UserC } from '../../models/users'; // './../../../../models/user';
@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AESEncryptService } from 'src/app/services/aesencrypt.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: Router,
     private cryptService: AESEncryptService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public _snackBar: MatSnackBar
     ) { 
       this.spinerShow = false;
       this.userinterface = new UserC();
@@ -60,6 +62,9 @@ export class LoginComponent implements OnInit {
         if (err.status === 0 || err.status === 500) {
           this.toastr.error('No se puede comunicar con el servidor', 'ERROR');
         }
+
+        this.openSnackBar('credenciales incorrectas', '');
+
         console.error(err);
         this.spinerShow = false;
       }
@@ -71,5 +76,9 @@ export class LoginComponent implements OnInit {
       nombreusuario : ['', Validators.required],
       contrasegna : ['', Validators.required]
     });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 }

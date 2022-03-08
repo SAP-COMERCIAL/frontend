@@ -38,7 +38,7 @@
         <div fxFlex.gt-sm="25%" >
             <div>
               <mat-form-field>
-              <input [type]="rfc" matInput class="form-control form-control-line control" formControlName="rfc" disabled >
+              <input [type]="rfc" matInput class="form-control form-control-line control" formControlName="rfc" disabled (change)="onChangeRFC($event)">
             </mat-form-field>
             <span *ngIf="!newProject.get('rfc').valid && newProject.get('rfc').touched" class="help-block" style="color: red;"> El RFC es requerido</span>
             </div>

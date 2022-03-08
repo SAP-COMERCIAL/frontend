@@ -21,6 +21,7 @@ rfc : string;
 contacto : string;
 ciudad : string;
 estado : string;
+supplierDataSource: any;
 
 projectInfo : any;
 estadoPantalla : string;
@@ -53,6 +54,8 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    
+    this.getSupplier();
     if(this.estadoPantalla == 'Edit'){
       this.newProject.controls['nombre'].setValue(this.projectInfo['nombre']);
       this.newProject.controls['direccion'].setValue(this.projectInfo['direccion']);
@@ -70,6 +73,11 @@ public newProject: FormGroup;
 
   save(form, event){
 
+    if(this.supplierDataSource.filter(e => e.rfc.trim() == form.controls["rfc"].value.trim()).length > 0){
+      this.openSnackBar('Este RFC ya esta registrado', '');
+      return
+    }
+
     let arrayToDb : any;
 
     arrayToDb = ({ 
@@ -85,6 +93,12 @@ public newProject: FormGroup;
 
     this.insertSupplier(arrayToDb);
     
+  }
+
+  onChangeRFC(event){
+    if(this.supplierDataSource.filter(e => e.rfc.trim() == this.newProject.controls["rfc"].value.trim()).length > 0){
+      this.openSnackBar('Este RFC ya esta registrado', '');
+    }
   }
 
 // =========================
@@ -123,6 +137,20 @@ updateSupplier(arrayToDb : any){
   )
 
 }
+
+getSupplier(){
+
+  // Inserta Proveedores
+  this._supplyservice.getsupplyAll().subscribe(
+    res=> {
+      this.supplierDataSource = res;
+      console.log('PROVEEDORES', this.supplierDataSource);
+    },
+    error => console.log("error al actualizar proveedores",error)
+  )
+
+}
+
 
 
 }

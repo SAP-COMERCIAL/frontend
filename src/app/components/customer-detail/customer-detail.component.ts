@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { customerModel } from 'src/app/models/customer.model';
 import { customerservice } from '../../services/customer.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-customer-detail',
@@ -22,6 +23,7 @@ rfc : string;
 responsable : string;
 telefono : string;
 estado : string;
+custommerDataSource: any;
 
 projectInfo : any;
 estadoPantalla : string;
@@ -55,6 +57,8 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+
+    this.getCustommer();
     if(this.estadoPantalla == 'Edit'){
       this.newProject.controls['nombre'].setValue(this.projectInfo['nombre']);
       this.newProject.controls['direccion'].setValue(this.projectInfo['direccion']);
@@ -74,11 +78,16 @@ public newProject: FormGroup;
 
     let arrayToDb : any;
 
+    if(this.custommerDataSource.filter(e => e.rfc.trim() == form.controls["rfc"].value.trim()).length > 0){
+      this.openSnackBar('Este RFC ya esta registrado', '');
+      return
+    }
+
     arrayToDb = ({ 
         id : 0
         , nombre : form.controls["nombre"].value
         , direccion : form.controls["direccion"].value
-        , rfc : form.controls["rfc"].value 
+        , rfc : form.controls["rfc"].value.trim() 
         , ciudad : form.controls["ciudad"].value
         , estado : '' //form.controls["estado"].value
         , contacto : '' //form.controls["responsable"].value
@@ -90,6 +99,12 @@ public newProject: FormGroup;
       this.openSnackBar('Debe capturar los campos requeridos', '');
     }else{
       this.insertCustommer(arrayToDb);
+    }
+  }
+
+  onChangeRFC(event){
+    if(this.custommerDataSource.filter(e => e.rfc.trim() == this.newProject.controls["rfc"].value.trim()).length > 0){
+      this.openSnackBar('Este RFC ya esta registrado', '');
     }
   }
 
@@ -122,14 +137,24 @@ insertCustommer(arrayToDb : any){
 
 updateCustommer(arrayToDb : any){
 
-// Actualiza clientes
-this._customerservice.updatecustomer(arrayToDb).subscribe(
-  res=> {
-    console.log('CLIENTES', res);
-  },
-  error => console.log("error al actualizar proyectos categorias",error)
-)
+  // Actualiza clientes
+  this._customerservice.updatecustomer(arrayToDb).subscribe(
+    res=> {
+      console.log('CLIENTES', res);
+    },
+    error => console.log("error al actualizar proyectos categorias",error)
+  )
+}
 
+getCustommer(){
+  // Obtine clientes
+  this._customerservice.getcustomerAll().subscribe(
+    res=> {
+      this.custommerDataSource = res;
+      console.log('CLIENTES', this.custommerDataSource);
+    },
+    error => console.log("error al actualizar proyectos categorias",error)
+  )
 }
 
 

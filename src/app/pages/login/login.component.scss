@@ -1,0 +1,14 @@
+::ng-deep.alert-snackbar{
+    background-color: rgb(106, 93, 83) !important;
+    color:rgb(255, 249, 246) !important;
+    height: 100px !important;
+    width: auto !important;
+    margin: 24px !important;
+    font-size: 32px;
+    align-items: center !important;
+  }
+
+  ::ng-deep.red-snackbar{
+    background-color: rgb(153, 50, 50);
+    color:lightgoldenrodyellow;
+  }

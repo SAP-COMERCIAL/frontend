@@ -39,7 +39,14 @@ export class RequisitionDetailComponent implements OnInit {
   requisicion_id : any = '';
   categoria_id : any = '';
   proyecto_id : any = 0;
-  requisicion_Numero : any = ''
+  requisicion_Numero : any = '';
+  sku_Detalle : any = '';
+  cantidad_Detalle : any = '';
+  uom_Detalle : any = '';
+  descripcion_Detalle : any = '';
+  medida_Detalle : any = '';
+  color_Detalle : any = '';
+
   loadfile : any  = '';
   buscar : any = '';
   public nombreArchivo : any = 'selecciona archivo';
@@ -79,7 +86,13 @@ export class RequisitionDetailComponent implements OnInit {
       categoria_id: new FormControl('', [Validators.required]),
       requisicion_id: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
-      requisicion_Numero : new FormControl('', [Validators.required])
+      requisicion_Numero : new FormControl('', [Validators.required]),
+      sku_Detalle : new FormControl(''),
+      cantidad_Detalle : new FormControl(''),
+      uom_Detalle : new FormControl(''),
+      descripcion_Detalle : new FormControl(''),
+      medida_Detalle : new FormControl(''),
+      color_Detalle : new FormControl('')
       // loadFile: new FormControl(''),
   });
   }
@@ -298,6 +311,10 @@ export class RequisitionDetailComponent implements OnInit {
         this.updateRequisition(arrayTodb);
     }
     this.dialogRef.close();
+  }
+
+  add(){
+    console.log('AGREGAR A DATASOURCE DE CARGA');
   }
 
   fechaInicial(event){
