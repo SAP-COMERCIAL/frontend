@@ -8223,7 +8223,6 @@ class RequisitionDetailComponent {
             descripcion_Detalle: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl(''),
             medida_Detalle: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl(''),
             color_Detalle: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl('')
-            // loadFile: new FormControl(''),
         });
     }
     // ===============
@@ -8414,8 +8413,26 @@ class RequisitionDetailComponent {
         }
         this.dialogRef.close();
     }
-    add() {
-        console.log('AGREGAR A DATASOURCE DE CARGA');
+    add(form, event) {
+        let arrayExcel = [];
+        // arrayExcel.push({ 
+        //   requisition_Id : 0,
+        //   SKU : this.newProject.controls["sku_Detalle"].value
+        //   , cantidad : this.newProject.controls["cantidad_Detalle"].value
+        //   , um : this.newProject.controls["uom_Detalle"].value
+        //   , descripcion : this.newProject.controls["descripcion_Detalle"].value
+        //   , medida : this.newProject.controls["medida_Detalle"].value
+        //   , color : this.newProject.controls["color_Detalle"].value
+        //   , otras_especificaciones : ''
+        //  })
+        //  this.UploadDataExcel.filteredData.forEach(element => {
+        //  });
+        //  this.UploadDataExcel.filteredData.push(arrayExcel)
+        //  arrayExcel.push(this.UploadDataExcel.filteredData);
+        //  console.log('arrayExcel', this.UploadDataExcel.filteredData)
+        //  this.UploadDataExcel = new MatTableDataSource(arrayExcel);
+        //  this.UploadDataExcelManual.filteredData.push(arrayExcel);
+        //  this.UploadDataExcel.filteredData.push(arrayExcel);
     }
     fechaInicial(event) {
         console.log('fecha', this.fecha);
@@ -8637,7 +8654,6 @@ RequisitionDetailComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵtemplate"](42, RequisitionDetailComponent_div_42_Template, 11, 1, "div", 14);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](43, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](44, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](45, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](46, "div", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](47, "div");
@@ -8693,6 +8709,7 @@ RequisitionDetailComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](78, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](79, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](80, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelement"](81, "div");
