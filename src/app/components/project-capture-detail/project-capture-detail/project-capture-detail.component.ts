@@ -152,8 +152,6 @@ console.log('data de entrada', this.projectInfo);
       return;
     }
 
-    console.log("PRESUPUESTOS", this.newProject.controls["presupuesto_proyecto"].value);
-
     if(this.projectId == 0){
       arrayTodb = { codigo_proyecto : this.newProject.controls["codigo_proyecto"].value,
                   nombre_proyecto : this.newProject.controls["nombre_proyecto"].value,

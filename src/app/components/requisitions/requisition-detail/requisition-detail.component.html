@@ -157,7 +157,11 @@
         <div></div>
     </div>
     <div fxFlex.gt-sm="20%" >
-      <div></div>
+      <div>
+        <ng-container *ngIf='requisicionId == 0' >
+          <button mat-raised-button color="accent" (click)="clean($event)">Limpiar</button>
+        </ng-container>
+      </div>
     </div>
     <div fxFlex.gt-sm="20%" >
       <div>

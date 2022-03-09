@@ -135,9 +135,29 @@ export class RequisitionDetailComponent implements OnInit {
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>(event.target);
     let extencionArchivo : string = '';
+    let arrayExcel = [];
 
-    this.UploadDataExcel = null;
-
+    if(this.UploadDataExcel != undefined){
+      if(this.UploadDataExcel.filteredData.length > 0){
+        this.UploadDataExcel.filteredData.forEach(element => {
+          arrayExcel.push({ 
+            requisition_Id : 0,
+            SKU : element.SKU
+            , cantidad : element.cantidad
+            , um : element.um
+            , descripcion : element.descripcion
+            , medida : element.medida
+            , color : element.color
+            , otras_especificaciones : element.otras_especificaciones
+          })
+        });
+      }else{
+        this.UploadDataExcel = null;
+      }
+    }else{
+      this.UploadDataExcel = null;
+    }
+         
     if (target.files.length !== 1) {
       throw new Error('No se pueden seleccionar multiples archivos');
     }
@@ -147,7 +167,6 @@ export class RequisitionDetailComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
     extencionArchivo = target.files[0].name.substring(target.files[0].name.length - 5,target.files[0].name.length)
     if(extencionArchivo == '.xlsx' || extencionArchivo.substring(extencionArchivo.length - 4, extencionArchivo.length) == 'xls'){
-      console.log('AQUI ESTAN LAS EXTENCIONES DE EXCEL')
       reader.onload = (e: any) => {
         /* create workbook */
   
@@ -164,7 +183,6 @@ export class RequisitionDetailComponent implements OnInit {
         this.dataExcel = data;
 
         let arrayErrores = [];
-        let arrayExcel = [];
         let valido : boolean = true;
 
         // Validadores de campos
@@ -227,21 +245,16 @@ export class RequisitionDetailComponent implements OnInit {
 
       if(arrayErrores.length > 0){
         this.openSnackBar('Los registros contienen datos incorrectos', '');
-
-        // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'Los registros contienen estaciónes, productos o plataformas no validos', 'warn');
         this.dataExcel = null;
-        // this.openErrorDialog(arrayErroresEstacion);
         return;
       }
 
       this.UploadDataExcel = new MatTableDataSource(arrayExcel);
-      console.log('datos del excel', this.UploadDataExcel);
 
       };
     }
     else{
       this.openSnackBar('Los registros contienen datos incorrectos', '');
-      // this.notificationService.openNotification(AppConstants.defaultNotificationWarningTitle, 'No es un archivo de excel válido', 'warn');
       this.deleteUploadFile(event);
     }
   }
@@ -317,31 +330,44 @@ export class RequisitionDetailComponent implements OnInit {
     
     let arrayExcel : any = [];
 
-    // arrayExcel.push({ 
-    //   requisition_Id : 0,
-    //   SKU : this.newProject.controls["sku_Detalle"].value
-    //   , cantidad : this.newProject.controls["cantidad_Detalle"].value
-    //   , um : this.newProject.controls["uom_Detalle"].value
-    //   , descripcion : this.newProject.controls["descripcion_Detalle"].value
-    //   , medida : this.newProject.controls["medida_Detalle"].value
-    //   , color : this.newProject.controls["color_Detalle"].value
-    //   , otras_especificaciones : ''
-    //  })
+    if(this.UploadDataExcel != undefined){
+      if(this.UploadDataExcel.filteredData.length > 0){
+        this.UploadDataExcel.filteredData.forEach(element => {
+          arrayExcel.push({ 
+            requisition_Id : 0,
+            SKU : element.SKU
+            , cantidad : element.cantidad
+            , um : element.um
+            , descripcion : element.descripcion
+            , medida : element.medida
+            , color : element.color
+            , otras_especificaciones : element.otras_especificaciones
+          })
+        });
+      }else{
+        arrayExcel = [];
+      }
+    }else{
+      arrayExcel = [];
+    }
 
-    //  this.UploadDataExcel.filteredData.forEach(element => {
-       
-    //  });
+    arrayExcel.push({ 
+      requisition_Id : 0,
+      SKU : this.newProject.controls["sku_Detalle"].value
+      , cantidad : this.newProject.controls["cantidad_Detalle"].value
+      , um : this.newProject.controls["uom_Detalle"].value
+      , descripcion : this.newProject.controls["descripcion_Detalle"].value
+      , medida : this.newProject.controls["medida_Detalle"].value
+      , color : this.newProject.controls["color_Detalle"].value
+      , otras_especificaciones : ''
+     })
 
-    //  this.UploadDataExcel.filteredData.push(arrayExcel)
+    this.UploadDataExcel = null;
+     this.UploadDataExcel = new MatTableDataSource(arrayExcel);
+  }
 
-    //  arrayExcel.push(this.UploadDataExcel.filteredData);
-    //  console.log('arrayExcel', this.UploadDataExcel.filteredData)
-     
-    //  this.UploadDataExcel = new MatTableDataSource(arrayExcel);
-    
-    //  this.UploadDataExcelManual.filteredData.push(arrayExcel);
-    //  this.UploadDataExcel.filteredData.push(arrayExcel);
-
+  clean(event){
+    this.UploadDataExcel = null;
   }
 
   fechaInicial(event){
