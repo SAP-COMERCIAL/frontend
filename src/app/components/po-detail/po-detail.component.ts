@@ -388,8 +388,8 @@ export class PoDetailComponent implements OnInit {
             row.push( data.cantidad.toString() );
             row.push( data.unidad_medida.toString()  );
             row.push( data.descripcion.toString() );
-            row.push( data.precio_unitario.toString()  );
-            row.push( (data.precio_unitario * data.cantidad).toString() );
+            row.push( formatter.format(data.precio_unitario).toString()  );
+            row.push( formatter.format((data.precio_unitario * data.cantidad)).toString() );
             // row.push( data.medida.toString() );
             body.push(row);
             bodyx.push(row);
