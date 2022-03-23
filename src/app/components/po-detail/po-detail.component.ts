@@ -25,6 +25,13 @@ declare var name: any;
 //   alert('Hello!!!');
 // }
 
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+
 @Component({
   selector: 'app-po-detail',
   templateUrl: './po-detail.component.html',
@@ -151,10 +158,7 @@ export class PoDetailComponent implements OnInit {
     this.getProveedores();
     this.getCotizacionesAll();
 
-    console.log('this.projectInfo',this.projectInfo);
     if(this.projectInfo != undefined){
-      console.log('project info', this.projectInfo);
-      console.log('podata', this.projectInfo.iva.toString());
       this.ordendecompra_id = this.projectInfo.proveedor_nombre
       this.subtotal = this.projectInfo.sub_total;
       this.ivaSubtotal = this.projectInfo.iva_moneda;
@@ -176,7 +180,6 @@ export class PoDetailComponent implements OnInit {
   }
 
   cotizacionSelected(form, event){
-    console.log('pagina', form.controls['cotizacion_id'].value);
     this.getcotizacionesDetail(form.controls['cotizacion_id'].value);
 
   }
@@ -316,7 +319,8 @@ export class PoDetailComponent implements OnInit {
                       )   
         break;
       default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
-                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
+                    // this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(              
+                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
                       result => this.logoDataUrl = result
                     )
         break;
@@ -326,14 +330,13 @@ export class PoDetailComponent implements OnInit {
                       this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
                         result => this.logoDataUrl = result
                       )
-    console.log(this.decodedSign)
+    console.log('this.decodedSign', this.decodedSign)
   }
   
   public async downloadAsPDF() {
-
-    let subTotal : any = 0;
-    let iva : any = 0;
-    let total : any = 0;
+    let subtotalPDF : number = 0;
+    let ivaPDF : number = 0;
+    let totalPDF : number = 0;
 
     const doc = new jsPDF();   
     const pdfTable = this.pdfTable.nativeElement;
@@ -341,8 +344,6 @@ export class PoDetailComponent implements OnInit {
     var html = htmlToPdfmake(pdfTable.innerHTML);
 
     let arrayProveedor = this.datasourcesupplier.filter(e => e.proveedorid == this.projectInfo["proveedor_id"])
-
-    console.log('this.projectInfo', arrayProveedor);
 
     var headers = {
       0:{
@@ -380,7 +381,6 @@ export class PoDetailComponent implements OnInit {
     }
 
     for (var key in this.datasourceCotizacionesDetalle) {
-      console.log('renglones', this.datasourceCotizacionesDetalle);
         if (this.datasourceCotizacionesDetalle.hasOwnProperty(key))
         {
             var data = this.datasourceCotizacionesDetalle[key];
@@ -393,14 +393,14 @@ export class PoDetailComponent implements OnInit {
             // row.push( data.medida.toString() );
             body.push(row);
             bodyx.push(row);
-
+            
             // Calcula Totales
-            this.subtotal = this.subtotal + (data.precio_unitario * data.cantidad);
+            subtotalPDF = subtotalPDF + (data.precio_unitario * data.cantidad);
         }
     }
 
-    this.iva = this.subtotal * (this.newProject.controls["iva"].value / 100);
-    this.total = this.subtotal + this.iva;
+    ivaPDF = subtotalPDF * (this.newProject.controls["iva"].value / 100);
+    totalPDF = subtotalPDF + ivaPDF;
 
     // {
     //   text: 'LOGO DE ORDEN DE COMPRA', fontSize:8
@@ -620,7 +620,7 @@ export class PoDetailComponent implements OnInit {
               text: 'Subtotal', fontSize:8, bold:true, width: '*'
             },
             {
-              text: '$ ' + this.subtotal, fontSize:8, width:'*'
+              text: formatter.format(subtotalPDF) , fontSize:8, alignment: 'right', width:'*'
             }
           ]
         },
@@ -639,7 +639,7 @@ export class PoDetailComponent implements OnInit {
               text: 'IVA', fontSize:8, bold:true, width: '*'
             },
             {
-              text: '$ ' + this.iva , fontSize:8, width:'*'
+              text: formatter.format(ivaPDF) , fontSize:8, alignment: 'right', width:'*'
             }
           ]
         },
@@ -658,7 +658,7 @@ export class PoDetailComponent implements OnInit {
               text: 'Total', fontSize:8, bold:true, width: '*'
             },
             {
-              text: '$ ' + this.total , fontSize:8, width:'*'
+              text: formatter.format(totalPDF) , fontSize:8, alignment: 'right', width:'*'
             }
           ]
         },
