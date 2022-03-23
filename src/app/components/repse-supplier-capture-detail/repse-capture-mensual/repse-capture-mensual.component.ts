@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../../services/supplier.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 
 @Component({
   selector: 'app-repse-capture-mensual',
@@ -30,29 +32,31 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
+ProveedorId : number = 1;
+
+// Variables de carga de archivos
+urlListadoTrabajadores : any;
+urlCFDI : any;
+urlComprobanteBanco : any;
+urlSIPARE : any;
+urlSUA : any;
+urlISRComprobanteBanco : any;
+urlISRDeclaracion : any;
+urlIVADeclaracion : any;
+urlOpinionPositivaIMSS : any;
+urlOpinionPositivaSAT : any;
 
 public newProject: FormGroup;
 
   constructor(
     private _supplyservice : supplyservice
     , private formBuilder: FormBuilder
+    , private _snackBar : MatSnackBar
+    , private readonly _uploadFileService: UploadFileService
   ) { 
     this.newProject = this.formBuilder.group({
-      ciudad: new FormControl('', [Validators.required]),
-      estado: new FormControl('', [Validators.required]),
-      objetivoSocial: new FormControl('', [Validators.required]),
-      tipoPersona: new FormControl('', [Validators.required]),
-      telefono: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      actaConstitutiva: new FormControl('', [Validators.required]),
-      ine: new FormControl('', [Validators.required]),
-      altaIMSS: new FormControl('', [Validators.required]),
-      altaINFONAVIT: new FormControl('', [Validators.required]),
-      altaSAT: new FormControl('', [Validators.required]),
-      edoCtaBancario: new FormControl('', [Validators.required]),
-      edoFinanciero: new FormControl('', [Validators.required]),
-      contrato: new FormControl('', [Validators.required]),
-      registroPatronalProv: new FormControl('', [Validators.required])
+      anio: new FormControl('', [Validators.required]),
+      mes: new FormControl('', [Validators.required])
     });
   }
 
@@ -89,9 +93,74 @@ public newProject: FormGroup;
 // =========================
 // UTILERIAS
 // =========================
+openFile(url){
+  console.log('url', url);
+  window.open(url);
+}
 
+openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
+}
 
 // =========================
 // SERVICIOS
 // =========================
+imagenes: any[] = [];
+  cargarImagen(form, event: any, tipoImagen : string, grupoImagen : string) {
+    let archivos = event.target.files;
+    let nombre = event.target.files.name;
+    let arrayToDb : any = [];
+    
+    for (let i = 0; i < archivos.length; i++) {
+
+      let reader = new FileReader();
+      reader.readAsDataURL(archivos[0]);
+      reader.onloadend = () => {
+        console.log(reader.result);
+        this.imagenes.push(reader.result);
+        this._uploadFileService.subirImagen(tipoImagen + '_' + event.target.files[0]["name"], reader.result, grupoImagen, this.ProveedorId, form.controls["anio"].value, form.controls["mes"].value).then(urlImagen => {
+          // let usuario = {
+          //   name: "jonathan",
+          //   nickName: "yonykikok",
+          //   password: "401325",
+          //   imgProfile: urlImagen
+          // }
+          console.log(urlImagen);
+
+          switch (tipoImagen){
+            case('listadoTabajadores'): this.urlListadoTrabajadores = urlImagen.toString();
+              break;
+            case ('CFDI') : this.urlCFDI = urlImagen.toString();
+              break;
+            case ('comprobanteBanco') : this.urlComprobanteBanco = urlImagen.toString();
+              break;
+            case ('SIPARE') : this.urlSIPARE = urlImagen.toString();
+              break;
+            case ('SUA') : this.urlSUA = urlImagen.toString();
+              break;
+            case ('ISRComprobanteBanco') : this.urlISRComprobanteBanco = urlImagen.toString();
+              break;
+            case ('ISRDeclaracion') : this.urlISRDeclaracion = urlImagen.toString();
+              break;
+            case ('IVADeclaracion') : this.urlIVADeclaracion = urlImagen.toString();
+              break;
+            case ('opinionPositivaIMSS') : this.urlOpinionPositivaIMSS = urlImagen.toString();
+              break;
+            case ('pinionPositivaSAT') : this.urlOpinionPositivaSAT = urlImagen.toString();
+              break;
+          }
+
+          console.log('direccion', this.urlListadoTrabajadores);
+          
+          this.openSnackBar('Se cargo exitosamente el archivo', '');
+
+          // guarda en base de datos
+          // arrayToDb.push({id : 1, })
+          // this.insertFilesToDb(arrayToDb);
+
+        });
+      }
+    }
+  }
+
 }

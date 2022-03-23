@@ -4,11 +4,53 @@
         <div fxFlex.gt-sm="150px">
             <div></div>
         </div>
+        <div fxFlex.gt-sm="200px">
+            <div>Año
+                <ng-container>
+                    <mat-select class="form-control"  formControlName="anio"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
+                        <mat-option value= "2020">2020</mat-option>
+                        <mat-option value= "2021">2021</mat-option>
+                        <mat-option value= "2022" selected="selected">2022</mat-option>
+                        <mat-option value= "2023">2023</mat-option>
+                        <mat-option value= "2024">2024</mat-option>
+                        <mat-option value= "2025">2025</mat-option>
+                        <mat-option value= "2026">2026</mat-option>
+                        <mat-option value= "2027">2027</mat-option>
+                        <mat-option value= "2028">2028</mat-option>
+                        <mat-option value= "2029">2029</mat-option>
+                        <mat-option value= "2030">2030</mat-option>
+                        <mat-option value= "2031">2031</mat-option>
+                      </mat-select>
+                </ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>Cuatrimestre
+                <ng-container>
+                      <mat-select class="form-control"  formControlName="mes"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
+                        <mat-option value= "1" selected="selected">Primer Cuatrimestre</mat-option>
+                        <mat-option value= "2">Segundo Cuatrimestre</mat-option>
+                        <mat-option value= "3">Tercer Cuatrimestre</mat-option>
+                      </mat-select>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div></div>
+        </div>
         <div fxFlex.gt-sm="500px">
             <div> Reporte al IMSS y  su acuse de presentacion ICSOE en PDF</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlCuICSOE" id="urlCuICSOE" (change)="cargarImagen(newProject, $event, 'CuICSOE', 'cuatrimestrales')" hidden><label for="urlCuICSOE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
@@ -21,7 +63,12 @@
             <div> Reporte al INFONAVIT y su acuse de presentacion SISUB en PDF</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlCuSISUB" id="urlCuSISUB" (change)="cargarImagen(newProject, $event, 'CuSISUB', 'cuatrimestrales')" hidden><label for="urlCuSISUB"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 </div>

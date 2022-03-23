@@ -4,12 +4,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from 'src/app/services/supplier.service';
-import { SupplierDetailComponent } from 'src/app/components/supplier-detail/supplier-detail.component';
+import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { RepseSupplierReviewDetailComponent } from '../../../components/repse-supplier-review-detail/repse-supplier-review-detail.component';
 import { ThrowStmt } from '@angular/compiler';
+import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
+import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-repse-review-general',
@@ -39,7 +41,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
   constructor(public dialogRef: MatDialogRef<supplierModel>
     , public dialog: MatDialog
     , private _excelService : ExcelServiceService
-    , private _supplyservice : supplyservice) { }
+    , private _supplyservice : supplyservice
+    , private _UploadFileService : UploadFileService) { }
 
   // =================
   // PROCEDIMIENTOS
@@ -70,19 +73,21 @@ dataSourceShow : MatTableDataSource<supplierModel>
 
     const dialogConfig = new MatDialogConfig();
 
+    console.log('Proveedores', element.proveedorId)
+    console.log('data', element);
     dialogConfig.data = {
       id: 1,
-      title: 'PROVEEDOR',
+      title: 'APROBAR/DENEGAR ARCHIVO',
       arrayData : element,
       proveedorId: element.proveedorId,
       estadoPantalla: 'Edit'
      
     }
-    dialogConfig.width = '1300px';
-    dialogConfig.height = '900px';
+    dialogConfig.width = '550px';
+    dialogConfig.height = '300px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RepseSupplierReviewDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(RepseReviewAproveComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();
@@ -120,6 +125,12 @@ dataSourceShow : MatTableDataSource<supplierModel>
     this.dataSourceShow.sort = this.sort;
     this.dataSourceShow.paginator = this.paginator;
   }
+
+  view(form, event){
+    console.log('SE MUESTRA LA IMAGEN O EL ARCHIVO', form);
+    this.getImage();
+  }
+
 
   // =================
   // SERVICIOS
@@ -169,6 +180,16 @@ dataSourceShow : MatTableDataSource<supplierModel>
     // )
 
 
+  }
+
+  fileDownload : any;
+
+  getImage(){
+    this._UploadFileService.getFiles('direccion_dos.PNG' ,'generales').then(urlImagen => {
+      console.log(urlImagen);
+      this.fileDownload = urlImagen;
+      window.open(urlImagen.toString());
+    });
   }
 
 }

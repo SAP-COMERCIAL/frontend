@@ -3,6 +3,10 @@
   </div>
   <br>
   <div mat-dialog-content-example [formGroup]="newProject">
+    
+    <!-- <script src="../../../assets/Utilities/NumeroALetras.js"></script> -->
+    <!-- <script src="../../../assets/Utilities/nand.js"></script> -->
+
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
           <div><br>Cotización</div>
@@ -97,7 +101,6 @@
       </div>
     </div>
 
-
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
           <div><br>Moneda</div>
@@ -124,7 +127,6 @@
       </div>
     </div>
 
-
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
         Subtotal: {{subtotal | currency}}
@@ -138,10 +140,53 @@
   </div>
 
     <br>
+    <p style="font-weight: bold;">Datos de envío</p>
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div>
+            <mat-form-field>
+              <input [type]="enviaANombre" matInput class="form-control form-control-line control" formControlName="enviaANombre" placeholder="Nombre Envía a">
+          </mat-form-field>
+          </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <input [type]="enviaADireccion" matInput class="form-control form-control-line control" formControlName="enviaADireccion" placeholder="Dirección envía a">
+        </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <input [type]="enviaACdEstado" matInput class="form-control form-control-line control" formControlName="enviaACdEstado" placeholder="Ciudad, estado">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div>
+          <mat-form-field>
+            <input [type]="enviaARequisitor" matInput class="form-control form-control-line control" formControlName="enviaARequisitor" placeholder="Requisitor">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+            <div>
+              <mat-form-field>
+                <input [type]="enviaATelefono" matInput class="form-control form-control-line control" formControlName="enviaATelefono" placeholder="Teléfono">
+              </mat-form-field>
+            </div>
+      </div>
+    </div>
+    <br>
+
+
     <!--Tabla de captura-->
     <div fxLayout="row" class="division">
         
     </div>
+
+    <p style="font-weight: bold;">Detalle orden de compra</p>
 
   </div>
     <div fxLayout="row" class="division">
@@ -398,4 +443,3 @@
         </div>
       </div>
     </div>
-  

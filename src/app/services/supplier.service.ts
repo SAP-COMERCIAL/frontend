@@ -46,4 +46,12 @@ export class supplyservice {
         return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Provider/activoinactivo', arrayToDb, {headers});
     }
 
+    postDocument(arrayToDb : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+        return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Document/subir', arrayToDb, {headers});
+    }
+
+
 }

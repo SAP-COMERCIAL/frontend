@@ -1,4 +1,50 @@
 <div mat-dialog-content-example [formGroup]="newProject">
+    <br>
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>Año
+                <ng-container>
+                    <mat-select class="form-control"  formControlName="anio"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
+                        <mat-option value= "2020">2020</mat-option>
+                        <mat-option value= "2021">2021</mat-option>
+                        <mat-option value= "2022" selected="selected">2022</mat-option>
+                        <mat-option value= "2023">2023</mat-option>
+                        <mat-option value= "2024">2024</mat-option>
+                        <mat-option value= "2025">2025</mat-option>
+                        <mat-option value= "2026">2026</mat-option>
+                        <mat-option value= "2027">2027</mat-option>
+                        <mat-option value= "2028">2028</mat-option>
+                        <mat-option value= "2029">2029</mat-option>
+                        <mat-option value= "2030">2030</mat-option>
+                        <mat-option value= "2031">2031</mat-option>
+                      </mat-select>
+                </ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>Mes
+                <ng-container>
+                      <mat-select class="form-control"  formControlName="mes"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
+                        <mat-option value= "1" selected="selected">Enero</mat-option>
+                        <mat-option value= "2">Febrero</mat-option>
+                        <mat-option value= "3">Marzo</mat-option>
+                        <mat-option value= "4">Abril</mat-option>
+                        <mat-option value= "5">Mayo</mat-option>
+                        <mat-option value= "6">Junio</mat-option>
+                        <mat-option value= "7">Julio</mat-option>
+                        <mat-option value= "8">Agosto</mat-option>
+                        <mat-option value= "9">Septiembre</mat-option>
+                        <mat-option value= "10">Octubre</mat-option>
+                        <mat-option value= "11">Noviembre</mat-option>
+                        <mat-option value= "12">Diciembre</mat-option>
+                      </mat-select>
+                </ng-container>
+            </div>
+        </div>
+    </div>
 <br>    
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
@@ -8,7 +54,12 @@
             <div>Listado trabajadores Excel o PDF</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="fuListadoTrabajadores" id="fuListadoTrabajadores" (change)="cargarImagen(newProject, $event, 'listadoTabajadores', 'mensuales')" hidden><label for="fuListadoTrabajadores"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div>
         </div>
     </div>
 
@@ -20,13 +71,18 @@
             <div><br>CFDI mensual de trabajadores</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><br><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <br><ng-container>
+                    <input type="file" name="fuCFDI" id="fuCFDI" (change)="cargarImagen(newProject, $event, 'CFDI', 'mensuales')" hidden><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="300px">
-            <div class="titles"><br>Pago IMSS mensual</div>
+            <br><div class="titles"><br>Pago IMSS mensual</div>
         </div>
         <div fxFlex.gt-sm="300px">
             <div></div>
@@ -43,10 +99,15 @@
             <div></div>
         </div>
         <div fxFlex.gt-sm="500px">
-            <div> Comprobante de pago del Banco en PDF</div>
+            <div><br>Comprobante de pago del Banco en PDF</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <br><ng-container>
+                    <input type="file" name="urlComprobanteBanco" id="urlComprobanteBanco" (change)="cargarImagen(newProject, $event, 'comprobanteBanco', 'mensuales')" hidden><label for="urlComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
@@ -58,9 +119,12 @@
             <div><br>SIPARE en pdf</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div>
-                <br><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-            </div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlSIPARE" id="urlSIPARE" (change)="cargarImagen(newProject, $event, 'SIPARE', 'mensuales')" hidden><label for="urlSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
@@ -73,7 +137,12 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div>
-                <br><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <div><br>
+                    <ng-container>
+                        <input type="file" name="urlSUA" id="urlSUA" (change)="cargarImagen(newProject, $event, 'SUA', 'mensuales')" hidden><label for="urlSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                        <button class="button" (click)="openFile(urlSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                    </ng-container>
+                </div> 
             </div>
         </div>
     </div>
@@ -95,12 +164,44 @@
             <div><br></div>
         </div>
         <div fxFlex.gt-sm="500px">
-            <div>Comprobante de pago del Banco en PDF</div>
+            <div><br>Comprobante de pago del Banco en PDF</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div>
-                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-            </div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlISRComprobanteBanco" id="urlISRComprobanteBanco" (change)="cargarImagen(newProject, $event, 'ISRComprobanteBanco', 'mensuales')" hidden><label for="urlISRComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div><br></div>
+        </div>
+        <div fxFlex.gt-sm="500px">
+            <div><br>Declaración de ISR</div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlISRDeclaracion" id="urlISRDeclaracion" (change)="cargarImagen(newProject, $event, 'ISRDeclaracion', 'mensuales')" hidden><label for="urlISRDeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
+        </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div class="titles"><br>Pago SAT (IVA)</div>
+        </div>
+        <div fxFlex.gt-sm="500px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="70px">
+            <div></div>
         </div>
     </div>
 
@@ -112,49 +213,12 @@
             <div><br>Declaración de IVA</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div>
-                <br><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-            </div>
-        </div>
-    </div>
-
-    <div fxLayout="row" class="division">
-        <div fxFlex.gt-sm="150px">
-            <div class="titles"><br>Pago ISN</div>
-        </div>
-        <div fxFlex.gt-sm="500px">
-            <div></div>
-        </div>
-        <div fxFlex.gt-sm="70px">
-            <div></div>
-        </div>
-    </div>
-
-    <div fxLayout="row" class="division">
-        <div fxFlex.gt-sm="150px">
-            <div><br></div>
-        </div>
-        <div fxFlex.gt-sm="500px">
-            <div><br>Comprobante de pago del Banco en PDF</div>
-        </div>
-        <div fxFlex.gt-sm="70px">
-            <div>
-                <br><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-            </div>
-        </div>
-    </div>
-
-    <div fxLayout="row" class="division">
-        <div fxFlex.gt-sm="150px">
-            <div><br></div>
-        </div>
-        <div fxFlex.gt-sm="500px">
-            <div><br>Declaración</div>
-        </div>
-        <div fxFlex.gt-sm="70px">
-            <div>
-                <br><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-            </div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlIVADeclaracion" id="urlIVADeclaracion" (change)="cargarImagen(newProject, $event, 'IVADeclaracion', 'mensuales')" hidden><label for="urlIVADeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
     <br>
@@ -163,10 +227,15 @@
             <div><br></div>
         </div>
         <div fxFlex.gt-sm="500px">
-            <div>Opinión Positiva IMSS  (Dos meses atrás)</div>
+            <div>Opinión Positiva IMSS  (Un meses atrás)</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlOpinionPositivaIMSS" id="urlOpinionPositivaIMSS" (change)="cargarImagen(newProject, $event, 'opinionPositivaIMSS', 'mensuales')" hidden><label for="urlOpinionPositivaIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
     <br>
@@ -175,10 +244,15 @@
             <div><br></div>
         </div>
         <div fxFlex.gt-sm="500px">
-            <div>Opinion Positiva SAT (Dos meses atrás)</div>
+            <div>Opinion Positiva SAT (Un meses atrás)</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlOpinionPositivaSAT" id="urlOpinionPositivaSAT" (change)="cargarImagen(newProject, $event, 'opinionPositivaSAT', 'mensuales')" hidden><label for="urlOpinionPositivaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div>
         </div>
     </div>
 </div>

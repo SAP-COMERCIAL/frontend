@@ -1,5 +1,44 @@
 <div mat-dialog-content-example [formGroup]="newProject">
-    
+    <br>
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="150px">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>Año
+                <ng-container>
+                    <mat-select class="form-control"  formControlName="anio"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
+                        <mat-option value= "2020">2020</mat-option>
+                        <mat-option value= "2021">2021</mat-option>
+                        <mat-option value= "2022" selected="selected">2022</mat-option>
+                        <mat-option value= "2023">2023</mat-option>
+                        <mat-option value= "2024">2024</mat-option>
+                        <mat-option value= "2025">2025</mat-option>
+                        <mat-option value= "2026">2026</mat-option>
+                        <mat-option value= "2027">2027</mat-option>
+                        <mat-option value= "2028">2028</mat-option>
+                        <mat-option value= "2029">2029</mat-option>
+                        <mat-option value= "2030">2030</mat-option>
+                        <mat-option value= "2031">2031</mat-option>
+                      </mat-select>
+                </ng-container>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="200px">
+            <div>Bimestre
+                <ng-container>
+                      <mat-select class="form-control"  formControlName="mes"><!--(selectionChange)="emitFilters($event, 'Enviado')"  [(ngModel)]="almacen"-->
+                        <mat-option value= "1" selected="selected">Bimestre 01 (ene/feb)</mat-option>
+                        <mat-option value= "2">Bimestre 02 (mar/abr)</mat-option>
+                        <mat-option value= "3">Bimestre 03 (may/jun)</mat-option>
+                        <mat-option value= "4">Bimestre 04 (jul/ago)</mat-option>
+                        <mat-option value= "5">Bimestre 05 (sep/oct)</mat-option>
+                        <mat-option value= "6">Bimestre 06 (nov/dic)</mat-option>
+                      </mat-select>
+                </ng-container>
+            </div>
+        </div>
+    </div>
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="300px">
             <div class="titles"><br>Pago INFONAVIT Bimestral</div>
@@ -22,7 +61,12 @@
             <div> Comprobante de pago del Banco en PDF</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlBiComprobantePagoBanco" id="urlBiComprobantePagoBanco" (change)="cargarImagen(newProject, $event, 'biComprobanteDePagoBanco', 'bimestrales')" hidden><label for="urlBiComprobantePagoBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
@@ -35,7 +79,12 @@
             <div> SIPARE en pdf</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlBiSIPARE" id="urlBiSIPARE" (change)="cargarImagen(newProject, $event, 'biSIPARE', 'bimestrales')" hidden><label for="urlBiSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
@@ -48,7 +97,12 @@
             <div> Cedula bimetral SUA en PDF (trabajadores)</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div>
+                <ng-container>
+                    <input type="file" name="urlBiSUA" id="urlBiSUA" (change)="cargarImagen(newProject, $event, 'biSUA', 'bimestrales')" hidden><label for="urlBiSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div> 
         </div>
     </div>
 
@@ -62,7 +116,12 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div>
-                <ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <div>
+                    <ng-container>
+                        <input type="file" name="urlBiOpinionPositivaINFONAVIT" id="urlBiOpinionPositivaINFONAVIT" (change)="cargarImagen(newProject, $event, 'biopinionPositivaINFONAVIT', 'bimestrales')" hidden><label for="urlBiOpinionPositivaINFONAVIT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                        <button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                    </ng-container>
+                </div> 
             </div>
         </div>
     </div>

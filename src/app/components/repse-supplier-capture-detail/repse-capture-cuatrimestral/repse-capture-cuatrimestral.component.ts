@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../../services/supplier.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+
 @Component({
   selector: 'app-repse-capture-cuatrimestral',
   templateUrl: './repse-capture-cuatrimestral.component.html',
@@ -29,12 +32,18 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
+ProveedorId : number = 1;
+
+urlCuICSOE : any;
+urlCuSISUB : any;
 
 public newProject: FormGroup;
 
   constructor(
     private _supplyservice : supplyservice
     , private formBuilder: FormBuilder
+    , private _snackBar : MatSnackBar
+    , private readonly _uploadFileService: UploadFileService
   ) { 
     this.newProject = this.formBuilder.group({
       ciudad: new FormControl('', [Validators.required]),
@@ -51,7 +60,9 @@ public newProject: FormGroup;
       edoCtaBancario: new FormControl('', [Validators.required]),
       edoFinanciero: new FormControl('', [Validators.required]),
       contrato: new FormControl('', [Validators.required]),
-      registroPatronalProv: new FormControl('', [Validators.required])
+      registroPatronalProv: new FormControl('', [Validators.required]),
+      anio: new FormControl('', [Validators.required]),
+      mes: new FormControl('', [Validators.required])
     });
   }
 
@@ -88,9 +99,57 @@ public newProject: FormGroup;
 // =========================
 // UTILERIAS
 // =========================
+openFile(url){
+  console.log('url', url);
+  window.open(url);
+}
 
+openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
+}
 
 // =========================
 // SERVICIOS
 // =========================
+imagenes: any[] = [];
+  cargarImagen(form, event: any, tipoImagen : string, grupoImagen : string) {
+    let archivos = event.target.files;
+    let nombre = event.target.files.name;
+    let arrayToDb : any = [];
+    
+    for (let i = 0; i < archivos.length; i++) {
+
+      let reader = new FileReader();
+      reader.readAsDataURL(archivos[0]);
+      reader.onloadend = () => {
+        console.log(reader.result);
+        this.imagenes.push(reader.result);
+        this._uploadFileService.subirImagen(tipoImagen + '_' + event.target.files[0]["name"], reader.result, grupoImagen, this.ProveedorId, form.controls["anio"].value, form.controls["mes"].value).then(urlImagen => {
+          // let usuario = {
+          //   name: "jonathan",
+          //   nickName: "yonykikok",
+          //   password: "401325",
+          //   imgProfile: urlImagen
+          // }
+          console.log(urlImagen);
+
+          switch (tipoImagen){
+            case('CuICSOE'): this.urlCuICSOE = urlImagen.toString();
+              break;
+            case ('CuSISUB') : this.urlCuSISUB = urlImagen.toString();
+              break;
+          }
+
+          console.log('direccion', this.urlCuSISUB);
+          
+          this.openSnackBar('Se cargo exitosamente el archivo', '');
+
+          // guarda en base de datos
+          // arrayToDb.push({id : 1, })
+          // this.insertFilesToDb(arrayToDb);
+
+        });
+      }
+    }
+  }
 }

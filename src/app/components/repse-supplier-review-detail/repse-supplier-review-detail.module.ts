@@ -17,6 +17,7 @@ import { ChartistModule } from 'ng-chartist';
   ],
   declarations: [
 
+  
   ],
 })
 export class RepseSupplierReviewDetailModule {}

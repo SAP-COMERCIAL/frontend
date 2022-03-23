@@ -18,6 +18,12 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
 import { MatMenu } from '@angular/material/menu';
+declare var name: any;
+
+
+// function numeroALetras() {
+//   alert('Hello!!!');
+// }
 
 @Component({
   selector: 'app-po-detail',
@@ -43,6 +49,7 @@ export class PoDetailComponent implements OnInit {
   logoDataUrl : string;
   logoDataCompras : string;
   logoDataControlProy : string;
+  usuarioId : any;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -74,6 +81,12 @@ export class PoDetailComponent implements OnInit {
   precio_unitario : number = 0;
   importe : number = 0;
   decodedSign : any;
+  enviaANombre : any;
+  enviaADireccion : any;
+  enviaACdEstado : any;
+  enviaARequisitor : any;
+  enviaATelefono : any;
+  logoCCC: any;
 
   constructor(
     public dialogRef: MatDialogRef<quotationDetailModel>
@@ -100,6 +113,11 @@ export class PoDetailComponent implements OnInit {
       total: new FormControl('', [Validators.required]),
       precio_unitario : new FormControl('', [Validators.required]),
       moneda : new FormControl('', [Validators.required]),
+      enviaANombre : new FormControl(''),
+      enviaADireccion : new FormControl(''),
+      enviaACdEstado : new FormControl(''),
+      enviaARequisitor : new FormControl(''),
+      enviaATelefono : new FormControl(''),
   });
 
   }
@@ -109,6 +127,8 @@ export class PoDetailComponent implements OnInit {
   // =====================
 
   ngOnInit(): void {
+
+    // new name();
     
     this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
       result => this.logoDataUrl = result
@@ -120,6 +140,10 @@ export class PoDetailComponent implements OnInit {
 
     this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgControlProyectos.PNG').then(
       result => this.logoDataControlProy = result
+    )
+
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/background/logoCCC.PNG').then(
+      result => this.logoCCC = result
     )
 
     this.decode();
@@ -187,7 +211,8 @@ export class PoDetailComponent implements OnInit {
   }
 
   Authoriza(form, event){
-      console.log('autoriza po', form)
+      console.log('autoriza po', form);
+      this.updateODCStatus(form);
   }
 
   ActivarDesactivar(element : any, event : Event){
@@ -263,7 +288,10 @@ export class PoDetailComponent implements OnInit {
   decode(){
     let token = localStorage.getItem('token_access');
     this.decodedSign = jwt_decode(token)["firma"] + '?alt=media&token='; 
-    let decodeUser = jwt_decode(token)["usuario"]; 
+    let decodeUser = jwt_decode(token)["usuario"];
+    let decodeId = jwt_decode(token);
+    
+    this.usuarioId = decodeUser;
     console.log(jwt_decode(token));
 
     switch(decodeUser){
@@ -293,6 +321,11 @@ export class PoDetailComponent implements OnInit {
                     )
         break;
     }
+
+    this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+                        result => this.logoDataUrl = result
+                      )
     console.log(this.decodedSign)
   }
   
@@ -306,7 +339,11 @@ export class PoDetailComponent implements OnInit {
     const pdfTable = this.pdfTable.nativeElement;
    
     var html = htmlToPdfmake(pdfTable.innerHTML);
-    
+
+    let arrayProveedor = this.datasourcesupplier.filter(e => e.proveedorid == this.projectInfo["proveedor_id"])
+
+    console.log('this.projectInfo', arrayProveedor);
+
     var headers = {
       0:{
           col_1:{ text: 'Cantidad', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 },
@@ -365,12 +402,19 @@ export class PoDetailComponent implements OnInit {
     this.iva = this.subtotal * (this.newProject.controls["iva"].value / 100);
     this.total = this.subtotal + this.iva;
 
+    // {
+    //   text: 'LOGO DE ORDEN DE COMPRA', fontSize:8
+    // }
+
     const documentDefinition = {
       content: [
         {
           columns: [
-            {
-              text: 'LOGO DE ORDEN DE COMPRA', fontSize:8
+            { 
+              // image: this.getBase64ImageFromURL('https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be'),
+              image: this.logoCCC,
+              width: 100,
+              height: 50,
             },
             {
               text: '', fontSize:8, width: 20
@@ -418,13 +462,13 @@ export class PoDetailComponent implements OnInit {
               text: 'Nombre: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'EXPLORACIÓN GEOFÍSICA Y ESTUDIOS DEL SUBSUELO DEL CENTRO', fontSize:8, width: '*'
+              text: (arrayProveedor.length > 0) ? arrayProveedor[0]["nombre"] : 'NA', fontSize:8, width: '*'
             },
             {
               text: 'Nombre: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'GM SILAO', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaANombre"].value.length > 0) ? this.newProject.controls["enviaANombre"].value : 'NA', fontSize:8, width:'*'
             }
           ]
         },
@@ -434,13 +478,13 @@ export class PoDetailComponent implements OnInit {
               text: 'Dirección: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'RIO LERMA NO 705, COLINAS DEL RIO', fontSize:8, width: '*'
+              text: (arrayProveedor.length > 0) ? arrayProveedor[0]["direccion"] : 'NA', fontSize:8, width: '*'
             },
             {
               text: 'Dirección: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: '', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaADireccion"].value.length > 0) ? this.newProject.controls["enviaADireccion"].value : 'NA', fontSize:8, width:'*'
             }
           ]
         },
@@ -450,13 +494,13 @@ export class PoDetailComponent implements OnInit {
               text: 'R.F.C. ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'EGE160527A29', fontSize:8, width: '*'
+              text: (arrayProveedor.length > 0) ? arrayProveedor[0]["rfc"] : 'NA', fontSize:8, width: '*'
             },
             {
               text: 'Cd./Edo: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'SILAO GTO', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaACdEstado"].value.length > 0) ? this.newProject.controls["enviaACdEstado"].value : 'NA', fontSize:8, width:'*'
             }
           ]
         },
@@ -466,13 +510,13 @@ export class PoDetailComponent implements OnInit {
               text: 'Cd./Edo: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'AGUASCALIENTES, AGUASCALIENTES', fontSize:8, width: '*'
+              text: ((arrayProveedor.length > 0) ? arrayProveedor[0]["ciudad"] : 'NA') + ', ' + ((arrayProveedor.length > 0) ? arrayProveedor[0]["estado"] : 'NA'), fontSize:8, width: '*'
             },
             {
               text: 'Requisitor: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'FERNANDO ARMENDARIZ', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaARequisitor"].value.length > 0) ? this.newProject.controls["enviaARequisitor"].value : 'NA', fontSize:8, width:'*'
             }
           ]
         },
@@ -482,13 +526,13 @@ export class PoDetailComponent implements OnInit {
               text: 'Contacto ', fontSize:8, bold:true, width: 90
             },
             {
-              text: 'ARTURO GONZALEZ OLVERA', fontSize:8, width: '*'
+              text: (arrayProveedor.length > 0) ? arrayProveedor[0]["contacto"] : 'NA', fontSize:8, width: '*'
             },
             {
               text: 'Teléfono: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: '', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaATelefono"].value.length > 0) ? this.newProject.controls["enviaATelefono"].value : 'NA', fontSize:8, width:'*'
             }
           ]
         },
@@ -518,7 +562,7 @@ export class PoDetailComponent implements OnInit {
               text: '', fontSize:8, bold:true, width: 90
             },
             {
-              text: '4200680361', fontSize:8, width:'*'
+              text: '', fontSize:8, width:'*'
             }
           ]
         },
@@ -527,7 +571,7 @@ export class PoDetailComponent implements OnInit {
           table: {
             body: [
               ['FECHA ODC', 'TERMINOS Y CONDICIONES'],
-              ['13-ene-22', 'Estimación por avance']
+              [moment(new Date, 'DD/MMMM/YYYY').format('DD/MMMM/YYYY'), 'Estimación por avance']
             ]
           }
         },
@@ -567,7 +611,7 @@ export class PoDetailComponent implements OnInit {
               text: '', fontSize:8, bold:true
             },
             {
-              text: 'CIEN MIL PESOS 00/100 MN', fontSize:8, width: '*'
+              text: '', fontSize:8, width: '*' // CIEN MIL PESOS 00/100 MN
             },
             {
               text: '', fontSize:8, bold:true
@@ -727,7 +771,7 @@ export class PoDetailComponent implements OnInit {
               text: '', fontSize:8, width: 20
             },
             { 
-              // image: this.getBase64ImageFromURL('https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be')
+              // image: this.getBase64ImageFromURL('https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be'),
               image: this.logoDataUrl,
               width: 100,
               height: 50,
@@ -997,14 +1041,18 @@ export class PoDetailComponent implements OnInit {
         }
         img.onerror = () => reject('Imagen no disponible')
         img.src = localPath;
+
+        console.log('path', localPath);
     })
 
   }
 
-  updateODCStatus(po_id){
+  updateODCStatus(form){
     let arrayToDb : any;
 
-    arrayToDb = ({ordendecompra_id : po_id, estatus : 1, usuario : 1})
+console.log('numero de orden de compra', this.projectInfo.ordendecompra_id)
+
+    arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 1, usuario : 2}) // this.usuarioId
 
     this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(
       res=> {

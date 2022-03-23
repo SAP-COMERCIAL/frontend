@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AnyMxRecord } from 'dns';
 
 @Component({
   selector: 'app-supplier-detail',
@@ -54,7 +55,7 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
-    
+
     this.getSupplier();
     if(this.estadoPantalla == 'Edit'){
       this.newProject.controls['nombre'].setValue(this.projectInfo['nombre']);
