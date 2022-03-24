@@ -3887,6 +3887,12 @@
       pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default().vfs = pdfmake_build_vfs_fonts__WEBPACK_IMPORTED_MODULE_5__.pdfMake.vfs; // function numeroALetras() {
       //   alert('Hello!!!');
       // }
+      // Create our number formatter.
+
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      });
 
       var _PoDetailComponent = /*#__PURE__*/function () {
         function _PoDetailComponent(dialogRef, _quotationservice, _supplyservice, data, snackBar, formBuilder, _snackBar, _purchaseOrderservice, dialog) {
@@ -3973,11 +3979,8 @@
             this.getsupplierAll();
             this.getProveedores();
             this.getCotizacionesAll();
-            console.log('this.projectInfo', this.projectInfo);
 
             if (this.projectInfo != undefined) {
-              console.log('project info', this.projectInfo);
-              console.log('podata', this.projectInfo.iva.toString());
               this.ordendecompra_id = this.projectInfo.proveedor_nombre;
               this.subtotal = this.projectInfo.sub_total;
               this.ivaSubtotal = this.projectInfo.iva_moneda;
@@ -3997,7 +4000,6 @@
         }, {
           key: "cotizacionSelected",
           value: function cotizacionSelected(form, event) {
-            console.log('pagina', form.controls['cotizacion_id'].value);
             this.getcotizacionesDetail(form.controls['cotizacion_id'].value);
           }
         }, {
@@ -4157,8 +4159,9 @@
 
               default:
                 this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
+                // this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(              
 
-                this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(function (result) {
+                this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(function (result) {
                   return _this11.logoDataUrl = result;
                 });
                 break;
@@ -4169,7 +4172,7 @@
             this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(function (result) {
               return _this11.logoDataUrl = result;
             });
-            console.log(this.decodedSign);
+            console.log('this.decodedSign', this.decodedSign);
           }
         }, {
           key: "downloadAsPDF",
@@ -4177,21 +4180,20 @@
             return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
               var _this12 = this;
 
-              var subTotal, iva, total, doc, pdfTable, html, arrayProveedor, headers, bodyx, body, key, header, row, data, documentDefinition;
+              var subtotalPDF, ivaPDF, totalPDF, doc, pdfTable, html, arrayProveedor, headers, bodyx, body, key, header, row, data, documentDefinition;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      subTotal = 0;
-                      iva = 0;
-                      total = 0;
+                      subtotalPDF = 0;
+                      ivaPDF = 0;
+                      totalPDF = 0;
                       doc = new jspdf__WEBPACK_IMPORTED_MODULE_3__["default"]();
                       pdfTable = this.pdfTable.nativeElement;
                       html = html_to_pdfmake__WEBPACK_IMPORTED_MODULE_6___default()(pdfTable.innerHTML);
                       arrayProveedor = this.datasourcesupplier.filter(function (e) {
                         return e.proveedorid == _this12.projectInfo["proveedor_id"];
                       });
-                      console.log('this.projectInfo', arrayProveedor);
                       headers = {
                         0: {
                           col_1: {
@@ -4287,26 +4289,24 @@
                       }
 
                       for (key in this.datasourceCotizacionesDetalle) {
-                        console.log('renglones', this.datasourceCotizacionesDetalle);
-
                         if (this.datasourceCotizacionesDetalle.hasOwnProperty(key)) {
                           data = this.datasourceCotizacionesDetalle[key];
                           row = new Array();
                           row.push(data.cantidad.toString());
                           row.push(data.unidad_medida.toString());
                           row.push(data.descripcion.toString());
-                          row.push(data.precio_unitario.toString());
-                          row.push((data.precio_unitario * data.cantidad).toString()); // row.push( data.medida.toString() );
+                          row.push(formatter.format(data.precio_unitario).toString());
+                          row.push(formatter.format(data.precio_unitario * data.cantidad).toString()); // row.push( data.medida.toString() );
 
                           body.push(row);
                           bodyx.push(row); // Calcula Totales
 
-                          this.subtotal = this.subtotal + data.precio_unitario * data.cantidad;
+                          subtotalPDF = subtotalPDF + data.precio_unitario * data.cantidad;
                         }
                       }
 
-                      this.iva = this.subtotal * (this.newProject.controls["iva"].value / 100);
-                      this.total = this.subtotal + this.iva; // {
+                      ivaPDF = subtotalPDF * (this.newProject.controls["iva"].value / 100);
+                      totalPDF = subtotalPDF + ivaPDF; // {
                       //   text: 'LOGO DE ORDEN DE COMPRA', fontSize:8
                       // }
 
@@ -4551,8 +4551,9 @@
                             bold: true,
                             width: '*'
                           }, {
-                            text: '$ ' + this.subtotal,
+                            text: formatter.format(subtotalPDF),
                             fontSize: 8,
+                            alignment: 'right',
                             width: '*'
                           }]
                         }, {
@@ -4574,8 +4575,9 @@
                             bold: true,
                             width: '*'
                           }, {
-                            text: '$ ' + this.iva,
+                            text: formatter.format(ivaPDF),
                             fontSize: 8,
+                            alignment: 'right',
                             width: '*'
                           }]
                         }, {
@@ -4597,8 +4599,9 @@
                             bold: true,
                             width: '*'
                           }, {
-                            text: '$ ' + this.total,
+                            text: formatter.format(totalPDF),
                             fontSize: 8,
+                            alignment: 'right',
                             width: '*'
                           }]
                         }, {
@@ -4748,7 +4751,7 @@
                       console.log('documentDefinition', documentDefinition);
                       pdfmake_build_pdfmake__WEBPACK_IMPORTED_MODULE_4___default().createPdf(documentDefinition).open();
 
-                    case 18:
+                    case 17:
                     case "end":
                       return _context.stop();
                   }
