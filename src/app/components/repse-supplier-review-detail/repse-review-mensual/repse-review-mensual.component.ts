@@ -135,11 +135,10 @@ dataSourceShow : MatTableDataSource<supplierModel>
                         , {supplier_id : 1, documento : 'SIPARE en pdf', estatus : 'Por Revisar', aprobacion : true}
                         , {supplier_id : 1, documento : 'Cedula mensual SUA en PDF (trabajadores)', estatus : 'Por Revisar', aprobacion : true}
                         , {supplier_id : 1, documento : 'Comprobante de pago del Banco en PDF', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Declaración de IVA', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Comprobante de pago del Banco en PDF', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Declaración', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Opinión Positiva IMSS (Dos meses atrás)', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Opinion Positiva SAT (Dos meses atrás)', estatus : 'Por Revisar', aprobacion : true}
+                        , {supplier_id : 1, documento : 'Declaración de ISR', estatus : 'Por Revisar', aprobacion : true}
+                        , {supplier_id : 1, documento : 'Declaración IVA', estatus : 'Por Revisar', aprobacion : true}
+                        , {supplier_id : 1, documento : 'Opinión Positiva IMSS (Un mes atrás)', estatus : 'Por Revisar', aprobacion : true}
+                        , {supplier_id : 1, documento : 'Opinion Positiva SAT (Un mes atrás)', estatus : 'Por Revisar', aprobacion : true}
                       )
                     
     this.dataSourceShow = new MatTableDataSource(arraySupplier);

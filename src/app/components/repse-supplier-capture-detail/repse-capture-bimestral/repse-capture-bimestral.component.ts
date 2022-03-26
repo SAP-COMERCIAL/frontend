@@ -33,6 +33,7 @@ edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
 ProveedorId : number = 1;
+tipoImagenFile : any = [];
 
 urlBiComprobantePagoBanco : any;
 urlBiSIPARE : any;
@@ -73,6 +74,12 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    this.tipoImagenFile = [
+      {id : 301, categoria : 'biComprobanteDePagoBanco'}
+    ,{id : 302, categoria : 'biSIPARE'}
+    ,{id : 303, categoria : 'biSUA'}
+    ,{id : 304, categoria : 'biopinionPositivaINFONAVIT'}
+    ]
   }
   
   cancel(event){
@@ -133,6 +140,26 @@ imagenes: any[] = [];
           //   imgProfile: urlImagen
           // }
           console.log(urlImagen);
+
+          let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
+
+          arrayToDb = {
+            idDocumento : 0, 
+            idProveedor : this.ProveedorId
+            , categoriaDocumento : arrayCategoriaFiltrado[0]["id"]
+            , urlDocumento : urlImagen.toString()
+            , anno : this.newProject.controls["anio"].value
+            , mes : this.newProject.controls["mes"].value
+            , estado : 0};
+
+            console.log('arreglo a subir', arrayToDb);
+
+          this._uploadFileService.postUploadDocumentsToDb(arrayToDb).subscribe(
+            res=> {
+              console.log('DOCUMENTOS', res);
+            },
+            error => console.log("error al actualizar proveedores",error)
+          );
 
           switch (tipoImagen){
             case('biComprobanteDePagoBanco'): this.urlBiComprobantePagoBanco = urlImagen.toString();

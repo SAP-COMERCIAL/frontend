@@ -33,6 +33,7 @@ edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
 ProveedorId : number = 1;
+tipoImagenFile : any = [];
 
 urlCuICSOE : any;
 urlCuSISUB : any;
@@ -71,6 +72,10 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    this.tipoImagenFile = [
+      {id : 401, categoria : 'CuICSOE'}
+    ,{id : 402, categoria : 'CuSISUB'}
+    ]
   }
 
   cancel(event){
@@ -132,6 +137,26 @@ imagenes: any[] = [];
           //   imgProfile: urlImagen
           // }
           console.log(urlImagen);
+
+          let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
+
+          arrayToDb = {
+            idDocumento : 0, 
+            idProveedor : this.ProveedorId
+            , categoriaDocumento : arrayCategoriaFiltrado[0]["id"]
+            , urlDocumento : urlImagen.toString()
+            , anno : this.newProject.controls["anio"].value
+            , mes : this.newProject.controls["mes"].value
+            , esAprobado : false};
+
+            console.log('arreglo a subir', arrayToDb);
+
+          this._uploadFileService.postUploadDocumentsToDb(arrayToDb).subscribe(
+            res=> {
+              console.log('DOCUMENTOS', res);
+            },
+            error => console.log("error al actualizar proveedores",error)
+          );
 
           switch (tipoImagen){
             case('CuICSOE'): this.urlCuICSOE = urlImagen.toString();

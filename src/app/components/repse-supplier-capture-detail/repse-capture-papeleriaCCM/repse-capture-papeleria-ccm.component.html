@@ -55,7 +55,12 @@
             <div> Orden de compra CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlOrdenCompraCCM" id="urlOrdenCompraCCM" (change)="cargarImagen(newProject, $event, 'ordenCompraCCM', 'papeleriaCCM')" hidden><label for="urlOrdenCompraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div>
         </div>
     </div>
 
@@ -67,7 +72,12 @@
             <div> Avance de obra CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlAvanceDeObraCCM" id="urlAvanceDeObraCCM" (change)="cargarImagen(newProject, $event, 'avanceDeObraCCM', 'mensuales')" hidden><label for="urlAvanceDeObraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div>
         </div>
     </div>
 
@@ -79,7 +89,12 @@
             <div> Factura de pago CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlFacturaDePagoCCM" id="urlFacturaDePagoCCM" (change)="cargarImagen(newProject, $event, 'facturaDePagoCCM', 'mensuales')" hidden><label for="urlFacturaDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div>
         </div>
     </div>
 
@@ -91,7 +106,12 @@
             <div> Comprobante de pago CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><ng-container><button class="button"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></button><button class="button"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container></div>
+            <div><br>
+                <ng-container>
+                    <input type="file" name="urlComprobanteDePagoCCM" id="urlComprobanteDePagoCCM" (change)="cargarImagen(newProject, $event, 'comprobanteDePagoCCM', 'mensuales')" hidden><label for="urlComprobanteDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
+                    <button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
+                </ng-container>
+            </div>
         </div>
     </div>
 

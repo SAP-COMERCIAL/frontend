@@ -1,17 +1,19 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from 'src/app/services/supplier.service';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
-import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { RepseSupplierReviewDetailComponent } from '../../../components/repse-supplier-review-detail/repse-supplier-review-detail.component';
 import { ThrowStmt } from '@angular/compiler';
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
 import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-repse-review-general',
@@ -31,6 +33,8 @@ public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
 dataSourceShow : MatTableDataSource<supplierModel>
+pageInfo : any;
+providerId : number;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -38,17 +42,35 @@ dataSourceShow : MatTableDataSource<supplierModel>
 
   displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision'];
 
+  public newForm: FormGroup;
+
   constructor(public dialogRef: MatDialogRef<supplierModel>
     , public dialog: MatDialog
     , private _excelService : ExcelServiceService
     , private _supplyservice : supplyservice
-    , private _UploadFileService : UploadFileService) { }
+    , private _UploadFileService : UploadFileService
+    , @Inject(MAT_DIALOG_DATA) public data
+    , private formBuilder: FormBuilder) { 
+
+      this.pageInfo = data.arrayData;
+      // this.providerId = data.estadoPantalla;
+
+      this.newForm = this.formBuilder.group({
+        
+      })
+
+    }
 
   // =================
   // PROCEDIMIENTOS
   // =================
 
   ngOnInit(): void {
+
+    console.log('pageInfo', this.pageInfo);
+
+    this.providerId = this.pageInfo.proveedorid;
+
     this.getsupplierDocuments();
   }
   descargarExcel(){
@@ -80,6 +102,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
       title: 'APROBAR/DENEGAR ARCHIVO',
       arrayData : element,
       proveedorId: element.proveedorId,
+      idDocumento: element.idDocument,
       estadoPantalla: 'Edit'
      
     }
@@ -126,9 +149,10 @@ dataSourceShow : MatTableDataSource<supplierModel>
     this.dataSourceShow.paginator = this.paginator;
   }
 
-  view(form, event){
-    console.log('SE MUESTRA LA IMAGEN O EL ARCHIVO', form);
-    this.getImage();
+  view(element, event){
+    console.log('SE MUESTRA LA IMAGEN O EL ARCHIVO', element);
+    window.open(element.url);
+    // this.getImage();
   }
 
 
@@ -139,47 +163,150 @@ dataSourceShow : MatTableDataSource<supplierModel>
   getsupplierDocuments(){
 
     let arraySupplier: any[] = [];
+    let arrayDocumentos : any;
+    let arrayDocumentosFiltrados : any;
+    let arrayDocumentoPorProveedor : any;
+    let urlArray : any = '';
+    let estadoArray : number = 3;
 
-    arraySupplier.push({supplier_id : 1, documento : 'Razón Social', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Dirección', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'RFC', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Contacto', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Ciudad', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Estado', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Objetivo Social', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Tipo Persona', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Teléfono contacto', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Correo electrónico', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Acta constitutiva', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'INE', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Alta IMSS', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Alta Infonavit', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Altta SAT', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Estado de cuenta', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Estado financiero', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Contrato', estatus : 'Por Revisar', aprobacion : false}
-                        , {supplier_id : 1, documento : 'Registro Patronal de proveedores', estatus : 'Por Revisar', aprobacion : true}
-                      )
-                    
-    this.dataSourceShow = new MatTableDataSource(arraySupplier);
+    // Lista de documentos
+    this._UploadFileService.getdocumentsAll().subscribe(
+      res=> {
+        console.log('Documentos', res);
 
-    // Proyectos registrados
-    // this._supplyservice.getsupplyAll().subscribe(
-    //   res=> {
-    //     console.log('Proveedores', res);
-    //     this.dataSourceShow = new MatTableDataSource(res);
-    //     this.array = res;
-    //     this.totalSize = this.array.length;
+        arrayDocumentos = res;
+
+        arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.providerId && e.categoriaDocumento > 100 && e.categoriaDocumento < 200);
+
+        arraySupplier = [];
+        arraySupplier.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : ''})
+
+        // Direccion
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 101)
+
+        console.log('doc x prov', arrayDocumentoPorProveedor);
+
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Dirección', estatus : estadoArray, aprobacion : true, url : urlArray, idDocumento : arrayDocumentoPorProveedor.idDocumento})
+       
+        // RFC
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 102)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'RFC', estatus : estadoArray, aprobacion : true, url : urlArray, idDocumento : arrayDocumentoPorProveedor.idDocumento})
+      
+        // Contacto - Correo electronico
+        arraySupplier.push({supplier_id : 1, documento : 'Contacto', estatus : 3, aprobacion : false, url : ''}
+          , {supplier_id : 1, documento : 'Ciudad', estatus : 3, aprobacion : false, url : ''}
+          , {supplier_id : 1, documento : 'Estado', estatus : 3, aprobacion : false, url : ''}
+          , {supplier_id : 1, documento : 'Objeto Social', estatus : 3, aprobacion : false, url : ''}
+          , {supplier_id : 1, documento : 'Tipo Persona', estatus : 3, aprobacion : false, url : ''}
+          , {supplier_id : 1, documento : 'Teléfono contacto', estatus : 3, aprobacion : false, url : ''}
+          , {supplier_id : 1, documento : 'Correo electrónico', estatus : 3, aprobacion : false, url : ''}
+        )
+
+        // Acta constitutiva
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 103)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Acta constitutiva', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        // INE
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 104)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'INE', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        // Alta IMSS
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 105)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta IMSS', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        // Alta Infonavit
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 106)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta Infonavit', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        // Alta SAT
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 107)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta SAT', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        // Estado de cuenta
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 108)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado de cuenta', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        // Estado Financiero
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 109)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado Financiero', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        arraySupplier.push(
+                          {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?', estatus : 3, aprobacion : false, url : ''}
+                        , {supplier_id : 1, documento : 'Contrato', estatus : 3, aprobacion : false, url : ''}
+        )
+
+        // Repse del proveedor
+        urlArray = '';
+        estadoArray = 4;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 110)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Repse del proveedor', estatus : estadoArray, aprobacion : true, url : urlArray})
+
+        this.dataSourceShow = new MatTableDataSource(arraySupplier);
+
+        console.log('ARREGLO SUPPLY', arraySupplier)
+
+        console.log('documentos filtrados', arrayDocumentoPorProveedor)
+
         
-    //     this.iterator();
-    //     this.dataSourceShow.sort = this.sort;
-        
-    //   },
-    //   error => console.log("error consulta regiones",error)
-    // )
-
-
+      },
+      error => console.log("error consulta regiones",error)
+    )
   }
 
   fileDownload : any;

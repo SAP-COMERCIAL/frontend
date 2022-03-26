@@ -45,17 +45,28 @@ public newProject: FormGroup;
   }
 
   ngOnInit(): void {
+    
   }
 
-  aprove(event, idDocument : number){
+  aprove(event){
+    let arrayToDb : any;
+
+    arrayToDb = ({idDocumento: this.projectInfo.idDocumento
+                  , estado: 1 })
+
     this.openSnackBar('Documento aprobado', '');
-    this.aproveDocument(idDocument);
+    this.aproveDocument(arrayToDb);
     this.dialogRef.close();
   }
 
-  deny(event, idDocument : number){
+  deny(event){
+    let arrayToDb : any;
+
+    arrayToDb = ({idDocumento: this.projectInfo.idDocumento
+                , estado: 2 })
+
     console.log('Rechaza documento')
-    this.rejectDocument(idDocument);
+    this.rejectDocument(arrayToDb);
     this.dialogRef.close();
   }
 
@@ -73,9 +84,9 @@ public newProject: FormGroup;
   // =========================
   // SERVICIOS
   // =========================
-  aproveDocument(idDocument : number){
+  aproveDocument(arrayToDb : any){
     // Inserta Archivos en base de datos
-    this._uploadFileService.postDocumentosAprobar(idDocument).subscribe(
+    this._uploadFileService.postDocumentosAprobar(arrayToDb).subscribe(
       res=> {
         console.log('APROBAR DOCUMENTO', res);
         this.openSnackBar('El registro se aprobó con éxito', '');  
@@ -84,9 +95,9 @@ public newProject: FormGroup;
     )
   }
 
-  rejectDocument(idDocument : number){
+  rejectDocument(arrayToDb : any){
     // Inserta Archivos en base de datos
-    this._uploadFileService.postDocumentosRechazar(idDocument).subscribe(
+    this._uploadFileService.postDocumentosRechazar(arrayToDb).subscribe(
       res=> {
         console.log('APROBAR DOCUMENTO', res);
         this.openSnackBar('El registro se rechazó con éxito', '');  

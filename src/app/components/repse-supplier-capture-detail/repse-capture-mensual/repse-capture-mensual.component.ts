@@ -33,6 +33,7 @@ edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
 ProveedorId : number = 1;
+tipoImagenFile : any = [];
 
 // Variables de carga de archivos
 urlListadoTrabajadores : any;
@@ -66,6 +67,19 @@ public newProject: FormGroup;
 
 
   ngOnInit(): void {
+    this.tipoImagenFile = [
+      {id : 201, categoria : 'listadoTabajadores'}
+    ,{id : 202, categoria : 'CFDI'}
+    ,{id : 203, categoria : 'comprobanteBanco'}
+    ,{id : 204, categoria : 'SIPARE'}
+    ,{id : 205, categoria : 'SUA'}
+    ,{id : 206, categoria : 'ISRComprobanteBanco'}
+    ,{id : 207, categoria : 'ISRDeclaracion'}
+    ,{id : 208, categoria : 'IVADeclaracion'}
+    ,{id : 209, categoria : 'opinionPositivaIMSS'}
+    ,{id : 210, categoria : 'opinionPositivaSAT'}
+    ]
+
   }
 
   cancel(event){
@@ -126,6 +140,26 @@ imagenes: any[] = [];
           //   imgProfile: urlImagen
           // }
           console.log(urlImagen);
+
+          let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
+
+          arrayToDb = {
+            idDocumento : 0, 
+            idProveedor : this.ProveedorId
+            , categoriaDocumento : arrayCategoriaFiltrado[0]["id"]
+            , urlDocumento : urlImagen.toString()
+            , anno : this.newProject.controls["anio"].value
+            , mes : this.newProject.controls["mes"].value
+            , estado : 0};
+
+            console.log('arreglo a subir', arrayToDb);
+
+          this._uploadFileService.postUploadDocumentsToDb(arrayToDb).subscribe(
+            res=> {
+              console.log('DOCUMENTOS', res);
+            },
+            error => console.log("error al actualizar proveedores",error)
+          );
 
           switch (tipoImagen){
             case('listadoTabajadores'): this.urlListadoTrabajadores = urlImagen.toString();

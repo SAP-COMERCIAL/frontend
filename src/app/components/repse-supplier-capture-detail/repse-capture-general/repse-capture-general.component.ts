@@ -4,10 +4,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import * as e from 'cors';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import { supplyservice } from '../../../services/supplier.service';
-
 
 @Component({
   selector: 'app-repse-capture-general',
@@ -16,7 +16,7 @@ import { supplyservice } from '../../../services/supplier.service';
 })
 export class RepseCaptureGeneralComponent implements OnInit {
 
-  // =========================
+// =========================
 // DECLARACIONES
 // =========================
 nombre : string;
@@ -39,6 +39,7 @@ edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
 ProveedorId : number = 1;
+tipoImagenFile : any = [];
 
 nombreArchivo: string = " (archivo nuevo) ";
 loading: boolean;
@@ -97,6 +98,20 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    
+    this.tipoImagenFile = [{id : 101, categoria : 'direccion'}
+    ,{id : 102, categoria : 'rfc'}
+    ,{id : 103, categoria : 'actaConstitutiva'}
+    ,{id : 104, categoria : 'ine'}
+    ,{id : 105, categoria : 'imss'}
+    ,{id : 106, categoria : 'altaInfonavit'}
+    ,{id : 107, categoria : 'altaSAT'}
+    ,{id : 108, categoria : 'edoCTA'}
+    ,{id : 109, categoria : 'edoFinanciero'}
+    ,{id : 110, categoria : 'contrato'}
+    ,{id : 111, categoria : 'RegPatProveedor'}  
+    ]
+
   }
   
   cancel(event){
@@ -214,6 +229,7 @@ imagenes: any[] = [];
     let archivos = event.target.files;
     let nombre = event.target.files.name;
     let arrayToDb : any;
+    let arrayCategoriaFiltrado : any;
 
     for (let i = 0; i < archivos.length; i++) {
 
@@ -231,14 +247,16 @@ imagenes: any[] = [];
           // }
           console.log(urlImagen);
 
+          let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
+
           arrayToDb = {
                         idDocumento : 0, 
                         idProveedor : this.ProveedorId
-                        , categoriaDocumento : 1
+                        , categoriaDocumento : arrayCategoriaFiltrado[0]["id"]
                         , urlDocumento : urlImagen.toString()
                         , anno : 2022
                         , mes : 1
-                        , esAprobado : false};
+                        , estado : 0};
 
                         console.log('arreglo a subir', arrayToDb);
 

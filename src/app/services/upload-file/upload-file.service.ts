@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { promise } from 'selenium-webdriver';
-import { uploadFile } from 'src/app/models/uploadFile.model';
+import { documentModel } from 'src/app/models/document.model';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
 import { environment } from 'src/environments/environment';
@@ -89,14 +89,21 @@ postDocumentosAprobar(arrayToDb : any){
     const headers : HttpHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-  return this.http.post(environment.urlapi + environment.apiContextDrivers + 'Document/aprobar', arrayToDb, {headers});
+  return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Document/estado', arrayToDb, {headers});
 }
 
 postDocumentosRechazar(arrayToDb : any){
     const headers : HttpHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-  return this.http.post(environment.urlapi + environment.apiContextDrivers + 'Document/rechazar', arrayToDb, {headers});
+  return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Document/estado', arrayToDb, {headers});
+}
+
+getdocumentsAll() {
+  const headers : HttpHeaders = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+  return this.http.get<documentModel[]>(environment.urlapi + environment.apiContextDrivers + 'Document/lista', {headers});
 }
 
   postUploadFile(FileData): Promise<string> {
