@@ -14068,9 +14068,12 @@
               categoria: 'IVADeclaracion'
             }, {
               id: 209,
-              categoria: 'opinionPositivaIMSS'
+              categoria: 'IVAComprobanteBanco'
             }, {
               id: 210,
+              categoria: 'opinionPositivaIMSS'
+            }, {
+              id: 211,
               categoria: 'opinionPositivaSAT'
             }];
           }
@@ -14192,11 +14195,15 @@
                       _this41.urlIVADeclaracion = urlImagen.toString();
                       break;
 
+                    case 'IVAComprobanteBanco':
+                      _this41.urlIVAComprobanteBanco = urlImagen.toString();
+                      break;
+
                     case 'opinionPositivaIMSS':
                       _this41.urlOpinionPositivaIMSS = urlImagen.toString();
                       break;
 
-                    case 'pinionPositivaSAT':
+                    case 'opinionPositivaSAT':
                       _this41.urlOpinionPositivaSAT = urlImagen.toString();
                       break;
                   }
@@ -14227,9 +14234,9 @@
       _RepseCaptureMensualComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
         type: _RepseCaptureMensualComponent,
         selectors: [["app-repse-capture-mensual"]],
-        decls: 258,
+        decls: 275,
         vars: 1,
-        consts: [["mat-dialog-content-example", "", 3, "formGroup"], ["fxLayout", "row", 1, "division"], ["fxFlex.gt-sm", "150px"], ["fxFlex.gt-sm", "200px"], ["formControlName", "anio", 1, "form-control"], ["value", "2020"], ["value", "2021"], ["value", "2022", "selected", "selected"], ["value", "2023"], ["value", "2024"], ["value", "2025"], ["value", "2026"], ["value", "2027"], ["value", "2028"], ["value", "2029"], ["value", "2030"], ["value", "2031"], ["formControlName", "mes", 1, "form-control"], ["value", "1", "selected", "selected"], ["value", "2"], ["value", "3"], ["value", "4"], ["value", "5"], ["value", "6"], ["value", "7"], ["value", "8"], ["value", "9"], ["value", "10"], ["value", "11"], ["value", "12"], ["fxFlex.gt-sm", "500px"], ["fxFlex.gt-sm", "70px"], ["type", "file", "name", "fuListadoTrabajadores", "id", "fuListadoTrabajadores", "hidden", "", 3, "change"], ["for", "fuListadoTrabajadores"], [1, "fa", "fa-arrow-up", "fa-lg", "icon-cog-blue"], [1, "button", 3, "click"], [1, "fa", "fa-eye", "fa-lg", "icon-cog-orange"], ["type", "file", "name", "fuCFDI", "id", "fuCFDI", "hidden", "", 3, "change"], ["for", "fuCFDI"], ["fxFlex.gt-sm", "300px"], [1, "titles"], ["type", "file", "name", "urlComprobanteBanco", "id", "urlComprobanteBanco", "hidden", "", 3, "change"], ["for", "urlComprobanteBanco"], ["type", "file", "name", "urlSIPARE", "id", "urlSIPARE", "hidden", "", 3, "change"], ["for", "urlSIPARE"], ["type", "file", "name", "urlSUA", "id", "urlSUA", "hidden", "", 3, "change"], ["for", "urlSUA"], ["type", "file", "name", "urlISRComprobanteBanco", "id", "urlISRComprobanteBanco", "hidden", "", 3, "change"], ["for", "urlISRComprobanteBanco"], ["type", "file", "name", "urlISRDeclaracion", "id", "urlISRDeclaracion", "hidden", "", 3, "change"], ["for", "urlISRDeclaracion"], ["type", "file", "name", "urlIVADeclaracion", "id", "urlIVADeclaracion", "hidden", "", 3, "change"], ["for", "urlIVADeclaracion"], ["type", "file", "name", "urlOpinionPositivaIMSS", "id", "urlOpinionPositivaIMSS", "hidden", "", 3, "change"], ["for", "urlOpinionPositivaIMSS"], ["type", "file", "name", "urlOpinionPositivaSAT", "id", "urlOpinionPositivaSAT", "hidden", "", 3, "change"], ["for", "urlOpinionPositivaSAT"]],
+        consts: [["mat-dialog-content-example", "", 3, "formGroup"], ["fxLayout", "row", 1, "division"], ["fxFlex.gt-sm", "150px"], ["fxFlex.gt-sm", "200px"], ["formControlName", "anio", 1, "form-control"], ["value", "2020"], ["value", "2021"], ["value", "2022", "selected", "selected"], ["value", "2023"], ["value", "2024"], ["value", "2025"], ["value", "2026"], ["value", "2027"], ["value", "2028"], ["value", "2029"], ["value", "2030"], ["value", "2031"], ["formControlName", "mes", 1, "form-control"], ["value", "1", "selected", "selected"], ["value", "2"], ["value", "3"], ["value", "4"], ["value", "5"], ["value", "6"], ["value", "7"], ["value", "8"], ["value", "9"], ["value", "10"], ["value", "11"], ["value", "12"], ["fxFlex.gt-sm", "500px"], ["fxFlex.gt-sm", "70px"], ["type", "file", "name", "fuListadoTrabajadores", "id", "fuListadoTrabajadores", "hidden", "", 3, "change"], ["for", "fuListadoTrabajadores"], [1, "fa", "fa-arrow-up", "fa-lg", "icon-cog-blue"], [1, "button", 3, "click"], [1, "fa", "fa-eye", "fa-lg", "icon-cog-orange"], ["type", "file", "name", "fuCFDI", "id", "fuCFDI", "hidden", "", 3, "change"], ["for", "fuCFDI"], ["fxFlex.gt-sm", "300px"], [1, "titles"], ["type", "file", "name", "urlComprobanteBanco", "id", "urlComprobanteBanco", "hidden", "", 3, "change"], ["for", "urlComprobanteBanco"], ["type", "file", "name", "urlSIPARE", "id", "urlSIPARE", "hidden", "", 3, "change"], ["for", "urlSIPARE"], ["type", "file", "name", "urlSUA", "id", "urlSUA", "hidden", "", 3, "change"], ["for", "urlSUA"], ["type", "file", "name", "urlISRComprobanteBanco", "id", "urlISRComprobanteBanco", "hidden", "", 3, "change"], ["for", "urlISRComprobanteBanco"], ["type", "file", "name", "urlISRDeclaracion", "id", "urlISRDeclaracion", "hidden", "", 3, "change"], ["for", "urlISRDeclaracion"], ["type", "file", "name", "urlIVADeclaracion", "id", "urlIVADeclaracion", "hidden", "", 3, "change"], ["for", "urlIVADeclaracion"], ["type", "file", "name", "urlIVAComprobanteBanco", "id", "urlIVAComprobanteBanco", "hidden", "", 3, "change"], ["type", "file", "name", "urlOpinionPositivaIMSS", "id", "urlOpinionPositivaIMSS", "hidden", "", 3, "change"], ["for", "urlOpinionPositivaIMSS"], ["type", "file", "name", "urlOpinionPositivaSAT", "id", "urlOpinionPositivaSAT", "hidden", "", 3, "change"], ["for", "urlOpinionPositivaSAT"]],
         template: function RepseCaptureMensualComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0);
@@ -14820,7 +14827,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](172, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](173, "Comprobante de pago del Banco en PDF");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](173, "Comprobante de pago del Banco en PDF (ISR)");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
@@ -15022,25 +15029,25 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](226, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](226, "div", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](227, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](227, "div", 2);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](228, "div", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](228, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](229, "div");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](230, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](229, "br");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](231, "div", 30);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](230, "div", 30);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](232, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](231, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](233, "Opini\xF3n Positiva IMSS (Un meses atr\xE1s)");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](232, "br");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](233, "Comprobante de pago del Banco PDF (IVA)");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
@@ -15050,29 +15057,31 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](235, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](236);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](236, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](237, "input", 53);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](237);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("change", function RepseCaptureMensualComponent_Template_input_change_237_listener($event) {
-              return ctx.cargarImagen(ctx.newProject, $event, "opinionPositivaIMSS", "mensuales");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](238, "input", 53);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("change", function RepseCaptureMensualComponent_Template_input_change_238_listener($event) {
+              return ctx.cargarImagen(ctx.newProject, $event, "IVAComprobanteBanco", "mensuales");
             });
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](238, "label", 54);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](239, "label", 52);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](239, "i", 34);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](240, "i", 34);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](240, "button", 35);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](241, "button", 35);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseCaptureMensualComponent_Template_button_click_240_listener() {
-              return ctx.openFile(ctx.urlOpinionPositivaIMSS);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseCaptureMensualComponent_Template_button_click_241_listener() {
+              return ctx.openFile(ctx.urlIVAComprobanteBanco);
             });
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](241, "i", 36);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](242, "i", 36);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
@@ -15084,57 +15093,119 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](242, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](243, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](243, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](244, "div", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](244, "div", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](245, "div", 2);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](245, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](246, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](246, "br");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](247, "div", 30);
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](248, "div");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](249, "Opinion Positiva SAT (Un meses atr\xE1s)");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](247, "br");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](250, "div", 31);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](248, "div", 30);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](251, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](249, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](252);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](250, "Opini\xF3n Positiva IMSS (Un meses atr\xE1s)");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](253, "input", 55);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("change", function RepseCaptureMensualComponent_Template_input_change_253_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](251, "div", 31);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](252, "div");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](253);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](254, "input", 54);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("change", function RepseCaptureMensualComponent_Template_input_change_254_listener($event) {
+              return ctx.cargarImagen(ctx.newProject, $event, "opinionPositivaIMSS", "mensuales");
+            });
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](255, "label", 55);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](256, "i", 34);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](257, "button", 35);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseCaptureMensualComponent_Template_button_click_257_listener() {
+              return ctx.openFile(ctx.urlOpinionPositivaIMSS);
+            });
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](258, "i", 36);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](259, "br");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](260, "div", 1);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](261, "div", 2);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](262, "div");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](263, "br");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](264, "div", 30);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](265, "div");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](266, "Opinion Positiva SAT (Un meses atr\xE1s)");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](267, "div", 31);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](268, "div");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](269);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](270, "input", 56);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("change", function RepseCaptureMensualComponent_Template_input_change_270_listener($event) {
               return ctx.cargarImagen(ctx.newProject, $event, "opinionPositivaSAT", "mensuales");
             });
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](254, "label", 56);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](271, "label", 57);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](255, "i", 34);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](272, "i", 34);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](256, "button", 35);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](273, "button", 35);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseCaptureMensualComponent_Template_button_click_256_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseCaptureMensualComponent_Template_button_click_273_listener() {
               return ctx.openFile(ctx.urlOpinionPositivaSAT);
             });
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](257, "i", 36);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](274, "i", 36);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
 
@@ -18517,31 +18588,31 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/core */
       37716);
       /* harmony import */
 
 
-      var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/paginator */
       99692);
       /* harmony import */
 
 
-      var _angular_material_sort__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _angular_material_sort__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @angular/material/sort */
       11494);
       /* harmony import */
 
 
-      var _angular_material_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_material_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/material/table */
       32091);
       /* harmony import */
 
 
-      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/material/dialog */
       22238);
       /* harmony import */
@@ -18565,226 +18636,241 @@
       /* harmony import */
 
 
-      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var src_app_services_upload_file_upload_file_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! src/app/services/upload-file/upload-file.service */
+      45292);
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/forms */
+      3679);
+      /* harmony import */
+
+
+      var _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! @angular/flex-layout/flex */
       35618);
       /* harmony import */
 
 
-      var _angular_material_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @angular/material/button */
       51095);
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/common */
       38583);
 
       function RepseReviewMensualComponent_th_14_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 29);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "th", 29);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, "supplier_id ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1, "supplier_id ");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_15_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 30);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "td", 30);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
           var element_r12 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r12.id, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", element_r12.id, " ");
         }
       }
 
       function RepseReviewMensualComponent_th_17_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "th", 31);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, " Documento");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1, " Documento");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_18_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "td", 32);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
           var element_r13 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r13.documento, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", element_r13.documento, " ");
         }
       }
 
       function RepseReviewMensualComponent_th_20_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 31);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "th", 31);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, " Estatus ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1, " Estatus ");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_21_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 32);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "td", 32);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
           var element_r14 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"](" ", element_r14.estatus, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate1"](" ", element_r14.estatus, " ");
         }
       }
 
       function RepseReviewMensualComponent_th_23_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "th", 33);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, " Ver ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1, " Ver ");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_24_button_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r19 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+          var _r19 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "button", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 36);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseReviewMensualComponent_td_24_button_1_Template_button_click_0_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RepseReviewMensualComponent_td_24_button_1_Template_button_click_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r19);
 
-            var element_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit;
+            var element_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]().$implicit;
 
-            var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
+            var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
 
             return ctx_r17.review(element_r15, $event);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](1, "i", 37);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "i", 37);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_24_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "td", 34);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](1, RepseReviewMensualComponent_td_24_button_1_Template, 2, 0, "button", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, RepseReviewMensualComponent_td_24_button_1_Template, 2, 0, "button", 35);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
           var element_r15 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", element_r15.aprobacion == true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", element_r15.aprobacion == true);
         }
       }
 
       function RepseReviewMensualComponent_th_26_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "th", 33);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "th", 33);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, " Revisi\xF3n ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1, " Revisi\xF3n ");
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_27_button_1_Template(rf, ctx) {
         if (rf & 1) {
-          var _r24 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
+          var _r24 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "button", 36);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "button", 36);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseReviewMensualComponent_td_27_button_1_Template_button_click_0_listener($event) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RepseReviewMensualComponent_td_27_button_1_Template_button_click_0_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵrestoreView"](_r24);
 
-            var element_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]().$implicit;
+            var element_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]().$implicit;
 
-            var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
+            var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
 
             return ctx_r22.see(element_r20, $event);
           });
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](1, "i", 38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "i", 38);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
       }
 
       function RepseReviewMensualComponent_td_27_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "td", 34);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "td", 34);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](1, RepseReviewMensualComponent_td_27_button_1_Template, 2, 0, "button", 35);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, RepseReviewMensualComponent_td_27_button_1_Template, 2, 0, "button", 35);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         }
 
         if (rf & 2) {
           var element_r20 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", element_r20.aprobacion == true);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", element_r20.aprobacion == true);
         }
       }
 
       function RepseReviewMensualComponent_tr_28_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "tr", 39);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](0, "tr", 39);
         }
       }
 
       function RepseReviewMensualComponent_tr_29_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "tr", 40);
+          _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](0, "tr", 40);
         }
       }
 
       var _RepseReviewMensualComponent = /*#__PURE__*/function () {
-        function _RepseReviewMensualComponent(dialogRef, dialog, _excelService, _supplyservice) {
+        function _RepseReviewMensualComponent(dialogRef, dialog, _excelService, _supplyservice, _UploadFileService, data, formBuilder) {
           _classCallCheck(this, _RepseReviewMensualComponent);
 
           this.dialogRef = dialogRef;
           this.dialog = dialog;
           this._excelService = _excelService;
-          this._supplyservice = _supplyservice; // =================
+          this._supplyservice = _supplyservice;
+          this._UploadFileService = _UploadFileService;
+          this.data = data;
+          this.formBuilder = formBuilder; // =================
           // DECLARACIONES
           // =================
           // Para paginación
@@ -18793,8 +18879,10 @@
           this.pageSize = 20;
           this.currentPage = 0;
           this.totalSize = 0;
-          this.filterChange = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
+          this.filterChange = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
           this.displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision'];
+          this.pageInfo = data.arrayData;
+          this.newForm = this.formBuilder.group({});
         } // =================
         // PROCEDIMIENTOS
         // =================
@@ -18803,6 +18891,7 @@
         _createClass(_RepseReviewMensualComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            this.providerId = this.pageInfo.proveedorid;
             this.getsupplierDocuments();
           }
         }, {
@@ -18826,7 +18915,7 @@
           value: function review(element, event) {
             // AUTORIZA O RECHAZA
             console.log('Editar un proveedores', element.proveedorId);
-            var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__.MatDialogConfig();
+            var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialogConfig();
             dialogConfig.data = {
               id: 1,
               title: 'PROVEEDOR',
@@ -18872,7 +18961,7 @@
             var end = (this.currentPage + 1) * this.pageSize;
             var start = this.currentPage * this.pageSize;
             var part = this.array.slice(0, this.totalSize);
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(part);
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(part);
             this.dataSourceShow.sort = this.sort;
             this.dataSourceShow.paginator = this.paginator;
           } // =================
@@ -18882,59 +18971,62 @@
         }, {
           key: "getsupplierDocuments",
           value: function getsupplierDocuments() {
+            var _this46 = this;
+
             var arraySupplier = [];
-            arraySupplier.push({
-              supplier_id: 1,
-              documento: 'Listado trabajadores Excel o PDF',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'CFDI mensual de trabajadores',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Comprobante de pago del Banco en PDF',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'SIPARE en pdf',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Cedula mensual SUA en PDF (trabajadores)',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Comprobante de pago del Banco en PDF',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Declaración de ISR',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Declaración IVA',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Opinión Positiva IMSS (Un mes atrás)',
-              estatus: 'Por Revisar',
-              aprobacion: true
-            }, {
-              supplier_id: 1,
-              documento: 'Opinion Positiva SAT (Un mes atrás)',
-              estatus: 'Por Revisar',
-              aprobacion: true
+            var arrayDocumentos;
+            var arrayDocumentosFiltrados;
+            var arrayDocumentoPorProveedor;
+            var urlShow = '';
+            var estadoShow = 3;
+            var idDocumentShow = 0; // arraySupplier.push({supplier_id : 1, documento : 'Listado trabajadores Excel o PDF', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'CFDI mensual de trabajadores', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Comprobante de pago del Banco en PDF', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'SIPARE en pdf', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Cedula mensual SUA en PDF (trabajadores)', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Comprobante de pago del Banco en PDF (ISR)', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Declaración de ISR', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Declaración IVA', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Comprobante de pago del Banco en PDF (IVA)', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Opinión Positiva IMSS (Un mes atrás)', estatus : 'Por Revisar', aprobacion : true}
+            //                     , {supplier_id : 1, documento : 'Opinion Positiva SAT (Un mes atrás)', estatus : 'Por Revisar', aprobacion : true}
+            //                   )
+
+            this._UploadFileService.getdocumentsAll().subscribe(function (res) {
+              console.log('Documentos obtenidos', res);
+              arrayDocumentos = res;
+              arrayDocumentosFiltrados = arrayDocumentos.filter(function (e) {
+                return e.idProveedor == _this46.providerId && e.categoriaDocumento > 201 && e.categoriaDocumento < 299;
+              });
+              arraySupplier = [];
+
+              _this46.showDocument(201, 2022, 3); // Listado trabajadores Excel o PDF
+
+
+              arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(function (e) {
+                return e.categoriaDocumento == 201;
+              });
+
+              if (arrayDocumentoPorProveedor != undefined) {
+                urlShow = arrayDocumentoPorProveedor.urlDocumento.length > 0 ? arrayDocumentoPorProveedor.urlDocumento : '';
+                estadoShow = arrayDocumentoPorProveedor.estado != undefined ? arrayDocumentoPorProveedor.estado : 0;
+                idDocumentShow = arrayDocumentoPorProveedor.idDocumento != undefined ? arrayDocumentoPorProveedor.idDocumento : 0;
+              }
+
+              arraySupplier.push({
+                supplier_id: _this46.providerId,
+                documento: 'Listado trabajadores Excel o PDF',
+                estatus: estadoShow,
+                aprobacion: true,
+                url: urlShow,
+                idDocumento: idDocumentShow
+              });
+              console.log('supplier', arraySupplier);
+            }, function (error) {
+              return console.log("error consulta regiones", error);
             });
-            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySupplier); // Proyectos registrados
+
+            this.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySupplier); // Proyectos registrados
             // this._supplyservice.getsupplyAll().subscribe(
             //   res=> {
             //     console.log('Proveedores', res);
@@ -18947,30 +19039,33 @@
             //   error => console.log("error consulta regiones",error)
             // )
           }
+        }, {
+          key: "showDocument",
+          value: function showDocument(categoriaDocumento, anio, mes) {}
         }]);
 
         return _RepseReviewMensualComponent;
       }();
 
       _RepseReviewMensualComponent.ɵfac = function RepseReviewMensualComponent_Factory(t) {
-        return new (t || _RepseReviewMensualComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_app_helpers_excel_service_service__WEBPACK_IMPORTED_MODULE_1__.ExcelServiceService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_app_services_supplier_service__WEBPACK_IMPORTED_MODULE_2__.supplyservice));
+        return new (t || _RepseReviewMensualComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialogRef), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_helpers_excel_service_service__WEBPACK_IMPORTED_MODULE_1__.ExcelServiceService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_supplier_service__WEBPACK_IMPORTED_MODULE_2__.supplyservice), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_services_upload_file_upload_file_service__WEBPACK_IMPORTED_MODULE_3__.UploadFileService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MAT_DIALOG_DATA), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormBuilder));
       };
 
-      _RepseReviewMensualComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
+      _RepseReviewMensualComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
         type: _RepseReviewMensualComponent,
         selectors: [["app-repse-review-mensual"]],
         viewQuery: function RepseReviewMensualComponent_Query(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵviewQuery"](_angular_material_sort__WEBPACK_IMPORTED_MODULE_6__.MatSort, 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵviewQuery"](_angular_material_sort__WEBPACK_IMPORTED_MODULE_8__.MatSort, 7);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵviewQuery"](_angular_material_paginator__WEBPACK_IMPORTED_MODULE_7__.MatPaginator, 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵviewQuery"](_angular_material_paginator__WEBPACK_IMPORTED_MODULE_9__.MatPaginator, 7);
           }
 
           if (rf & 2) {
             var _t;
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵloadQuery"]()) && (ctx.sort = _t.first);
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵloadQuery"]()) && (ctx.paginator = _t.first);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵloadQuery"]()) && (ctx.sort = _t.first);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵloadQuery"]()) && (ctx.paginator = _t.first);
           }
         },
         outputs: {
@@ -18981,160 +19076,160 @@
         consts: [[1, "header", "bg-gradient-danger", "pb-8", "pt-5", "pt-md-8"], [1, "container-fluid"], [1, "header-body"], [1, "container-fluid", "mt--7"], [1, "row"], [2, "width", "200px"], [1, "col"], [1, "card", "shadow"], [1, "col-12", "col-md-12", "p-0"], [1, "card"], [1, "card-body", "card-body-table"], ["matSort", "", 1, "mat-elevation-z8", 2, "width", "80%", 3, "dataSource"], ["matColumnDef", "supplier_id", 2, "width", "300px"], ["mat-header-cell", "", "mat-sort-header", "", "class", "col30", "hidden", "", 4, "matHeaderCellDef"], ["mat-cell", "", "hidden", "", 4, "matCellDef"], ["matColumnDef", "documento", 1, "col300"], ["mat-header-cell", "", "mat-sort-header", "", "class", "col300", 4, "matHeaderCellDef"], ["mat-cell", "", "class", "col300", 4, "matCellDef"], ["matColumnDef", "estatus", 1, "col300"], ["matColumnDef", "ver"], ["mat-header-cell", "", "class", "colbuttons", 4, "matHeaderCellDef"], ["mat-cell", "", 4, "matCellDef"], ["matColumnDef", "revision"], ["mat-header-row", "", 4, "matHeaderRowDef"], ["mat-row", "", 4, "matRowDef", "matRowDefColumns"], ["fxLayout", "row", 1, "division"], ["fxFlex.gt-sm", "20%"], ["mat-raised-button", "", "color", "warn", 3, "click"], [1, "fa", "fa-arrow-left", "fa-lg", "icon-cog-wite"], ["mat-header-cell", "", "mat-sort-header", "", "hidden", "", 1, "col30"], ["mat-cell", "", "hidden", ""], ["mat-header-cell", "", "mat-sort-header", "", 1, "col300"], ["mat-cell", "", 1, "col300"], ["mat-header-cell", "", 1, "colbuttons"], ["mat-cell", ""], ["mat-button", "", "color", "primary", 3, "click", 4, "ngIf"], ["mat-button", "", "color", "primary", 3, "click"], [1, "fa", "fa-eye", "fa-lg", "icon-cog"], [1, "fa", "fa-arrow-right", "fa-lg", "icon-cog-blue"], ["mat-header-row", ""], ["mat-row", ""]],
         template: function RepseReviewMensualComponent_Template(rf, ctx) {
           if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](2, "div", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](2, "div", 2);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](3, "div", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "div", 3);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](4, "div", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](4, "div", 4);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](5, "div", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](5, "div", 5);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](6, "div", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](6, "div", 6);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "div", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](7, "div", 7);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](8, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](8, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](9, "div", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](9, "div", 8);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](10, "div", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](10, "div", 9);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](11, "div", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](11, "div", 10);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](12, "mat-table", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](12, "mat-table", 11);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](13, 12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerStart"](13, 12);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](14, RepseReviewMensualComponent_th_14_Template, 2, 0, "th", 13);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](14, RepseReviewMensualComponent_th_14_Template, 2, 0, "th", 13);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](15, RepseReviewMensualComponent_td_15_Template, 2, 1, "td", 14);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](15, RepseReviewMensualComponent_td_15_Template, 2, 1, "td", 14);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](16, 15);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerStart"](16, 15);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](17, RepseReviewMensualComponent_th_17_Template, 2, 0, "th", 16);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](17, RepseReviewMensualComponent_th_17_Template, 2, 0, "th", 16);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](18, RepseReviewMensualComponent_td_18_Template, 2, 1, "td", 17);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](18, RepseReviewMensualComponent_td_18_Template, 2, 1, "td", 17);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](19, 18);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerStart"](19, 18);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](20, RepseReviewMensualComponent_th_20_Template, 2, 0, "th", 16);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](20, RepseReviewMensualComponent_th_20_Template, 2, 0, "th", 16);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](21, RepseReviewMensualComponent_td_21_Template, 2, 1, "td", 17);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](21, RepseReviewMensualComponent_td_21_Template, 2, 1, "td", 17);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](22, 19);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerStart"](22, 19);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](23, RepseReviewMensualComponent_th_23_Template, 2, 0, "th", 20);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](23, RepseReviewMensualComponent_th_23_Template, 2, 0, "th", 20);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](24, RepseReviewMensualComponent_td_24_Template, 2, 1, "td", 21);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](24, RepseReviewMensualComponent_td_24_Template, 2, 1, "td", 21);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](25, 22);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerStart"](25, 22);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](26, RepseReviewMensualComponent_th_26_Template, 2, 0, "th", 20);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](26, RepseReviewMensualComponent_th_26_Template, 2, 0, "th", 20);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](27, RepseReviewMensualComponent_td_27_Template, 2, 1, "td", 21);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](27, RepseReviewMensualComponent_td_27_Template, 2, 1, "td", 21);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementContainerEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](28, RepseReviewMensualComponent_tr_28_Template, 1, 0, "tr", 23);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](28, RepseReviewMensualComponent_tr_28_Template, 1, 0, "tr", 23);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](29, RepseReviewMensualComponent_tr_29_Template, 1, 0, "tr", 24);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](29, RepseReviewMensualComponent_tr_29_Template, 1, 0, "tr", 24);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](30, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](30, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](31, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](31, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](32, "br");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](32, "br");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](33, "div", 25);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](33, "div", 25);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](34, "div", 26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](34, "div", 26);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](35, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](35, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](36, "div", 26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](36, "div", 26);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](37, "div", 26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](37, "div", 26);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](38, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](38, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](39, "button", 27);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](39, "button", 27);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function RepseReviewMensualComponent_Template_button_click_39_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("click", function RepseReviewMensualComponent_Template_button_click_39_listener($event) {
               return ctx.cancel($event);
             });
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](40, "i", 28);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](40, "i", 28);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](41, "div", 26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](41, "div", 26);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](42, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](42, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](43, "div", 26);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](43, "div", 26);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](44, "div");
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](44, "div");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](12);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("dataSource", ctx.dataSourceShow);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("dataSource", ctx.dataSourceShow);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](16);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](16);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("matHeaderRowDef", ctx.displayedColumns);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
+            _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("matRowDefColumns", ctx.displayedColumns);
           }
         },
-        directives: [_angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_6__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatRowDef, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__.DefaultLayoutDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_8__.DefaultFlexDirective, _angular_material_button__WEBPACK_IMPORTED_MODULE_9__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatHeaderCell, _angular_material_sort__WEBPACK_IMPORTED_MODULE_6__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatCell, _angular_common__WEBPACK_IMPORTED_MODULE_10__.NgIf, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatRow],
+        directives: [_angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTable, _angular_material_sort__WEBPACK_IMPORTED_MODULE_8__.MatSort, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatColumnDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatCellDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderRowDef, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatRowDef, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__.DefaultLayoutDirective, _angular_flex_layout_flex__WEBPACK_IMPORTED_MODULE_10__.DefaultFlexDirective, _angular_material_button__WEBPACK_IMPORTED_MODULE_11__.MatButton, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderCell, _angular_material_sort__WEBPACK_IMPORTED_MODULE_8__.MatSortHeader, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatCell, _angular_common__WEBPACK_IMPORTED_MODULE_12__.NgIf, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatHeaderRow, _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatRow],
         styles: [".col10[_ngcontent-%COMP%]{\r\n    width: 10%;\r\n    vertical-align: middle;\r\n}\r\n\r\n.col20[_ngcontent-%COMP%]{\r\n    width: 20%;\r\n    vertical-align: middle;\r\n}\r\n\r\n.col30[_ngcontent-%COMP%]{\r\n    width: 30%;\r\n    vertical-align: middle;\r\n}\r\n\r\n.col70[_ngcontent-%COMP%]{\r\n    width: 70%;\r\n    vertical-align: middle;\r\n}\r\n\r\n.col300[_ngcontent-%COMP%]{\r\n    width: 300px;\r\n    vertical-align: middle;\r\n}\r\n\r\n.colbuttons[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n    text-align: center;\r\n}\r\n\r\n.column[_ngcontent-%COMP%]{\r\n    vertical-align: middle;\r\n}\r\n\r\n.icon-cog[_ngcontent-%COMP%] {\r\n    color: orange;\r\n  }\r\n\r\n.icon-cog-wite[_ngcontent-%COMP%] {\r\n    color: white;\r\n  }\r\n\r\n.icon-cog-blue[_ngcontent-%COMP%]{\r\n    color: rgb(22, 22, 175);\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlcHNlLXJldmlldy1tZW5zdWFsLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksVUFBVTtJQUNWLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLFVBQVU7SUFDVixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysc0JBQXNCO0FBQzFCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLHNCQUFzQjtJQUN0QixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxhQUFhO0VBQ2Y7O0FBRUY7SUFDSSxZQUFZO0VBQ2Q7O0FBRUE7SUFDRSx1QkFBdUI7QUFDM0IiLCJmaWxlIjoicmVwc2UtcmV2aWV3LW1lbnN1YWwuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb2wxMHtcclxuICAgIHdpZHRoOiAxMCU7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG59XHJcblxyXG4uY29sMjB7XHJcbiAgICB3aWR0aDogMjAlO1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG5cclxuLmNvbDMwe1xyXG4gICAgd2lkdGg6IDMwJTtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbn1cclxuXHJcbi5jb2w3MHtcclxuICAgIHdpZHRoOiA3MCU7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG59XHJcblxyXG4uY29sMzAwe1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG5cclxuLmNvbGJ1dHRvbnN7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcblxyXG4uY29sdW1ue1xyXG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxufVxyXG5cclxuLmljb24tY29nIHtcclxuICAgIGNvbG9yOiBvcmFuZ2U7XHJcbiAgfVxyXG5cclxuLmljb24tY29nLXdpdGUge1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gIH1cclxuXHJcbiAgLmljb24tY29nLWJsdWV7XHJcbiAgICBjb2xvcjogcmdiKDIyLCAyMiwgMTc1KTtcclxufSJdfQ== */"]
       });
       /***/
@@ -19399,18 +19494,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this46 = this;
+            var _this47 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this46.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
-              _this46.array = res;
-              _this46.totalSize = _this46.array.length;
+              _this47.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(res);
+              _this47.array = res;
+              _this47.totalSize = _this47.array.length;
 
-              _this46.iterator();
+              _this47.iterator();
 
-              _this46.dataSourceShow.sort = _this46.sort;
+              _this47.dataSourceShow.sort = _this47.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -20543,7 +20638,7 @@
         }, {
           key: "onFileChange",
           value: function onFileChange(event) {
-            var _this47 = this;
+            var _this48 = this;
 
             /* wire up file reader */
             var target = event.target;
@@ -20594,8 +20689,8 @@
                 /* save data */
 
                 var data = xlsx__WEBPACK_IMPORTED_MODULE_1__.utils.sheet_to_json(ws);
-                _this47.dataExcel = _this47.validate(data);
-                _this47.dataExcel = data;
+                _this48.dataExcel = _this48.validate(data);
+                _this48.dataExcel = data;
                 var arrayErrores = [];
                 var valido = true; // Validadores de campos
 
@@ -20606,7 +20701,7 @@
                 var DescripcionAnt = '';
                 var Descripcion = ''; // Ordena los descuentos por cr + produto + plataforma
 
-                _this47.dataExcel.sort(function (a, b) {
+                _this48.dataExcel.sort(function (a, b) {
                   if (a.DESCRIPCION > b.DESCRIPCION) {
                     return 1;
                   }
@@ -20619,11 +20714,11 @@
                   return 0;
                 });
 
-                DescripcionAnt = _this47.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
+                DescripcionAnt = _this48.dataExcel[0]["DESCRIPCION"].toUpperCase(); // Validamos que los crs del excel vs las existentes en el ctálogo
 
                 var contador = 0;
 
-                _this47.dataExcel.forEach(function (element) {
+                _this48.dataExcel.forEach(function (element) {
                   // Reinicia valores
                   valido = true;
                   errorDescripcion = false;
@@ -20673,13 +20768,13 @@
                 });
 
                 if (arrayErrores.length > 0) {
-                  _this47.openSnackBar('Los registros contienen datos incorrectos', '');
+                  _this48.openSnackBar('Los registros contienen datos incorrectos', '');
 
-                  _this47.dataExcel = null;
+                  _this48.dataExcel = null;
                   return;
                 }
 
-                _this47.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
+                _this48.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayExcel);
               };
             } else {
               this.openSnackBar('Los registros contienen datos incorrectos', '');
@@ -20854,11 +20949,11 @@
         }, {
           key: "getEnabledCategories",
           value: function getEnabledCategories() {
-            var _this48 = this;
+            var _this49 = this;
 
             // Actualiza registro NUEVO
             this._projectCategoryservice.getProjectCateogryById(1).subscribe(function (res) {
-              _this48.datasourceCategories = res;
+              _this49.datasourceCategories = res;
               console.log('CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta categorias", error);
@@ -20867,11 +20962,11 @@
         }, {
           key: "getProyectos",
           value: function getProyectos() {
-            var _this49 = this;
+            var _this50 = this;
 
             // Obtiene proyectos
             this._projectService.getProjectAll().subscribe(function (res) {
-              _this49.datasourcePorjects = res;
+              _this50.datasourcePorjects = res;
               console.log('PROYECTOS', res);
             }, function (error) {
               return console.log("error consulta proyectos", error);
@@ -20880,7 +20975,7 @@
         }, {
           key: "getrequisition",
           value: function getrequisition(codigo_categoria) {
-            var _this50 = this;
+            var _this51 = this;
 
             var categoria_id = this.newProject.controls["categoria_id"].value;
             var codigo_requisicion = 0;
@@ -20888,13 +20983,13 @@
             var arrayCodigoCategoria; // Proyectos registrados
 
             this._requisitionservice.getRequisitionAll().subscribe(function (res) {
-              _this50.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
+              _this51.datasourceRequisition = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(res);
 
-              if (_this50.datasourceRequisition.filteredData.length == 0) {
+              if (_this51.datasourceRequisition.filteredData.length == 0) {
                 codigo_requisicion = codigo_categoria + '-1';
               } else {
                 // Obtener requisicion en la que se mas alta y determinar cual sigue
-                arrayRequisition = _this50.datasourceRequisition.filteredData.filter(function (e) {
+                arrayRequisition = _this51.datasourceRequisition.filteredData.filter(function (e) {
                   return e.proyectocategoria_id == categoria_id;
                 });
 
@@ -20909,9 +21004,9 @@
               } // this.newProject.controls["requisicion_Numero"].setValue = codigo_categoria + codigo_requisicion;
 
 
-              _this50.requisicion_Numero = codigo_requisicion;
+              _this51.requisicion_Numero = codigo_requisicion;
 
-              _this50.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
+              _this51.newProject.controls["requisicion_Numero"].setValue(codigo_requisicion);
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -20919,11 +21014,11 @@
         }, {
           key: "getCategories",
           value: function getCategories(proyecto) {
-            var _this51 = this;
+            var _this52 = this;
 
             // Obtiene categorias 
             this._projectCategoryservice.getProjectCateogryById(proyecto).subscribe(function (res) {
-              _this51.datasourceCategories = res;
+              _this52.datasourceCategories = res;
               console.log('PROYECTOS - CATEGORIAS', res);
             }, function (error) {
               return console.log("error consulta cateogorias", error);
@@ -20932,12 +21027,12 @@
         }, {
           key: "insertRequisition",
           value: function insertRequisition(arrayTodb) {
-            var _this52 = this;
+            var _this53 = this;
 
             this._requisitionservice.insertRequisition(arrayTodb).subscribe(function (res) {
               console.log('Se inserto con éxito', res); // INSERTA REQUISICIONES DET
 
-              _this52.insertRequisitionDet(res);
+              _this53.insertRequisitionDet(res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -20945,7 +21040,7 @@
         }, {
           key: "getRequisitionDetail",
           value: function getRequisitionDetail(arrayTodb) {
-            var _this53 = this;
+            var _this54 = this;
 
             var arrayRequsitionDetail;
             var arrayRequsitionToTable = []; //MatTableDataSource<requisitionModelDetail>;
@@ -20962,7 +21057,7 @@
                   medida: element.medida
                 });
               });
-              _this53.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
+              _this54.UploadDataExcel = new _angular_material_table__WEBPACK_IMPORTED_MODULE_8__.MatTableDataSource(arrayRequsitionToTable);
               console.log('Se obtiene detalle de requisición', res);
             }, function (error) {
               return console.log("error alta de proyectos", error);
@@ -20982,7 +21077,7 @@
         }, {
           key: "insertRequisitionDet",
           value: function insertRequisitionDet(requisicionId) {
-            var _this54 = this;
+            var _this55 = this;
 
             // Obtiene Requisicion Registrada
             var datasourceRequsition;
@@ -21007,10 +21102,10 @@
               };
               console.log('DETALLE DETALLE DETALLE', arrayToDb); // Inserta Proyecto Categoria
 
-              _this54._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
+              _this55._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(function (res) {
                 console.log('REQUISICIONES DETALLE', res);
 
-                _this54.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
+                _this55.openSnackBar('Se genero el la requisición exitosamente', 'success'); // this.dialogRef.close();
 
               }, function (error) {
                 return console.log("error al insertar proyectos categorias", error);
@@ -21770,10 +21865,10 @@
         }, {
           key: "onChangeRFC",
           value: function onChangeRFC(event) {
-            var _this55 = this;
+            var _this56 = this;
 
             if (this.supplierDataSource.filter(function (e) {
-              return e.rfc.trim() == _this55.newProject.controls["rfc"].value.trim();
+              return e.rfc.trim() == _this56.newProject.controls["rfc"].value.trim();
             }).length > 0) {
               this.openSnackBar('Este RFC ya esta registrado', '');
             }
@@ -21797,15 +21892,15 @@
         }, {
           key: "insertSupplier",
           value: function insertSupplier(arrayToDb) {
-            var _this56 = this;
+            var _this57 = this;
 
             // Inserta Proveedores
             this._supplyservice.insertsupply(arrayToDb).subscribe(function (res) {
               console.log('PROVEEDORES', res);
 
-              _this56.openSnackBar('El registro se actualizó con éxito', '');
+              _this57.openSnackBar('El registro se actualizó con éxito', '');
 
-              _this56.dialogRef.close();
+              _this57.dialogRef.close();
             }, function (error) {
               return console.log("error al insertar proveedores", error);
             });
@@ -21823,12 +21918,12 @@
         }, {
           key: "getSupplier",
           value: function getSupplier() {
-            var _this57 = this;
+            var _this58 = this;
 
             // Inserta Proveedores
             this._supplyservice.getsupplyAll().subscribe(function (res) {
-              _this57.supplierDataSource = res;
-              console.log('PROVEEDORES', _this57.supplierDataSource);
+              _this58.supplierDataSource = res;
+              console.log('PROVEEDORES', _this58.supplierDataSource);
             }, function (error) {
               return console.log("error al actualizar proveedores", error);
             });
@@ -24225,7 +24320,7 @@
         }, {
           key: "getcustomer",
           value: function getcustomer() {
-            var _this58 = this;
+            var _this59 = this;
 
             var arraySort; // Proyectos registrados
 
@@ -24243,13 +24338,13 @@
 
                 return 0;
               });
-              _this58.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
-              _this58.array = res;
-              _this58.totalSize = _this58.array.length;
+              _this59.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
+              _this59.array = res;
+              _this59.totalSize = _this59.array.length;
 
-              _this58.iterator();
+              _this59.iterator();
 
-              _this58.dataSourceShow.sort = _this58.sort;
+              _this59.dataSourceShow.sort = _this59.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -24691,29 +24786,29 @@
         }, {
           key: "loginReq",
           value: function loginReq() {
-            var _this59 = this;
+            var _this60 = this;
 
             this.spinerShow = true;
             var pswdEncryp = this.cryptService.encrypt(this.loginform.value.contrasegna);
             this.loginform.value.contrasegna = pswdEncryp;
             this.authService.loginReq(this.loginform.value).subscribe(function (response) {
               localStorage.setItem('token_access', response.token);
-              _this59.spinerShow = false;
+              _this60.spinerShow = false;
 
-              _this59.route.navigate(['/dashboard']);
+              _this60.route.navigate(['/dashboard']);
             }, function (err) {
               if (err.status === 401) {
-                _this59.toastr.error('Credenciales de acceso inválidas', 'ERROR');
+                _this60.toastr.error('Credenciales de acceso inválidas', 'ERROR');
               }
 
               if (err.status === 0 || err.status === 500) {
-                _this59.toastr.error('No se puede comunicar con el servidor', 'ERROR');
+                _this60.toastr.error('No se puede comunicar con el servidor', 'ERROR');
               }
 
-              _this59.openSnackBar('credenciales incorrectas', '');
+              _this60.openSnackBar('credenciales incorrectas', '');
 
               console.error(err);
-              _this59.spinerShow = false;
+              _this60.spinerShow = false;
             });
           }
         }, {
@@ -25294,7 +25389,7 @@
         }, {
           key: "getProjects",
           value: function getProjects() {
-            var _this60 = this;
+            var _this61 = this;
 
             var arraySort; // Proyectos registrados
 
@@ -25312,13 +25407,13 @@
 
                 return 0;
               });
-              _this60.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
-              _this60.array = res;
-              _this60.totalSize = _this60.array.length;
+              _this61.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
+              _this61.array = res;
+              _this61.totalSize = _this61.array.length;
 
-              _this60.iterator();
+              _this61.iterator();
 
-              _this60.dataSourceShow.sort = _this60.sort;
+              _this61.dataSourceShow.sort = _this61.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -25338,7 +25433,7 @@
         }, {
           key: "editProyecto",
           value: function editProyecto(element, event) {
-            var _this61 = this;
+            var _this62 = this;
 
             console.log('Edita', element);
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__.MatDialogConfig();
@@ -25353,13 +25448,13 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_project_capture_detail_project_capture_detail_project_capture_detail_component__WEBPACK_IMPORTED_MODULE_1__.ProjectCaptureDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this61.getProjects();
+              _this62.getProjects();
             });
           }
         }, {
           key: "addCategorias",
           value: function addCategorias(proyectoId, event) {
-            var _this62 = this;
+            var _this63 = this;
 
             console.log('Alta de categoras', proyectoId);
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__.MatDialogConfig();
@@ -25374,13 +25469,13 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_categories_categories_categories_component__WEBPACK_IMPORTED_MODULE_2__.CategoriesComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this62.getProjects();
+              _this63.getProjects();
             });
           }
         }, {
           key: "nuevoProyecto",
           value: function nuevoProyecto(event) {
-            var _this63 = this;
+            var _this64 = this;
 
             console.log('Alta de categoras');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__.MatDialogConfig();
@@ -25395,7 +25490,7 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_project_capture_detail_project_capture_detail_project_capture_detail_component__WEBPACK_IMPORTED_MODULE_1__.ProjectCaptureDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this63.getProjects();
+              _this64.getProjects();
             });
           }
         }, {
@@ -26309,7 +26404,7 @@
         }, {
           key: "nuevaOrdenDeCompra",
           value: function nuevaOrdenDeCompra(event) {
-            var _this64 = this;
+            var _this65 = this;
 
             console.log('Alta de requisiciones');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialogConfig();
@@ -26325,13 +26420,13 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this64.getPO_Hdr();
+              _this65.getPO_Hdr();
             });
           }
         }, {
           key: "editRequisicion",
           value: function editRequisicion(element, event) {
-            var _this65 = this;
+            var _this66 = this;
 
             console.log('Alta de requisiciones');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialogConfig();
@@ -26348,13 +26443,13 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this65.getPO_Hdr();
+              _this66.getPO_Hdr();
             });
           }
         }, {
           key: "aproveODC",
           value: function aproveODC(element, event) {
-            var _this66 = this;
+            var _this67 = this;
 
             console.log('Aprueba orden de compra');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialogConfig();
@@ -26371,7 +26466,7 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_po_detail_po_detail_component__WEBPACK_IMPORTED_MODULE_1__.PoDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this66.getPO_Hdr();
+              _this67.getPO_Hdr();
             });
           }
         }, {
@@ -26429,7 +26524,7 @@
         }, {
           key: "getPO_Hdr",
           value: function getPO_Hdr() {
-            var _this67 = this;
+            var _this68 = this;
 
             var arraySort; // Proyectos registrados
 
@@ -26447,13 +26542,13 @@
 
                 return 0;
               });
-              _this67.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(arraySort);
-              _this67.array = res;
-              _this67.totalSize = _this67.array.length;
+              _this68.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_10__.MatTableDataSource(arraySort);
+              _this68.array = res;
+              _this68.totalSize = _this68.array.length;
 
-              _this67.iterator();
+              _this68.iterator();
 
-              _this67.dataSourceShow.sort = _this67.sort;
+              _this68.dataSourceShow.sort = _this68.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -26470,7 +26565,7 @@
         }, {
           key: "updateODCStatus",
           value: function updateODCStatus(element, statusToDb) {
-            var _this68 = this;
+            var _this69 = this;
 
             var arrayToDb;
             arrayToDb = {
@@ -26483,7 +26578,7 @@
             this._purchaseOrderService.updatePOStatus(arrayToDb).subscribe(function (res) {
               console.log('Se inserto con éxito', res);
 
-              _this68.getPO_Hdr();
+              _this69.getPO_Hdr();
             }, function (error) {
               return console.log("error alta de proyectos", error);
             });
@@ -27099,7 +27194,7 @@
         }, {
           key: "getQuotationAll",
           value: function getQuotationAll() {
-            var _this69 = this;
+            var _this70 = this;
 
             var arraySort; // Proyectos registrados
 
@@ -27117,13 +27212,13 @@
                 return 0;
               });
               console.log('Cotizaciones', res);
-              _this69.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
-              _this69.array = res;
-              _this69.totalSize = _this69.array.length;
+              _this70.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_5__.MatTableDataSource(arraySort);
+              _this70.array = res;
+              _this70.totalSize = _this70.array.length;
 
-              _this69.iterator();
+              _this70.iterator();
 
-              _this69.dataSourceShow.sort = _this69.sort;
+              _this70.dataSourceShow.sort = _this70.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -27149,7 +27244,7 @@
         }, {
           key: "nuevaCotizacion",
           value: function nuevaCotizacion(evetn) {
-            var _this70 = this;
+            var _this71 = this;
 
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__.MatDialogConfig();
             dialogConfig.data = {
@@ -27164,13 +27259,13 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_1__.QuotationDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this70.getQuotationAll();
+              _this71.getQuotationAll();
             });
           }
         }, {
           key: "editCotizacion",
           value: function editCotizacion(element, event) {
-            var _this71 = this;
+            var _this72 = this;
 
             console.log('Edita cotizaciones');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__.MatDialogConfig();
@@ -27186,7 +27281,7 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_quotations_quotation_detail_quotation_detail_component__WEBPACK_IMPORTED_MODULE_1__.QuotationDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this71.getQuotationAll();
+              _this72.getQuotationAll();
             });
           }
         }, {
@@ -28126,18 +28221,18 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this72 = this;
+            var _this73 = this;
 
             // Proyectos registrados
             this._supplyservice.getsupplyAll().subscribe(function (res) {
               console.log('Proveedores', res);
-              _this72.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
-              _this72.array = res;
-              _this72.totalSize = _this72.array.length;
+              _this73.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(res);
+              _this73.array = res;
+              _this73.totalSize = _this73.array.length;
 
-              _this72.iterator();
+              _this73.iterator();
 
-              _this72.dataSourceShow.sort = _this72.sort;
+              _this73.dataSourceShow.sort = _this73.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -28647,7 +28742,7 @@
         }, {
           key: "nuevaRequisicion",
           value: function nuevaRequisicion(evetn) {
-            var _this73 = this;
+            var _this74 = this;
 
             console.log('Alta de requisiciones');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialogConfig();
@@ -28662,13 +28757,13 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this73.getrequisition();
+              _this74.getrequisition();
             });
           }
         }, {
           key: "editRequisicion",
           value: function editRequisicion(element) {
-            var _this74 = this;
+            var _this75 = this;
 
             console.log('Editar de requisiciones');
             var dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialogConfig();
@@ -28683,7 +28778,7 @@
             dialogConfig.disableClose = true;
             var dialogRef = this.dialog.open(src_app_components_requisitions_requisition_detail_requisition_detail_component__WEBPACK_IMPORTED_MODULE_0__.RequisitionDetailComponent, dialogConfig);
             dialogRef.afterClosed().subscribe(function (result) {
-              _this74.getrequisition();
+              _this75.getrequisition();
             });
           }
         }, {
@@ -28719,7 +28814,7 @@
         }, {
           key: "getrequisition",
           value: function getrequisition() {
-            var _this75 = this;
+            var _this76 = this;
 
             var arraySort; // Proyectos registrados
 
@@ -28737,13 +28832,13 @@
 
                 return 0;
               });
-              _this75.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
-              _this75.array = res;
-              _this75.totalSize = _this75.array.length;
+              _this76.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
+              _this76.array = res;
+              _this76.totalSize = _this76.array.length;
 
-              _this75.iterator();
+              _this76.iterator();
 
-              _this75.dataSourceShow.sort = _this75.sort;
+              _this76.dataSourceShow.sort = _this76.sort;
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -30076,7 +30171,7 @@
         }, {
           key: "getsupplier",
           value: function getsupplier() {
-            var _this76 = this;
+            var _this77 = this;
 
             var arraySort; // Proyectos registrados
 
@@ -30094,14 +30189,14 @@
 
                 return 0;
               });
-              _this76.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
-              _this76.array = res;
-              _this76.totalSize = _this76.array.length;
+              _this77.dataSourceShow = new _angular_material_table__WEBPACK_IMPORTED_MODULE_6__.MatTableDataSource(arraySort);
+              _this77.array = res;
+              _this77.totalSize = _this77.array.length;
 
-              _this76.iterator();
+              _this77.iterator();
 
-              _this76.dataSourceShow.sort = _this76.sort;
-              console.log('sdsdsdsdsd', _this76.dataSourceShow);
+              _this77.dataSourceShow.sort = _this77.sort;
+              console.log('sdsdsdsdsd', _this77.dataSourceShow);
             }, function (error) {
               return console.log("error consulta regiones", error);
             });
@@ -32430,14 +32525,14 @@
 
       var _AccordionDirective = /*#__PURE__*/function () {
         function _AccordionDirective(router) {
-          var _this77 = this;
+          var _this78 = this;
 
           _classCallCheck(this, _AccordionDirective);
 
           this.router = router;
           this.navlinks = [];
           setTimeout(function () {
-            return _this77.checkOpenLinks();
+            return _this78.checkOpenLinks();
           });
         }
 
@@ -32467,17 +32562,17 @@
         }, {
           key: "checkOpenLinks",
           value: function checkOpenLinks() {
-            var _this78 = this;
+            var _this79 = this;
 
             this.navlinks.forEach(function (link) {
               if (link.group) {
-                var routeUrl = _this78.router.url;
+                var routeUrl = _this79.router.url;
                 var currentUrl = routeUrl.split('/');
 
                 if (currentUrl.indexOf(link.group) > 0) {
                   link.selected = true;
 
-                  _this78.closeOtherLinks(link);
+                  _this79.closeOtherLinks(link);
                 }
               }
             });
@@ -32485,12 +32580,12 @@
         }, {
           key: "ngAfterContentChecked",
           value: function ngAfterContentChecked() {
-            var _this79 = this;
+            var _this80 = this;
 
             this.router.events.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.filter)(function (event) {
               return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationEnd;
             })).subscribe(function (e) {
-              return _this79.checkOpenLinks();
+              return _this80.checkOpenLinks();
             });
           }
         }]);
@@ -33028,7 +33123,7 @@
 
       var _SpinnerComponent = /*#__PURE__*/function () {
         function _SpinnerComponent(router, document) {
-          var _this80 = this;
+          var _this81 = this;
 
           _classCallCheck(this, _SpinnerComponent);
 
@@ -33038,12 +33133,12 @@
           this.backgroundColor = 'rgba(0, 115, 170, 0.69)';
           this.router.events.subscribe(function (event) {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationStart) {
-              _this80.isSpinnerVisible = true;
+              _this81.isSpinnerVisible = true;
             } else if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationEnd || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationCancel || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__.NavigationError) {
-              _this80.isSpinnerVisible = false;
+              _this81.isSpinnerVisible = false;
             }
           }, function () {
-            _this80.isSpinnerVisible = false;
+            _this81.isSpinnerVisible = false;
           });
         }
 
@@ -33113,7 +33208,7 @@
 
       var _environment = {
         production: false,
-        urlapi: 'http://api.dev.comercial.gsctech.com.mx/',
+        urlapi: 'https://sap-comercial.azurewebsites.net/',
         apiContextDrivers: 'api/',
         firebaseConfig: {
           apiKey: "AIzaSyBRC1z4fQiZMaxSwdn4wHIDmHBN2WsGg-Y",
