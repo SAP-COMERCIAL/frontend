@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { BREAKPOINT } from '@angular/flex-layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -38,8 +39,9 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
-ProveedorId : number = 1;
+ProveedorId : number = 4;
 tipoImagenFile : any = [];
+arrayDocumentosProveedor : any;
 
 nombreArchivo: string = " (archivo nuevo) ";
 loading: boolean;
@@ -58,7 +60,20 @@ urlEstadoCuenta : any;
 urlEstadoFinanciero : any;
 urlContrato : any;
 urlRPP : any;
+urledoCtaBancario : any;
 
+estadoDireccion : number = 0;
+estadoRFC : any;
+estadoActaConstitutiva : any;
+estadoINE : any;
+estadoAltaImss : any;
+estadoAltaInfonavit : any;
+estadoAltaSAT : any;
+estadoEstadoCuenta : any;
+estadoEstadoFinanciero : any;
+estadoContrato : any;
+estadoRPP : any;
+estadoedoCtaBancario : any;
 
 public newProject: FormGroup;
 
@@ -99,6 +114,8 @@ public newProject: FormGroup;
 
   ngOnInit(): void {
     
+    this.getDocumentsAll(0);
+
     this.tipoImagenFile = [{id : 101, categoria : 'direccion'}
     ,{id : 102, categoria : 'rfc'}
     ,{id : 103, categoria : 'actaConstitutiva'}
@@ -213,9 +230,9 @@ async UploadFiles(file: File, idProveedor: string, tipoArchivo: string) {
   }
 }
 
-openFile(url){
-  console.log('url', url);
-  window.open(url);
+openFile(documentShow : number){
+  this.getDocumentsAll(documentShow);
+  // window.open(this.urlDireccion);
 }
 
 openSnackBar(message: string, action: string) {
@@ -245,7 +262,9 @@ imagenes: any[] = [];
           //   password: "401325",
           //   imgProfile: urlImagen
           // }
-          console.log(urlImagen);
+
+          console.warn('urlImagen', tipoImagen);
+          console.warn('this.tipoImagenFile', this.tipoImagenFile);
 
           let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
 
@@ -313,6 +332,50 @@ imagenes: any[] = [];
         this.openSnackBar('El registro se actualizó con éxito', '');  
       },
       error => console.log("error al insertar proveedores",error)
+    )
+  }
+
+  getDocumentsAll(documentShow : number){
+    let arrayDocumentos : any
+    this._uploadFileService.getdocumentsAll().subscribe(
+      res=> {
+        console.log('Documentos', res);
+
+        arrayDocumentos = res;
+        if(documentShow == 0)
+          this.arrayDocumentosProveedor = arrayDocumentos.filter(e => e.idProveedor == this.ProveedorId)
+        else
+          this.arrayDocumentosProveedor = arrayDocumentos.filter(e => e.idProveedor == this.ProveedorId && e.categoriaDocumento == documentShow)
+
+        if(documentShow == 0){
+          this.arrayDocumentosProveedor.forEach(element => {
+            switch(element.categoriaDocumento){
+              case(101): this.estadoDireccion = element.estado; break;
+              case(102): this.estadoRFC = element.estado; break;
+              case(103): this.estadoActaConstitutiva = element.estado; break;
+              case(104): this.estadoINE = element.estado; break;
+              case(105): this.estadoAltaImss = element.estado; break;
+              case(106): this.estadoAltaInfonavit = element.estado; break;
+              case(107): this.estadoAltaSAT = element.estado; break;
+              case(108): this.estadoEstadoCuenta = element.estado; break;
+              case(109): this.estadoEstadoFinanciero = element.estado; break;
+              case(110): this.estadoContrato = element.estado; break;
+              case(111): this.estadoRPP = element.estado; break;
+            }
+          });
+        }
+
+        console.log('dfdfdf', this.arrayDocumentosProveedor)
+
+        if(documentShow != 0){
+          if(this.arrayDocumentosProveedor != undefined && this.arrayDocumentosProveedor.length > 0)
+            window.open(this.arrayDocumentosProveedor[0]["urlDocumento"]);
+          else
+            this.openSnackBar('Documento no encontrado', '');
+        }
+
+      },
+      error => console.log("error consulta regiones",error)
     )
   }
 

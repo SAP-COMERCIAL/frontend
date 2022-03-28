@@ -8,6 +8,7 @@ import { SupplierDetailComponent } from 'src/app/components/supplier-detail/supp
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
+import { SupplierUserComponent } from '../../components/supplier-user/supplier-user.component';
 
 @Component({
   selector: 'app-supplier',
@@ -33,7 +34,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estado', 'edit'];
+  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estado', 'edit', 'users'];
 
   constructor(public dialog: MatDialog
     , private _excelService : ExcelServiceService
@@ -87,7 +88,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
   }
 
   edit(element, event){
-    console.log('Editar un proveedores', element.proveedorId);
+    console.log('Editar un proveedores', element);
 
     const dialogConfig = new MatDialogConfig();
 
@@ -104,6 +105,30 @@ dataSourceShow : MatTableDataSource<supplierModel>
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(SupplierDetailComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      // window.location.reload();
+    });
+  }
+
+  users(element, event){
+    console.log('Editar un proveedores', element);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'USUARIOS',
+      arrayData : element,
+      proveedorId: element.proveedorId,
+      estadoPantalla: 'Edit'
+     
+    }
+    dialogConfig.width = '500px';
+    dialogConfig.height = '500px';
+    dialogConfig.disableClose = true;
+
+    const dialogRef = this.dialog.open(SupplierUserComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();
@@ -164,6 +189,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
         
         this.iterator();
         this.dataSourceShow.sort = this.sort;
+
+        console.log('sdsdsdsdsd', this.dataSourceShow)
         
       },
       error => console.log("error consulta regiones",error)

@@ -54,8 +54,8 @@ public newProject: FormGroup;
     arrayToDb = ({idDocumento: this.projectInfo.idDocumento
                   , estado: 1 })
 
+    this.aproveRejectDocument(arrayToDb);
     this.openSnackBar('Documento aprobado', '');
-    this.aproveDocument(arrayToDb);
     this.dialogRef.close();
   }
 
@@ -65,8 +65,8 @@ public newProject: FormGroup;
     arrayToDb = ({idDocumento: this.projectInfo.idDocumento
                 , estado: 2 })
 
-    console.log('Rechaza documento')
-    this.rejectDocument(arrayToDb);
+    this.aproveRejectDocument(arrayToDb);
+    this.openSnackBar('Documento rechazado', '');
     this.dialogRef.close();
   }
 
@@ -84,25 +84,14 @@ public newProject: FormGroup;
   // =========================
   // SERVICIOS
   // =========================
-  aproveDocument(arrayToDb : any){
+  aproveRejectDocument(arrayToDb : any){
     // Inserta Archivos en base de datos
-    this._uploadFileService.postDocumentosAprobar(arrayToDb).subscribe(
+    this._uploadFileService.postDocumentosAprobarRechazar(arrayToDb).subscribe(
       res=> {
         console.log('APROBAR DOCUMENTO', res);
         this.openSnackBar('El registro se aprobó con éxito', '');  
       },
       error => console.log("error al aprobar el ocumento",error)
-    )
-  }
-
-  rejectDocument(arrayToDb : any){
-    // Inserta Archivos en base de datos
-    this._uploadFileService.postDocumentosRechazar(arrayToDb).subscribe(
-      res=> {
-        console.log('APROBAR DOCUMENTO', res);
-        this.openSnackBar('El registro se rechazó con éxito', '');  
-      },
-      error => console.log("error al rechazar el documento",error)
     )
   }
 

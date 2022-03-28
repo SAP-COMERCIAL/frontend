@@ -43,10 +43,12 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuDireccion" id="fuDireccion" (change)="cargarImagen($event, 'direccion', 'generales')" hidden><label for="fuDireccion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlDireccion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoDireccion == 0 || estadoDireccion == undefined"><input type="file" name="fuDireccion" id="fuDireccion" (change)="cargarImagen($event, 'direccion', 'generales')" hidden><label for="fuDireccion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoDireccion == 2"><input type="file" name="fuDireccion" id="fuDireccion" (change)="cargarImagen($event, 'direccion', 'generales')" hidden><label for="fuDireccion"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoDireccion == 0 || estadoDireccion == undefined"><button class="button" (click)="openFile(101)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoDireccion == 1"><button class="button" (click)="openFile(101)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoDireccion == 2"><button class="button" (click)="openFile(101)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="70px">
@@ -69,10 +71,12 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuRFC" id="fuRFC" (change)="cargarImagen($event, 'rfc', 'generales')" hidden><label for="fuRFC"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlRFC)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoRFC == 0 || estadoRFC == undefined"><input type="file" name="fuRFC" id="fuRFC" (change)="cargarImagen($event, 'rfc', 'generales')" hidden><label for="fuRFC"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoRFC == 2"><input type="file" name="fuRFC" id="fuRFC" (change)="cargarImagen($event, 'rfc', 'generales')" hidden><label for="fuRFC"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoRFC == 0 || estadoRFC == undefined"><button class="button" (click)="openFile(102)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoRFC == 1"><button class="button" (click)="openFile(102)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoRFC == 2"><button class="button" (click)="openFile(102)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="50px">
@@ -258,22 +262,17 @@
             <div><br>Acta constitutiva</div>
         </div>
         <div fxFlex.gt-sm="300px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="actaConstitutiva" matInput class="form-control form-control-line control"
-                        formControlName="actaConstitutiva" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('actaConstitutiva').valid && newProject.get('actaConstitutiva').touched"
-                    class="help-block" style="color: red;">El acta constitutiva es requerida</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuActaConstitutiva" id="fuActaConstitutiva" (change)="cargarImagen($event, 'actaConstitutiva', 'generales')" hidden>
-                    <label for="fuActaConstitutiva"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlActaConstitutiva)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoActaConstitutiva == 0 || estadoActaConstitutiva == undefined"><input type="file" name="fuActaConstitutiva" id="fuActaConstitutiva" (change)="cargarImagen($event, 'actaConstitutiva', 'generales')" hidden><label for="fuActaConstitutiva"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoActaConstitutiva == 2"><input type="file" name="fuActaConstitutiva" id="fuActaConstitutiva" (change)="cargarImagen($event, 'actaConstitutiva', 'generales')" hidden><label for="fuActaConstitutiva"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoActaConstitutiva == 0 || estadoActaConstitutiva == undefined"><button class="button" (click)="openFile(103)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoActaConstitutiva == 1"><button class="button" (click)="openFile(103)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoActaConstitutiva == 2"><button class="button" (click)="openFile(103)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                
             </div>
         </div>
         <div fxFlex.gt-sm="50px">
@@ -284,22 +283,16 @@
             <div><br>INE</div>
         </div>
         <div fxFlex.gt-sm="400px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="ine" matInput class="form-control form-control-line control" formControlName="ine"
-                        disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('ine').valid && newProject.get('ine').touched" class="help-block"
-                    style="color: red;"> El INE es requerido</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuINE" id="fuINE" (change)="cargarImagen($event, 'ine', 'generales')" hidden>
-                    <label for="fuINE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlINE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoINE == 0 || estadoINE == undefined"><input type="file" name="fuINE" id="fuINE" (change)="cargarImagen($event, 'ine', 'generales')" hidden><label for="fuINE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoINE == 2"><input type="file" name="fuINE" id="fuINE" (change)="cargarImagen($event, 'ine', 'generales')" hidden><label for="fuINE"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoINE == 0 || estadoINE == undefined"><button class="button" (click)="openFile(104)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoINE == 1"><button class="button" (click)="openFile(104)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoINE == 2"><button class="button" (click)="openFile(104)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>                
             </div>
         </div>
         <div fxFlex.gt-sm="70px">
@@ -312,22 +305,16 @@
             <div><br>Alta IMSS</div>
         </div>
         <div fxFlex.gt-sm="300px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="altaIMSS" matInput class="form-control form-control-line control"
-                        formControlName="altaIMSS" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('altaIMSS').valid && newProject.get('altaIMSS').touched" class="help-block"
-                    style="color: red;">El alta del IMSS es requerida</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuIMSS" id="fuIMSS" (change)="cargarImagen($event, 'imss', 'generales')" hidden>
-                    <label for="fuIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlAltaImss)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoAltaImss == 0 || estadoAltaImss == undefined"><input type="file" name="fuIMSS" id="fuIMSS" (change)="cargarImagen($event, 'imss', 'generales')" hidden><label for="fuIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoAltaImss == 2"><input type="file" name="fuIMSS" id="fuIMSS" (change)="cargarImagen($event, 'imss', 'generales')" hidden><label for="fuIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                
+                <ng-container *ngIf="estadoAltaImss == 0 || estadoAltaImss == undefined"><button class="button" (click)="openFile(105)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoAltaImss == 1"><button class="button" (click)="openFile(105)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoAltaImss == 2"><button class="button" (click)="openFile(105)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="50px">
@@ -337,22 +324,16 @@
             <div><br>Alta Infonavit</div>
         </div>
         <div fxFlex.gt-sm="300px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="altaINFONAVIT" matInput class="form-control form-control-line control"
-                        formControlName="altaINFONAVIT" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('altaINFONAVIT').valid && newProject.get('altaINFONAVIT').touched"
-                    class="help-block" style="color: red;"> El Alta Infonavit es requerido</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuAltaInfonavit" id="fuAltaInfonavit" (change)="cargarImagen($event, 'altaInfonavit', 'generales')" hidden>
-                    <label for="fuAltaInfonavit"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlAltaInfonavit)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoAltaInfonavit == 0 || estadoAltaInfonavit == undefined"><input type="file" name="fuAltaInfonavit" id="fuAltaInfonavit" (change)="cargarImagen($event, 'altaInfonavit', 'generales')" hidden><label for="fuAltaInfonavit"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoAltaInfonavit == 2"><input type="file" name="fuAltaInfonavit" id="fuAltaInfonavit" (change)="cargarImagen($event, 'altaInfonavit', 'generales')" hidden><label for="fuAltaInfonavit"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoAltaInfonavit == 0 || estadoAltaInfonavit == undefined"><button class="button" (click)="openFile(106)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoAltaInfonavit == 1"><button class="button" (click)="openFile(106)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>    
+                <ng-container *ngIf="estadoAltaInfonavit == 2"><button class="button" (click)="openFile(106)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>    
             </div>
         </div>
         <div fxFlex.gt-sm="70px">
@@ -365,22 +346,16 @@
             <div><br>Alta SAT</div>
         </div>
         <div fxFlex.gt-sm="200px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="altaSAT" matInput class="form-control form-control-line control"
-                        formControlName="altaSAT" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('altaSAT').valid && newProject.get('altaSAT').touched" class="help-block"
-                    style="color: red;">El alta del SAT es requerida</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuAltaSAT" id="fuAltaSAT" (change)="cargarImagen($event, 'altaSAT', 'generales')" hidden>
-                    <label for="fuAltaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlAltaSAT)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoAltaSAT == 0 || estadoAltaSAT == undefined"><input type="file" name="fuAltaSAT" id="fuAltaSAT" (change)="cargarImagen($event, 'altaSAT', 'generales')" hidden><label for="fuAltaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoAltaSAT == 2"><input type="file" name="fuAltaSAT" id="fuAltaSAT" (change)="cargarImagen($event, 'altaSAT', 'generales')" hidden><label for="fuAltaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoAltaSAT == 0 || estadoAltaSAT == undefined"><button class="button" (click)="openFile(107)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoAltaSAT == 1"><button class="button" (click)="openFile(107)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoAltaSAT == 3"><button class="button" (click)="openFile(107)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="50px">
@@ -390,22 +365,16 @@
             <div><br>Estado de cuenta</div>
         </div>
         <div fxFlex.gt-sm="300px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="edoCtaBancario" matInput class="form-control form-control-line control"
-                        formControlName="edoCtaBancario" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('edoCtaBancario').valid && newProject.get('edoCtaBancario').touched"
-                    class="help-block" style="color: red;"> El esstado de cuenta bancario es requerido</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuEdoCta" id="fuEdoCta" (change)="cargarImagen($event, 'edoCta', 'generales')" hidden>
-                    <label for="fuEdoCta"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlEstadoCuenta)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoEstadoCuenta == 0 || estadoEstadoCuenta == undefined"><input type="file" name="fuEdoCta" id="fuEdoCta" (change)="cargarImagen($event, 'edoCTA', 'generales')" hidden><label for="fuEdoCta"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoEstadoCuenta == 2"><input type="file" name="fuEdoCta" id="fuEdoCta" (change)="cargarImagen($event, 'edoCTA', 'generales')" hidden><label for="fuEdoCta"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoEstadoCuenta == 0 || estadoEstadoCuenta == undefined"><button class="button" (click)="openFile(108)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoEstadoCuenta == 1"><button class="button" (click)="openFile(108)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoEstadoCuenta == 3"><button class="button" (click)="openFile(108)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="70px">
@@ -418,22 +387,16 @@
             <div><br>Estado financiero</div>
         </div>
         <div fxFlex.gt-sm="300px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="edoFinanciero" matInput class="form-control form-control-line control"
-                        formControlName="edoFinanciero" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('edoFinanciero').valid && newProject.get('edoFinanciero').touched"
-                    class="help-block" style="color: red;">El estado financiero es requerido</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuEdoFinanciero" id="fuEdoFinanciero" (change)="cargarImagen($event, 'edoFinanciero', 'generales')" hidden>
-                    <label for="fuEdoFinanciero"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlEstadoFinanciero)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoEstadoFinanciero == 0 || estadoEstadoFinanciero == undefined"><input type="file" name="fuEdoFinanciero" id="fuEdoFinanciero" (change)="cargarImagen($event, 'edoFinanciero', 'generales')" hidden><label for="fuEdoFinanciero"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoEstadoFinanciero == 2"><input type="file" name="fuEdoFinanciero" id="fuEdoFinanciero" (change)="cargarImagen($event, 'edoFinanciero', 'generales')" hidden><label for="fuEdoFinanciero"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                    
+                <ng-container *ngIf="estadoEstadoFinanciero == 0 || estadoEstadoFinanciero == undefined"><button class="button" (click)="openFile(109)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoEstadoFinanciero == 1"><button class="button" (click)="openFile(109)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoEstadoFinanciero == 3"><button class="button" (click)="openFile(109)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
             </div>
         </div>
         <div fxFlex.gt-sm="70px">
@@ -468,22 +431,17 @@
             <div><br>Contrato</div>
         </div>
         <div fxFlex.gt-sm="300px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="contrato" matInput class="form-control form-control-line control"
-                        formControlName="contrato" disabled>
-                </mat-form-field>
-                <span *ngIf="!newProject.get('contrato').valid && newProject.get('contrato').touched" class="help-block"
-                    style="color: red;">El contrato es requerido</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuContrato" id="fuContrato" (change)="cargarImagen($event, 'contrato', 'generales')" hidden>
-                    <label for="fuContrato"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlContrato)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoContrato == 0 || estadoContrato == undefined"><input type="file" name="fuContrato" id="fuContrato" (change)="cargarImagen($event, 'contrato', 'generales')" hidden><label for="fuContrato"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoContrato == 2"><input type="file" name="fuContrato" id="fuContrato" (change)="cargarImagen($event, 'contrato', 'generales')" hidden><label for="fuContrato"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                    
+                <ng-container *ngIf="estadoContrato == 0 || estadoContrato == undefined"><button class="button" (click)="openFile(110)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoContrato == 1"><button class="button" (click)="openFile(110)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoContrato == 3"><button class="button" (click)="openFile(110)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                
             </div>
         </div>
         <div fxFlex.gt-sm="70px">
@@ -493,23 +451,17 @@
             <div><br>Repse del proveedor</div>
         </div>
         <div fxFlex.gt-sm="200px">
-            <div>
-                <!-- <mat-form-field>
-                    <input [type]="registroPatronalProv" matInput class="form-control form-control-line control"
-                        formControlName="registroPatronalProv" disabled>
-                </mat-form-field>
-                <span
-                    *ngIf="!newProject.get('registroPatronalProv').valid && newProject.get('registroPatronalProv').touched"
-                    class="help-block" style="color: red;"> El registro patronal del proveedor es requerido</span> -->
-            </div>
+            <div></div>
         </div>
         <div fxFlex.gt-sm="70px">
             <div><br>
-                <ng-container>
-                    <input type="file" name="fuRegPatProveedor" id="fuRegPatProveedor" (change)="cargarImagen($event, 'RegPatProveedor', 'generales')" hidden>
-                    <label for="fuRegPatProveedor"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlRPP)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container *ngIf="estadoRPP == 0 || estadoRPP == undefined"><input type="file" name="fuRegPatProveedor" id="fuRegPatProveedor" (change)="cargarImagen($event, 'RegPatProveedor', 'generales')" hidden><label for="fuRegPatProveedor"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoRPP == 2"><input type="file" name="fuRegPatProveedor" id="fuRegPatProveedor" (change)="cargarImagen($event, 'RegPatProveedor', 'generales')" hidden><label for="fuRegPatProveedor"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoRPP == 0 || estadoRPP == undefined"><button class="button" (click)="openFile(111)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoRPP == 1"><button class="button" (click)="openFile(111)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoRPP == 3"><button class="button" (click)="openFile(111)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                
             </div>
         </div>
         <div fxFlex.gt-sm="70px">

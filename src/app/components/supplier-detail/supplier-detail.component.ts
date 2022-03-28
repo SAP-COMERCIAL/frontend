@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AnyMxRecord } from 'dns';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-supplier-detail',
@@ -56,15 +56,16 @@ public newProject: FormGroup;
 
   ngOnInit(): void {
 
+    console.warn('this.newProject', this.projectInfo.contacto)
     this.getSupplier();
     if(this.estadoPantalla == 'Edit'){
       this.newProject.controls['nombre'].setValue(this.projectInfo['nombre']);
       this.newProject.controls['direccion'].setValue(this.projectInfo['direccion']);
       this.newProject.controls['ciudad'].setValue(this.projectInfo['ciudad']);
       this.newProject.controls['rfc'].setValue(this.projectInfo['rfc']);
-      // this.newProject.controls['responsable'].setValue(this.projectInfo['responsable']);
+      this.newProject.controls['contacto'].setValue(this.projectInfo.contacto);
       // this.newProject.controls['telefono'].setValue(this.projectInfo['telefono']);
-      // this.newProject.controls['estado'].setValue(this.projectInfo['estado']);
+      this.newProject.controls['estado'].setValue(this.projectInfo.estado);
     }
   }
 
@@ -74,25 +75,31 @@ public newProject: FormGroup;
 
   save(form, event){
 
-    if(this.supplierDataSource.filter(e => e.rfc.trim() == form.controls["rfc"].value.trim()).length > 0){
-      this.openSnackBar('Este RFC ya esta registrado', '');
-      return
+    if(this.estadoPantalla != 'Edit'){
+      if(this.supplierDataSource.filter(e => e.rfc.trim() == form.controls["rfc"].value.trim()).length > 0){
+        this.openSnackBar('Este RFC ya esta registrado', '');
+        return
+      }
     }
 
     let arrayToDb : any;
 
     arrayToDb = ({ 
-      proveedorid : 0
+      proveedorid : (this.estadoPantalla == 'Edit') ? this.projectInfo.proveedorid : 0
         , nombre : form.controls["nombre"].value
         , direccion : form.controls["direccion"].value
         , rfc : form.controls["rfc"].value 
         , ciudad : form.controls["ciudad"].value
-        , estado : 1 //form.controls["estado"].value
+        , estado : form.controls["estado"].value
         , contacto : form.controls["contacto"].value
         // , vigencia : '2050-01-01'
       });
 
-    this.insertSupplier(arrayToDb);
+      if(this.estadoPantalla == 'Edit'){
+        this.updateSupplier(arrayToDb);
+      }else{
+        this.insertSupplier(arrayToDb);
+      }
     
   }
 
@@ -120,7 +127,7 @@ insertSupplier(arrayToDb : any){
     res=> {
       console.log('PROVEEDORES', res);
       this.openSnackBar('El registro se actualizó con éxito', '');  
-      this.dialogRef.close();    
+      this.dialogRef.close();
     },
     error => console.log("error al insertar proveedores",error)
   )

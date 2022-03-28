@@ -1,0 +1,68 @@
+<div fxLayout="row">
+    <h4>Catálogo de proveedores</h4>
+  </div>
+  <br>
+  <div mat-dialog-content-example [formGroup]="newPage">
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="10%">
+            <div><br></div>
+        </div>
+        <div fxFlex.gt-sm="80%" >
+            <div>
+                <label>Proveedor: <b>{{nombre}}</b></label>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="10%">
+            <div><br></div>
+        </div>
+      </div>
+        <br>
+      <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="10%">
+            <div><br></div>
+        </div>
+        <div fxFlex.gt-sm="60%" >
+            <div>
+              <label>Usuario:<b>{{usuario}}</b></label>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="30%">
+            <div><br></div>
+        </div>
+      </div>
+
+      <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="10%">
+            <div><br></div>
+        </div>
+        <div fxFlex.gt-sm="60%" >
+            <div>
+                <mat-form-field>
+                    <input type="password" matInput class="form-control form-control-line control" placeholder="" formControlName="clave" placeholder="clave">
+                  </mat-form-field>
+                  <span *ngIf="!newPage.get('clave').valid && newPage.get('clave').touched" class="help-block" style="color: red;"> La clave es requerida</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="30%">
+            <div><br></div>
+        </div>
+      </div>
+
+  <div fxLayout="row" class="division">
+    <div fxFlex.gt-sm="10%">
+        <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+        <div><button mat-raised-button color="accent" (click)="save(newPage, $event)">Guardar</button></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+    </div>
+    <div fxFlex.gt-sm="20%" >
+      <div></div>
+    </div>
+  </div>
+  

@@ -67,14 +67,11 @@ providerId : number;
 
   ngOnInit(): void {
 
-    console.log('pageInfo', this.pageInfo);
-
     this.providerId = this.pageInfo.proveedorid;
 
     this.getsupplierDocuments();
   }
   descargarExcel(){
-    console.log('Descargar a excel');
     let dataSourceShowToExcel : any[] = [];
 
   this.dataSourceShow.filteredData.forEach(element => {
@@ -91,21 +88,18 @@ providerId : number;
 
   review(element, event){
     // AUTORIZA O RECHAZA
-    console.log('Editar un proveedores', element.proveedorId);
-
     const dialogConfig = new MatDialogConfig();
 
-    console.log('Proveedores', element.proveedorId)
-    console.log('data', element);
     dialogConfig.data = {
       id: 1,
       title: 'APROBAR/DENEGAR ARCHIVO',
       arrayData : element,
       proveedorId: element.proveedorId,
-      idDocumento: element.idDocument,
+      idDocumento: element.idDocumento,
       estadoPantalla: 'Edit'
      
     }
+    
     dialogConfig.width = '550px';
     dialogConfig.height = '300px';
     dialogConfig.disableClose = true;
@@ -120,7 +114,6 @@ providerId : number;
   filtrar(event : Event){
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSourceShow.filter = filtro.trim().toLowerCase();
-    console.log('filtro', filtro);
   }
 
   save(event){
@@ -150,7 +143,6 @@ providerId : number;
   }
 
   view(element, event){
-    console.log('SE MUESTRA LA IMAGEN O EL ARCHIVO', element);
     window.open(element.url);
     // this.getImage();
   }
@@ -166,8 +158,9 @@ providerId : number;
     let arrayDocumentos : any;
     let arrayDocumentosFiltrados : any;
     let arrayDocumentoPorProveedor : any;
-    let urlArray : any = '';
-    let estadoArray : number = 3;
+    let urlShow : any = '';
+    let estadoShow : number = 3;
+    let idDocumentShow : number = 0;
 
     // Lista de documentos
     this._UploadFileService.getdocumentsAll().subscribe(
@@ -179,131 +172,153 @@ providerId : number;
         arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.providerId && e.categoriaDocumento > 100 && e.categoriaDocumento < 200);
 
         arraySupplier = [];
-        arraySupplier.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : ''})
+        arraySupplier.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : '', idDocumento : 0})
 
         // Direccion
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 101)
-
-        console.log('doc x prov', arrayDocumentoPorProveedor);
-
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Dirección', estatus : estadoArray, aprobacion : true, url : urlArray, idDocumento : arrayDocumentoPorProveedor.idDocumento})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Dirección', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
        
         // RFC
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 102)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'RFC', estatus : estadoArray, aprobacion : true, url : urlArray, idDocumento : arrayDocumentoPorProveedor.idDocumento})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'RFC', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
       
         // Contacto - Correo electronico
-        arraySupplier.push({supplier_id : 1, documento : 'Contacto', estatus : 3, aprobacion : false, url : ''}
-          , {supplier_id : 1, documento : 'Ciudad', estatus : 3, aprobacion : false, url : ''}
-          , {supplier_id : 1, documento : 'Estado', estatus : 3, aprobacion : false, url : ''}
-          , {supplier_id : 1, documento : 'Objeto Social', estatus : 3, aprobacion : false, url : ''}
-          , {supplier_id : 1, documento : 'Tipo Persona', estatus : 3, aprobacion : false, url : ''}
-          , {supplier_id : 1, documento : 'Teléfono contacto', estatus : 3, aprobacion : false, url : ''}
-          , {supplier_id : 1, documento : 'Correo electrónico', estatus : 3, aprobacion : false, url : ''}
+        arraySupplier.push({supplier_id : 1, documento : 'Contacto', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+          , {supplier_id : 1, documento : 'Ciudad', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+          , {supplier_id : 1, documento : 'Estado', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+          , {supplier_id : 1, documento : 'Objeto Social', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+          , {supplier_id : 1, documento : 'Tipo Persona', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+          , {supplier_id : 1, documento : 'Teléfono contacto', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+          , {supplier_id : 1, documento : 'Correo electrónico', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
         )
 
         // Acta constitutiva
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 103)
+
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Acta constitutiva', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Acta constitutiva', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         // INE
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 104)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'INE', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'INE', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         // Alta IMSS
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 105)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta IMSS', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta IMSS', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         // Alta Infonavit
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 106)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta Infonavit', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta Infonavit', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         // Alta SAT
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 107)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta SAT', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta SAT', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         // Estado de cuenta
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 108)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado de cuenta', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado de cuenta', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         // Estado Financiero
-        urlArray = '';
-        estadoArray = 4;
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 109)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado Financiero', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado Financiero', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
         arraySupplier.push(
-                          {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?', estatus : 3, aprobacion : false, url : ''}
-                        , {supplier_id : 1, documento : 'Contrato', estatus : 3, aprobacion : false, url : ''}
+                          {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+                        , {supplier_id : 1, documento : 'Contrato', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
         )
 
-        // Repse del proveedor
-        urlArray = '';
-        estadoArray = 4;
+        // Contrato
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
         arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 110)
         if(arrayDocumentoPorProveedor != undefined){ 
-          urlArray = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoArray = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
         }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Repse del proveedor', estatus : estadoArray, aprobacion : true, url : urlArray})
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Contrato', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
-        this.dataSourceShow = new MatTableDataSource(arraySupplier);
+        // Repse del proveedor
+        urlShow = '';
+        estadoShow = 4;
+        idDocumentShow = 0;
+        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 111)
+        if(arrayDocumentoPorProveedor != undefined){ 
+          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
+          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
+        }
+        arraySupplier.push({supplier_id : this.providerId, documento : 'Repse del proveedor', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
 
-        console.log('ARREGLO SUPPLY', arraySupplier)
-
-        console.log('documentos filtrados', arrayDocumentoPorProveedor)
-
-        
+        this.dataSourceShow = new MatTableDataSource(arraySupplier);       
       },
       error => console.log("error consulta regiones",error)
     )
@@ -313,7 +328,6 @@ providerId : number;
 
   getImage(){
     this._UploadFileService.getFiles('direccion_dos.PNG' ,'generales').then(urlImagen => {
-      console.log(urlImagen);
       this.fileDownload = urlImagen;
       window.open(urlImagen.toString());
     });
