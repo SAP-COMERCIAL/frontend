@@ -5,6 +5,7 @@ import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-repse-capture-mensual',
@@ -32,8 +33,10 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
-ProveedorId : number = 1;
+ProveedorId : number = 0;
+usuarioId : number = 0;
 tipoImagenFile : any = [];
+decodedSign : any;
 
 // Variables de carga de archivos
 urlListadoTrabajadores : any;
@@ -46,6 +49,7 @@ urlISRDeclaracion : any;
 urlIVADeclaracion : any;
 urlOpinionPositivaIMSS : any;
 urlOpinionPositivaSAT : any;
+urlIVAComprobanteBanco : any;
 
 public newProject: FormGroup;
 
@@ -67,6 +71,9 @@ public newProject: FormGroup;
 
 
   ngOnInit(): void {
+    
+  this.decode();
+
     this.tipoImagenFile = [
       {id : 201, categoria : 'listadoTabajadores'}
     ,{id : 202, categoria : 'CFDI'}
@@ -76,8 +83,9 @@ public newProject: FormGroup;
     ,{id : 206, categoria : 'ISRComprobanteBanco'}
     ,{id : 207, categoria : 'ISRDeclaracion'}
     ,{id : 208, categoria : 'IVADeclaracion'}
-    ,{id : 209, categoria : 'opinionPositivaIMSS'}
-    ,{id : 210, categoria : 'opinionPositivaSAT'}
+    ,{id : 209, categoria : 'IVAComprobanteBanco'}
+    ,{id : 210, categoria : 'opinionPositivaIMSS'}
+    ,{id : 211, categoria : 'opinionPositivaSAT'}
     ]
 
   }
@@ -114,6 +122,14 @@ openFile(url){
 
 openSnackBar(message: string, action: string) {
   this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
+}
+
+decode(){
+  let token = localStorage.getItem('token_access');
+  let decodeUser = jwt_decode(token)["usuario"];
+  let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+  this.usuarioId = decodeUser;
+  this.ProveedorId = decodeProveedorId
 }
 
 // =========================
@@ -178,9 +194,11 @@ imagenes: any[] = [];
               break;
             case ('IVADeclaracion') : this.urlIVADeclaracion = urlImagen.toString();
               break;
+            case ('IVAComprobanteBanco') : this.urlIVAComprobanteBanco = urlImagen.toString();
+              break;
             case ('opinionPositivaIMSS') : this.urlOpinionPositivaIMSS = urlImagen.toString();
               break;
-            case ('pinionPositivaSAT') : this.urlOpinionPositivaSAT = urlImagen.toString();
+            case ('opinionPositivaSAT') : this.urlOpinionPositivaSAT = urlImagen.toString();
               break;
           }
 

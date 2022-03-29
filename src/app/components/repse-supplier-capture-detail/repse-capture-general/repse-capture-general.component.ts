@@ -1,4 +1,4 @@
-import { IfStmt } from '@angular/compiler';
+import { CompileShallowModuleMetadata, IfStmt } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { BREAKPOINT } from '@angular/flex-layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,9 +6,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import * as e from 'cors';
+import { decode } from 'querystring';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import { supplyservice } from '../../../services/supplier.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-repse-capture-general',
@@ -39,7 +41,8 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
-ProveedorId : number = 4;
+ProveedorId : number = 0;
+usuarioId : number = 0;
 tipoImagenFile : any = [];
 arrayDocumentosProveedor : any;
 
@@ -74,6 +77,7 @@ estadoEstadoFinanciero : any;
 estadoContrato : any;
 estadoRPP : any;
 estadoedoCtaBancario : any;
+decodedSign : any;
 
 public newProject: FormGroup;
 
@@ -113,6 +117,8 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    
+    this.decode();
     
     this.getDocumentsAll(0);
 
@@ -238,6 +244,15 @@ openFile(documentShow : number){
 openSnackBar(message: string, action: string) {
   this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
 }
+
+decode(){
+  let token = localStorage.getItem('token_access');
+  let decodeUser = jwt_decode(token)["usuario"];
+  let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+  this.usuarioId = decodeUser;
+  this.ProveedorId = decodeProveedorId
+}
+
 // =========================
 // SERVICIOS
 // =========================

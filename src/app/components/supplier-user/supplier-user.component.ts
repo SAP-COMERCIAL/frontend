@@ -4,6 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { supplyusersservice } from '../../services/supplier.users.service';
+import { supplierUsersModel } from '../../models/supplier-users.model';
 
 @Component({
   selector: 'app-supplier-user',
@@ -19,6 +21,7 @@ nombre : string = '';
 usuario : string;
 clave : string;
 isEdit : boolean = false;
+proveedorId : number = 0;
 
 pageInfo : any;
 estadoPantalla : string;
@@ -31,6 +34,7 @@ public newPage: FormGroup;
     , private formBuilder: FormBuilder
     , @Inject(MAT_DIALOG_DATA) public data
     , private _snackBar : MatSnackBar
+    , private _supplyusersservice : supplyusersservice
   ) { 
 
     this.pageInfo = data.arrayData;
@@ -56,12 +60,23 @@ public newPage: FormGroup;
   }
 
   save(form, event){
+    let arrayToDb : any;
 
+    arrayToDb = ({
+      usuarioId : 0
+      , nombreUsuario : 'nombre'
+      , contrasegnna : 121212
+      , correo : ''
+      , perfilId : 3
+      , perfilNombre : ''
+      , estado : 1
+      , proveedorId : this.proveedorId
+    })
 
     if(this.isEdit == true){
-      this.updateUser();
+      this.updateUser(arrayToDb);
     }else{
-      this.insertUser();
+      this.insertUser(arrayToDb);
     }
   }
 
@@ -75,14 +90,35 @@ public newPage: FormGroup;
   // =========================
   // SERVICIOS
   // =========================
-  insertUser(){
+  insertUser(arrayToDb){
     console.log('INSERTA USUARIO');
+
+    // Inserta usuarios
+    this._supplyusersservice.insertsupplyUser(arrayToDb).subscribe(
+      res=> {
+        console.log('PROVEEDORES', res);
+        this.openSnackBar('El registro se actualizó con éxito', '');  
+        this.dialogRef.close();
+      },
+      error => console.log("error al insertar proveedores",error)
+    )
+
     this.openSnackBar('Se creo el usuario correctamente', '');
     this.dialogRef.close();
   }
 
-  updateUser(){
+  updateUser(arrayToDb){
     console.log('ACTUALIZA USUARIO');
+    // Inserta usuarios
+    this._supplyusersservice.updatesupplyUser(arrayToDb).subscribe(
+      res=> {
+        console.log('PROVEEDORES', res);
+        this.openSnackBar('El registro se actualizó con éxito', '');  
+        this.dialogRef.close();
+      },
+      error => console.log("error al insertar proveedores",error)
+    )
+
     this.openSnackBar('Se actualizó el usuario correctamente', '');
     this.dialogRef.close();
   }

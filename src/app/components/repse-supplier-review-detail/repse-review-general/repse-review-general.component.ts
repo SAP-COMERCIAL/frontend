@@ -35,6 +35,7 @@ public array: any;
 dataSourceShow : MatTableDataSource<supplierModel>
 pageInfo : any;
 providerId : number;
+arraySupplierGlobal : any = [];
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -66,9 +67,7 @@ providerId : number;
   // =================
 
   ngOnInit(): void {
-
     this.providerId = this.pageInfo.proveedorid;
-
     this.getsupplierDocuments();
   }
   descargarExcel(){
@@ -171,32 +170,13 @@ providerId : number;
 
         arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.providerId && e.categoriaDocumento > 100 && e.categoriaDocumento < 200);
 
-        arraySupplier = [];
-        arraySupplier.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : '', idDocumento : 0})
+        this.arraySupplierGlobal = [];
+        this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : '', idDocumento : 0})
 
-        // Direccion
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 101)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Dirección', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-       
-        // RFC
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 102)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'RFC', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-      
-        // Contacto - Correo electronico
-        arraySupplier.push({supplier_id : 1, documento : 'Contacto', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+        this.showDocument(arrayDocumentosFiltrados, 101, 2022, 1, 'Dirección');
+        this.showDocument(arrayDocumentosFiltrados, 102, 2022, 1, 'RFC');
+
+        this.arraySupplierGlobal.push({supplier_id : 1, documento : 'Contacto', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
           , {supplier_id : 1, documento : 'Ciudad', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
           , {supplier_id : 1, documento : 'Estado', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
           , {supplier_id : 1, documento : 'Objeto Social', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
@@ -205,120 +185,22 @@ providerId : number;
           , {supplier_id : 1, documento : 'Correo electrónico', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
         )
 
-        // Acta constitutiva
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 103)
+        this.showDocument(arrayDocumentosFiltrados, 103, 2022, 1, 'Acta constitutiva');
+        this.showDocument(arrayDocumentosFiltrados, 104, 2022, 1, 'INE');
+        this.showDocument(arrayDocumentosFiltrados, 105, 2022, 1, 'Alta IMSS');
+        this.showDocument(arrayDocumentosFiltrados, 106, 2022, 1, 'Alta Infonavit');
+        this.showDocument(arrayDocumentosFiltrados, 107, 2022, 1, 'Alta SAT');
+        this.showDocument(arrayDocumentosFiltrados, 108, 2022, 1, 'Estado de cuenta');
+        this.showDocument(arrayDocumentosFiltrados, 109, 2022, 1, 'Estado Financiero');
 
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Acta constitutiva', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        // INE
-        urlShow = '';
-        estadoShow = 4;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 104)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'INE', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        // Alta IMSS
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 105)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta IMSS', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        // Alta Infonavit
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 106)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta Infonavit', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        // Alta SAT
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 107)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Alta SAT', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        // Estado de cuenta
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 108)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado de cuenta', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        // Estado Financiero
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 109)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Estado Financiero', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        arraySupplier.push(
+        this.arraySupplierGlobal.push(
                           {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-                        , {supplier_id : 1, documento : 'Contrato', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
         )
 
-        // Contrato
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 110)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Contrato', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
+        this.showDocument(arrayDocumentosFiltrados, 110, 2022, 1, 'Contrato');
+        this.showDocument(arrayDocumentosFiltrados, 111, 2022, 1, 'Repse del proveedor');
 
-        // Repse del proveedor
-        urlShow = '';
-        estadoShow = 4;
-        idDocumentShow = 0;
-        arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == 111)
-        if(arrayDocumentoPorProveedor != undefined){ 
-          urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '' 
-          estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
-          idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
-        }
-        arraySupplier.push({supplier_id : this.providerId, documento : 'Repse del proveedor', estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
-
-        this.dataSourceShow = new MatTableDataSource(arraySupplier);       
+        this.dataSourceShow = new MatTableDataSource(this.arraySupplierGlobal);
       },
       error => console.log("error consulta regiones",error)
     )
@@ -331,6 +213,27 @@ providerId : number;
       this.fileDownload = urlImagen;
       window.open(urlImagen.toString());
     });
+  }
+
+  showDocument(arrayDocumentosFiltrados : any, categoriaDocumento : number, anio: number, mes: number, titulo : string){
+    let arraySupplier: any[] = [];
+      let arrayDocumentos : any;
+      let arrayDocumentoPorProveedor : any;
+      let urlShow : any = '';
+      let estadoShow : number = 3;
+      let idDocumentShow : number = 0;
+    
+    urlShow = '';
+    estadoShow = 4;
+    idDocumentShow = 0;
+    arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == categoriaDocumento)
+
+    if(arrayDocumentoPorProveedor != undefined){ 
+      urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
+      estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+      idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
+    }
+    this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : titulo, estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
   }
 
 }

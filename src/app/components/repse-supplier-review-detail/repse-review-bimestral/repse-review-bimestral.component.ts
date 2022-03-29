@@ -1,15 +1,17 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from 'src/app/services/supplier.service';
 import { SupplierDetailComponent } from 'src/app/components/supplier-detail/supplier-detail.component';
-import { MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { RepseSupplierReviewDetailComponent } from '../../../components/repse-supplier-review-detail/repse-supplier-review-detail.component';
-
+import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
 
 @Component({
   selector: 'app-repse-review-bimestral',
@@ -28,6 +30,9 @@ public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
 dataSourceShow : MatTableDataSource<supplierModel>
+providerId : number;
+pageInfo : any;
+arraySupplierGlobal : any = [];
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -35,18 +40,31 @@ dataSourceShow : MatTableDataSource<supplierModel>
 
   displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision'];
 
+  public newForm: FormGroup;
+
   constructor(public dialogRef: MatDialogRef<supplierModel>
     , public dialog: MatDialog
     , private _excelService : ExcelServiceService
-    , private _supplyservice : supplyservice) { }
+    , private _supplyservice : supplyservice, private _UploadFileService : UploadFileService
+    , @Inject(MAT_DIALOG_DATA) public data
+    , private formBuilder: FormBuilder) { 
+      this.pageInfo = data.arrayData;
 
+      this.newForm = this.formBuilder.group({
+        mes: new FormControl('', [Validators.required]),
+        anio: new FormControl('', [Validators.required])
+      })
+    }
+    
   // =================
   // PROCEDIMIENTOS
   // =================
 
 
   ngOnInit(): void {
-    this.getsupplierDocuments();
+    this.providerId = this.pageInfo.proveedorid;
+
+    // this.getsupplierDocuments();
   }
   descargarExcel(){
     console.log('Descargar a excel');
@@ -66,27 +84,32 @@ dataSourceShow : MatTableDataSource<supplierModel>
 
   review(element, event){
     // AUTORIZA O RECHAZA
-    console.log('Editar un proveedores', element.proveedorId);
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id: 1,
-      title: 'PROVEEDOR',
+      title: 'APROBAR/DENEGAR ARCHIVO',
       arrayData : element,
       proveedorId: element.proveedorId,
+      idDocumento: element.idDocumento,
       estadoPantalla: 'Edit'
      
     }
-    dialogConfig.width = '1300px';
-    dialogConfig.height = '900px';
+    
+    dialogConfig.width = '550px';
+    dialogConfig.height = '300px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(RepseSupplierReviewDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(RepseReviewAproveComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();
     });
+  }
+
+  view(element, event){
+    window.open(element.url);
+    // this.getImage();
   }
 
   filtrar(event : Event){
@@ -103,6 +126,9 @@ dataSourceShow : MatTableDataSource<supplierModel>
     this.dialogRef.close();
   }
 
+  search(form, event){
+    this.getsupplierDocuments();
+  }
   
   // =================
   // UTILERIAS
@@ -127,33 +153,57 @@ dataSourceShow : MatTableDataSource<supplierModel>
   // =================
 
   getsupplierDocuments(){
+    let arrayDocumentos : any;
+    let arrayDocumentosFiltrados : any;
+    let anio : number = 0;
+    let mes : number = 0;
 
+    this._UploadFileService.getdocumentsAll().subscribe(
+      res=> {
+        console.log('Documentos obtenidos', res);
+
+        arrayDocumentos = res;
+
+        if(this.newForm.controls["anio"].value != ''){
+          anio = this.newForm.controls["anio"].value;
+          mes = this.newForm.controls["mes"].value;
+        }
+
+        arrayDocumentosFiltrados = null;
+        arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.providerId && e.categoriaDocumento > 300 && e.categoriaDocumento < 400 && e.anno == anio && e.mes == mes);
+
+                       
+    this.arraySupplierGlobal = [];
+    this.showDocument(arrayDocumentosFiltrados, 301, anio, mes, 'Comprobante de pago del Banco en PDF');
+    this.showDocument(arrayDocumentosFiltrados, 302, anio, mes, 'SIPARE en pdf');
+    this.showDocument(arrayDocumentosFiltrados, 303, anio, mes, 'Cedula bimetral SUA en PDF (trabajadores)');
+    this.showDocument(arrayDocumentosFiltrados, 304, anio, mes, 'Opinion Positiva INFONAVIT (Dos meses atrás)');
+
+    this.dataSourceShow = new MatTableDataSource(this.arraySupplierGlobal);
+
+      },
+      error => console.log("error consulta regiones",error)
+    )
+  }
+
+  showDocument(arrayDocumentosFiltrados : any, categoriaDocumento : number, anio: number, mes: number, titulo : string){
     let arraySupplier: any[] = [];
+      let arrayDocumentos : any;
+      let arrayDocumentoPorProveedor : any;
+      let urlShow : any = '';
+      let estadoShow : number = 4;
+      let idDocumentShow : number = 0;
+    
+    arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == categoriaDocumento)
+    if(arrayDocumentoPorProveedor != undefined){ 
+      urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
+      estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+      idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
+    }
 
-    arraySupplier.push({supplier_id : 1, documento : 'Comprobante de pago del Banco en PDF', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'SIPARE en pdf', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Cedula bimetral SUA en PDF (trabajadores)', estatus : 'Por Revisar', aprobacion : true}
-                        , {supplier_id : 1, documento : 'Opinion Positiva INFONAVIT (Dos meses atrás)', estatus : 'Por Revisar', aprobacion : true}
-                      )
-                    
-    this.dataSourceShow = new MatTableDataSource(arraySupplier);
-
-    // Proyectos registrados
-    // this._supplyservice.getsupplyAll().subscribe(
-    //   res=> {
-    //     console.log('Proveedores', res);
-    //     this.dataSourceShow = new MatTableDataSource(res);
-    //     this.array = res;
-    //     this.totalSize = this.array.length;
-        
-    //     this.iterator();
-    //     this.dataSourceShow.sort = this.sort;
-        
-    //   },
-    //   error => console.log("error consulta regiones",error)
-    // )
-
-
+    console.log('estado show', estadoShow);
+    
+    this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : titulo, estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
   }
 
 }

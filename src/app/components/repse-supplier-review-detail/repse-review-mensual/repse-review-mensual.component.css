@@ -43,3 +43,15 @@
   .icon-cog-blue{
     color: rgb(22, 22, 175);
 }
+
+.icon-cog-red {
+    color: red;
+  }
+
+.icon-cog-green {
+    color: green;
+  }
+
+.icon-cog-gray {
+    color: gray;
+  }

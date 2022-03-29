@@ -5,6 +5,7 @@ import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-repse-capture-cuatrimestral',
@@ -32,8 +33,10 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
-ProveedorId : number = 1;
+ProveedorId : number = 0;
+usuarioId : number = 0;
 tipoImagenFile : any = [];
+decodedSign : any;
 
 urlCuICSOE : any;
 urlCuSISUB : any;
@@ -72,6 +75,8 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    this.decode();
+
     this.tipoImagenFile = [
       {id : 401, categoria : 'CuICSOE'}
     ,{id : 402, categoria : 'CuSISUB'}
@@ -113,6 +118,13 @@ openSnackBar(message: string, action: string) {
   this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
 }
 
+decode(){
+  let token = localStorage.getItem('token_access');
+  let decodeUser = jwt_decode(token)["usuario"];
+  let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+  this.usuarioId = decodeUser;
+  this.ProveedorId = decodeProveedorId
+}
 // =========================
 // SERVICIOS
 // =========================
@@ -130,13 +142,6 @@ imagenes: any[] = [];
         console.log(reader.result);
         this.imagenes.push(reader.result);
         this._uploadFileService.subirImagen(tipoImagen + '_' + event.target.files[0]["name"], reader.result, grupoImagen, this.ProveedorId, form.controls["anio"].value, form.controls["mes"].value).then(urlImagen => {
-          // let usuario = {
-          //   name: "jonathan",
-          //   nickName: "yonykikok",
-          //   password: "401325",
-          //   imgProfile: urlImagen
-          // }
-          console.log(urlImagen);
 
           let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
 

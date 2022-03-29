@@ -7,6 +7,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AESEncryptService } from 'src/app/services/aesencrypt.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginReq(this.loginform.value).subscribe(
       response => {
-        
+        // localStorage.removeItem('token_access')
         localStorage.setItem('token_access', response.token);
         
         this.spinerShow = false;
@@ -76,6 +77,7 @@ export class LoginComponent implements OnInit {
       nombreusuario : ['', Validators.required],
       contrasegna : ['', Validators.required]
     });
+
   }
 
   openSnackBar(message: string, action: string) {

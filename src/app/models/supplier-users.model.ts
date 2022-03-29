@@ -1,5 +1,10 @@
 export class supplierUsersModel{
-    supplier_id : number
-    usuario : string
-    clave : string
+    usuarioId: number
+    nombreUsuario: string
+    contrasegnna: string
+    correo: string
+    perfilId: number
+    perfilNombre: string
+    estado: number
+    proveedorId: number
 }

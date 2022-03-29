@@ -5,6 +5,7 @@ import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-repse-capture-bimestral',
@@ -32,8 +33,10 @@ edoCtaBancario : string;
 edoFinanciero : string;
 contrato : string;
 registroPatronalProv : string;
-ProveedorId : number = 1;
+ProveedorId : number = 0;
+usuarioId : number = 0;
 tipoImagenFile : any = [];
+decodedSign : any;
 
 urlBiComprobantePagoBanco : any;
 urlBiSIPARE : any;
@@ -74,6 +77,8 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+    this.decode();
+
     this.tipoImagenFile = [
       {id : 301, categoria : 'biComprobanteDePagoBanco'}
     ,{id : 302, categoria : 'biSIPARE'}
@@ -114,6 +119,14 @@ openFile(url){
 
 openSnackBar(message: string, action: string) {
   this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
+}
+
+decode(){
+  let token = localStorage.getItem('token_access');
+  let decodeUser = jwt_decode(token)["usuario"];
+  let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+  this.usuarioId = decodeUser;
+  this.ProveedorId = decodeProveedorId
 }
 
 // =========================

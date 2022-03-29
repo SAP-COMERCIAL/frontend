@@ -22,14 +22,14 @@ export class supplyusersservice {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-        return this.http.post(environment.urlapi+environment.apiContextDrivers+'Provider/registrar',arrayToDb, {headers});
+        return this.http.post(environment.urlapi+environment.apiContextDrivers+'User/registrar',arrayToDb, {headers});
     }
 
     updatesupplyUser(arrayToDb : any) {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-        return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Provider/actualizar', arrayToDb, {headers});
+        return this.http.put(environment.urlapi + environment.apiContextDrivers + 'User/actualizar', arrayToDb, {headers});
     }
 
     putsupplyUserStatus(arrayToDb : any) {
