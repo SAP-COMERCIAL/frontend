@@ -56,7 +56,6 @@ public newProject: FormGroup;
 
   ngOnInit(): void {
 
-    console.warn('this.newProject', this.projectInfo.contacto)
     this.getSupplier();
     if(this.estadoPantalla == 'Edit'){
       this.newProject.controls['nombre'].setValue(this.projectInfo['nombre']);

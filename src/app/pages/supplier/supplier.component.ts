@@ -63,7 +63,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Proveedores');  
   }
 
-  newcustomer(evetn){
+  newsupplier(evetn){
     console.log('Alta de proveedores');
 
     const dialogConfig = new MatDialogConfig();
@@ -83,7 +83,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
     const dialogRef = this.dialog.open(SupplierDetailComponent , dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      console.log('proveedores');
+      window.location.reload();
     });
   }
 
@@ -107,7 +108,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
     const dialogRef = this.dialog.open(SupplierDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      window.location.reload();
     });
   }
 
@@ -131,7 +132,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
     const dialogRef = this.dialog.open(SupplierUserComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
+      window.location.reload();
     });
   }
 
