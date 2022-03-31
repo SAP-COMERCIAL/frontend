@@ -11,9 +11,17 @@
     color: rgb(22, 22, 175);
 }
 
-.icon-cog-green{
-    color: rgb(15, 201, 46);
-}
+.icon-cog-green {
+    color: green;
+  }
+
+.icon-cog-gray {
+    color: gray;
+  }
+
+.icon-cog-red {
+    color: red;
+  }  
 
 ::ng-deep.alert-snackbar{
     background-color: rgb(106, 93, 83) !important;

@@ -251,6 +251,8 @@ decode(){
   let decodeProveedorId = jwt_decode(token)["proveedor_id"];
   this.usuarioId = decodeUser;
   this.ProveedorId = decodeProveedorId
+
+  console.log("proveedor buscado", this.ProveedorId);
 }
 
 // =========================

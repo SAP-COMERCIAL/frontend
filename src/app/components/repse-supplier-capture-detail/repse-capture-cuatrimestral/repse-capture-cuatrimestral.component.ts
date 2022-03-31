@@ -41,6 +41,9 @@ decodedSign : any;
 urlCuICSOE : any;
 urlCuSISUB : any;
 
+estadoCuICSOE : any;
+estadoCuSISUB : any;
+
 public newProject: FormGroup;
 
   constructor(
@@ -85,6 +88,10 @@ public newProject: FormGroup;
 
   cancel(event){
   
+  }
+
+  search(form, event){
+    this.getsupplierDocuments();
   }
 
   save(form, event){
@@ -182,4 +189,61 @@ imagenes: any[] = [];
       }
     }
   }
+
+  getsupplierDocuments(){
+
+    let arrayDocumentos : any;
+    let arrayDocumentosFiltrados : any;
+    let anio : number = 0;
+    let mes : number = 0;
+                    
+    this._uploadFileService.getdocumentsAll().subscribe(
+      res=> {
+        console.log('Documentos obtenidos', res);
+
+        arrayDocumentos = res;
+
+        if(this.newProject.controls["anio"].value != ''){
+          anio = this.newProject.controls["anio"].value;
+          mes = this.newProject.controls["mes"].value;
+        }else{
+          return;
+        }
+
+        arrayDocumentosFiltrados = null;
+        arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.ProveedorId && e.categoriaDocumento > 400 && e.categoriaDocumento < 500 && e.anno == anio && e.mes == mes);
+
+        this.showDocument(arrayDocumentosFiltrados, 401, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 402, anio, mes);
+      },
+      error => console.log("error consulta regiones",error)
+    )
+
+  }
+
+  showDocument(arrayDocumentosFiltrados : any, categoriaDocumento : number, anio: number, mes: number){
+    let arraySupplier: any[] = [];
+    let arrayDocumentos : any;
+    let arrayDocumentoPorProveedor : any;
+    let urlShow : any = '';
+    let estadoShow : number = 3;
+    let idDocumentShow : number = 0;
+  
+    urlShow = '';
+    estadoShow = 4;
+    idDocumentShow = 0;
+    arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == categoriaDocumento)
+    if(arrayDocumentoPorProveedor != undefined){ 
+      urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
+      estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+      idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
+    }
+    
+    switch(categoriaDocumento){
+      case(401): this.estadoCuICSOE = estadoShow; break;
+      case(402): this.estadoCuSISUB = estadoShow; break;
+    }
+
+  }
+
 }

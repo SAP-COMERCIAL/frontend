@@ -35,6 +35,13 @@
                 </ng-container>
             </div>
         </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>
+                <ng-container>
+                    <button mat-raised-button color="accent" (click)="search(newProject, $event)">Buscar</button>
+                </ng-container>
+            </div>
+        </div>
     </div>
     <br>
     <div fxLayout="row" class="division">
@@ -46,10 +53,15 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div>
-                <ng-container>
-                    <input type="file" name="urlCuICSOE" id="urlCuICSOE" (change)="cargarImagen(newProject, $event, 'CuICSOE', 'cuatrimestrales')" hidden><label for="urlCuICSOE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container><input type="file" name="urlCuICSOE" id="urlCuICSOE" (change)="cargarImagen(newProject, $event, 'CuICSOE', 'cuatrimestrales')" hidden></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 0"><label for="urlCuICSOE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 2"><label for="urlCuICSOE"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 4"><label for="urlCuICSOE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoCuICSOE == 0"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 1"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 2"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 4"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div> 
         </div>
     </div>
@@ -64,30 +76,16 @@
         </div>
         <div fxFlex.gt-sm="70px">
             <div>
-                <ng-container>
-                    <input type="file" name="urlCuSISUB" id="urlCuSISUB" (change)="cargarImagen(newProject, $event, 'CuSISUB', 'cuatrimestrales')" hidden><label for="urlCuSISUB"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+                <ng-container><input type="file" name="urlCuSISUB" id="urlCuSISUB" (change)="cargarImagen(newProject, $event, 'CuSISUB', 'cuatrimestrales')" hidden></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 0"><label for="urlCuSISUB"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 2"><label for="urlCuSISUB"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 4"><label for="urlCuSISUB"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                    
+                <ng-container *ngIf="estadoCuSISUB == 0"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 1"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 2"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 4"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div> 
         </div>
     </div>
 </div>
-
-<!-- <br><br><br>
-<div fxLayout="row" class="division">
-    <div fxFlex.gt-sm="20%">
-        <div></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div><button mat-raised-button color="accent" (click)="save(newProject, $event)"><i class="fa fa-check fa-lg icon-cog-wite"></i></button></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div><button mat-raised-button color="warn" (click)="cancel($event)"><i class="fa fa-arrow-left fa-lg icon-cog-wite"></i></button></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div></div>
-    </div>
-</div>  -->

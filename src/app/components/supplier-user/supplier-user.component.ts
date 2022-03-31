@@ -6,6 +6,7 @@ import { supplyservice } from '../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { supplyusersservice } from '../../services/supplier.users.service';
 import { supplierUsersModel } from '../../models/supplier-users.model';
+import { AESEncryptService } from '../../services/aesencrypt.service';
 
 @Component({
   selector: 'app-supplier-user',
@@ -35,6 +36,7 @@ public newPage: FormGroup;
     , @Inject(MAT_DIALOG_DATA) public data
     , private _snackBar : MatSnackBar
     , private _supplyusersservice : supplyusersservice
+    , private cryptojs: AESEncryptService
   ) { 
 
     this.pageInfo = data.arrayData;
@@ -62,15 +64,17 @@ public newPage: FormGroup;
   save(form, event){
     let arrayToDb : any;
 
+    let pswdEncryp = this.cryptojs.encrypt(this.newPage.controls["clave"].value);
+
     arrayToDb = ({
       usuarioId : 0
-      , nombreUsuario : 'nombre'
-      , contrasegnna : 121212
+      , nombreUsuario : this.pageInfo.rfc
+      , contrasegnna : pswdEncryp
       , correo : ''
       , perfilId : 3
       , perfilNombre : ''
       , estado : 1
-      , proveedorId : this.proveedorId
+      , proveedorId : this.pageInfo.proveedorid
     })
 
     if(this.isEdit == true){

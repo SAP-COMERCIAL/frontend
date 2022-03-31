@@ -11,14 +11,22 @@
     color: rgb(22, 22, 175);
 }
 
-.icon-cog-green{
-    color: rgb(15, 201, 46);
-}
-
 .btn-bg-wite{
     background-color: white;
     border: none;
 }
+
+.icon-cog-green {
+    color: green;
+  }
+
+.icon-cog-gray {
+    color: gray;
+  }
+
+.icon-cog-red {
+    color: red;
+  }  
 
 .titles{
     font-weight: bold;

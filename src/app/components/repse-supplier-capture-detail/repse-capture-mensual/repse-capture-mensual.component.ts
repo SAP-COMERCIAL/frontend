@@ -51,6 +51,19 @@ urlOpinionPositivaIMSS : any;
 urlOpinionPositivaSAT : any;
 urlIVAComprobanteBanco : any;
 
+// Maneja estados en la pantalla
+estadoListadoTrabajadores : any;
+estadoCFDI : any;
+estadoComprobanteBanco : any;
+estadoSIPARE : any;
+estadoSUA : any;
+estadoISRComprobanteBanco : any;
+estadoISRDeclaracion : any;
+estadoIVADeclaracion : any;
+estadoOpinionPositivaIMSS : any;
+estadoOpinionPositivaSAT : any;
+estadoIVAComprobanteBanco : any;
+
 public newProject: FormGroup;
 
   constructor(
@@ -110,6 +123,10 @@ public newProject: FormGroup;
 
     // this.insertSupplier(arrayToDb);
     
+  }
+
+  search(form, event){
+    this.getsupplierDocuments();
   }
 
 // =========================
@@ -214,5 +231,81 @@ imagenes: any[] = [];
       }
     }
   }
+
+  getsupplierDocuments(){
+
+    let arrayDocumentos : any;
+    let arrayDocumentosFiltrados : any;
+    let anio : number = 0;
+    let mes : number = 0;
+                    
+    this._uploadFileService.getdocumentsAll().subscribe(
+      res=> {
+        console.log('Documentos obtenidos', res);
+
+        arrayDocumentos = res;
+
+        if(this.newProject.controls["anio"].value != ''){
+          anio = this.newProject.controls["anio"].value;
+          mes = this.newProject.controls["mes"].value;
+        }else{
+          return;
+        }
+
+        arrayDocumentosFiltrados = null;
+        arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.ProveedorId && e.categoriaDocumento > 200 && e.categoriaDocumento < 300 && e.anno == anio && e.mes == mes);
+
+        this.showDocument(arrayDocumentosFiltrados, 201, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 202, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 203, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 204, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 205, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 206, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 207, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 208, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 209, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 210, anio, mes);
+        this.showDocument(arrayDocumentosFiltrados, 211, anio, mes);
+
+      },
+      error => console.log("error consulta regiones",error)
+    )
+
+  }
+
+  showDocument(arrayDocumentosFiltrados : any, categoriaDocumento : number, anio: number, mes: number){
+    let arraySupplier: any[] = [];
+    let arrayDocumentos : any;
+    let arrayDocumentoPorProveedor : any;
+    let urlShow : any = '';
+    let estadoShow : number = 3;
+    let idDocumentShow : number = 0;
+  
+    urlShow = '';
+    estadoShow = 4;
+    idDocumentShow = 0;
+    arrayDocumentoPorProveedor = arrayDocumentosFiltrados.find(e => e.categoriaDocumento == categoriaDocumento)
+    if(arrayDocumentoPorProveedor != undefined){ 
+      urlShow = (arrayDocumentoPorProveedor.urlDocumento.length > 0) ? arrayDocumentoPorProveedor.urlDocumento : '';
+      estadoShow = (arrayDocumentoPorProveedor.estado != undefined) ? arrayDocumentoPorProveedor.estado : 0;
+      idDocumentShow = (arrayDocumentoPorProveedor.idDocumento != undefined) ? arrayDocumentoPorProveedor.idDocumento : 0;
+    }
+    
+    switch(categoriaDocumento){
+      case(201): this.estadoListadoTrabajadores = estadoShow; break;
+      case(202): this.estadoCFDI = estadoShow; break;
+      case(203): this.estadoComprobanteBanco = estadoShow; break;
+      case(204): this.estadoSIPARE = estadoShow; break;
+      case(205): this.estadoSUA = estadoShow; break;
+      case(206): this.estadoISRComprobanteBanco = estadoShow; break;
+      case(207): this.estadoISRDeclaracion = estadoShow; break;
+      case(208): this.estadoIVADeclaracion = estadoShow; break;
+      case(209): this.estadoOpinionPositivaIMSS = estadoShow; break;
+      case(210): this.estadoOpinionPositivaSAT = estadoShow; break;
+      case(211): this.estadoIVAComprobanteBanco = estadoShow; break;
+    }
+
+  }
+
 
 }

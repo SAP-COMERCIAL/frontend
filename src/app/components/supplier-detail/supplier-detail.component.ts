@@ -139,6 +139,7 @@ updateSupplier(arrayToDb : any){
   this._supplyservice.updatesupply(arrayToDb).subscribe(
     res=> {
       console.log('PROVEEDORES', res);
+      this.dialogRef.close();
     },
     error => console.log("error al actualizar proveedores",error)
   )
