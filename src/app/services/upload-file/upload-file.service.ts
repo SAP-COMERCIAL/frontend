@@ -32,6 +32,8 @@ export class UploadFileService {
         break;
       case ('cuatrimestrales'): this.storareRef = firebase.app().storage("gs://sap-comercial.appspot.com").ref("documentos/cuatrimestrales" + '/' + anio + '/' + mes + '/' + ProveedorId);
         break;
+      case ('papeleriaCCM'): this.storareRef = firebase.app().storage("gs://sap-comercial.appspot.com").ref("documentos/papeleriaCCM" + '/' + anio + '/' + mes + '/' + ProveedorId);
+        break;
       default: this.storareRef = firebase.app().storage("gs://sap-comercial.appspot.com").ref("documentos/generales" + '/' + ProveedorId);
         break;
     }

@@ -6,7 +6,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RepseSupplierReviewDetailRoutes } from './repse-supplier-review-detail.routing';
 import { ChartistModule } from 'ng-chartist';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +16,7 @@ import { ChartistModule } from 'ng-chartist';
   ],
   declarations: [
 
-  
+
   ],
 })
 export class RepseSupplierReviewDetailModule {}

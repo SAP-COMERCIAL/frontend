@@ -33,6 +33,10 @@
     font-size: 10pt;
 }
 
+.icon-cog-chocolate {
+  color: chocolate;
+}
+
 ::ng-deep.alert-snackbar{
     background-color: rgb(106, 93, 83) !important;
     color:rgb(255, 249, 246) !important;

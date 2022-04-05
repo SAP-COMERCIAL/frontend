@@ -44,6 +44,13 @@
                 </ng-container>
             </div>
         </div>
+        <div fxFlex.gt-sm="100px">
+            <div><br>
+                <ng-container>
+                    <button mat-raised-button color="accent" (click)="search(newProject, $event)">Buscar</button>
+                </ng-container>
+            </div>
+        </div>
     </div>
 
     <br>
@@ -55,15 +62,22 @@
             <div> Orden de compra CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><br>
-                <ng-container>
-                    <input type="file" name="urlOrdenCompraCCM" id="urlOrdenCompraCCM" (change)="cargarImagen(newProject, $event, 'ordenCompraCCM', 'papeleriaCCM')" hidden><label for="urlOrdenCompraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+            <div>
+                <ng-container><input type="file" name="urlOrdenCompraCCM" id="urlOrdenCompraCCM" (change)="cargarImagen(newProject, $event, 'ordenCompraCCM', 'papeleriaCCM')" hidden></ng-container>
+
+                <ng-container *ngIf="estadoOrdenCompraCCM == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlOrdenCompraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoOrdenCompraCCM == 2"><label for="urlOrdenCompraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                <ng-container *ngIf="estadoOrdenCompraCCM == 4"><label for="urlOrdenCompraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoOrdenCompraCCM == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoOrdenCompraCCM == 0"><button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
+                <ng-container *ngIf="estadoOrdenCompraCCM == 1"><button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoOrdenCompraCCM == 2"><button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoOrdenCompraCCM == 4"><button class="button" (click)="openFile(urlOrdenCompraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>                
             </div>
         </div>
     </div>
-
+<br>
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
             <div></div>
@@ -72,15 +86,22 @@
             <div> Avance de obra CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><br>
-                <ng-container>
-                    <input type="file" name="urlAvanceDeObraCCM" id="urlAvanceDeObraCCM" (change)="cargarImagen(newProject, $event, 'avanceDeObraCCM', 'mensuales')" hidden><label for="urlAvanceDeObraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+            <div>
+                <ng-container><input type="file" name="urlAvanceDeObraCCM" id="urlAvanceDeObraCCM" (change)="cargarImagen(newProject, $event, 'avanceDeObraCCM', 'papeleriaCCM')" hidden></ng-container>
+                
+                <ng-container *ngIf="estadoAvanceDeObraCCM == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlAvanceDeObraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoAvanceDeObraCCM == 2"><label for="urlAvanceDeObraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                <ng-container *ngIf="estadoAvanceDeObraCCM == 4"><label for="urlAvanceDeObraCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoAvanceDeObraCCM == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoAvanceDeObraCCM == 0"><button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
+                <ng-container *ngIf="estadoAvanceDeObraCCM == 1"><button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoAvanceDeObraCCM == 2"><button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoAvanceDeObraCCM == 4"><button class="button" (click)="openFile(urlAvanceDeObraCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div>
         </div>
     </div>
-
+    <br>
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
             <div></div>
@@ -89,15 +110,22 @@
             <div> Factura de pago CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><br>
-                <ng-container>
-                    <input type="file" name="urlFacturaDePagoCCM" id="urlFacturaDePagoCCM" (change)="cargarImagen(newProject, $event, 'facturaDePagoCCM', 'mensuales')" hidden><label for="urlFacturaDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+            <div>
+                <ng-container><input type="file" name="urlFacturaDePagoCCM" id="urlFacturaDePagoCCM" (change)="cargarImagen(newProject, $event, 'facturaDePagoCCM', 'papeleriaCCM')" hidden></ng-container>
+                
+                <ng-container *ngIf="estadoFacturaDePagoCCM == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlFacturaDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoFacturaDePagoCCM == 2"><label for="urlFacturaDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                <ng-container *ngIf="estadoFacturaDePagoCCM == 4"><label for="urlFacturaDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoFacturaDePagoCCM == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoFacturaDePagoCCM == 0"><button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
+                <ng-container *ngIf="estadoFacturaDePagoCCM == 1"><button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoFacturaDePagoCCM == 2"><button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoFacturaDePagoCCM == 4"><button class="button" (click)="openFile(urlFacturaDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div>
         </div>
     </div>
-
+    <br>
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
             <div></div>
@@ -106,11 +134,18 @@
             <div> Comprobante de pago CCM</div>
         </div>
         <div fxFlex.gt-sm="70px">
-            <div><br>
-                <ng-container>
-                    <input type="file" name="urlComprobanteDePagoCCM" id="urlComprobanteDePagoCCM" (change)="cargarImagen(newProject, $event, 'comprobanteDePagoCCM', 'mensuales')" hidden><label for="urlComprobanteDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label>
-                    <button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button>
-                </ng-container>
+            <div>
+                <ng-container><input type="file" name="urlComprobanteDePagoCCM" id="urlComprobanteDePagoCCM" (change)="cargarImagen(newProject, $event, 'comprobanteDePagoCCM', 'papeleriaCCM')" hidden></ng-container>
+
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlComprobanteDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == 2"><label for="urlComprobanteDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == 4"><label for="urlComprobanteDePagoCCM"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == 0"><button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == 1"><button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == 2"><button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoComprobanteDePagoCCM == 4"><button class="button" (click)="openFile(urlComprobanteDePagoCCM)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div>
         </div>
     </div>

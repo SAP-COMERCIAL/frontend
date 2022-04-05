@@ -37,6 +37,8 @@ ProveedorId : number = 0;
 usuarioId : number = 0;
 tipoImagenFile : any = [];
 decodedSign : any;
+anioBandera : number = 0;
+mesBandera : number = 0;
 
 // Variables de carga de archivos
 urlListadoTrabajadores : any;
@@ -248,6 +250,8 @@ imagenes: any[] = [];
         if(this.newProject.controls["anio"].value != ''){
           anio = this.newProject.controls["anio"].value;
           mes = this.newProject.controls["mes"].value;
+          this.anioBandera = anio;
+          this.mesBandera = mes;
         }else{
           return;
         }
@@ -300,9 +304,9 @@ imagenes: any[] = [];
       case(206): this.estadoISRComprobanteBanco = estadoShow; break;
       case(207): this.estadoISRDeclaracion = estadoShow; break;
       case(208): this.estadoIVADeclaracion = estadoShow; break;
-      case(209): this.estadoOpinionPositivaIMSS = estadoShow; break;
-      case(210): this.estadoOpinionPositivaSAT = estadoShow; break;
-      case(211): this.estadoIVAComprobanteBanco = estadoShow; break;
+      case(209): this.estadoIVAComprobanteBanco = estadoShow; break;
+      case(210): this.estadoOpinionPositivaIMSS = estadoShow; break;
+      case(211): this.estadoOpinionPositivaSAT = estadoShow; break;
     }
 
   }

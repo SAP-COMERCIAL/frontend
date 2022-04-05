@@ -37,6 +37,8 @@ ProveedorId : number = 0;
 usuarioId : number = 0;
 tipoImagenFile : any = [];
 decodedSign : any;
+anioBandera : number = 0;
+mesBandera : number = 0;
 
 urlCuICSOE : any;
 urlCuSISUB : any;
@@ -206,6 +208,8 @@ imagenes: any[] = [];
         if(this.newProject.controls["anio"].value != ''){
           anio = this.newProject.controls["anio"].value;
           mes = this.newProject.controls["mes"].value;
+          this.anioBandera = anio;
+          this.mesBandera = mes;
         }else{
           return;
         }

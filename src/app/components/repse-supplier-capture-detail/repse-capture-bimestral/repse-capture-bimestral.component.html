@@ -70,11 +70,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <ng-container><input type="file" name="urlBiComprobantePagoBanco" id="urlBiComprobantePagoBanco" (change)="cargarImagen(newProject, $event, 'biComprobanteDePagoBanco', 'bimestrales')" hidden></ng-container>
-                <ng-container *ngIf="estadoBiComprobantePagoBanco == 0"><label for="urlBiComprobantePagoBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoBiComprobantePagoBanco == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlBiComprobantePagoBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoBiComprobantePagoBanco == 2"><label for="urlBiComprobantePagoBanco"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoBiComprobantePagoBanco == 4"><label for="urlBiComprobantePagoBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoBiComprobantePagoBanco == 0"><button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoBiComprobantePagoBanco == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoBiComprobantePagoBanco == 0"><button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiComprobantePagoBanco == 1"><button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiComprobantePagoBanco == 2"><button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiComprobantePagoBanco == 4"><button class="button" (click)="openFile(urlBiComprobantePagoBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -93,11 +94,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <ng-container><input type="file" name="urlBiSIPARE" id="urlBiSIPARE" (change)="cargarImagen(newProject, $event, 'biSIPARE', 'bimestrales')" hidden></ng-container>
-                <ng-container *ngIf="estadoBiSIPARE == 0"><label for="urlBiSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoBiSIPARE == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlBiSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoBiSIPARE == 2"><label for="urlBiSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoBiSIPARE == 4"><label for="urlBiSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoBiSIPARE == 0"><button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoBiSIPARE == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoBiSIPARE == 0"><button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiSIPARE == 1"><button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiSIPARE == 2"><button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiSIPARE == 4"><button class="button" (click)="openFile(urlBiSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -116,11 +118,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <ng-container><input type="file" name="urlBiSUA" id="urlBiSUA" (change)="cargarImagen(newProject, $event, 'biSUA', 'bimestrales')" hidden></ng-container>
-                <ng-container *ngIf="estadoBiSUA == 0"><label for="urlBiSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoBiSUA == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlBiSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoBiSUA == 2"><label for="urlBiSUA"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoBiSUA == 4"><label for="urlBiSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoBiSUA == 0"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoBiSUA == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoBiSUA == 0"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiSUA == 1"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiSUA == 2"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoBiSUA == 4"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -140,11 +143,12 @@
             <div>
                 <div>
                     <ng-container><input type="file" name="urlBiOpinionPositivaINFONAVIT" id="urlBiOpinionPositivaINFONAVIT" (change)="cargarImagen(newProject, $event, 'biopinionPositivaINFONAVIT', 'bimestrales')" hidden></ng-container>
-                    <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 0"><label for="urlBiOpinionPositivaINFONAVIT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                    <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlBiOpinionPositivaINFONAVIT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 2"><label for="urlBiOpinionPositivaINFONAVIT"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                     <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 4"><label for="urlBiOpinionPositivaINFONAVIT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                    <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 0"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 0"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                     <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 1"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                     <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 2"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                     <ng-container *ngIf="estadoBiOpinionPositivaINFONAVIT == 4"><button class="button" (click)="openFile(urlBiSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>

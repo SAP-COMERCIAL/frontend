@@ -64,12 +64,13 @@
             <div>
                 <ng-container><input type="file" name="fuListadoTrabajadores" id="fuListadoTrabajadores" (change)="cargarImagen(newProject, $event, 'listadoTabajadores', 'mensuales')" hidden></ng-container>
                 
-                <ng-container *ngIf="estadoListadoTrabajadores == 0"><label for="fuListadoTrabajadores"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoListadoTrabajadores == undefined && anioBandera != 0 && mesBandera != 0"><label for="fuListadoTrabajadores"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoListadoTrabajadores == 2"><label for="fuListadoTrabajadores"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoListadoTrabajadores == 4"><label for="fuListadoTrabajadores"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 
 
-                <ng-container *ngIf="estadoListadoTrabajadores == 0"><button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoListadoTrabajadores == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoListadoTrabajadores == 0"><button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoListadoTrabajadores == 1"><button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoListadoTrabajadores == 2"><button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoListadoTrabajadores == 4"><button class="button" (click)="openFile(urlListadoTrabajadores)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -87,11 +88,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <br><ng-container><input type="file" name="fuCFDI" id="fuCFDI" (change)="cargarImagen(newProject, $event, 'CFDI', 'mensuales')" hidden></ng-container>
-                    <ng-container *ngIf="estadoCFDI == 0"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                    <ng-container *ngIf="estadoCFDI == undefined && anioBandera != 0 && mesBandera != 0"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     <ng-container *ngIf="estadoCFDI == 2"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                     <ng-container *ngIf="estadoCFDI == 4"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     
-                    <ng-container *ngIf="estadoCFDI == 0"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoCFDI == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoCFDI == 0"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-loack fa-lg icon-cog-chocolate"></i></button></ng-container>
                     <ng-container *ngIf="estadoCFDI == 1"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                     <ng-container *ngIf="estadoCFDI == 2"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                     <ng-container *ngIf="estadoCFDI == 4"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -123,11 +125,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <br><ng-container><input type="file" name="urlComprobanteBanco" id="urlComprobanteBanco" (change)="cargarImagen(newProject, $event, 'comprobanteBanco', 'mensuales')" hidden></ng-container>
-                    <ng-container *ngIf="estadoComprobanteBanco == 0"><label for="urlComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                    <ng-container *ngIf="estadoComprobanteBanco == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     <ng-container *ngIf="estadoComprobanteBanco == 2"><label for="urlComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                     <ng-container *ngIf="estadoComprobanteBanco == 4"><label for="urlComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                    <ng-container *ngIf="estadoComprobanteBanco == 0"><button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoComprobanteBanco == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoComprobanteBanco == 0"><button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                     <ng-container *ngIf="estadoComprobanteBanco == 1"><button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                     <ng-container *ngIf="estadoComprobanteBanco == 2"><button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                     <ng-container *ngIf="estadoComprobanteBanco == 4"><button class="button" (click)="openFile(urlComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -145,12 +148,13 @@
         <div fxFlex.gt-sm="70px">
             <div><br>
                 <ng-container><input type="file" name="urlSIPARE" id="urlSIPARE" (change)="cargarImagen(newProject, $event, 'SIPARE', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoSIPARE == 0"><label for="urlSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoSIPARE == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoSIPARE == 2"><label for="urlSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoSIPARE == 4"><label for="urlSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
+                <ng-container *ngIf="estadoSIPARE == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
                 <ng-container *ngIf="estadoSIPARE == 0"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-                <ng-container *ngIf="estadoSIPARE == 1"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
+                <ng-container *ngIf="estadoSIPARE == 1"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoSIPARE == 2"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoSIPARE == 4"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div> 
@@ -168,11 +172,12 @@
             <div>
                 <div><br>
                     <ng-container><input type="file" name="urlSUA" id="urlSUA" (change)="cargarImagen(newProject, $event, 'SUA', 'mensuales')" hidden></ng-container>
-                    <ng-container *ngIf="estadoSUA == 0"><label for="urlSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                    <ng-container *ngIf="estadoSUA == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     <ng-container *ngIf="estadoSUA == 2"><label for="urlSUA"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                     <ng-container *ngIf="estadoSUA == 4"><label for="urlSUA"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                    <ng-container *ngIf="estadoSUA == 0"><button class="button" (click)="openFile(urlSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoSUA == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                    <ng-container *ngIf="estadoSUA == 0"><button class="button" (click)="openFile(urlSUA)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                     <ng-container *ngIf="estadoSUA == 1"><button class="button" (click)="openFile(urlSUA)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                     <ng-container *ngIf="estadoSUA == 2"><button class="button" (click)="openFile(urlSUA)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                     <ng-container *ngIf="estadoSUA == 4"><button class="button" (click)="openFile(urlSUA)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -204,11 +209,12 @@
         <div fxFlex.gt-sm="70px">
             <div><br>
                 <ng-container><input type="file" name="urlISRComprobanteBanco" id="urlISRComprobanteBanco" (change)="cargarImagen(newProject, $event, 'ISRComprobanteBanco', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoISRComprobanteBanco == 0"><label for="urlISRComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoISRComprobanteBanco == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlISRComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoISRComprobanteBanco == 2"><label for="urlISRComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoISRComprobanteBanco == 4"><label for="urlISRComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoISRComprobanteBanco == 0"><button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoISRComprobanteBanco == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoISRComprobanteBanco == 0"><button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoISRComprobanteBanco == 1"><button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoISRComprobanteBanco == 2"><button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoISRComprobanteBanco == 4"><button class="button" (click)="openFile(urlISRComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -226,11 +232,12 @@
         <div fxFlex.gt-sm="70px">
             <div><br>
                 <ng-container><input type="file" name="urlISRDeclaracion" id="urlISRDeclaracion" (change)="cargarImagen(newProject, $event, 'ISRDeclaracion', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoISRDeclaracion == 0"><label for="urlISRDeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoISRDeclaracion == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlISRDeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoISRDeclaracion == 2"><label for="urlISRDeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoISRDeclaracion == 4"><label for="urlISRDeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoISRDeclaracion == 0"><button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoISRDeclaracion == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoISRDeclaracion == 0"><button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoISRDeclaracion == 1"><button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoISRDeclaracion == 2"><button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoISRDeclaracion == 4"><button class="button" (click)="openFile(urlISRDeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -261,11 +268,12 @@
         <div fxFlex.gt-sm="70px">
             <div><br>
                 <ng-container><input type="file" name="urlIVADeclaracion" id="urlIVADeclaracion" (change)="cargarImagen(newProject, $event, 'IVADeclaracion', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoIVADeclaracion == 0"><label for="urlIVADeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoIVADeclaracion == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlIVADeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoIVADeclaracion == 2"><label for="urlIVADeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoIVADeclaracion == 4"><label for="urlIVADeclaracion"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 
-                <ng-container *ngIf="estadoIVADeclaracion == 0"><button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoIVADeclaracion == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoIVADeclaracion == 0"><button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoIVADeclaracion == 1"><button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoIVADeclaracion == 2"><button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoIVADeclaracion == 4"><button class="button" (click)="openFile(urlIVADeclaracion)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -283,11 +291,12 @@
         <div fxFlex.gt-sm="70px">
             <div><br>
                 <ng-container><input type="file" name="urlIVAComprobanteBanco" id="urlIVAComprobanteBanco" (change)="cargarImagen(newProject, $event, 'IVAComprobanteBanco', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoIVAComprobanteBanco == 0"><label for="urlIVAComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoIVAComprobanteBanco == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlIVAComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoIVAComprobanteBanco == 2"><label for="urlIVAComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoIVAComprobanteBanco == 4"><label for="urlIVAComprobanteBanco"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoIVAComprobanteBanco == 0"><button class="button" (click)="openFile(urlIVAComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoIVAComprobanteBanco == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlIVAComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoIVAComprobanteBanco == 0"><button class="button" (click)="openFile(urlIVAComprobanteBanco)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoIVAComprobanteBanco == 1"><button class="button" (click)="openFile(urlIVAComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoIVAComprobanteBanco == 2"><button class="button" (click)="openFile(urlIVAComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoIVAComprobanteBanco == 4"><button class="button" (click)="openFile(urlIVAComprobanteBanco)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -306,11 +315,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <ng-container><input type="file" name="urlOpinionPositivaIMSS" id="urlOpinionPositivaIMSS" (change)="cargarImagen(newProject, $event, 'opinionPositivaIMSS', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoSUA == 0"><label for="urlOpinionPositivaIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoOpinionPositivaIMSS == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlOpinionPositivaIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaIMSS == 2"><label for="urlOpinionPositivaIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaIMSS == 4"><label for="urlOpinionPositivaIMSS"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
-                <ng-container *ngIf="estadoOpinionPositivaIMSS == 0"><button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoOpinionPositivaIMSS == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoOpinionPositivaIMSS == 0"><button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaIMSS == 1"><button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaIMSS == 2"><button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaIMSS == 4"><button class="button" (click)="openFile(urlOpinionPositivaIMSS)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -329,11 +339,12 @@
         <div fxFlex.gt-sm="70px">
             <div>
                 <ng-container><input type="file" name="urlOpinionPositivaSAT" id="urlOpinionPositivaSAT" (change)="cargarImagen(newProject, $event, 'opinionPositivaSAT', 'mensuales')" hidden></ng-container>
-                <ng-container *ngIf="estadoOpinionPositivaSAT == 0"><label for="urlOpinionPositivaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
+                <ng-container *ngIf="estadoOpinionPositivaSAT == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlOpinionPositivaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaSAT == 2"><label for="urlOpinionPositivaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaSAT == 4"><label for="urlOpinionPositivaSAT"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                 
-                <ng-container *ngIf="estadoOpinionPositivaSAT == 0"><button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoOpinionPositivaSAT == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
+                <ng-container *ngIf="estadoOpinionPositivaSAT == 0"><button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaSAT == 1"><button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaSAT == 2"><button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
                 <ng-container *ngIf="estadoOpinionPositivaSAT == 4"><button class="button" (click)="openFile(urlOpinionPositivaSAT)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
@@ -343,21 +354,3 @@
     </div>
 </div>
 
-<!-- <br><br><br>
-<div fxLayout="row" class="division">
-    <div fxFlex.gt-sm="20%">
-        <div></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div><button mat-raised-button color="accent" (click)="save(newProject, $event)"><i class="fa fa-check fa-lg icon-cog-wite"></i></button></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div><button mat-raised-button color="warn" (click)="cancel($event)"><i class="fa fa-arrow-left fa-lg icon-cog-wite"></i></button></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div></div>
-    </div>
-    <div fxFlex.gt-sm="20%">
-        <div></div>
-    </div>
-</div>  -->
