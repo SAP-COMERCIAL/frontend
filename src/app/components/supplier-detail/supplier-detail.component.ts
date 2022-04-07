@@ -91,7 +91,13 @@ public newProject: FormGroup;
         , ciudad : form.controls["ciudad"].value
         , estado : form.controls["estado"].value
         , contacto : form.controls["contacto"].value
-        // , vigencia : '2050-01-01'
+        , objetoSocial: ''
+        , telefonoContacto : 0
+        , correo : ''
+        , tipoPersona : 1
+        , prestadorServicio : 0
+        , vigencia : '2050-01-01'
+        , estatus : 1
       });
 
       if(this.estadoPantalla == 'Edit'){

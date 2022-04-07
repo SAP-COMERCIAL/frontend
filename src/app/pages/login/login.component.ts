@@ -8,6 +8,7 @@ import { AESEncryptService } from 'src/app/services/aesencrypt.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CompileShallowModuleMetadata } from '@angular/compiler';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ export class LoginComponent implements OnInit {
   msg = '';
   public userinterface: UserI;
   public spinerShow: boolean; 
+  ProveedorId : any;
+  usuarioId : any;
   loginform: FormGroup;
 
   constructor(private service: loginservice,
@@ -50,10 +53,15 @@ export class LoginComponent implements OnInit {
       response => {
         // localStorage.removeItem('token_access')
         localStorage.setItem('token_access', response.token);
+
+        this.decode();
         
         this.spinerShow = false;
 
-        this.route.navigate(['/dashboard']);
+        if(this.ProveedorId.length == 0)
+          this.route.navigate(['/dashboard']);
+        else
+          this.route.navigate(['/repseCapture']);
       },
       err => {
         if (err.status === 401) {
@@ -78,6 +86,14 @@ export class LoginComponent implements OnInit {
       contrasegna : ['', Validators.required]
     });
 
+  }
+
+  decode(){
+    let token = localStorage.getItem('token_access');
+    let decodeUser = jwt_decode(token)["usuario"];
+    let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+    this.usuarioId = decodeUser;
+    this.ProveedorId = decodeProveedorId
   }
 
   openSnackBar(message: string, action: string) {

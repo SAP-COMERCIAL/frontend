@@ -2,7 +2,8 @@ import { CompileShallowModuleMetadata, IfStmt } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { BREAKPOINT } from '@angular/flex-layout';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import * as e from 'cors';
@@ -10,7 +11,10 @@ import { decode } from 'querystring';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import { supplyservice } from '../../../services/supplier.service';
+import { RepseCommentsComponent } from '../repse-comments/repse-comments.component';
 import jwt_decode from "jwt-decode";
+import Swal from 'sweetalert2';
+import { BrowserStack } from 'protractor/built/driverProviders';
 
 @Component({
   selector: 'app-repse-capture-general',
@@ -45,6 +49,8 @@ ProveedorId : number = 0;
 usuarioId : number = 0;
 tipoImagenFile : any = [];
 arrayDocumentosProveedor : any;
+arrayDocumentosProveedorOrigen : any;
+dataSourceSupplier : any;
 
 nombreArchivo: string = " (archivo nuevo) ";
 loading: boolean;
@@ -82,9 +88,8 @@ decodedSign : any;
 public newProject: FormGroup;
 
   constructor(
-    // public dialogRef: MatDialogRef<any>
-    // , 
-    private _supplyservice : supplyservice
+    public dialog: MatDialog
+    , private _supplyservice : supplyservice
     , private formBuilder: FormBuilder
     , private _snackBar : MatSnackBar
     , private readonly _uploadFileService: UploadFileService
@@ -106,7 +111,7 @@ public newProject: FormGroup;
       altaINFONAVIT: new FormControl('', [Validators.required]),
       altaSAT: new FormControl('', [Validators.required]),
       edoCtaBancario: new FormControl('', [Validators.required]),
-      edoFinanciero: new FormControl('', [Validators.required]),
+      serviciosEspecializados: new FormControl('', [Validators.required]),
       contrato: new FormControl('', [Validators.required]),
       registroPatronalProv: new FormControl('', [Validators.required])
     });
@@ -143,20 +148,25 @@ public newProject: FormGroup;
 
   save(form, event){
 
-    // let arrayToDb : any;
+    let arrayToDb : any;
 
-    // arrayToDb = ({ 
-    //   proveedorid : 0
-    //     , nombre : form.controls["nombre"].value
-    //     , direccion : form.controls["direccion"].value
-    //     , rfc : form.controls["rfc"].value 
-    //     , ciudad : form.controls["ciudad"].value
-    //     , estado : form.controls["estado"].value
-    //     , contacto : form.controls["contacto"].value
-    //     // , vigencia : '2050-01-01'
-    //   });
+    arrayToDb = ({ 
+      proveedorid : this.ProveedorId
+        , nombre : form.controls["nombre"].value
+        , direccion : form.controls["direccion"].value
+        , rfc : form.controls["rfc"].value 
+        , ciudad : form.controls["ciudad"].value
+        , estado : form.controls["estado"].value
+        , contacto : form.controls["contacto"].value
+        , objetoSocial : form.controls["objetivoSocial"].value
+        , tipoPersona : form.controls["tipoPersona"].value
+        , telefonoContacto : form.controls["telefono"].value
+        , correo : form.controls["email"].value
+        , prestadorServicio : form.controls["serviciosEspecializados"].value
 
-    // this.insertSupplier(arrayToDb);
+      });
+
+    this.updateSupplier(arrayToDb);
     
   }
 
@@ -186,15 +196,41 @@ public newProject: FormGroup;
     reader.readAsBinaryString(target.files[0]);
     extencionArchivo = target.files[0].name.substring(target.files[0].name.length - 5,target.files[0].name.length)
 
-    console.log('subimos un archivo tipo', this.nombreArchivo);
-
     this.UploadFiles(target.files[0], '1', tipoArchivo)
-    // this.cargarImagen(event);
+   
+  }
 
-    // fileToUpload = form.identificacion ? await this.UploadFiles(form.identificacion[0], form.email, form.placas, form.plataforma) : this.userInfo.identificacionOficial;
-    // this.errorUpdIdentificacionOficial = (this.errorFileUpload == false) ? false : true;
+  opencomments(documentShow : number, element, event){
+
+    let arrayDocuemtnoEnviar : any;
+
+    arrayDocuemtnoEnviar = this.arrayDocumentosProveedorOrigen.filter(e => e.idProveedor == this.ProveedorId && e.categoriaDocumento == documentShow);
+
+    // const dialogConfig = new MatDialogConfig();
+
+    // dialogConfig.data = {
+    //   id: 1,
+    //   title: 'COMENTARIOS',
+    //   arrayData : element,
+    //   proveedorId: this.ProveedorId,
+    //   comentarios: arrayDocuemtnoEnviar[0]["comentarios"],
+    //   estadoPantalla: 'Edit'
+     
+    // }
+    // dialogConfig.width = '400px';
+    // dialogConfig.height = '300px';
+    // dialogConfig.disableClose = true;
+
+    // const dialogRef = this.dialog.open(RepseCommentsComponent, dialogConfig);
+
+    // dialogRef.afterClosed().subscribe(result => {
+    // });
+    // console.log('Muestra comentarios');
+
+    this.showMessage(1, 'Comentario', 'info', arrayDocuemtnoEnviar[0]["comentarios"], 'Cerrar');
 
   }
+
 
 // =========================
 // UTILERIAS
@@ -218,12 +254,6 @@ async UploadFiles(file: File, idProveedor: string, tipoArchivo: string) {
   formData.append('idProveedor', idProveedor);
   formData.append('tipoArchivo', tipoArchivo);
 
-
-
-  let result;
-
-  // /let resp = await this._uploadFileService.postUploadFile(formData).toPromise()
-  // return resp;
   try {
       this.errorFileUpload = true; // valido
       console.log('FORM DATA', formData);
@@ -252,7 +282,33 @@ decode(){
   this.usuarioId = decodeUser;
   this.ProveedorId = decodeProveedorId
 
-  console.log("proveedor buscado", this.ProveedorId);
+  this.getsupplyAll(this.ProveedorId);
+}
+
+showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+  switch(tipoMensaje){
+    case(1) : 
+        Swal.fire({
+          title: header,
+          html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+          icon: icon,
+          confirmButtonText: buttonCaption,
+          customClass: {
+              confirmButton: 'btn  btn-rounded btn-outline-warning'
+          }
+        })
+      break;
+    case(2) :
+        Swal.fire({
+          position: 'top-end',
+          icon: icon,
+          title: message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      break;
+  }
 }
 
 // =========================
@@ -273,15 +329,6 @@ imagenes: any[] = [];
         console.log(reader.result);
         this.imagenes.push(reader.result);
         this._uploadFileService.subirImagen(tipoImagen + '_' + event.target.files[0]["name"], reader.result, grupoImagen, this.ProveedorId, 2022, 1).then(urlImagen => {
-          // let usuario = {
-          //   name: "jonathan",
-          //   nickName: "yonykikok",
-          //   password: "401325",
-          //   imgProfile: urlImagen
-          // }
-
-          console.warn('urlImagen', tipoImagen);
-          console.warn('this.tipoImagenFile', this.tipoImagenFile);
 
           let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
 
@@ -293,8 +340,6 @@ imagenes: any[] = [];
                         , anno : 2022
                         , mes : 1
                         , estado : 0};
-
-                        console.log('arreglo a subir', arrayToDb);
 
           this._uploadFileService.postUploadDocumentsToDb(arrayToDb).subscribe(
             res=> {
@@ -327,10 +372,10 @@ imagenes: any[] = [];
             case ('RegPatProveedor') : this.urlRPP = urlImagen.toString();
               break;
           }
-
-          console.log('direccion', this.urlDireccion);
           
-          this.openSnackBar('Se cargo exitosamente el archivo', '');
+          this.showMessage(2, 'Exitoso', 'success', 'Se cargo exitosamente el archivo', 'Cerrar');
+
+          // this.openSnackBar('Se cargo exitosamente el archivo', '');
 
           // guarda en base de datos
           // arrayToDb.push({id : 1, })
@@ -357,8 +402,9 @@ imagenes: any[] = [];
     this._uploadFileService.getdocumentsAll().subscribe(
       res=> {
         console.log('Documentos', res);
-
+        
         arrayDocumentos = res;
+
         if(documentShow == 0)
           this.arrayDocumentosProveedor = arrayDocumentos.filter(e => e.idProveedor == this.ProveedorId)
         else
@@ -382,7 +428,8 @@ imagenes: any[] = [];
           });
         }
 
-        console.log('dfdfdf', this.arrayDocumentosProveedor)
+        if(this.arrayDocumentosProveedorOrigen == undefined)
+          this.arrayDocumentosProveedorOrigen = this.arrayDocumentosProveedor
 
         if(documentShow != 0){
           if(this.arrayDocumentosProveedor != undefined && this.arrayDocumentosProveedor.length > 0)
@@ -396,4 +443,37 @@ imagenes: any[] = [];
     )
   }
 
+  getsupplyAll(supplierId : number){
+
+    // Proyectos registrados
+    this._supplyservice.getsupplyById(supplierId).subscribe(
+      res=> {
+        console.log('Proveedores', res);
+        this.dataSourceSupplier = new MatTableDataSource(res);
+
+        this.newProject.controls["nombre"].setValue(this.dataSourceSupplier.filteredData.nombre);
+        this.newProject.controls["direccion"].setValue(this.dataSourceSupplier.filteredData.direccion);
+        this.newProject.controls["rfc"].setValue(this.dataSourceSupplier.filteredData.rfc);
+        this.newProject.controls["contacto"].setValue(this.dataSourceSupplier.filteredData.contacto);
+        this.newProject.controls["ciudad"].setValue(this.dataSourceSupplier.filteredData.ciudad);
+        this.newProject.controls["estado"].setValue(this.dataSourceSupplier.filteredData.estado);
+        this.newProject.controls["objetivoSocial"].setValue(this.dataSourceSupplier.filteredData.objetoSocial);
+        this.newProject.controls["tipoPersona"].setValue(this.dataSourceSupplier.filteredData.tipoPersona);
+        this.newProject.controls["telefono"].setValue(this.dataSourceSupplier.filteredData.telefonoContacto);
+        this.newProject.controls["email"].setValue(this.dataSourceSupplier.filteredData.correo);
+        this.newProject.controls["serviciosEspecializados"].setValue(this.dataSourceSupplier.filteredData.prestadorServicio);
+      },
+      error => console.log("error consulta regiones",error)
+    )
+  }
+
+  updateSupplier(arrayToDb : any){
+    // Proyectos registrados
+    this._supplyservice.updatesupply(arrayToDb).subscribe(
+      res=> {
+        console.log('Proveedores', res);
+      },
+      error => console.log("error consulta regiones",error)
+    )
+  }
 }

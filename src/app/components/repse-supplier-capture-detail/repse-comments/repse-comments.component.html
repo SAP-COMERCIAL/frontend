@@ -1,0 +1,32 @@
+<p>Comentarios</p>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+ <div mat-dialog-content-example [formGroup]="newProject">
+   <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="100%">
+            <div><textarea type="[comentarios]" formControlName="comentarios" style="height: 100px; width: 300px;" disabled></textarea> </div>
+        </div>
+    </div>
+    <br>
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%">
+            <div><button mat-raised-button color="warn" (click)="cancel($event)"><i class="fa fa-arrow-left fa-lg icon-cog-wite"></i></button></div>
+        </div>
+        <div fxFlex.gt-sm="20%">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%">
+            <div></div>
+        </div>
+    </div> 
+</div>

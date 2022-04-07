@@ -13,7 +13,7 @@ import { UploadFileService } from 'src/app/services/upload-file/upload-file.serv
 })
 export class RepseReviewAproveComponent implements OnInit {
   
- // =========================
+// =========================
 // DECLARACIONES
 // =========================
 nombre : string;
@@ -63,7 +63,10 @@ public newProject: FormGroup;
     let arrayToDb : any;
 
     arrayToDb = ({idDocumento: this.projectInfo.idDocumento
-                , estado: 2 })
+                , estado: 2
+               , comentarios: this.newProject.controls["comentarios"].value })
+
+               console.log('aqui va el arreglo', arrayToDb)
 
     this.aproveRejectDocument(arrayToDb);
     this.openSnackBar('Documento rechazado', '');

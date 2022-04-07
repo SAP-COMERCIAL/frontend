@@ -6,6 +6,7 @@ import { supplyservice } from '../../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import jwt_decode from "jwt-decode";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-repse-capture-bimestral',
@@ -36,6 +37,7 @@ registroPatronalProv : string;
 ProveedorId : number = 0;
 usuarioId : number = 0;
 tipoImagenFile : any = [];
+arrayDocumentosProveedorOrigen : any;
 decodedSign : any;
 anioBandera : number = 0;
 mesBandera : number = 0;
@@ -140,6 +142,45 @@ decode(){
   this.ProveedorId = decodeProveedorId
 }
 
+opencomments(documentShow : number, element, event){
+
+  let arrayDocuemtnoEnviar : any;
+
+  arrayDocuemtnoEnviar = this.arrayDocumentosProveedorOrigen.filter(e => e.idProveedor == this.ProveedorId 
+                                                                  && e.categoriaDocumento == documentShow
+                                                                  && e.anno == this.newProject.controls["anio"].value 
+                                                                  && e.mes == this.newProject.controls["mes"].value);
+
+  this.showMessage(1, 'Comentario', 'info', arrayDocuemtnoEnviar[0]["comentarios"], 'Cerrar');
+
+}
+
+showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+  switch(tipoMensaje){
+    case(1) : 
+        Swal.fire({
+          title: header,
+          html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+          icon: icon,
+          confirmButtonText: buttonCaption,
+          customClass: {
+              confirmButton: 'btn  btn-rounded btn-outline-warning'
+          }
+        })
+      break;
+    case(2) :
+        Swal.fire({
+          position: 'top-end',
+          icon: icon,
+          title: message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      break;
+  }
+}
+
 // =========================
 // SERVICIOS
 // =========================
@@ -154,15 +195,9 @@ imagenes: any[] = [];
       let reader = new FileReader();
       reader.readAsDataURL(archivos[0]);
       reader.onloadend = () => {
-        console.log(reader.result);
         this.imagenes.push(reader.result);
         this._uploadFileService.subirImagen(tipoImagen + '_' + event.target.files[0]["name"], reader.result, grupoImagen, this.ProveedorId, form.controls["anio"].value, form.controls["mes"].value).then(urlImagen => {
-          // let usuario = {
-          //   name: "jonathan",
-          //   nickName: "yonykikok",
-          //   password: "401325",
-          //   imgProfile: urlImagen
-          // }
+
           console.log(urlImagen);
 
           let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
@@ -175,8 +210,6 @@ imagenes: any[] = [];
             , anno : this.newProject.controls["anio"].value
             , mes : this.newProject.controls["mes"].value
             , estado : 0};
-
-            console.log('arreglo a subir', arrayToDb);
 
           this._uploadFileService.postUploadDocumentsToDb(arrayToDb).subscribe(
             res=> {
@@ -195,14 +228,8 @@ imagenes: any[] = [];
             case ('biopinionPositivaINFONAVIT') : this.urlBiOpinionPositivaINFONAVIT = urlImagen.toString();
               break;
           }
-
-          console.log('direccion', this.urlBiOpinionPositivaINFONAVIT);
           
           this.openSnackBar('Se cargo exitosamente el archivo', '');
-
-          // guarda en base de datos
-          // arrayToDb.push({id : 1, })
-          // this.insertFilesToDb(arrayToDb);
 
         });
       }
@@ -238,6 +265,8 @@ imagenes: any[] = [];
         this.showDocument(arrayDocumentosFiltrados, 302, anio, mes);
         this.showDocument(arrayDocumentosFiltrados, 303, anio, mes);
         this.showDocument(arrayDocumentosFiltrados, 304, anio, mes);
+
+        this.arrayDocumentosProveedorOrigen = arrayDocumentosFiltrados;
       },
       error => console.log("error consulta regiones",error)
     )

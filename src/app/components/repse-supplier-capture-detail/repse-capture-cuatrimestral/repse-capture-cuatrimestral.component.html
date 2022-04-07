@@ -51,7 +51,7 @@
         <div fxFlex.gt-sm="500px">
             <div> Reporte al IMSS y  su acuse de presentacion ICSOE en PDF</div>
         </div>
-        <div fxFlex.gt-sm="70px">
+        <div fxFlex.gt-sm="90px">
             <div>
                 <ng-container><input type="file" name="urlCuICSOE" id="urlCuICSOE" (change)="cargarImagen(newProject, $event, 'CuICSOE', 'cuatrimestrales')" hidden></ng-container>
                 <ng-container *ngIf="estadoCuICSOE == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlCuICSOE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
@@ -61,7 +61,10 @@
                 <ng-container *ngIf="estadoCuICSOE == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
                 <ng-container *ngIf="estadoCuICSOE == 0"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoCuICSOE == 1"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
-                <ng-container *ngIf="estadoCuICSOE == 2"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuICSOE == 2">
+                    <button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button>
+                    <button class="button" (click)="opencomments(401, element, $event)"><i class="fa fa-list fa-lg icon-cog-lightblue"></i></button>
+                </ng-container>
                 <ng-container *ngIf="estadoCuICSOE == 4"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div> 
         </div>
@@ -75,7 +78,7 @@
         <div fxFlex.gt-sm="500px">
             <div> Reporte al INFONAVIT y su acuse de presentacion SISUB en PDF</div>
         </div>
-        <div fxFlex.gt-sm="70px">
+        <div fxFlex.gt-sm="90px">
             <div>
                 <ng-container><input type="file" name="urlCuSISUB" id="urlCuSISUB" (change)="cargarImagen(newProject, $event, 'CuSISUB', 'cuatrimestrales')" hidden></ng-container>
                 <ng-container *ngIf="estadoCuSISUB == undefined && anioBandera != 0 && mesBandera != 0"><label for="urlCuSISUB"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
@@ -85,7 +88,10 @@
                 <ng-container *ngIf="estadoCuICSOE == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlCuICSOE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
                 <ng-container *ngIf="estadoCuSISUB == 0"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                 <ng-container *ngIf="estadoCuSISUB == 1"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
-                <ng-container *ngIf="estadoCuSISUB == 2"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button></ng-container>
+                <ng-container *ngIf="estadoCuSISUB == 2">
+                    <button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button>
+                    <button class="button" (click)="opencomments(402, element, $event)"><i class="fa fa-list fa-lg icon-cog-lightblue"></i></button>
+                </ng-container>
                 <ng-container *ngIf="estadoCuSISUB == 4"><button class="button" (click)="openFile(urlCuSISUB)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
             </div> 
         </div>

@@ -63,6 +63,7 @@ import { RepseReviewAproveComponent } from './components/repse-supplier-review-d
 import { RepseCapturePapeleriaCCMComponent } from './components/repse-supplier-capture-detail/repse-capture-papeleriaCCM/repse-capture-papeleria-ccm.component';
 import { SupplierUserComponent } from './components/supplier-user/supplier-user.component';
 import { RepseReviewCcmComponent } from './components/repse-supplier-review-detail/repse-review-ccm/repse-review-ccm.component';
+import { RepseCommentsComponent } from './components/repse-supplier-capture-detail/repse-comments/repse-comments.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -108,7 +109,8 @@ import { RepseReviewCcmComponent } from './components/repse-supplier-review-deta
     RepseReviewAproveComponent,
     RepseCapturePapeleriaCCMComponent,
     SupplierUserComponent,
-    RepseReviewCcmComponent
+    RepseReviewCcmComponent,
+    RepseCommentsComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

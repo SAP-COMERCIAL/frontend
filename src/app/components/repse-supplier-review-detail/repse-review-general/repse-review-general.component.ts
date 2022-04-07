@@ -36,6 +36,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
 pageInfo : any;
 providerId : number;
 arraySupplierGlobal : any = [];
+dataSourceSupplier : any;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -161,48 +162,59 @@ arraySupplierGlobal : any = [];
     let estadoShow : number = 3;
     let idDocumentShow : number = 0;
 
+        // Proyectos registrados
+        this._supplyservice.getsupplyById(this.providerId).subscribe(
+          prov=> {
+            console.log('Proveedores', prov);
+            this.dataSourceSupplier = new MatTableDataSource(prov);
+                console.log('AQUI ESTA EL PROVEEDOR', this.dataSourceSupplier);
+              
     // Lista de documentos
     this._UploadFileService.getdocumentsAll().subscribe(
       res=> {
         console.log('Documentos', res);
+        // this.getsupplyById(this.providerId);
 
-        arrayDocumentos = res;
+            arrayDocumentos = res;
 
-        arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.providerId && e.categoriaDocumento > 100 && e.categoriaDocumento < 200);
+            arrayDocumentosFiltrados = arrayDocumentos.filter(e => e.idProveedor == this.providerId && e.categoriaDocumento > 100 && e.categoriaDocumento < 200);
 
-        this.arraySupplierGlobal = [];
-        this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : '', idDocumento : 0})
+            this.arraySupplierGlobal = [];
+            this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : this.pageInfo.nombre, estatus : 3, aprobacion : false, url : '', idDocumento : 0})
 
-        this.showDocument(arrayDocumentosFiltrados, 101, 2022, 1, 'Dirección');
-        this.showDocument(arrayDocumentosFiltrados, 102, 2022, 1, 'RFC');
+            this.showDocument(arrayDocumentosFiltrados, 101, 2022, 1, 'Dirección: ' + this.dataSourceSupplier.filteredData.direccion);
+            this.showDocument(arrayDocumentosFiltrados, 102, 2022, 1, 'RFC: ' + this.dataSourceSupplier.filteredData.rfc);
 
-        this.arraySupplierGlobal.push({supplier_id : 1, documento : 'Contacto', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-          , {supplier_id : 1, documento : 'Ciudad', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-          , {supplier_id : 1, documento : 'Estado', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-          , {supplier_id : 1, documento : 'Objeto Social', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-          , {supplier_id : 1, documento : 'Tipo Persona', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-          , {supplier_id : 1, documento : 'Teléfono contacto', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-          , {supplier_id : 1, documento : 'Correo electrónico', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+            this.arraySupplierGlobal.push({supplier_id : 1, documento : 'Contacto: ' + this.dataSourceSupplier.filteredData.contacto, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+              , {supplier_id : 1, documento : 'Ciudad: ' + this.dataSourceSupplier.filteredData.ciudad, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+              , {supplier_id : 1, documento : 'Estado: ' + this.dataSourceSupplier.filteredData.estado, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+              , {supplier_id : 1, documento : 'Objeto Social: ' + this.dataSourceSupplier.filteredData.objetoSocial, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+              , {supplier_id : 1, documento : 'Tipo Persona: ' + this.dataSourceSupplier.filteredData.tipoPersona, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+              , {supplier_id : 1, documento : 'Teléfono contacto: ' + this.dataSourceSupplier.filteredData.telefonoContacto, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+              , {supplier_id : 1, documento : 'Correo electrónico: ' + this.dataSourceSupplier.filteredData.correo, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+            )
+
+            this.showDocument(arrayDocumentosFiltrados, 103, 2022, 1, 'Acta constitutiva');
+            this.showDocument(arrayDocumentosFiltrados, 104, 2022, 1, 'INE');
+            this.showDocument(arrayDocumentosFiltrados, 105, 2022, 1, 'Alta IMSS');
+            this.showDocument(arrayDocumentosFiltrados, 106, 2022, 1, 'Alta Infonavit');
+            this.showDocument(arrayDocumentosFiltrados, 107, 2022, 1, 'Alta SAT');
+            this.showDocument(arrayDocumentosFiltrados, 108, 2022, 1, 'Estado de cuenta');
+            this.showDocument(arrayDocumentosFiltrados, 109, 2022, 1, 'Estado Financiero');
+
+            this.arraySupplierGlobal.push(
+                              {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?: ' + this.dataSourceSupplier.filteredData.prestadorServicio, estatus : 3, aprobacion : false, url : '', idDocumento : 0}
+            )
+
+            this.showDocument(arrayDocumentosFiltrados, 110, 2022, 1, 'Contrato');
+            this.showDocument(arrayDocumentosFiltrados, 111, 2022, 1, 'Repse del proveedor');
+
+            this.dataSourceShow = new MatTableDataSource(this.arraySupplierGlobal);
+          },
+          error => console.log("error consulta documentos",error)
         )
-
-        this.showDocument(arrayDocumentosFiltrados, 103, 2022, 1, 'Acta constitutiva');
-        this.showDocument(arrayDocumentosFiltrados, 104, 2022, 1, 'INE');
-        this.showDocument(arrayDocumentosFiltrados, 105, 2022, 1, 'Alta IMSS');
-        this.showDocument(arrayDocumentosFiltrados, 106, 2022, 1, 'Alta Infonavit');
-        this.showDocument(arrayDocumentosFiltrados, 107, 2022, 1, 'Alta SAT');
-        this.showDocument(arrayDocumentosFiltrados, 108, 2022, 1, 'Estado de cuenta');
-        this.showDocument(arrayDocumentosFiltrados, 109, 2022, 1, 'Estado Financiero');
-
-        this.arraySupplierGlobal.push(
-                          {supplier_id : 1, documento : '¿Es usted prestador de servicios especializados?', estatus : 3, aprobacion : false, url : '', idDocumento : 0}
-        )
-
-        this.showDocument(arrayDocumentosFiltrados, 110, 2022, 1, 'Contrato');
-        this.showDocument(arrayDocumentosFiltrados, 111, 2022, 1, 'Repse del proveedor');
-
-        this.dataSourceShow = new MatTableDataSource(this.arraySupplierGlobal);
       },
-      error => console.log("error consulta regiones",error)
+      error => console.log("error consulta proveedores",error)
     )
   }
 
@@ -235,5 +247,17 @@ arraySupplierGlobal : any = [];
     }
     this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : titulo, estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
   }
+
+  // getsupplyById(supplierId : number){
+
+  //   // Proyectos registrados
+  //   this._supplyservice.getsupplyById(supplierId).subscribe(
+  //     res=> {
+  //       console.log('Proveedores', res);
+  //       this.dataSourceSupplier = new MatTableDataSource(res);
+  //     },
+  //     error => console.log("error consulta regiones",error)
+  //   )
+  // }
 
 }

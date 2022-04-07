@@ -28,12 +28,12 @@
     color: red;
   }  
 
-.icon-cog-gray {
-    color: gray;
-  }
-
 .icon-cog-chocolate {
     color: chocolate;
+  }
+
+.icon-cog-lightblue {
+    color: rgb(22, 140, 213);
   }
 
 ::ng-deep.alert-snackbar{

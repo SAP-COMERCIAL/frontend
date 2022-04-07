@@ -12,19 +12,11 @@ export interface Menu {
 
 
 // console.log('token-access', localStorage.getItem('token_access'));
-
 // console.log('proveedor-access', jwt_decode((localStorage.getItem('token_access'))));
 // let arrayprov = jwt_decode((localStorage.getItem('token_access')));
-
 // console.log('arrayprov', arrayprov["proveedor_id"]);
-let MENUITEMS
-// if(arrayprov["proveedor_id"].toString().length > 0 ){
-//   MENUITEMS = [
-//     { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
-  
-//   ];
-// }else{
-  MENUITEMS = [
+
+  const MENUITEMS = [
     { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
     { state: 'project', name: 'Proyecto', type: 'link', icon: 'view_comfy' },
     { state: 'requisition', name: 'Requisiciones', type: 'link', icon: 'view_list' },
@@ -80,7 +72,12 @@ let MENUITEMS
     //   icon: 'all_inclusive'
     // }
   ];
-// }
+
+  const MENUITEMS_PROV = [
+    { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
+  
+  ];
+
 
 // decode(){
 //   let token = localStorage.getItem('token_access');
@@ -93,7 +90,10 @@ let MENUITEMS
 
 @Injectable()
 export class MenuItems {
-  getMenuitem(): Menu[] {
-    return MENUITEMS;
+  getMenuitem(proveedor_id: string): Menu[] {
+    if(proveedor_id.length > 0 )
+      return MENUITEMS_PROV;
+    else
+      return MENUITEMS;
   }
 }

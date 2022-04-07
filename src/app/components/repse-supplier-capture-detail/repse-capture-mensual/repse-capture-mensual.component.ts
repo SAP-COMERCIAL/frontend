@@ -6,6 +6,8 @@ import { supplyservice } from '../../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import jwt_decode from "jwt-decode";
+import Swal from 'sweetalert2';
+import * as e from 'cors';
 
 @Component({
   selector: 'app-repse-capture-mensual',
@@ -36,6 +38,7 @@ registroPatronalProv : string;
 ProveedorId : number = 0;
 usuarioId : number = 0;
 tipoImagenFile : any = [];
+arrayDocumentosProveedorOrigen : any;
 decodedSign : any;
 anioBandera : number = 0;
 mesBandera : number = 0;
@@ -131,6 +134,19 @@ public newProject: FormGroup;
     this.getsupplierDocuments();
   }
 
+  opencomments(documentShow : number, element, event){
+
+    let arrayDocuemtnoEnviar : any;
+
+    arrayDocuemtnoEnviar = this.arrayDocumentosProveedorOrigen.filter(e => e.idProveedor == this.ProveedorId 
+                                                                    && e.categoriaDocumento == documentShow
+                                                                    && e.anno == this.newProject.controls["anio"].value 
+                                                                    && e.mes == this.newProject.controls["mes"].value);
+
+    this.showMessage(1, 'Comentario', 'info', arrayDocuemtnoEnviar[0]["comentarios"], 'Cerrar');
+
+  }
+
 // =========================
 // UTILERIAS
 // =========================
@@ -149,6 +165,32 @@ decode(){
   let decodeProveedorId = jwt_decode(token)["proveedor_id"];
   this.usuarioId = decodeUser;
   this.ProveedorId = decodeProveedorId
+}
+
+showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+  switch(tipoMensaje){
+    case(1) : 
+        Swal.fire({
+          title: header,
+          html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+          icon: icon,
+          confirmButtonText: buttonCaption,
+          customClass: {
+              confirmButton: 'btn  btn-rounded btn-outline-warning'
+          }
+        })
+      break;
+    case(2) :
+        Swal.fire({
+          position: 'top-end',
+          icon: icon,
+          title: message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      break;
+  }
 }
 
 // =========================
@@ -225,10 +267,6 @@ imagenes: any[] = [];
           
           this.openSnackBar('Se cargo exitosamente el archivo', '');
 
-          // guarda en base de datos
-          // arrayToDb.push({id : 1, })
-          // this.insertFilesToDb(arrayToDb);
-
         });
       }
     }
@@ -270,6 +308,8 @@ imagenes: any[] = [];
         this.showDocument(arrayDocumentosFiltrados, 209, anio, mes);
         this.showDocument(arrayDocumentosFiltrados, 210, anio, mes);
         this.showDocument(arrayDocumentosFiltrados, 211, anio, mes);
+
+        this.arrayDocumentosProveedorOrigen = arrayDocumentosFiltrados;
 
       },
       error => console.log("error consulta regiones",error)

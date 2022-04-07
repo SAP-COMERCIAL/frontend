@@ -23,11 +23,11 @@
             <mat-icon>exit_to_app</mat-icon> Sign Out </a>
         </button>
         <br>
-        <label>V1.00.00</label>
+        <label>V1.00.02</label>
     </mat-menu>
 </div>
 <mat-nav-list appAccordion>
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem(proveedor_Id)" routerLinkActive="selected" group="{{menuitem.state}}">
         <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon> 
             <span>{{ menuitem.name }}</span> 
