@@ -229,7 +229,8 @@ imagenes: any[] = [];
               break;
           }
           
-          this.openSnackBar('Se cargo exitosamente el archivo', '');
+          this.showMessage(2, 'Comentario', 'info', 'Se cargo exitosamente el archivo', 'Cerrar');          
+          this.getsupplierDocuments();
 
         });
       }
@@ -292,10 +293,10 @@ imagenes: any[] = [];
     }
     
     switch(categoriaDocumento){
-      case(301): this.estadoBiComprobantePagoBanco = estadoShow; break;
-      case(302): this.estadoBiSIPARE = estadoShow; break;
-      case(303): this.estadoBiSUA = estadoShow; break;
-      case(304): this.estadoBiOpinionPositivaINFONAVIT = estadoShow; break;
+      case(301): this.estadoBiComprobantePagoBanco = estadoShow; this.urlBiComprobantePagoBanco = urlShow; break;
+      case(302): this.estadoBiSIPARE = estadoShow; this.urlBiSIPARE = urlShow; break;
+      case(303): this.estadoBiSUA = estadoShow; this.urlBiSUA = urlShow; break;
+      case(304): this.estadoBiOpinionPositivaINFONAVIT = estadoShow; this.urlBiOpinionPositivaINFONAVIT = urlShow; break;
     }
 
   }

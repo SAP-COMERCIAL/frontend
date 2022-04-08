@@ -218,8 +218,8 @@ imagenes: any[] = [];
               break;
           }
           
-          this.openSnackBar('Se cargo exitosamente el archivo', '');
-
+          this.showMessage(2, 'Comentario', 'info', 'Se cargo exitosamente el archivo', 'Cerrar');
+          this.getsupplierDocuments();
         });
       }
     }
@@ -279,8 +279,8 @@ imagenes: any[] = [];
     }
     
     switch(categoriaDocumento){
-      case(401): this.estadoCuICSOE = estadoShow; break;
-      case(402): this.estadoCuSISUB = estadoShow; break;
+      case(401): this.estadoCuICSOE = estadoShow; this.urlCuICSOE = urlShow; break;
+      case(402): this.estadoCuSISUB = estadoShow; this.urlCuSISUB = urlShow; break;
     }
 
   }

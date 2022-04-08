@@ -13,6 +13,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
 import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -108,6 +109,7 @@ dataSourceSupplier : any;
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();
+      this.getsupplierDocuments();
     });
   }
 

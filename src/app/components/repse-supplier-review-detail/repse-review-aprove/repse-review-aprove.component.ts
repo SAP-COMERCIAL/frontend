@@ -5,6 +5,7 @@ import { supplierModel } from 'src/app/models/supplier.model';
 // import { supplyservice } from '../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-repse-review-aprove',
@@ -52,10 +53,12 @@ public newProject: FormGroup;
     let arrayToDb : any;
 
     arrayToDb = ({idDocumento: this.projectInfo.idDocumento
-                  , estado: 1 })
+                  , estado: 1
+                  , comentarios: '' })
 
     this.aproveRejectDocument(arrayToDb);
-    this.openSnackBar('Documento aprobado', '');
+    // this.openSnackBar('Documento aprobado', '');
+    this.showMessage(2, 'Comentario', 'success', 'Documento aprobado', 'Cerrar');
     this.dialogRef.close();
   }
 
@@ -69,7 +72,8 @@ public newProject: FormGroup;
                console.log('aqui va el arreglo', arrayToDb)
 
     this.aproveRejectDocument(arrayToDb);
-    this.openSnackBar('Documento rechazado', '');
+    // this.openSnackBar('Documento rechazado', '');
+    this.showMessage(2, 'Comentario', 'success', 'Documento rechazado', 'Cerrar');
     this.dialogRef.close();
   }
 
@@ -84,6 +88,32 @@ public newProject: FormGroup;
     this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
   }
 
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
+    }
+  }
+
   // =========================
   // SERVICIOS
   // =========================
@@ -92,7 +122,7 @@ public newProject: FormGroup;
     this._uploadFileService.postDocumentosAprobarRechazar(arrayToDb).subscribe(
       res=> {
         console.log('APROBAR DOCUMENTO', res);
-        this.openSnackBar('El registro se aprobó con éxito', '');  
+        // this.openSnackBar('El registro se aprobó con éxito', '');  
       },
       error => console.log("error al aprobar el ocumento",error)
     )

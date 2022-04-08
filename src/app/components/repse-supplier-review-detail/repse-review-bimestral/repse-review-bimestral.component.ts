@@ -104,6 +104,7 @@ arraySupplierGlobal : any = [];
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();
+      this.getsupplierDocuments();
     });
   }
 

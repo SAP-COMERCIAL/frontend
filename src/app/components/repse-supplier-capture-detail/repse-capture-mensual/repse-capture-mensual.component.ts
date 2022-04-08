@@ -265,7 +265,8 @@ imagenes: any[] = [];
 
           console.log('direccion', this.urlListadoTrabajadores);
           
-          this.openSnackBar('Se cargo exitosamente el archivo', '');
+          this.showMessage(2, 'Comentario', 'info', 'Se cargo exitosamente el archivo', 'Cerrar');
+          this.getsupplierDocuments();
 
         });
       }
@@ -311,6 +312,8 @@ imagenes: any[] = [];
 
         this.arrayDocumentosProveedorOrigen = arrayDocumentosFiltrados;
 
+console.log('estados', arrayDocumentosFiltrados);
+
       },
       error => console.log("error consulta regiones",error)
     )
@@ -336,17 +339,17 @@ imagenes: any[] = [];
     }
     
     switch(categoriaDocumento){
-      case(201): this.estadoListadoTrabajadores = estadoShow; break;
-      case(202): this.estadoCFDI = estadoShow; break;
-      case(203): this.estadoComprobanteBanco = estadoShow; break;
-      case(204): this.estadoSIPARE = estadoShow; break;
-      case(205): this.estadoSUA = estadoShow; break;
-      case(206): this.estadoISRComprobanteBanco = estadoShow; break;
-      case(207): this.estadoISRDeclaracion = estadoShow; break;
-      case(208): this.estadoIVADeclaracion = estadoShow; break;
-      case(209): this.estadoIVAComprobanteBanco = estadoShow; break;
-      case(210): this.estadoOpinionPositivaIMSS = estadoShow; break;
-      case(211): this.estadoOpinionPositivaSAT = estadoShow; break;
+      case(201): this.estadoListadoTrabajadores = estadoShow; this.urlListadoTrabajadores = urlShow; break;
+      case(202): this.estadoCFDI = estadoShow; this.urlCFDI = urlShow; break;
+      case(203): this.estadoComprobanteBanco = estadoShow; this.urlComprobanteBanco = urlShow; break;
+      case(204): this.estadoSIPARE = estadoShow; this.urlSIPARE = urlShow; break;
+      case(205): this.estadoSUA = estadoShow; this.urlSUA = urlShow; break;
+      case(206): this.estadoISRComprobanteBanco = estadoShow; this.urlISRComprobanteBanco = urlShow; break;
+      case(207): this.estadoISRDeclaracion = estadoShow; this.urlISRDeclaracion = urlShow; break;
+      case(208): this.estadoIVADeclaracion = estadoShow; this.urlIVADeclaracion = urlShow; break;
+      case(209): this.estadoIVAComprobanteBanco = estadoShow; this.urlIVAComprobanteBanco = urlShow; break;
+      case(210): this.estadoOpinionPositivaIMSS = estadoShow; this.urlOpinionPositivaIMSS = urlShow; break;
+      case(211): this.estadoOpinionPositivaSAT = estadoShow; this.urlOpinionPositivaSAT = urlShow; break;
     }
 
   }

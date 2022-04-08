@@ -91,12 +91,13 @@
         <div fxFlex.gt-sm="90px">
             <div>
                 <br><ng-container><input type="file" name="fuCFDI" id="fuCFDI" (change)="cargarImagen(newProject, $event, 'CFDI', 'mensuales')" hidden></ng-container>
+                
                     <ng-container *ngIf="estadoCFDI == undefined && anioBandera != 0 && mesBandera != 0"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     <ng-container *ngIf="estadoCFDI == 2"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-red"></i></label></ng-container>
                     <ng-container *ngIf="estadoCFDI == 4"><label for="fuCFDI"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
                     
                     <ng-container *ngIf="estadoCFDI == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-                    <ng-container *ngIf="estadoCFDI == 0"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-loack fa-lg icon-cog-chocolate"></i></button></ng-container>
+                    <ng-container *ngIf="estadoCFDI == 0"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
                     <ng-container *ngIf="estadoCFDI == 1"><button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                     <ng-container *ngIf="estadoCFDI == 2">
                         <button class="button" (click)="openFile(urlCFDI)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button>
@@ -162,8 +163,8 @@
                 <ng-container *ngIf="estadoSIPARE == 4"><label for="urlSIPARE"><i class="fa fa-arrow-up fa-lg icon-cog-blue"></i></label></ng-container>
 
                 <ng-container *ngIf="estadoSIPARE == undefined && anioBandera != 0 && mesBandera != 0"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-                <ng-container *ngIf="estadoSIPARE == 0"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-orange"></i></button></ng-container>
-                <ng-container *ngIf="estadoSIPARE == 1"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
+                <ng-container *ngIf="estadoSIPARE == 0"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-lock fa-lg icon-cog-chocolate"></i></button></ng-container>
+                <ng-container *ngIf="estadoSIPARE == 1"><button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-green"></i></button></ng-container>
                 <ng-container *ngIf="estadoSIPARE == 2">
                     <button class="button" (click)="openFile(urlSIPARE)"><i class="fa fa-eye fa-lg icon-cog-red"></i></button>
                     <button class="button" (click)="opencomments(204, element, $event)"><i class="fa fa-list fa-lg icon-cog-lightblue"></i></button>

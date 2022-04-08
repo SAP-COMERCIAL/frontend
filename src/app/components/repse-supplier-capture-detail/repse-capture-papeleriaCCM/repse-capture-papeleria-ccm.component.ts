@@ -221,10 +221,10 @@ showDocument(arrayDocumentosFiltrados : any, categoriaDocumento : number, anio: 
   }
   
   switch(categoriaDocumento){
-    case(501): this.estadoOrdenCompraCCM = estadoShow; break;
-    case(502): this.estadoAvanceDeObraCCM = estadoShow; break;
-    case(503): this.estadoFacturaDePagoCCM = estadoShow; break;
-    case(504): this.estadoComprobanteDePagoCCM = estadoShow; break;
+    case(501): this.estadoOrdenCompraCCM = estadoShow; this.urlOrdenCompraCCM = urlShow; break;
+    case(502): this.estadoAvanceDeObraCCM = estadoShow; this.urlAvanceDeObraCCM = urlShow; break;
+    case(503): this.estadoFacturaDePagoCCM = estadoShow; this.urlFacturaDePagoCCM = urlShow; break;
+    case(504): this.estadoComprobanteDePagoCCM = estadoShow; this.urlComprobanteDePagoCCM = urlShow; break;
   }
 
 }
@@ -278,8 +278,8 @@ imagenes: any[] = [];
 
           console.log('direccion', this.urlOrdenCompraCCM);
           
-          this.openSnackBar('Se cargo exitosamente el archivo', '');
-
+          this.showMessage(2, 'Comentario', 'info', 'Se cargo exitosamente el archivo', 'Cerrar');
+          this.getsupplierDocuments();
         });
       }
     }

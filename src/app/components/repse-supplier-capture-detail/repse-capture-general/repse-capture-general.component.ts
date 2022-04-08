@@ -71,7 +71,7 @@ urlContrato : any;
 urlRPP : any;
 urledoCtaBancario : any;
 
-estadoDireccion : number = 0;
+estadoDireccion : number;
 estadoRFC : any;
 estadoActaConstitutiva : any;
 estadoINE : any;
@@ -315,11 +315,11 @@ showMessage(tipoMensaje : number, header: string, icon: any, message : string, b
 // SERVICIOS
 // =========================
 imagenes: any[] = [];
-  cargarImagen(event: any, tipoImagen : string, grupoImagen : string) {
+  cargarImagen(event: any, tipoImagen : string, grupoImagen : string, estado : any, categoriaImagen : any) {
+
     let archivos = event.target.files;
     let nombre = event.target.files.name;
     let arrayToDb : any;
-    let arrayCategoriaFiltrado : any;
 
     for (let i = 0; i < archivos.length; i++) {
 
@@ -331,15 +331,18 @@ imagenes: any[] = [];
         this._uploadFileService.subirImagen(tipoImagen + '_' + event.target.files[0]["name"], reader.result, grupoImagen, this.ProveedorId, 2022, 1).then(urlImagen => {
 
           let arrayCategoriaFiltrado = this.tipoImagenFile.filter(e => e.categoria == tipoImagen);
+          let idDocumento : number = 0;
 
           arrayToDb = {
-                        idDocumento : 0, 
+                        idDocumento : idDocumento, 
                         idProveedor : this.ProveedorId
                         , categoriaDocumento : arrayCategoriaFiltrado[0]["id"]
                         , urlDocumento : urlImagen.toString()
                         , anno : 2022
                         , mes : 1
                         , estado : 0};
+
+                        console.log('documento mostrado', arrayToDb);
 
           this._uploadFileService.postUploadDocumentsToDb(arrayToDb).subscribe(
             res=> {
