@@ -166,6 +166,8 @@ public newProject: FormGroup;
 
       });
 
+      console.log('ARRAY TO DB', arrayToDb);
+
     this.updateSupplier(arrayToDb);
     
   }
@@ -461,10 +463,12 @@ imagenes: any[] = [];
         this.newProject.controls["ciudad"].setValue(this.dataSourceSupplier.filteredData.ciudad);
         this.newProject.controls["estado"].setValue(this.dataSourceSupplier.filteredData.estado);
         this.newProject.controls["objetivoSocial"].setValue(this.dataSourceSupplier.filteredData.objetoSocial);
-        this.newProject.controls["tipoPersona"].setValue(this.dataSourceSupplier.filteredData.tipoPersona);
+        this.newProject.controls["tipoPersona"].setValue(this.dataSourceSupplier.filteredData.tipoPersona.toString());
         this.newProject.controls["telefono"].setValue(this.dataSourceSupplier.filteredData.telefonoContacto);
         this.newProject.controls["email"].setValue(this.dataSourceSupplier.filteredData.correo);
         this.newProject.controls["serviciosEspecializados"].setValue(this.dataSourceSupplier.filteredData.prestadorServicio);
+
+        console.log('TIPO DE PERSONA' ,this.dataSourceSupplier.filteredData.tipoPersona.toString());
       },
       error => console.log("error consulta regiones",error)
     )
@@ -475,6 +479,7 @@ imagenes: any[] = [];
     this._supplyservice.updatesupply(arrayToDb).subscribe(
       res=> {
         console.log('Proveedores', res);
+        this.showMessage(2, 'Exitoso', 'success', 'Actualización de registro exitosa', 'Cerrar');
       },
       error => console.log("error consulta regiones",error)
     )

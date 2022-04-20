@@ -196,9 +196,8 @@
             <div>
                 <mat-form-field>
                     <mat-select class="form-control" formControlName="tipoPersona">
-                        <mat-option value="0" selected="selected">SELECCIONA</mat-option>
                         <mat-option value="1">Moral</mat-option>
-                        <mat-option value="2">Física</mat-option>
+                        <mat-option value="0">Física</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <span *ngIf="!newProject.get('tipoPersona').valid && newProject.get('tipoPersona').touched"
@@ -446,9 +445,8 @@
             <div>
                 <mat-form-field>
                     <mat-select class="form-control" formControlName="serviciosEspecializados">
-                        <mat-option value="0" selected="selected">SELECCIONA</mat-option>
                         <mat-option value="1">Sí</mat-option>
-                        <mat-option value="2">No</mat-option>
+                        <mat-option value="0">No</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <span *ngIf="!newProject.get('serviciosEspecializados').valid && newProject.get('serviciosEspecializados').touched"
