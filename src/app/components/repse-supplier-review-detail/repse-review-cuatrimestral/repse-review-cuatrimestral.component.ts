@@ -12,6 +12,7 @@ import { RepseSupplierReviewDetailComponent } from '../../../components/repse-su
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UploadFileService } from 'src/app/services/upload-file/upload-file.service';
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-repse-review-cuatrimestral',
@@ -33,6 +34,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
 providerId : number;
 pageInfo : any;
 arraySupplierGlobal : any = [];
+usuarioId : string;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -62,6 +64,7 @@ arraySupplierGlobal : any = [];
 
 
   ngOnInit(): void {
+    this.decode();
     this.providerId = this.pageInfo.proveedorid;
     // this.getsupplierDocuments();
   }
@@ -128,6 +131,15 @@ this.dialogRef.close();
 
   search(form, event){
     this.getsupplierDocuments();
+  }
+
+  decode(){
+    let token = localStorage.getItem('token_access');
+    let decodeUser = jwt_decode(token)["usuario"];
+    // let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+    this.usuarioId = decodeUser;
+    console.log('usuarioId', this.usuarioId)
+  
   }
 
   // =================

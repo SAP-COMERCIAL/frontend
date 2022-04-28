@@ -108,8 +108,8 @@
                                 <ng-container matColumnDef="revision">
                                     <th mat-header-cell *matHeaderCellDef class="colbuttons"> Revisión </th>
                                     <td mat-cell *matCellDef="let element"> 
-                                        <ng-container><button *ngIf="element.aprobacion == true && element.estatus == 0" mat-button color="primary"(click)="review(element, $event)"><i class="fa fa-arrow-right fa-lg icon-cog-blue"></i> </button></ng-container>
-                                        <ng-container><button *ngIf="element.aprobacion == true && element.estatus == 2" mat-button color="primary"(click)="review(element, $event)"><i class="fa fa-arrow-right fa-lg icon-cog-red"></i> </button></ng-container>
+                                        <ng-container *ngIf="usuarioId != 'revisor'"><button *ngIf="element.aprobacion == true && element.estatus == 0" mat-button color="primary"(click)="review(element, $event)"><i class="fa fa-arrow-right fa-lg icon-cog-blue"></i> </button></ng-container>
+                                        <ng-container *ngIf="usuarioId != 'revisor'"><button *ngIf="element.aprobacion == true && element.estatus == 2" mat-button color="primary"(click)="review(element, $event)"><i class="fa fa-arrow-right fa-lg icon-cog-red"></i> </button></ng-container>
                                         <!-- <button *ngIf="element.aprobacion == true" mat-button color="primary" (click)="see(element, $event)"><i class="fa fa-arrow-right fa-lg icon-cog-blue"></i> </button>  -->
                                     </td>
                                 </ng-container>

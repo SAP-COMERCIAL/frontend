@@ -444,13 +444,13 @@
         <div fxFlex.gt-sm="300px">
             <div>
                 <mat-form-field>
-                    <mat-select class="form-control" formControlName="serviciosEspecializados">
+                    <mat-select class="form-control" formControlName="prestadorServicio">
                         <mat-option value="1">Sí</mat-option>
                         <mat-option value="0">No</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <span *ngIf="!newProject.get('serviciosEspecializados').valid && newProject.get('serviciosEspecializados').touched"
-                    class="help-block" style="color: red;"> El estado de cuenta bancario es requerido</span>
+                <span *ngIf="!newProject.get('prestadorServicio').valid && newProject.get('prestadorServicio').touched"
+                    class="help-block" style="color: rgb(74, 28, 28);"> El estado de cuenta bancario es requerido</span>
             </div>
         </div>
         <div fxFlex.gt-sm="90px">

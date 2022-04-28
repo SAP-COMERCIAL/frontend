@@ -13,7 +13,7 @@ import { UploadFileService } from 'src/app/services/upload-file/upload-file.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY } from '@angular/material/autocomplete';
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
-
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-repse-review-ccm',
@@ -36,6 +36,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
 pageInfo : any;
 providerId : number;
 arraySupplierGlobal : any = [];
+usuarioId : string;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -65,6 +66,7 @@ arraySupplierGlobal : any = [];
   // =================
 
   ngOnInit(): void {
+    this.decode();
     console.log('aqui empieza todo', this.pageInfo)
     this.providerId = this.pageInfo.proveedorid;
   }
@@ -130,6 +132,14 @@ arraySupplierGlobal : any = [];
     this.dialogRef.close();
   }
 
+  decode(){
+    let token = localStorage.getItem('token_access');
+    let decodeUser = jwt_decode(token)["usuario"];
+    // let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+    this.usuarioId = decodeUser;
+    console.log('usuarioId', this.usuarioId)
+  
+  }
   
   // =================
   // UTILERIAS

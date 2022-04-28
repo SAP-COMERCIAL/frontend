@@ -6,4 +6,5 @@ export class supplierModel{
     ciudad : string
     estado : string
     contacto : string
+    url : string
 }

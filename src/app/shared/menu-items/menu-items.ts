@@ -27,7 +27,7 @@ export interface Menu {
     { state: 'customer', name: 'Clientes', type: 'link', icon: 'assignment_turned_in' },
     { state: 'supplier', name: 'Proveedores', type: 'link', icon: 'assignment_turned_in' },
     { state: 'reportMaster', name: 'Reporte Maestro', type: 'link', icon: 'assignment_turned_in' },
-    { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
+    // { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
     { state: 'repseReview', name: 'Revisión de proveedores', type: 'link', icon: 'assignment_turned_in' },
   
     // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
@@ -77,7 +77,6 @@ export interface Menu {
     { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
   
   ];
-
 
 // decode(){
 //   let token = localStorage.getItem('token_access');

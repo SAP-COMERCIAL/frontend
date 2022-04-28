@@ -13,8 +13,11 @@ import { ThrowStmt } from '@angular/compiler';
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
 import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
-
+import * as firebase from 'firebase/compat';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-repse-review-general',
@@ -38,6 +41,8 @@ pageInfo : any;
 providerId : number;
 arraySupplierGlobal : any = [];
 dataSourceSupplier : any;
+usuarioId : string;
+downloadURL : any;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -52,6 +57,7 @@ dataSourceSupplier : any;
     , private _excelService : ExcelServiceService
     , private _supplyservice : supplyservice
     , private _UploadFileService : UploadFileService
+    , private http: HttpClient
     , @Inject(MAT_DIALOG_DATA) public data
     , private formBuilder: FormBuilder) { 
 
@@ -69,6 +75,7 @@ dataSourceSupplier : any;
   // =================
 
   ngOnInit(): void {
+    this.decode();
     this.providerId = this.pageInfo.proveedorid;
     this.getsupplierDocuments();
   }
@@ -124,6 +131,85 @@ dataSourceSupplier : any;
 
   cancel(event){
     this.dialogRef.close();
+  }
+
+  
+
+  descargarArchivos(){
+  
+    let posicion : number;
+    let posicionInicial : number;
+
+    this.fileDownload = ''
+    this.dataSourceShow.filteredData.forEach(element => {
+
+      let binaryData : any = []
+      let dataType = 'png';
+      let fileName = 'Nombre'
+      let fileNameCompleto : string;
+      let filePath : string;
+
+      if(element.url != ''){
+
+        posicionInicial = element.url.indexOf("6%2")
+        posicion = element.url.indexOf("?")
+
+        console.log('posicion', posicionInicial)
+        console.log('posicion', posicion)
+
+        fileNameCompleto = element.url.substring(posicion, posicionInicial + 3)
+        dataType = fileNameCompleto.substring(fileNameCompleto.indexOf(".") + 1, fileNameCompleto.length)
+        fileName = fileNameCompleto.substring(0, fileNameCompleto.indexOf("."))
+        console.warn('ELEMENTOS', fileName);
+        console.warn('TIPO DE ELEMENTOS', dataType);
+
+        // DESCARGAR ARCHIVO
+        // ==================
+        binaryData.push(element.url)
+        console.log('binario FILE PATH', binaryData);
+        filePath = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+        console.log('binario', filePath);
+        
+        let downloadLink = document.createElement('a');
+        downloadLink.href = filePath;
+        downloadLink.setAttribute('download', fileNameCompleto);
+        downloadLink.setAttribute('src', fileNameCompleto);
+        document.body.appendChild(downloadLink);
+        console.log('doc', downloadLink)
+        downloadLink.click();
+
+        // this.download(element.url);
+
+        
+        // ==================
+        // TERMINA DESCARGA
+
+
+        
+        // window.open(element.url);
+
+        console.log('AQUI ESTA LA DESCARGA', element.url);
+      }
+    
+    });
+
+  }
+
+  // download(url: string): Observable<Blob> {
+  //   return this.http.get(url, {
+  //     responseType: 'blob'
+  //   })
+  // }
+
+    
+
+  decode(){
+    let token = localStorage.getItem('token_access');
+    let decodeUser = jwt_decode(token)["usuario"];
+    // let decodeProveedorId = jwt_decode(token)["proveedor_id"];
+    this.usuarioId = decodeUser;
+    console.log('usuarioId', this.usuarioId)
+  
   }
 
   // =================
@@ -263,3 +349,5 @@ dataSourceSupplier : any;
   // }
 
 }
+
+

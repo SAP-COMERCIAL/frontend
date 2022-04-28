@@ -51,6 +51,7 @@ tipoImagenFile : any = [];
 arrayDocumentosProveedor : any;
 arrayDocumentosProveedorOrigen : any;
 dataSourceSupplier : any;
+prestadorServicio : string;
 
 nombreArchivo: string = " (archivo nuevo) ";
 loading: boolean;
@@ -84,6 +85,7 @@ estadoContrato : any;
 estadoRPP : any;
 estadoedoCtaBancario : any;
 decodedSign : any;
+unamePattern = "^[0-9]";
 
 public newProject: FormGroup;
 
@@ -104,6 +106,7 @@ public newProject: FormGroup;
       objetivoSocial: new FormControl('', [Validators.required]),
       tipoPersona: new FormControl('', [Validators.required]),
       telefono: new FormControl('', [Validators.required]),
+      // telefono: ['', [Validators.required, Validators.pattern('^[0-9]')]],
       email: new FormControl('', [Validators.required]),
       actaConstitutiva: new FormControl('', [Validators.required]),
       ine: new FormControl('', [Validators.required]),
@@ -111,7 +114,7 @@ public newProject: FormGroup;
       altaINFONAVIT: new FormControl('', [Validators.required]),
       altaSAT: new FormControl('', [Validators.required]),
       edoCtaBancario: new FormControl('', [Validators.required]),
-      serviciosEspecializados: new FormControl('', [Validators.required]),
+      prestadorServicio: new FormControl('', [Validators.required]),
       contrato: new FormControl('', [Validators.required]),
       registroPatronalProv: new FormControl('', [Validators.required])
     });
@@ -149,6 +152,16 @@ public newProject: FormGroup;
   save(form, event){
 
     let arrayToDb : any;
+    let telefonoToDb : number;
+
+    // console.log('funcion match', form.controls["telefono"].value.match(this.unamePattern))
+    if(form.controls["telefono"].value.match(this.unamePattern)){
+          console.log('funcion match')
+    //   telefonoToDb = form.controls["telefono"].value;
+    }else{
+      this.showMessage(2,'Telefono no valido', 'info', 'El telefono solo puede contener números', 'cerrar')
+      // return;
+    }
 
     arrayToDb = ({ 
       proveedorid : this.ProveedorId
@@ -162,13 +175,13 @@ public newProject: FormGroup;
         , tipoPersona : form.controls["tipoPersona"].value
         , telefonoContacto : form.controls["telefono"].value
         , correo : form.controls["email"].value
-        , prestadorServicio : form.controls["serviciosEspecializados"].value
+        , prestadorServicio : form.controls["prestadorServicio"].value
 
       });
 
       console.log('ARRAY TO DB', arrayToDb);
 
-    this.updateSupplier(arrayToDb);
+    // this.updateSupplier(arrayToDb);
     
   }
 
@@ -258,7 +271,6 @@ async UploadFiles(file: File, idProveedor: string, tipoArchivo: string) {
 
   try {
       this.errorFileUpload = true; // valido
-      console.log('FORM DATA', formData);
       return await this._uploadFileService.postUploadFile(formData);
   } catch (error) {
       this.openSnackBar('El archivo no pudo ser cargado', 'error');
@@ -466,9 +478,8 @@ imagenes: any[] = [];
         this.newProject.controls["tipoPersona"].setValue(this.dataSourceSupplier.filteredData.tipoPersona.toString());
         this.newProject.controls["telefono"].setValue(this.dataSourceSupplier.filteredData.telefonoContacto);
         this.newProject.controls["email"].setValue(this.dataSourceSupplier.filteredData.correo);
-        this.newProject.controls["serviciosEspecializados"].setValue(this.dataSourceSupplier.filteredData.prestadorServicio);
+        this.newProject.controls["prestadorServicio"].setValue(this.dataSourceSupplier.filteredData.prestadorServicio.toString());
 
-        console.log('TIPO DE PERSONA' ,this.dataSourceSupplier.filteredData.tipoPersona.toString());
       },
       error => console.log("error consulta regiones",error)
     )
