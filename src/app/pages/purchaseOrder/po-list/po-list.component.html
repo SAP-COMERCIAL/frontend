@@ -79,9 +79,9 @@
                 <!-- Email Column -->
                 <ng-container matColumnDef="Estatus">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> 
-                    <ng-container *ngIf="element.estado == 0">EN PROCESO</ng-container>
-                    <ng-container *ngIf="element.estado == 1">EN PROCESO</ng-container>
+                  <td mat-cell *matCellDef="let element" class="col20"> 
+                    <ng-container *ngIf="element.estado == 0">POR AUTORIZAR</ng-container>
+                    <ng-container *ngIf="element.estado == 1">POR AUTORIZAR</ng-container>
                     <ng-container *ngIf="element.estado == 2">ORDEN DE COMPRA</ng-container>
                     <ng-container *ngIf="element.estado == 3">AUTORIZADO</ng-container>
                     <ng-container *ngIf="element.estado == 4">CANCELADO</ng-container>

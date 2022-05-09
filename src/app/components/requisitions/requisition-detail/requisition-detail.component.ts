@@ -14,6 +14,7 @@ import { requisitionservice } from '../../../services/requisition/requisition.se
 import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-requisition-detail',
@@ -407,6 +408,32 @@ export class RequisitionDetailComponent implements OnInit {
     console.log('filtro', filtro);
   }
 
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
+    }
+  }
+
   // ====================
   // LLAMADAS A SERVICIOS
   // ====================
@@ -552,7 +579,7 @@ export class RequisitionDetailComponent implements OnInit {
         this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
           res=> {
             console.log('REQUISICIONES DETALLE', res);
-            this.openSnackBar('Se genero el la requisición exitosamente', 'success');
+            this.showMessage(2, 'Guardardo', 'success', 'La requisición se guardo exitosamente', 'Cerrar');
             // this.dialogRef.close();
           },
           error => console.log("error al insertar proyectos categorias",error)

@@ -155,13 +155,13 @@ public newProject: FormGroup;
     let telefonoToDb : number;
 
     // console.log('funcion match', form.controls["telefono"].value.match(this.unamePattern))
-    if(form.controls["telefono"].value.match(this.unamePattern)){
-          console.log('funcion match')
-    //   telefonoToDb = form.controls["telefono"].value;
-    }else{
-      this.showMessage(2,'Telefono no valido', 'info', 'El telefono solo puede contener números', 'cerrar')
-      // return;
-    }
+    // if(form.controls["telefono"].value.match(this.unamePattern)){
+    //       console.log('funcion match')
+    // //   telefonoToDb = form.controls["telefono"].value;
+    // }else{
+    //   this.showMessage(2,'Telefono no valido', 'info', 'El telefono solo puede contener números', 'cerrar')
+    //   // return;
+    // }
 
     arrayToDb = ({ 
       proveedorid : this.ProveedorId
@@ -181,7 +181,7 @@ public newProject: FormGroup;
 
       console.log('ARRAY TO DB', arrayToDb);
 
-    // this.updateSupplier(arrayToDb);
+    this.updateSupplier(arrayToDb);
     
   }
 

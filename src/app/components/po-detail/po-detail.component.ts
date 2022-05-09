@@ -19,7 +19,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
 import { MatMenu } from '@angular/material/menu';
 declare var name: any;
-
+import Swal from 'sweetalert2';
+import { ElementSchemaRegistry } from '@angular/compiler';
+import { mapMultiply } from 'chartist';
 
 // function numeroALetras() {
 //   alert('Hello!!!');
@@ -56,7 +58,9 @@ export class PoDetailComponent implements OnInit {
   logoDataUrl : string;
   logoDataCompras : string;
   logoDataControlProy : string;
+  logoDataBlanco : string
   usuarioId : any;
+  loading:boolean;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -67,7 +71,7 @@ export class PoDetailComponent implements OnInit {
   odc_Numero : any = '';
   proveedor_id : any = '';
   activoEdicion : boolean = true;
-  displayedColumns = ['select', 'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento']; // , 'importe'
+  displayedColumns = ['select', 'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento'];
 
   projectInfo : any;
   estadoPantalla : string;
@@ -88,12 +92,23 @@ export class PoDetailComponent implements OnInit {
   precio_unitario : number = 0;
   importe : number = 0;
   decodedSign : any;
-  enviaANombre : any;
+  enviaANombre : string;
   enviaADireccion : any;
-  enviaACdEstado : any;
+  enviaACd : any;
+  enviaAEstado : any;
   enviaARequisitor : any;
   enviaATelefono : any;
   logoCCC: any;
+  descuentoGlobal : number = 0;
+  terminoYCondiciones : any;
+  
+  destinoNombre : any;
+  destinoDireccion : any;
+  destinoCiudad : any;
+  destinoEstado : any;
+  destinoCP : any;
+  destinoTelefono : any;
+  destinoRequisitor : any;
 
   constructor(
     public dialogRef: MatDialogRef<quotationDetailModel>
@@ -108,10 +123,11 @@ export class PoDetailComponent implements OnInit {
   ) { 
     this.projectInfo = data.arrayData;
     this.estadoPantalla = data.estadoPantalla;
+    this.loading = false;
 
     this.newProject = this.formBuilder.group({
       cotizacion_id : new FormControl('', [Validators.required]),
-      codigo_requisicioninterna: new FormControl('', [Validators.required]),
+      codigo_requisicioninterna: new FormControl(''),
       odc_Numero: new FormControl('', [Validators.required]),
       proveedor_id: new FormControl('', [Validators.required]),
       iva: new FormControl('', [Validators.required]),
@@ -122,9 +138,13 @@ export class PoDetailComponent implements OnInit {
       moneda : new FormControl('', [Validators.required]),
       enviaANombre : new FormControl(''),
       enviaADireccion : new FormControl(''),
-      enviaACdEstado : new FormControl(''),
+      enviaACd : new FormControl(''),
+      enviaAEstado : new FormControl(''),
       enviaARequisitor : new FormControl(''),
       enviaATelefono : new FormControl(''),
+      descuentoGlobal : new FormControl(''),
+      terminoYCondiciones : new FormControl(''),
+      destinoCP : new FormControl(''),
   });
 
   }
@@ -134,14 +154,12 @@ export class PoDetailComponent implements OnInit {
   // =====================
 
   ngOnInit(): void {
-
-    // new name();
     
     this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
       result => this.logoDataUrl = result
     )
 
-    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgCompras.PNG').then(
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaRoberto.PNG').then(
       result => this.logoDataCompras = result
     )
 
@@ -153,18 +171,24 @@ export class PoDetailComponent implements OnInit {
       result => this.logoCCC = result
     )
 
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/imgBlanco.png' ).then(
+      result => this.logoDataBlanco = result
+    )
+
     this.decode();
     this.getsupplierAll();
     this.getProveedores();
     this.getCotizacionesAll();
+
+this.newProject.controls["descuentoGlobal"].setValue(0);
 
     if(this.projectInfo != undefined){
       this.ordendecompra_id = this.projectInfo.proveedor_nombre
       this.subtotal = this.projectInfo.sub_total;
       this.ivaSubtotal = this.projectInfo.iva_moneda;
       this.total = this.projectInfo.total;
+      this.descuentoGlobal = this.projectInfo.descuento_global;
 
-      // this.getcotizacionesDetail(this.projectInfo.cotizacion_id);
       this.getPO_Detail(this.projectInfo.ordendecompra_id);
 
       this.newProject.patchValue({
@@ -174,6 +198,16 @@ export class PoDetailComponent implements OnInit {
         proveedor_id : this.projectInfo.proveedor_id,
         iva : this.projectInfo.iva.toString(),
         moneda : this.projectInfo.tipo_moneda.toString(),
+        
+        descuentoGlobal : (this.projectInfo.descuento_global.toString().length > 0 ) ? this.projectInfo.descuento_global.toString() : 0,
+        terminoYCondiciones : this.projectInfo.terminos_condiciones.toString(),
+        enviaANombre : this.projectInfo.destino_nombre.toString(),
+        enviaADireccion : this.projectInfo.destino_direccion.toString(),
+        enviaACd : this.projectInfo.destino_ciudad.toString(),
+        enviaAEstado : this.projectInfo.destino_estado.toString(),
+        destinoCP : (this.projectInfo.destino_cp.toString() != '0') ? this.projectInfo.destino_cp.toString() : '',
+        enviaARequisitor : this.projectInfo.destino_requisitor.toString(),
+        enviaATelefono : (this.projectInfo.destino_telefono.toString() != '0') ? this.projectInfo.destino_telefono.toString() : '',
       })
       
     }
@@ -185,7 +219,7 @@ export class PoDetailComponent implements OnInit {
   }
 
   ivaSelected(form, event){
-    console.log('iva', form.controls['iva'].value);
+    this.iva = this.newProject.controls['iva'].value;
     this.onBlurMethod();
   }
 
@@ -193,22 +227,66 @@ export class PoDetailComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  validaPartidas() : boolean{
+    let valido : boolean = true;
+    let partidaSeleccionada : boolean = false;
+
+    this.tabla1["_data"].forEach(element => {
+      if(element.activo == true){
+        partidaSeleccionada = true;
+        if(element.cantidad == undefined || element.precio_unitario == undefined){
+          valido = false;
+          this.showMessage(1, 'Alerta', 'error', 'Uno o varios articulos no contienen cantidad o precio', 'Cerrar');
+        }else{
+          if(element.cantidad == 0 || element.precio_unitario == 0){
+            valido = false;
+            this.showMessage(1, 'Alerta', 'error', 'La cantidad o precio no pueden ser cero', 'Cerrar');
+          }
+        }
+      }
+    });
+
+    if (partidaSeleccionada == false){
+      this.showMessage(1, 'Alerta', 'error', 'Debe seleccionar al menos un articulo', 'Cerrar');
+      valido = false;
+    }
+
+    return valido;
+  }
+
   validaCamposRequeridos() : boolean{
     let valido : boolean = true;
+
     valido = (this.newProject.get('cotizacion_id').status == 'INVALID') ? false : valido;
     valido = (this.newProject.get("codigo_requisicioninterna").status == 'INVALID') ? false : valido;
     valido = (this.newProject.get("odc_Numero").status == 'INVALID') ? false : valido;
     valido = (this.newProject.get("proveedor_id").status == 'INVALID') ? false : valido;
+    
+    if(valido == false){
+      this.showMessage(1, 'Alerta', 'error', 'Debe capturar los campos requeridos', 'Cerrar');
+    }
 
     return valido;
   }
 
   save(form, event){
 
-    if(this.validaCamposRequeridos() == false){
-      this.openSnackBar('debe capturar los campos requeridos', 'success');
+    // VALIDACIONES
+    if(this.subtotal <= 0 || this.iva <= 0 || this.total <= 0){
+      this.showMessage(1, 'Alerta', 'error', 'Los totales no pueden ser negativos o cero', 'Cerrar');
       return;
     }
+
+
+    if(this.validaCamposRequeridos() == false){
+      return;
+    }
+
+    if(this.validaPartidas() == false){
+      return;
+    }
+
+    // TERMINA VALIDACIONES
 
     this.insertPOHdr(this.tabla1["_data"]);
   }
@@ -260,6 +338,8 @@ export class PoDetailComponent implements OnInit {
   }
 
   onBlurMethod(){
+    let descuento : number = Number(this.newProject.controls["descuentoGlobal"].value);
+
     if (this.tabla1["_data"][0]["activo"] != undefined && this.tabla1["_data"][0]["precio_unitario"] != undefined){ // && this.tabla1["_data"][0]["activo"] == true 
       
       this.importe = 100
@@ -275,8 +355,17 @@ export class PoDetailComponent implements OnInit {
             
       });
 
+      this.subtotal = this.subtotal - descuento
+
       this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
       this.total = this.subtotal + this.ivaSubtotal;
+    }
+  }
+
+  modificaDescuento(event){
+    this.descuentoGlobal = this.newProject.controls["descuentoGlobal"].value;
+    if(this.subtotal != 0){
+      this.onBlurMethod()
     }
   }
 
@@ -294,8 +383,7 @@ export class PoDetailComponent implements OnInit {
     let decodeUser = jwt_decode(token)["usuario"];
     let decodeId = jwt_decode(token);
     
-    this.usuarioId = decodeUser;
-    console.log(jwt_decode(token));
+    this.usuarioId = decodeUser; 
 
     switch(decodeUser){
       case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
@@ -303,17 +391,17 @@ export class PoDetailComponent implements OnInit {
                         result => this.logoDataUrl = result
                       )
         break;
-      case('alejandro'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
+      case('alejandro_fuentes'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
                       this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(
                         result => this.logoDataUrl = result
                       )
         break;
-      case('bernardo'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
+      case('bernardo_tamez'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
                       this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(
                         result => this.logoDataUrl = result
                       )        
         break;
-      case('fernando'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
+      case('fernando_chavez'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
                       this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(
                         result => this.logoDataUrl = result
                       )   
@@ -330,13 +418,16 @@ export class PoDetailComponent implements OnInit {
                       this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
                         result => this.logoDataUrl = result
                       )
-    console.log('this.decodedSign', this.decodedSign)
   }
   
   public async downloadAsPDF() {
     let subtotalPDF : number = 0;
     let ivaPDF : number = 0;
     let totalPDF : number = 0;
+    let ciudadEstado : string;
+    let totalLetra : string;
+    let terminosYCondiciones : string = this.newProject.controls["terminoYCondiciones"].value;
+    let descuentoPDF : number = Number(this.newProject.controls["descuentoGlobal"].value);
 
     const doc = new jsPDF();   
     const pdfTable = this.pdfTable.nativeElement;
@@ -362,7 +453,7 @@ export class PoDetailComponent implements OnInit {
           col_5:{ text: 'Cumplimiento', style: 'tableHeader', alignment: 'center'},
           col_6:{ text: 'Cumplimiento', style: 'tableHeader', alignment: 'center'}
       }
-  }
+    }
 
     let bodyx = [];
     var body = [];
@@ -399,8 +490,13 @@ export class PoDetailComponent implements OnInit {
         }
     }
 
+    subtotalPDF = subtotalPDF - descuentoPDF;
     ivaPDF = subtotalPDF * (this.newProject.controls["iva"].value / 100);
     totalPDF = subtotalPDF + ivaPDF;
+
+    totalLetra = (this.newProject.controls["moneda"].value == 'MXN') ? this.numeroALetras(totalPDF, 'PESOS MEXICANOS') : this.numeroALetras(totalPDF, 'DOLARES AMERICANOS') 
+
+    ciudadEstado = (this.newProject.controls["enviaACd"].value.length > 0 && this.newProject.controls["enviaAEstado"].value.length > 0) ? this.newProject.controls["enviaACd"].value + ' ' + this.newProject.controls["enviaAEstado"].value : ''
 
     // {
     //   text: 'LOGO DE ORDEN DE COMPRA', fontSize:8
@@ -420,13 +516,13 @@ export class PoDetailComponent implements OnInit {
               text: '', fontSize:8, width: 20
             },
             {
-              text: 'COMERCIAL ... S. DE R.L. DE C.V. RFC: CCM95033..A Carretera a Saltillo-Monterrey Km. 18 Parque Industrial Santa María 25900 Ramos Arízpe, Coahuila Telefono: (844) 866 9030', fontSize:8
+              text: 'COMMERCIAL CONTRACTING DE MEXICO, S DE RL DE CV      Carretera a Saltillo-Monterrey Km. 18                                       Parque Industrial Santa María 25900 Ramos Arízpe, Coahuila Telefono: (844) 866 9030 RFC: CCM-950330-P1A', fontSize:8, width: 230
             },
             {
               text: '', fontSize:8, width: 20
             },
             {
-              text: 'ORDEN DE COMPRA No. 1791-SUB232', fontSize:8
+              text: '', fontSize:8 // ORDEN DE COMPRA No. 1791-SUB232
             }
           ]
         },
@@ -468,7 +564,7 @@ export class PoDetailComponent implements OnInit {
               text: 'Nombre: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: (this.newProject.controls["enviaANombre"].value.length > 0) ? this.newProject.controls["enviaANombre"].value : 'NA', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaANombre"].value.length > 0) ? this.newProject.controls["enviaANombre"].value : '', fontSize:8, width:'*'
             }
           ]
         },
@@ -484,7 +580,7 @@ export class PoDetailComponent implements OnInit {
               text: 'Dirección: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: (this.newProject.controls["enviaADireccion"].value.length > 0) ? this.newProject.controls["enviaADireccion"].value : 'NA', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaADireccion"].value.length > 0) ? this.newProject.controls["enviaADireccion"].value : '', fontSize:8, width:'*'
             }
           ]
         },
@@ -500,7 +596,7 @@ export class PoDetailComponent implements OnInit {
               text: 'Cd./Edo: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: (this.newProject.controls["enviaACdEstado"].value.length > 0) ? this.newProject.controls["enviaACdEstado"].value : 'NA', fontSize:8, width:'*'
+              text: ciudadEstado, fontSize:8, width:'*'
             }
           ]
         },
@@ -510,13 +606,13 @@ export class PoDetailComponent implements OnInit {
               text: 'Cd./Edo: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: ((arrayProveedor.length > 0) ? arrayProveedor[0]["ciudad"] : 'NA') + ', ' + ((arrayProveedor.length > 0) ? arrayProveedor[0]["estado"] : 'NA'), fontSize:8, width: '*'
+              text: ((arrayProveedor.length > 0) ? arrayProveedor[0]["ciudad"] : 'NA') + ', ' + ((arrayProveedor.length > 0) ? arrayProveedor[0]["estado"] : ''), fontSize:8, width: '*'
             },
             {
               text: 'Requisitor: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: (this.newProject.controls["enviaARequisitor"].value.length > 0) ? this.newProject.controls["enviaARequisitor"].value : 'NA', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaARequisitor"].value.length > 0) ? this.newProject.controls["enviaARequisitor"].value : '', fontSize:8, width:'*'
             }
           ]
         },
@@ -532,7 +628,7 @@ export class PoDetailComponent implements OnInit {
               text: 'Teléfono: ', fontSize:8, bold:true, width: 90
             },
             {
-              text: (this.newProject.controls["enviaATelefono"].value.length > 0) ? this.newProject.controls["enviaATelefono"].value : 'NA', fontSize:8, width:'*'
+              text: (this.newProject.controls["enviaATelefono"].value.length > 0) ? this.newProject.controls["enviaATelefono"].value : '', fontSize:8, width:'*'
             }
           ]
         },
@@ -567,11 +663,11 @@ export class PoDetailComponent implements OnInit {
           ]
         },
         {
-          style: 'tableHeader', fontSize:8, width:'100%',
+          style: 'tableHeader', fontSize:8, width:'500px',
           table: {
             body: [
-              ['FECHA ODC', 'TERMINOS Y CONDICIONES'],
-              [moment(new Date, 'DD/MMMM/YYYY').format('DD/MMMM/YYYY'), 'Estimación por avance']
+              ['FECHA ODC', 'TERMINOS Y CONDICIONES                                                                                                                                                                            .'],
+              [moment(new Date, 'DD/MMMM/YYYY').format('DD/MMMM/YYYY'), terminosYCondiciones]
             ]
           }
         },
@@ -608,11 +704,11 @@ export class PoDetailComponent implements OnInit {
         {
           columns: [
             {
-              text: '', fontSize:8, bold:true
+              text: totalLetra, fontSize:8, bold:true, width: 300
             },
-            {
-              text: '', fontSize:8, width: '*' // CIEN MIL PESOS 00/100 MN
-            },
+            // {
+            //   text: '', fontSize:8, width: '*' // CIEN MIL PESOS 00/100 MN
+            // },
             {
               text: '', fontSize:8, bold:true
             },
@@ -627,7 +723,26 @@ export class PoDetailComponent implements OnInit {
         {
           columns: [
             {
+              text: '', fontSize:8, bold:true, width: 280
+            },
+            {
+              text: '', fontSize:8, width: '*'
+            },
+            {
               text: '', fontSize:8, bold:true
+            },
+            {
+              text: 'Descuento', fontSize:8, bold:true, width: '*'
+            },
+            {
+              text: formatter.format(descuentoPDF) , fontSize:8, alignment: 'right', width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '', fontSize:8, bold:true, width: 280
             },
             {
               text: '', fontSize:8, width: '*'
@@ -646,7 +761,7 @@ export class PoDetailComponent implements OnInit {
         {
           columns: [
             {
-              text: '', fontSize:8, bold:true
+              text: '', fontSize:8, bold:true, width: 280
             },
             {
               text: '', fontSize:8, width: '*'
@@ -711,48 +826,18 @@ export class PoDetailComponent implements OnInit {
             }
           ]
         },
-        // {
-        //   columns: [
-        //     {
-        //       text: '_________________', fontSize:8, bold:true
-        //     },
-        //     {
-        //       text: '', fontSize:8, width: 20
-        //     },
-        //     {
-        //       text: '_________________', fontSize:8
-        //     },
-        //     {
-        //       text: '', fontSize:8, width: 20
-        //     },
-        //     {
-        //       text: '_________________', fontSize:8, bold:true
-        //     }
-        //   ]
-        // },
-        // {
-        //   columns: [
-        //     {
-        //       text: 'Compras', fontSize:8, bold:true
-        //     },
-        //     {
-        //       text: '', fontSize:8, width: 20
-        //     },
-        //     {
-        //       text: 'Control de proyectos', fontSize:8
-        //     },
-        //     {
-        //       text: '', fontSize:8, width: 20
-        //     },
-        //     {
-        //       text: 'Autorizar', fontSize:8, bold:true
-        //     }
-        //   ]
-        // },
         {
           columns: [
             {
-              text: '', fontSize:8, width: 20
+              text: ' ', fontSize:8, width: 20
+            },
+            { 
+              image: this.logoDataBlanco,
+              width: 50,
+              height: 50,
+            },
+            {
+              text: ' ', fontSize:8, width: 20
             },
             { 
               image: this.logoDataCompras,
@@ -775,6 +860,64 @@ export class PoDetailComponent implements OnInit {
               image: this.logoDataUrl,
               width: 100,
               height: 50,
+            }
+          ]
+        },
+      
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+       
+        {
+          columns: [
+            {
+              text: '1. Entregar factura anexa con OC.', fontSize:8, bold:true, width: 300
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '2. La factura deberá presentar los siguientes datos:', fontSize:8, bold:true, width: 300
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' Banco:BBVA Bancomer                                                     Método de pago: 03 Transferencia Electrónica        Últimos digitos de la cuenta: 9673', fontSize:8, bold:true, width: 200
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: '3. Enviar factura electrónica PDF Y XML al siguiente correo:      facturas.ccm@cccnetwork.com', fontSize:8, bold:true, width: 300
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' 4. No se pagaran facturas que no cumplan con estos requisitos', fontSize:8, bold:true, width: 300
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: ' ', fontSize:8, bold:true, width: 90
             }
           ]
         },
@@ -810,10 +953,34 @@ export class PoDetailComponent implements OnInit {
       }
     };
 
-    console.log('documentDefinition', documentDefinition);
-
     pdfMake.createPdf(documentDefinition).open();
      
+  }
+
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
+    }
   }
 
   // =====================
@@ -830,8 +997,6 @@ export class PoDetailComponent implements OnInit {
                     )
 
     this.datasourcePoveedores = arrayProvider;
-
-    console.log(this.datasourcePoveedores);
   }
 
   getPO_Hdr(codigo_cotizacion : string){
@@ -896,15 +1061,23 @@ export class PoDetailComponent implements OnInit {
                   , tipo_moneda : 'MXN'
                   , sub_total : this.subtotal
                   , total : this.total
+
+                  // , nombre_usuario : '' // this.newProject.controls["proveedor_id"].value
+                  , descuento_global : this.newProject.controls["descuentoGlobal"].value
+                  , terminos_condiciones : this.newProject.controls["terminoYCondiciones"].value
+                  , destino_nombre : this.newProject.controls["enviaANombre"].value
+                  , destino_direccion : this.newProject.controls["enviaADireccion"].value
+                  , destino_ciudad : this.newProject.controls["enviaACd"].value
+                  , destino_estado : this.newProject.controls["enviaAEstado"].value
+                  , destino_cp : (this.newProject.controls["destinoCP"].value.toString().length == 0 || this.newProject.controls["destinoCP"].value.toString() == '' || this.newProject.controls["destinoCP"].value == 0) ? 0 : this.newProject.controls["destinoCP"].value
+                  , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
+                  , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
                 }
       }
 
       //Detalle
       if(element.activo == true)
       {
-        console.log('tabla', element.precio_unitario)
-        console.log('pu', element.precio_unitario)
-
         arrayDetail.push( {ordendecompradetalle_id : 0
                             , ordendecompra_id : this.ordendecompra_id
                             , cotizaciondetalle_id : element.cotizaciondetalle_id
@@ -923,8 +1096,6 @@ export class PoDetailComponent implements OnInit {
       conteo++;
     });
 
-    console.log('ARRAY tO db', arrayTodb);
-
     this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
@@ -933,7 +1104,8 @@ export class PoDetailComponent implements OnInit {
         this.insertPODet(res, arrayDetail);
 
         //INSERTA EN BITACORA
-        this.updateODCStatus(res);
+        this.insertODCStatus(res);
+
         this.dialogRef.close();
       },
       error => console.log("error alta de proyectos",error)
@@ -943,7 +1115,7 @@ export class PoDetailComponent implements OnInit {
   insertPODet(po_id : any, arrayDetail : any){
 
     let arrayTodbDetail : any;
-
+    this.loading = true;
     arrayDetail.forEach(element => {
 
       arrayTodbDetail = {ordendecompradetalle_id : 0
@@ -966,6 +1138,7 @@ export class PoDetailComponent implements OnInit {
     this._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
+        this.showMessage(2, 'Exitoso', 'success', 'Se creo una nueva orden de compra', 'Cerrar');
   
       },
       error => console.log("error alta de proyectos",error)
@@ -1042,7 +1215,6 @@ export class PoDetailComponent implements OnInit {
         img.onerror = () => reject('Imagen no disponible')
         img.src = localPath;
 
-        console.log('path', localPath);
     })
 
   }
@@ -1050,17 +1222,198 @@ export class PoDetailComponent implements OnInit {
   updateODCStatus(form){
     let arrayToDb : any;
 
-console.log('numero de orden de compra', this.projectInfo.ordendecompra_id)
+    console.log('numero de orden de compra', this.projectInfo.ordendecompra_id)
 
-    arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 1, usuario : 2}) // this.usuarioId
+    arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 3, usuario : 2}) // this.usuarioId
 
     this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
+        this.showMessage(2, 'Comentario', 'info', 'La autorización fue exitosa', 'Cerrar');
         
       },
       error => console.log("error alta de proyectos",error)
     )
   }
 
+  insertODCStatus(po_id : any){
+    let arrayToDb : any;
+
+    console.log('numero de orden de compra', this.usuarioId)
+
+    arrayToDb = ({ordendecompra_id : po_id , estatus : 1, usuario : 2}) // this.usuarioId
+
+    this._purchaseOrderservice.insertPOStatus(arrayToDb).subscribe(
+      res=> {
+        console.log('Se inserto con éxito', res);
+        this.loading = false;
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+  }
+
+
+// NUMEROS A LETRAS
+
+Unidades(num){
+
+  switch(num)
+  {
+      case 1: return 'UN';
+      case 2: return 'DOS';
+      case 3: return 'TRES';
+      case 4: return 'CUATRO';
+      case 5: return 'CINCO';
+      case 6: return 'SEIS';
+      case 7: return 'SIETE';
+      case 8: return 'OCHO';
+      case 9: return 'NUEVE';
+  }
+
+  return '';
+}//Unidades()
+
+Decenas(num){
+
+  let decena = Math.floor(num/10);
+  let unidad = num - (decena * 10);
+
+  switch(decena)
+  {
+      case 1:
+          switch(unidad)
+          {
+              case 0: return 'DIEZ';
+              case 1: return 'ONCE';
+              case 2: return 'DOCE';
+              case 3: return 'TRECE';
+              case 4: return 'CATORCE';
+              case 5: return 'QUINCE';
+              default: return 'DIECI' + this.Unidades(unidad);
+          }
+      case 2:
+          switch(unidad)
+          {
+              case 0: return 'VEINTE';
+              default: return 'VEINTI' + this.Unidades(unidad);
+          }
+      case 3: return this.DecenasY('TREINTA', unidad);
+      case 4: return this.DecenasY('CUARENTA', unidad);
+      case 5: return this.DecenasY('CINCUENTA', unidad);
+      case 6: return this.DecenasY('SESENTA', unidad);
+      case 7: return this.DecenasY('SETENTA', unidad);
+      case 8: return this.DecenasY('OCHENTA', unidad);
+      case 9: return this.DecenasY('NOVENTA', unidad);
+      case 0: return this.Unidades(unidad);
+  }
+}//Unidades()
+
+DecenasY(strSin, numUnidades) {
+  if (numUnidades > 0)
+      return strSin + ' Y ' + this.Unidades(numUnidades)
+
+  return strSin;
+}//DecenasY()
+
+Centenas(num) {
+  let centenas = Math.floor(num / 100);
+  let decenas = num - (centenas * 100);
+
+  switch(centenas)
+  {
+      case 1:
+          if (decenas > 0)
+              return 'CIENTO ' + this.Decenas(decenas);
+          return 'CIEN';
+      case 2: return 'DOSCIENTOS ' + this.Decenas(decenas);
+      case 3: return 'TRESCIENTOS ' + this.Decenas(decenas);
+      case 4: return 'CUATROCIENTOS ' + this.Decenas(decenas);
+      case 5: return 'QUINIENTOS ' + this.Decenas(decenas);
+      case 6: return 'SEISCIENTOS ' + this.Decenas(decenas);
+      case 7: return 'SETECIENTOS ' + this.Decenas(decenas);
+      case 8: return 'OCHOCIENTOS ' + this.Decenas(decenas);
+      case 9: return 'NOVECIENTOS ' + this.Decenas(decenas);
+  }
+
+  return this.Decenas(decenas);
+}//Centenas()
+
+Seccion(num, divisor, strSingular, strPlural) {
+  let cientos = Math.floor(num / divisor)
+  let resto = num - (cientos * divisor)
+
+  let letras = '';
+
+  if (cientos > 0)
+      if (cientos > 1)
+          letras = this.Centenas(cientos) + ' ' + strPlural;
+      else
+          letras = strSingular;
+
+  if (resto > 0)
+      letras += '';
+
+  return letras;
+}//Seccion()
+
+Miles(num) {
+  let divisor = 1000;
+  let cientos = Math.floor(num / divisor)
+  let resto = num - (cientos * divisor)
+
+  let strMiles = this.Seccion(num, divisor, 'UN MIL', 'MIL');
+  let strCentenas = this.Centenas(resto);
+
+  if(strMiles == '')
+      return strCentenas;
+
+  return strMiles + ' ' + strCentenas;
+}//Miles()
+
+Millones(num) {
+  let divisor = 1000000;
+  let cientos = Math.floor(num / divisor)
+  let resto = num - (cientos * divisor)
+
+  let strMillones = this.Seccion(num, divisor, 'UN MILLON', 'MILLONES');
+  let strMiles = this.Miles(resto);
+
+  if(strMillones == '')
+      return strMiles;
+
+  return strMillones + ' ' + strMiles;
+}//Millones()
+
+numeroALetras(num, currency) {
+  currency = currency || {};
+  let data = {
+      numero: num,
+      enteros: Math.floor(num),
+      centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
+      letrasCentavos: '',
+      letrasMonedaPlural: currency.plural || currency,//'PESOS', 'Dólares', 'Bolívares', 'etcs'
+      letrasMonedaSingular: currency.singular || currency, //'PESO', 'Dólar', 'Bolivar', 'etc'
+      letrasMonedaCentavoPlural: currency.centPlural || 'CENTAVOS',
+      letrasMonedaCentavoSingular: currency.centSingular || 'CENTAVO'
+  };
+
+  if (data.centavos > 0) {
+      let centavos = ''
+      if (data.centavos == 1)
+          centavos = this.Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+      else
+          centavos =  this.Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+      data.letrasCentavos = 'CON ' + centavos
+  };
+
+  if(data.enteros == 0)
+      return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+  if (data.enteros == 1)
+      return this.Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
+  else
+      return this.Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
 }
+
+}
+
+

@@ -3,10 +3,6 @@
   </div>
   <br>
   <div mat-dialog-content-example [formGroup]="newProject">
-    
-    <!-- <script src="../../../assets/Utilities/NumeroALetras.js"></script> -->
-    <!-- <script src="../../../assets/Utilities/nand.js"></script> -->
-
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
           <div><br>Cotización</div>
@@ -34,7 +30,7 @@
               <mat-form-field>
                 <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna"> <!--[(ngModel)]="codigo_requisicioninterna"-->
             </mat-form-field>
-            <span *ngIf="!newProject.get('codigo_requisicioninterna').valid && newProject.get('codigo_requisicioninterna').touched" class="help-block" style="color: red;"> seleccione una requisición</span>
+            <!-- <span *ngIf="!newProject.get('codigo_requisicioninterna').valid && newProject.get('codigo_requisicioninterna').touched" class="help-block" style="color: red;"> seleccione una requisición</span> -->
           </div>
       </div>
     </div>
@@ -60,9 +56,10 @@
       <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <mat-select class="form-control control" formControlName="proveedor_id" ><!--[(ngModel)]="proveedor_id"-->
+            <mat-select class="form-control control" formControlName="proveedor_id" >
                 <mat-option *ngFor="let op of datasourcesupplier" [value]="op.proveedorid" (selectionChange)="selectsupplier($event)">
-                  {{op.nombre}}
+                  <ng-container *ngIf="op.estatus == true"> <p style="color: navy;">{{op.nombre}}</p></ng-container>
+                  <ng-container *ngIf="op.estatus == false"> <p style="color: red;">{{op.nombre}}</p></ng-container>
                 </mat-option>
               </mat-select>
           </mat-form-field>
@@ -88,10 +85,8 @@
         </div>
       </div>
       <div fxFlex.gt-sm="10%" >
-        <!-- <div><img src="https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be"></div> -->
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div></div>
       </div>
       <div fxFlex.gt-sm="25%" >
             <div>
@@ -120,57 +115,95 @@
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div></div>
+        <div><br>
+          Descuento global
+        </div>
       </div>
       <div fxFlex.gt-sm="25%" >
-            <div></div>
+            <div>
+            <mat-form-field>
+              <input [type]="descuentoGlobal" matInput class="form-control form-control-line control" formControlName="descuentoGlobal" placeHplder="Descuento global" (change)="modificaDescuento($event)">
+            </mat-form-field>
+          </div>
+      </div>
+    </div>
+
+    <!-- ENVIAR A -->
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div><br>Nombre Destino</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <input [type]="enviaANombre" matInput class="form-control form-control-line control" formControlName="enviaANombre" placeholder="Nombre Destino">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div>
+          <br>Dirección destino
+        </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div>
+            <mat-form-field>
+              <input [type]="enviaADireccion" matInput class="form-control form-control-line control" formControlName="enviaADireccion" placeholder="Dirección Destino">
+            </mat-form-field>
+            </div>
       </div>
     </div>
 
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
-        Subtotal: {{subtotal | currency}}
-      </div>
-      <div fxFlex.gt-sm="20%">
-        IVA: {{ivaSubtotal | currency}}
-      </div>
-      <div fxFlex.gt-sm="20%">
-          Total: {{total | currency}}
-      </div>
-  </div>
-
-    <br>
-    <p style="font-weight: bold;">Datos de envío</p>
-    <div fxLayout="row" class="division">
-      <div fxFlex.gt-sm="20%">
-          <div>
-            <mat-form-field>
-              <input [type]="enviaANombre" matInput class="form-control form-control-line control" formControlName="enviaANombre" placeholder="Nombre Envía a">
-          </mat-form-field>
-          </div>
+          <div><br>Ciudad destino</div>
       </div>
       <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <input [type]="enviaADireccion" matInput class="form-control form-control-line control" formControlName="enviaADireccion" placeholder="Dirección envía a">
-        </mat-form-field>
-        </div>
-      </div>
-      <div fxFlex.gt-sm="25%" >
-        <div>
-          <mat-form-field>
-            <input [type]="enviaACdEstado" matInput class="form-control form-control-line control" formControlName="enviaACdEstado" placeholder="Ciudad, estado">
-          </mat-form-field>
-        </div>
-      </div>
-      <div fxFlex.gt-sm="20%" >
-        <div>
-          <mat-form-field>
-            <input [type]="enviaARequisitor" matInput class="form-control form-control-line control" formControlName="enviaARequisitor" placeholder="Requisitor">
+            <input [type]="enviaACd" matInput class="form-control form-control-line control" formControlName="enviaACd" placeholder="Ciudad destino">
           </mat-form-field>
         </div>
       </div>
       <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div>
+          <br>Estado destino
+        </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div>
+            <mat-form-field>
+              <input [type]="enviaAEstado" matInput class="form-control form-control-line control" formControlName="enviaAEstado" placeholder="Estado destino">
+            </mat-form-field>
+            </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div><br>CP destino</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <input [type]="destinoCP" matInput class="form-control form-control-line control" formControlName="destinoCP" placeholder="cp destino">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div><br>Teléfono destino
+        </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
             <div>
               <mat-form-field>
                 <input [type]="enviaATelefono" matInput class="form-control form-control-line control" formControlName="enviaATelefono" placeholder="Teléfono">
@@ -178,8 +211,35 @@
             </div>
       </div>
     </div>
-    <br>
 
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div><br>Requisitor destino</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div>
+          <mat-form-field>
+            <input [type]="enviaARequisitor" matInput class="form-control form-control-line control" formControlName="enviaARequisitor" placeholder="Requisitor">
+        </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div></div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div><br>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div>
+              <mat-form-field>
+                <input [type]="terminoYCondiciones" matInput class="form-control form-control-line control" formControlName="terminoYCondiciones" placeholder="Términos y condiciones">
+              </mat-form-field>
+            </div>
+      </div>
+    </div>
+
+    <!--ESTABA SUBTOTAL IVA TOTAL -->
 
     <!--Tabla de captura-->
     <div fxLayout="row" class="division">
@@ -291,15 +351,20 @@
             </ng-container>
 
             <!-- descuento column -->
-            <ng-container matColumnDef="descuento">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descuento </th>
-              <td mat-cell *matCellDef="let element"> 
+            <ng-container matColumnDef="" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20" hidden> Descuento </th>
+              <td mat-cell *matCellDef="let element" hidden> 
                   <input type='descuento' [(ngModel)]="element.descuento" (keyup)="checkEnterKey($event, 'descuento')" (blur)="onBlurMethod($event)">
               </td>
             </ng-container>
-            
-            <!-- descuento column -->
-            <!-- <ng-container matColumnDef="importe" hidden>
+
+            <!-- importe column -->
+            <ng-container matColumnDef="descuento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Importe </th>
+              <td mat-cell *matCellDef="let element"> {{element.precio_unitario * element.cantidad | currency}}
+              </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="importe">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Importe </th>
               <td mat-cell *matCellDef="let element"> {{importe | currency}}
               </td>
@@ -311,6 +376,50 @@
     
         </div>
         <!-- <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator> -->
+        
+        <!--SUBTOTAL IVA TOTAL-->
+        <br>
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+            <!-- Subtotal: {{subtotal | currency}} -->
+          </div>
+          <div fxFlex.gt-sm="20%">
+            <!-- IVA: {{ivaSubtotal | currency}} -->
+          </div>
+          <div fxFlex.gt-sm="20%">
+            Subtotal: {{subtotal | currency}}
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+            Descuento: {{descuentoGlobal | currency}}
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+            IVA: {{ivaSubtotal | currency}}
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+              Total: {{total | currency}}
+          </div>
+        </div>
       </div>
 
       <!-- REPORTE DE ORDEN DE COMPRA -->
@@ -443,3 +552,6 @@
         </div>
       </div>
     </div>
+    <div *ngIf="loading">
+      <app-loader-global></app-loader-global>
+  </div>

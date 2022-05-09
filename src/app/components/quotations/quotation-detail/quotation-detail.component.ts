@@ -14,6 +14,8 @@ import { quotationservice } from '../../../services/quotation/quotation.service'
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { RequisitionDetailComponent } from '../../requisitions/requisition-detail/requisition-detail.component';
+import Swal from 'sweetalert2';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-quotation-detail',
@@ -21,6 +23,7 @@ import { RequisitionDetailComponent } from '../../requisitions/requisition-detai
   styleUrls: ['./quotation-detail.component.css']
 })
 export class QuotationDetailComponent implements OnInit {
+  
   // ====================
   // DECLARACIONES
   // ====================
@@ -62,7 +65,8 @@ export class QuotationDetailComponent implements OnInit {
   datasourceCotizaciones : any;
   datasourceCotizacionesDet : any[] = [];
   arraytemp : any = [];
-  
+  selectionM: boolean;
+  disabledM: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<projectModel>
@@ -219,6 +223,27 @@ export class QuotationDetailComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  checkProduct(event){
+
+    console.log('seleccion event', event)
+
+    if (event.checked ) {
+      console.log('checado');
+          // this.datasourceRequisitionDetail.data= this.datasourceRequisitionDetail.data.filter(s => s.productName.toUpperCase() === product.toUpperCase());
+    //       this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
+    //       this.dataSource.data.forEach(station => {
+    //         this.setStations.push(station);
+    //       });
+
+    }else{
+      console.log('no checaco');
+      // this.setStations = [];
+      // this.setTableDataAndConfig();
+      // this.selection.clear();
+      this.selectionM = false;
+      this.disabledM = false;
+    }
+  }
 
 // =============================
 // UTILERIAS
@@ -248,6 +273,33 @@ filtrar(event: Event) {
   this.dataSourceShow.filter = filtro.trim().toLowerCase();
   console.log('filtro', filtro);
 }
+
+showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+  switch(tipoMensaje){
+    case(1) : 
+        Swal.fire({
+          title: header,
+          html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+          icon: icon,
+          confirmButtonText: buttonCaption,
+          customClass: {
+              confirmButton: 'btn  btn-rounded btn-outline-warning'
+          }
+        })
+      break;
+    case(2) :
+        Swal.fire({
+          position: 'top-end',
+          icon: icon,
+          title: message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      break;
+  }
+}
+
 
 // =============================
 // CONSUME SERVICIOS
@@ -387,7 +439,7 @@ insertQuotationDet(cotizacionId : any){
     this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
       res=> {
         console.log('INSERTA COTIZACION DETALLE', arrayToDb);
-        this.openSnackBar('Se genero el la cotización exitosamente', 'success');
+        this.showMessage(2, 'Guardardo', 'success', 'La cotización se guardo exitosamente', 'Cerrar');
       },
       error => console.log("error al insertar proyectos categorias",error)
     )

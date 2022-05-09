@@ -14,4 +14,15 @@ export class poDetailModel{
     cargo: string
     fecha: string
     estado: number
+
+    nombre_usuario : string
+    descuento_global : string
+    terminos_condiciones : string
+    destino_nombre : string
+    destino_direccion : string
+    destino_ciudad : string
+    destino_estado : string
+    destino_cp : string
+    destino_requisitor : string
+    destino_telefono : string
 }

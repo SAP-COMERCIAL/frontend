@@ -122,9 +122,13 @@
 
           <ng-container matColumnDef="select">
               <th mat-header-cell *matHeaderCellDef>
-                  <div style="width: 100%; text-align: left; vertical-align: middle;">
+                <div class="checkbox-magna"> 
+                  <mat-checkbox (change)="checkProduct($event)" [checked]="selectionM" [disabled]="disabledM">
+                  </mat-checkbox> SELEC 
+                </div>
+                  <!-- <div style="width: 100%; text-align: left; vertical-align: middle;">
                       SELEC
-              </div>
+              </div> -->
                 </th>
                 <div style="width: 50px;">
                 <td mat-cell *matCellDef="let element; let i = index">

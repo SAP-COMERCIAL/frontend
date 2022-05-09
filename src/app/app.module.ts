@@ -65,7 +65,7 @@ import { SupplierUserComponent } from './components/supplier-user/supplier-user.
 import { RepseReviewCcmComponent } from './components/repse-supplier-review-detail/repse-review-ccm/repse-review-ccm.component';
 import { RepseCommentsComponent } from './components/repse-supplier-capture-detail/repse-comments/repse-comments.component';
 import { RepseSupplierReviewValidosComponent } from './components/repse-supplier-review-detail/repse-supplier-review-validos/repse-supplier-review-validos.component';
-
+import { LoaderGlobalComponent } from './components/loader-global/loader-global.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -113,7 +113,8 @@ import { RepseSupplierReviewValidosComponent } from './components/repse-supplier
     SupplierUserComponent,
     RepseReviewCcmComponent,
     RepseCommentsComponent,
-    RepseSupplierReviewValidosComponent
+    RepseSupplierReviewValidosComponent,
+    LoaderGlobalComponent
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

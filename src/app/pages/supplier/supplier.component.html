@@ -71,11 +71,11 @@
                                 </ng-container>
 
                                 
-                                <ng-container matColumnDef="estado">
+                                <ng-container matColumnDef="estatus">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estatus </th>
                                     <td mat-cell *matCellDef="let element">
-                                        <ng-container *ngIf="element.estado == true">ACTIVO</ng-container>
-                                        <ng-container *ngIf="element.estado == false">INACTIVO</ng-container>
+                                        <ng-container *ngIf="element.estatus == true"><p style="color: green;">ACTIVO</p></ng-container>
+                                        <ng-container *ngIf="element.estatus == false"><p style="color: red;">INACTIVO</p></ng-container>
                                     </td>
                                 </ng-container>
                                 

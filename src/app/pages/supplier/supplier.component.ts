@@ -34,7 +34,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estado', 'edit', 'users'];
+  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estatus', 'edit', 'users'];
 
   constructor(public dialog: MatDialog
     , private _excelService : ExcelServiceService
