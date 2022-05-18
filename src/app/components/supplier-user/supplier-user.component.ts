@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { supplyusersservice } from '../../services/supplier.users.service';
 import { supplierUsersModel } from '../../models/supplier-users.model';
 import { AESEncryptService } from '../../services/aesencrypt.service';
+import { UserService } from '../../services/user.service';
+import { I } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-supplier-user',
@@ -23,6 +25,7 @@ usuario : string;
 clave : string;
 isEdit : boolean = false;
 proveedorId : number = 0;
+userId : number = 0;
 
 pageInfo : any;
 estadoPantalla : string;
@@ -37,6 +40,7 @@ public newPage: FormGroup;
     , private _snackBar : MatSnackBar
     , private _supplyusersservice : supplyusersservice
     , private cryptojs: AESEncryptService
+    , private _UserService : UserService
   ) { 
 
     this.pageInfo = data.arrayData;
@@ -55,6 +59,8 @@ public newPage: FormGroup;
     console.log('informacion', this.pageInfo);
     this.nombre = this.pageInfo.nombre
     this.usuario = this.pageInfo.rfc
+    
+    this.getUser(this.usuario);
   }
 
   cancel(event){
@@ -66,8 +72,10 @@ public newPage: FormGroup;
 
     let pswdEncryp = this.cryptojs.encrypt(this.newPage.controls["clave"].value);
 
+if(this.userId == 0){
+
     arrayToDb = ({
-      usuarioId : 0
+      usuarioId : this.userId
       , nombreUsuario : this.pageInfo.rfc
       , contrasegnna : pswdEncryp
       , correo : ''
@@ -76,12 +84,37 @@ public newPage: FormGroup;
       , estado : 1
       , proveedorId : this.pageInfo.proveedorid
     })
-
-    if(this.isEdit == true){
+  }else{
+    arrayToDb = ({
+      usuarioId : this.userId
+      , nombreUsuario : this.pageInfo.rfc
+      , contrasegnna : pswdEncryp
+      , correo : ''
+      , perfilId : 3
+    })
+  }
+    if(this.userId != 0){
       this.updateUser(arrayToDb);
     }else{
       this.insertUser(arrayToDb);
     }
+  }
+
+  getUser(rfc : string){
+    let arrayUsers : any;
+    let arrayUserFilter : any;
+
+    this._UserService.getUsersAll().subscribe(
+      res=> {
+        console.log('user', res);
+        arrayUsers = res;
+        arrayUserFilter = arrayUsers.filter(e => e.nombreUsuario == rfc)
+        if (arrayUserFilter.length > 0){
+          this.userId = arrayUserFilter[0]["usuarioId"];
+        }
+      },
+      error => console.log("error consulta regiones",error)
+    )
   }
 
   // =========================
@@ -113,7 +146,7 @@ public newPage: FormGroup;
 
   updateUser(arrayToDb){
     console.log('ACTUALIZA USUARIO');
-    // Inserta usuarios
+    // Actualiza usuarios
     this._supplyusersservice.updatesupplyUser(arrayToDb).subscribe(
       res=> {
         console.log('PROVEEDORES', res);

@@ -1,0 +1,113 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Facturas</h3>
+                </div>
+
+                <!-- <form> -->
+
+                <h6 class="heading-small text-muted mb-4"></h6>
+                <hr class="my-4" />
+                <!-- </form> -->
+                <div class="card">
+                    <table>
+                        <tr>
+                            <td class="col20"><input type="text" class="form-control form-control-line"
+                                    placeholder="BUSCAR" (keyup)="filtrar($event)">
+                            </td>
+                            <td class="col70"></td>
+                            <td class="col10"><button mat-raised-button color="primary"
+                                    (click)="descargarExcel()">Descargar</button></td>
+                            <td class="col10"></td>
+                            <td class="col10"></td>
+                        </tr>
+                    </table>
+                    <br>
+                </div>
+
+                <!-- INICIA CUERPO DE LA PÁGINA-->
+                <div class="col-12 col-md-12 p-0">
+                    <div class="card">
+                        <div class="card-body card-body-table">
+                            <mat-table [dataSource]="dataSourceShow" matSort class="mat-elevation-z8"
+                                style="width: 95%;">
+                                
+                                <ng-container matColumnDef="odc_id">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30">Orden de compra </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.odc_id}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="odc_codigo">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30">Orden de compra </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.odc_codigo}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="proveedor">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30">Proveedor </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.proveedor}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="total_odc">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Monto</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.total_odc | currency}} </td>
+                                </ng-container>
+
+                                
+                                <ng-container matColumnDef="moneda">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> Moneda </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.moneda}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="estatus">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Estatus </th>
+                                    <td mat-cell *matCellDef="let element">{{element.estatus}}
+                                    </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="add">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Facturas </th>
+                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+                                            (click)="add(element, $event)">Agregar</button> </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </mat-table>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div fxLayout="row" class="division">
+                    <div fxFlex.gt-sm="20%">
+                        <div></div>
+                    </div>
+                    <div fxFlex.gt-sm="20%">
+                    </div>
+                    <div fxFlex.gt-sm="20%">
+                        <div><button mat-raised-button color="warn" (click)="cancel($event)"><i class="fa fa-arrow-left fa-lg icon-cog-wite"></i></button></div>
+                    </div>
+                    <div fxFlex.gt-sm="20%">
+                        <div></div>
+                    </div>
+                    <div fxFlex.gt-sm="20%">
+                        <div></div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

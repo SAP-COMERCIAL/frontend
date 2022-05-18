@@ -2,23 +2,20 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { supplierModel } from 'src/app/models/supplier.model';
-import { supplyservice } from 'src/app/services/supplier.service';
-import { SupplierDetailComponent } from 'src/app/components/supplier-detail/supplier-detail.component';
+import { invoiceModel } from 'src/app/models/invoice.model';
+import { invoiceservice } from 'src/app/services/invoice.service';
+import { InvoiceDetailComponent } from 'src/app/components/invoice/invoice-detail/invoice-detail.component';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
-import { SupplierUserComponent } from '../../components/supplier-user/supplier-user.component';
-import { UserService } from '../../services/user.service';
 import { elementAt } from 'rxjs-compat/operator/elementAt';
 
 @Component({
-  selector: 'app-supplier',
-  templateUrl: './supplier.component.html',
-  styleUrls: ['./supplier.component.css']
+  selector: 'app-invoice',
+  templateUrl: './invoice.component.html',
+  styleUrls: ['./invoice.component.css']
 })
-
-export class SupplierComponent implements OnInit {
+export class InvoiceComponent implements OnInit {
 
 // =================
 // DECLARACIONES
@@ -30,18 +27,17 @@ public pageSize:number = 20;
 public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
-dataSourceShow : MatTableDataSource<supplierModel>
+dataSourceShow : MatTableDataSource<invoiceModel>
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estatus', 'edit', 'users']; //, 'delusers'
+  displayedColumns = ['proyecto_id', 'proyecto', 'cliente', 'total_odc_mxn', 'total_odc_usd', 'total_factura_mxn', 'total_factura_usd', 'presupuesto', 'detail'];
 
   constructor(public dialog: MatDialog
     , private _excelService : ExcelServiceService
-    , private _supplyservice : supplyservice
-    , private _UserService : UserService) { }
+    , private _invoiceservice : invoiceservice) { }
 
   // =================
   // PROCEDIMIENTOS
@@ -56,10 +52,13 @@ dataSourceShow : MatTableDataSource<supplierModel>
 
   this.dataSourceShow.filteredData.forEach(element => {
     dataSourceShowToExcel.push({
-                              nombre : element.nombre
-                              , direccion : element.direccion
-                              , RFC : element.rfc
-                              , estatus : element.estado
+                                proyecto : element.proyecto_id
+                              , cliente : element.cliente
+                              , total_odc_mxn : element.total_odc_mxn
+                              , total_odc_usd : element.total_odc_usd
+                              , total_factura_mxn : element.total_factura_mxn
+                              , total_factura_usd : element.total_factura_usd
+                              , presupuesto : element.presupuesto
       })
     });
 
@@ -83,7 +82,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(SupplierDetailComponent , dialogConfig);
+    const dialogRef = this.dialog.open(InvoiceDetailComponent , dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('proveedores');
@@ -97,8 +96,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      id: 1,
-      title: 'PROVEEDOR',
+      id: element.proyecto,
+      title: 'FACTURAS',
       arrayData : element,
       proveedorId: element.proveedorId,
       estadoPantalla: 'Edit'
@@ -108,44 +107,12 @@ dataSourceShow : MatTableDataSource<supplierModel>
     dialogConfig.height = '900px';
     dialogConfig.disableClose = true;
 
-    const dialogRef = this.dialog.open(SupplierDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(InvoiceDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       // window.location.reload();
     });
   }
-
-  users(element, event){
-    console.log('Editar un proveedores', element);
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.data = {
-      id: 1,
-      title: 'USUARIOS',
-      arrayData : element,
-      proveedorId: element.proveedorId,
-      estadoPantalla: 'Edit'
-     
-    }
-    dialogConfig.width = '500px';
-    dialogConfig.height = '500px';
-    dialogConfig.disableClose = true;
-
-    const dialogRef = this.dialog.open(SupplierUserComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      // window.location.reload();
-    });
-  }
-
-  // delusers(element, event){
-  //   let userId : number = 0
-  //   console.log('Elimina usuario', element);
-
-  //   this.getUser(element.rfc);
-
-  // }
 
   filtrar(event : Event){
     const filtro = (event.target as HTMLInputElement).value;
@@ -180,16 +147,16 @@ dataSourceShow : MatTableDataSource<supplierModel>
     let arraySort: any;
 
     // Proyectos registrados
-    this._supplyservice.getsupplyAll().subscribe(
+    this._invoiceservice.getinvoiceAll().subscribe(
       res=> {
         console.log('Proveedores', res);
 
         // Ordenado de arreglo
         arraySort = res.sort(function (a, b) {
-          if (a.supplier_id < b.supplier_id) {
+          if (a.proyecto < b.proyecto) {
             return 1;
           }
-          if (a.supplier_id > b.supplier_id) {
+          if (a.proyecto > b.proyecto) {
             return -1;
           }
           return 0;
@@ -206,36 +173,5 @@ dataSourceShow : MatTableDataSource<supplierModel>
       error => console.log("error consulta regiones",error)
     )
   }
-
-  // getUser(rfc : string){
-  //   let arrayUsers : any;
-  //   let arrayUserFilter : any;
-  //   let userId : number;
-
-  //   this._UserService.getUsersAll().subscribe(
-  //     res=> {
-  //       console.log('user', res);
-  //       arrayUsers = res;
-  //       arrayUserFilter = arrayUsers.filter(e => e.nombreUsuario == rfc)
-  //       userId = arrayUserFilter[0]["usuarioId"];
-  //       // this.deleteUser(userId);
-  //     },
-  //     error => console.log("error consulta regiones",error)
-  //   )
-
-  // }
-
-//   deleteUser(userId : number){
-
-// console.log('usuarios', userId);
-
-//     this._UserService.postDeleteUser(userId).subscribe(
-//       res=> {
-//         console.log('Proveedores', res);        
-        
-//       },
-//       error => console.log("error consulta regiones",error)
-//     )
-//   }
 
 }

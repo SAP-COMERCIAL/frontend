@@ -80,6 +80,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/repse-supplier-review/repse-supplier-review/repse-supplier-review.module').then(m => m.RepseSupplierReviewModule)
       },
       {
+        path: 'invoice',
+        loadChildren: () => import('./pages/invoice/invoice.module').then(m => m.InvoiceModule)
+      },
+      {
           path: 'login',
           component: LoginComponent,
       }

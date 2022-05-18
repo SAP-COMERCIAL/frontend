@@ -133,8 +133,6 @@ downloadURL : any;
     this.dialogRef.close();
   }
 
-  
-
   descargarArchivos(){
   
     let posicion : number;

@@ -25,4 +25,18 @@ export class poDetailModel{
     destino_cp : string
     destino_requisitor : string
     destino_telefono : string
+
+    // Detalle de orden de compra
+    SKU : string
+    cantidad : number
+    unidad_de_medida : string
+    descripcion : string
+    medida : string
+    color : string
+    otras_especificaciones : string
+    cantidad_Ordenar : number
+    precio_unitario : number
+    descuento : number
+    importe : number
+    
 }

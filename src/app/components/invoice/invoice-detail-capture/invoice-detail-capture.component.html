@@ -1,0 +1,270 @@
+<div fxLayout="row">
+    <h4>Captura de facturas</h4>
+  </div>
+  <br>
+  <div mat-dialog-content-example [formGroup]="newProject">
+    <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div><br>Proyecto</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div>
+                <br>{{proyecto_id}}
+            </div>
+        </div>
+        <div fxFlex.gt-sm="10%" >
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+            <div><br>Orden de compra</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div>
+                <br>{{po_Id}}
+            </div>
+        </div>
+        </div>
+        <br>
+        <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div><br>Factura</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div>
+            <mat-form-field>
+                <input [type]="facturaNumero" matInput class="form-control form-control-line control" formControlName="facturaNumero" >
+            </mat-form-field>
+            <span *ngIf="!newProject.get('facturaNumero').valid && newProject.get('facturaNumero').touched" class="help-block" style="color: red;"> capture un número de factura</span>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="10%" >
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+            <div>Fecha</div>
+        </div>
+        <div fxFlex.gt-sm="25%" >
+            <div><mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaControl($event)" class="control">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field></div>
+        </div>
+        </div>
+        <div fxLayout="row" class="division">
+            <div fxFlex.gt-sm="20%">
+                <div><br>Sub-Total</div>
+            </div>
+            <div fxFlex.gt-sm="25%" >
+                <div>
+                <mat-form-field>
+                    <input [type]="subTotalFactura" matInput class="form-control form-control-line control" formControlName="subTotalFactura" >
+                </mat-form-field>
+                <!-- <span *ngIf="!newProject.get('subTotalFactura').valid && newProject.get('SubTotalFactura').touched" class="help-block" style="color: red;"> capture el sub-total de factura</span> -->
+                </div>
+            </div>
+            <div fxFlex.gt-sm="10%" >
+            </div>
+            <div fxFlex.gt-sm="20%" >
+            <div>IVA</div>
+            </div>
+            <div fxFlex.gt-sm="25%" >
+                <mat-form-field>
+                    <input [type]="ivaFactura" matInput class="form-control form-control-line control" formControlName="ivaFactura" >
+                </mat-form-field>
+                <!-- <span *ngIf="!newProject.get('ivaFactura').valid && newProject.get('ivaFactura').touched" class="help-block" style="color: red;"> capture el iva de factura</span> -->
+            </div>
+        </div>
+        <div fxLayout="row" class="division">
+            <div fxFlex.gt-sm="20%">
+                <div><br>Total</div>
+            </div>
+            <div fxFlex.gt-sm="25%" >
+                <div>
+                <mat-form-field>
+                    <input [type]="totalFactura" matInput class="form-control form-control-line control" formControlName="totalFactura" >
+                </mat-form-field>
+                <span *ngIf="!newProject.get('totalFactura').valid && newProject.get('totalFactura').touched" class="help-block" style="color: red;"> capture el total de factura</span>
+                </div>
+            </div>
+            <div fxFlex.gt-sm="10%" >
+            </div>
+            <div fxFlex.gt-sm="20%" >
+            <div></div>
+            </div>
+            <div fxFlex.gt-sm="25%" >
+            </div>
+        </div>
+        <br>
+        <!--Tabla de captura-->
+        <div fxLayout="row" class="division">      
+        </div>
+  
+        <div fxLayout="row" class="division">
+        <div fxFlex.gt-sm="20%">
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+            <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar Factura</button></div>
+        </div>
+        <div fxFlex.gt-sm="20%" >
+            <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
+        </div>
+        </div>
+    </div>
+    <br>
+     <!-- INICIA CUERPO DE LA PÁGINA-->
+     <div class="col-12 col-md-12 p-0">
+      <div class="card">
+        <div class="card-body card-body-table">
+          <mat-table [dataSource]="datasourcePoDetail" matSort class="mat-elevation-z8" style="width: 95%;" #tabla1>
+  
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <div class="checkbox-magna"> 
+                    <mat-checkbox (change)="checkProduct($event)" [checked]="selectionM" [disabled]="disabledM">
+                    </mat-checkbox> SELEC 
+                  </div>
+                    <!-- <div style="width: 100%; text-align: left; vertical-align: middle;">
+                        SELEC
+                </div> -->
+                  </th>
+                  <div style="width: 50px;">
+                  <td mat-cell *matCellDef="let element; let i = index">
+                    <mat-checkbox color="warn"
+                                (click)="$event.stopPropagation()"
+                                (change)="SeleccionarRegistro(element.cantidad, element.ordendecompradetalle_id, element.um, element.descripcion, $event)"
+                                [checked]="element.activo"
+                                [(ngModel)]="element.activo"
+                                >
+                                <!--[checked]="selection.isSelected(element.proyecto_id)"-->
+                                <!--[(ngModel)]="element.activo" -->
+                                <!--formControlName="seleccionar" -->
+                    </mat-checkbox>
+                  </td>
+                </div>
+            </ng-container>
+  
+            <!-- SKU Column -->
+            <ng-container matColumnDef="sku">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>sku</span> </th>
+              <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
+            </ng-container>
+  
+            <!-- descripción Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
+              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+  
+            <!-- descripción Column -->
+            <ng-container matColumnDef="medida">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Medida </th>
+              <td mat-cell *matCellDef="let element"> {{element.medida}} </td>
+            </ng-container>
+  
+            <!-- descripción Column -->
+            <ng-container matColumnDef="color">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Color </th>
+              <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+            </ng-container>
+  
+            <!-- Name Column -->
+            <ng-container matColumnDef="um">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col30"> Unidad de Medida </th>
+              <td mat-cell *matCellDef="let element"> {{element.unidad_de_medida}} </td>
+            </ng-container>
+  
+            <!-- ID Column -->
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad</span> </th>
+              <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+            </ng-container>
+
+            <!-- cantidad_Ordenar Column -->
+            <ng-container matColumnDef="cantidad_Ordenar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Cantidad seleccionada </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <input type='cantidad_Ordenar' [(ngModel)]="element.cantidad_Ordenar" (keyup)="checkEnterKey($event, 'presupuesto')" (blur)="onBlurMethod(element, $event)">
+                </td>
+              </ng-container>
+
+              <!-- cantidad_Ordenar Column -->
+              <ng-container matColumnDef="cantidad_Surtida">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Cantidad Surtida </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidad_Surtida}}</td>
+              </ng-container>
+              
+              <!-- cantidad_Ordenar Column -->
+            <ng-container matColumnDef="cantidad_Pendiente">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Cantidad Pendiente </th>
+              <td mat-cell *matCellDef="let element"> {{element.cantidad_Pendiente}}</td>
+            </ng-container>
+
+            <!-- ID Column -->
+            <!-- <ng-container matColumnDef="cantidad_restante">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>Cantidad a surtir</span> </th>
+              <td mat-cell *matCellDef="let element"> {{element.cantidad_restante}} </td>
+            </ng-container> -->
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </mat-table>
+    
+        </div>
+        <!-- <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator> -->
+      </div>
+
+      <!--SUBTOTAL IVA TOTAL-->
+        <br>
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+            <!-- Subtotal: {{subtotal | currency}} -->
+          </div>
+          <div fxFlex.gt-sm="20%">
+            <!-- IVA: {{ivaSubtotal | currency}} -->
+          </div>
+          <div fxFlex.gt-sm="20%">
+            <!-- Subtotal: {{subtotal | currency}} -->
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+            <!-- Descuento: {{descuentoGlobal | currency}} -->
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+            <!-- IVA: {{ivaSubtotal | currency}} -->
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+              <!-- Total: {{total | currency}} -->
+          </div>
+        </div>
+
+    </div>
+  

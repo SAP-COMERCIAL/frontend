@@ -71,9 +71,9 @@
     <div fxLayout="row" class="division" *ngIf="requisicionId == 0">
         <div fxFlex.gt-sm="20%">
             <div class="input-group mb-3">
-                            <input type="file" name="loadFile" id="loadFile" class="form-control form-control-line" placeholder="SELECCIONA ARCHIVO" style="display: none;" (change)="onFileChange($event)" onclick="this.value=null;"> <!--[(ngModel)]="buscar" -->
-                            <label for="loadFile" style="margin: 0; text-align: left; width: 400px;" class="btn btn-outline-dark"><b style="background-color: orange;">{{nombreArchivo}}</b></label><br><!--{{nombreArchivo}}  formControlName="loadFile"--> 
-                        </div>
+              <input type="file" name="loadFile" id="loadFile" class="form-control form-control-line" placeholder="SELECCIONA ARCHIVO" style="display: none;" (change)="onFileChange($event)" onclick="this.value=null;"> <!--[(ngModel)]="buscar" -->
+              <label for="loadFile" style="margin: 0; text-align: left; width: 400px;" class="btn btn-outline-dark"><b style="background-color: orange;">{{nombreArchivo}}</b></label><br><!--{{nombreArchivo}}  formControlName="loadFile"--> 
+            </div>
         </div>
         <div fxFlex.gt-sm="20%">
             <!-- <div><button mat-raised-button color="primary" (click)="save(newProject, $event)">Subir Archivo</button></div> -->

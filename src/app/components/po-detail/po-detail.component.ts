@@ -22,17 +22,14 @@ declare var name: any;
 import Swal from 'sweetalert2';
 import { ElementSchemaRegistry } from '@angular/compiler';
 import { mapMultiply } from 'chartist';
-
-// function numeroALetras() {
-//   alert('Hello!!!');
-// }
+import { poDetailModel } from 'src/app/models/po-detail.model';
+import * as XLSX from 'xlsx';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 });
-
 
 @Component({
   selector: 'app-po-detail',
@@ -101,6 +98,9 @@ export class PoDetailComponent implements OnInit {
   logoCCC: any;
   descuentoGlobal : number = 0;
   terminoYCondiciones : any;
+  UploadDataExcel : MatTableDataSource<poDetailModel>;
+  public nombreArchivo : any = 'selecciona archivo';
+  dataExcel: any[];
   
   destinoNombre : any;
   destinoDireccion : any;
@@ -277,7 +277,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       return;
     }
 
-
     if(this.validaCamposRequeridos() == false){
       return;
     }
@@ -340,6 +339,9 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   onBlurMethod(){
     let descuento : number = Number(this.newProject.controls["descuentoGlobal"].value);
 
+    console.log('ingresa onblur', this.tabla1["_data"][0]["activo"])
+    console.log('ingresa precio', this.tabla1["_data"][0]["precio_unitario"])
+
     if (this.tabla1["_data"][0]["activo"] != undefined && this.tabla1["_data"][0]["precio_unitario"] != undefined){ // && this.tabla1["_data"][0]["activo"] == true 
       
       this.importe = 100
@@ -348,7 +350,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       this.total = 0;
 
       this.tabla1["_data"].forEach(element => {
-      
+        
         if (element.activo != undefined && element.activo == true && element.precio_unitario != undefined){
           this.subtotal = this.subtotal + element.cantidad * (element.precio_unitario - element.descuento);
         }
@@ -359,6 +361,10 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
       this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
       this.total = this.subtotal + this.ivaSubtotal;
+
+      console.log('subtotal', this.subtotal)
+      console.log('iva', this.ivaSubtotal)
+      console.log('total', this.total)
     }
   }
 
@@ -367,6 +373,157 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
     if(this.subtotal != 0){
       this.onBlurMethod()
     }
+  }
+
+  onFileChange(event){
+    this.datasourceCotizacionesDetalle = null;
+    console.log('PRIMERA CARGA', this.datasourceCotizacionesDetalle);
+    let descuento : number = Number(this.newProject.controls["descuentoGlobal"].value);
+    
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(event.target);
+    let extencionArchivo : string = '';
+    let arrayExcel = [];
+
+    this.UploadDataExcel = null;
+    this.subtotal = 0;
+    this.ivaSubtotal = 0;
+    this.total = 0;
+         
+    if (target.files.length !== 1) {
+      throw new Error('No se pueden seleccionar multiples archivos');
+    }
+
+    this.nombreArchivo = (target.files.length > 0) ? target.files[0]["name"].substring(1,30) : " (archivo nuevo) ";
+    const reader: FileReader = new FileReader();
+    reader.readAsBinaryString(target.files[0]);
+    extencionArchivo = target.files[0].name.substring(target.files[0].name.length - 5,target.files[0].name.length)
+
+    if(extencionArchivo == '.xlsx' || extencionArchivo.substring(extencionArchivo.length - 4, extencionArchivo.length) == 'xls'){
+      reader.onload = (e: any) => {
+        /* create workbook */
+  
+        const binarystr: string = e.target.result;
+        const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+  
+        /* selected the first sheet */
+        const wsname: string = wb.SheetNames[0];
+        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+        /* save data */
+        const data = XLSX.utils.sheet_to_json(ws);
+        this.dataExcel = this.validate(data);
+        this.dataExcel = data;
+
+        let arrayErrores = [];
+        let valido : boolean = true;
+
+        // Validadores de campos
+        let errorCantidad : boolean = false;
+        let errorUoM : boolean = false;
+        let errorDescripcion : boolean = false;
+        let errorSKU : boolean = false;
+        let DescripcionAnt : string = '';
+        let Descripcion : string = '';
+
+        // Ordena los descuentos por cr + produto + plataforma
+        this.dataExcel.sort(function (a, b) {
+          if (a.DESCRIPCION > b.DESCRIPCION) {
+            return 1;
+          }
+          if (a.DESCRIPCION < b.DESCRIPCION) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+
+        DescripcionAnt = this.dataExcel[0]["DESCRIPCION"].toUpperCase();
+
+        // Validamos que los crs del excel vs las existentes en el ctálogo
+      let contador : number = 0;
+      this.dataExcel.forEach(element => {
+        // Reinicia valores
+        valido = true;
+        errorDescripcion = false;
+
+        Descripcion = element.DESCRIPCION.toUpperCase()
+
+        if(element.SKU == '') {valido = false; errorSKU = true}
+        if(element.CANTIDAD_REQUERIDA == '') {valido = false; errorCantidad = true;}
+        if(element.UNIDAD.toUpperCase() == '') {valido = false; errorUoM = true;}
+        if(element.DESCRIPCION.toUpperCase() == '') {valido = false; errorDescripcion = true;}
+
+        contador++;
+        DescripcionAnt = Descripcion;
+
+        if(valido == false){
+          arrayErrores.push({ cantidad : element.CANTIDAD_REQUERIDA, 
+            unidad_de_medida : element.UNIDAD, 
+            descripcion : element.DESCRIPCION.toUpperCase()
+           })
+        }else{
+          arrayExcel.push({ 
+            requisition_Id : 0,
+            sku : element.SKU,
+            cantidad : element.CANTIDAD_REQUERIDA, 
+            unidad_medida : element.UNIDAD,
+            descripcion : element.DESCRIPCION,
+            medida : element.MEDIDA,
+            color : element.COLOR,
+            otras_especificaciones : element.OTRAS_ESPECIFICACIONES,
+            precio_unitario : element.PRECIO_UNITARIO,
+            importe : element.IMPORTE,
+            activo : true
+           })
+
+           if (element.PRECIO_UNITARIO != undefined){
+            this.subtotal = this.subtotal + element.CANTIDAD_REQUERIDA * (element.PRECIO_UNITARIO);
+          }
+        }
+      });
+
+      this.subtotal = this.subtotal - descuento
+
+      this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
+      this.total = this.subtotal + this.ivaSubtotal;
+
+      if(arrayErrores.length > 0){
+        this.openSnackBar('Los registros contienen datos incorrectos', '');
+        this.dataExcel = null;
+        return;
+      }
+
+      this.UploadDataExcel = new MatTableDataSource(arrayExcel);
+      this.datasourceCotizacionesDetalle = null;
+      this.datasourceCotizacionesDetalle = this.UploadDataExcel.filteredData;
+      console.log('this.UploadDataExcel', arrayExcel);
+      };
+
+      
+    }
+    else{
+      this.openSnackBar('Los registros contienen datos incorrectos', '');
+      this.deleteUploadFile(event);
+    }
+
+    // this.tabla1["_data"].forEach(element => {
+    //   this.subtotal = parseInt(element.presupuesto);
+    //   console.log('subtotal', element);
+    //   // CalculaPresupuesto = CalculaPresupuesto + presupuestoCategoria;
+
+    // });
+  }
+
+  validate(data : any)
+  {
+    // Valida que todos los datos esten completos
+    return data
+  }
+
+  deleteUploadFile(event: any){
+    this.nombreArchivo = " (archivo nuevo) ";
+    this.UploadDataExcel = null;
   }
 
   // =====================
@@ -1048,12 +1205,15 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
     let arrayDetail : any[] = [];
     let conteo : number = 0;
 
+    this.cotizacionId = this.newProject.controls["cotizacion_id"].value;
+
     table.forEach(element => {
 
       //Hdr
       if(conteo == 0){
+        console.log('element.cotizacion_id', this.cotizacionId);
         arrayTodb = {codigo : this.odc_Numero
-                  , cotizacion_id : element.cotizacion_id
+                  , cotizacion_id : (this.cotizacionId == undefined) ? 0 : this.cotizacionId
                   , proveedor_id : this.newProject.controls["proveedor_id"].value // this.proveedor_id
                   , fecha : moment(new Date, 'YYYY-M-DD')
                   , iva : this.iva
@@ -1080,21 +1240,25 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       {
         arrayDetail.push( {ordendecompradetalle_id : 0
                             , ordendecompra_id : this.ordendecompra_id
-                            , cotizaciondetalle_id : element.cotizaciondetalle_id
+                            , cotizaciondetalle_id : (element.cotizaciondetalle_id != undefined) ? element.cotizaciondetalle_id : 0 
                             , sku : element.sku
-                            , medida : element.medida
-                            , color : element.color
-                            , otras_especificaciones : element.otras_especificaciones
+                            , medida : (element.medida != undefined) ? element.medida : ''
+                            , color : (element.color != undefined) ? element.color : ''
+                            , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
                             , cantidad : element.cantidad
                             , unidad_medida : element.unidad_medida
-                            , costo : element.costo
+                            , costo : (element.costo != undefined) ? element.costo : 0
                             , precio_unitario : element.precio_unitario
-                            , importe_total : element.cantidad * (element.precio_unitario - element.descuento)
+                            , importe_total : element.cantidad * (element.precio_unitario - 0)
                             , descuento : element.descuento
                             , descripcion : element.descripcion });
       }
+      console.log('elemento', element)
       conteo++;
     });
+
+    console.log('encabezado', arrayTodb)
+    console.log('detalle', arrayDetail)
 
     this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(
       res=> {
@@ -1129,7 +1293,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                         , unidad_medida : element.unidad_medida
                         , costo : element.costo
                         , precio_unitario : element.precio_unitario 
-                        , importe_total : element.cantidad * (element.precio_unitario - element.descuento)
+                        , importe_total : element.cantidad * (element.precio_unitario - 0)
                         , descuento : element.descuento
                         , descripcion : element.descripcion }
     

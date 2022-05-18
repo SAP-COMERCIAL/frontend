@@ -245,6 +245,8 @@ export class QuotationDetailComponent implements OnInit {
     }
   }
 
+ 
+
 // =============================
 // UTILERIAS
 // =============================

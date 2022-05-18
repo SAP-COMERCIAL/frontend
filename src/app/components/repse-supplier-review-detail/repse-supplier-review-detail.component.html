@@ -27,7 +27,7 @@
                             <td class="col20"></td>
                             <td class="col70"></td>
                             <td class="col10"></td>
-                            <td class="col10"><button mat-raised-button color="primary"
+                            <td class="col10" hidden><button mat-raised-button color="primary"
                                 (click)="descargarExcel()">Descargar</button></td>
                             <td class="col10"></td>
                         </tr>
@@ -125,6 +125,21 @@
                             <tr>
                                 <td style="width: 5%;"></td>
                                 <td style="width: 70%;"><app-repse-supplier-review-validos></app-repse-supplier-review-validos></td>
+                            </tr>
+                        </table>
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="tabsEncabezado">Reporte Ejecutivo</span>
+                        </ng-template>
+                        <br><span class="tabsEncabezado">Reporte Ejecutivo</span><br>
+                        <div>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 5%;"></td>
+                                <td style="width: 70%;"><app-repse-report></app-repse-report></td>
                             </tr>
                         </table>
                         </div>

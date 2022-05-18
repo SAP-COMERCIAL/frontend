@@ -7,4 +7,5 @@ export class supplierModel{
     estado : string
     contacto : string
     url : string
+
 }

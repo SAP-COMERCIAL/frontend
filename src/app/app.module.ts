@@ -65,7 +65,12 @@ import { SupplierUserComponent } from './components/supplier-user/supplier-user.
 import { RepseReviewCcmComponent } from './components/repse-supplier-review-detail/repse-review-ccm/repse-review-ccm.component';
 import { RepseCommentsComponent } from './components/repse-supplier-capture-detail/repse-comments/repse-comments.component';
 import { RepseSupplierReviewValidosComponent } from './components/repse-supplier-review-detail/repse-supplier-review-validos/repse-supplier-review-validos.component';
+import { RepseReportComponent } from './components/repse-supplier-review-detail/repse-report/repse-report.component';
 import { LoaderGlobalComponent } from './components/loader-global/loader-global.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { InvoiceDetailComponent } from './components/invoice/invoice-detail/invoice-detail.component';
+import { InvoiceDetailCaptureComponent } from './components/invoice/invoice-detail-capture/invoice-detail-capture.component';
+import { SupplyProfileComponent } from './components/supply-profile/supply-profile.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -114,7 +119,12 @@ import { LoaderGlobalComponent } from './components/loader-global/loader-global.
     RepseReviewCcmComponent,
     RepseCommentsComponent,
     RepseSupplierReviewValidosComponent,
-    LoaderGlobalComponent
+    LoaderGlobalComponent,
+    InvoiceComponent,
+    InvoiceDetailComponent,
+    InvoiceDetailCaptureComponent,
+    SupplyProfileComponent,
+    RepseReportComponent,
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

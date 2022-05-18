@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GlobalUrl } from './webapiurl';
 import { environment } from 'src/environments/environment';
+import { userAppModel } from '../models/userApp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,14 @@ export class UserService {
     // this.url = GlobalUrl.url_webapi;
     this.url = environment.urlapi + environment.apiContextDrivers
   }
+
+  getUsersAll() {
+    const headers : HttpHeaders = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+        console.log('aqui esta', environment.urlapi + environment.apiContextDrivers + 'User/lista')
+    return this.http.get<userAppModel[]>(environment.urlapi + environment.apiContextDrivers + 'User/lista', {headers});
+}
 
   getAllUser(): Observable<any> {
     const headers = new HttpHeaders()
