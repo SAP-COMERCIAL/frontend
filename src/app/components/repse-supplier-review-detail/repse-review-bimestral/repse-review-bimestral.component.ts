@@ -13,6 +13,7 @@ import { UploadFileService } from 'src/app/services/upload-file/upload-file.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
 import jwt_decode from "jwt-decode";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-repse-review-bimestral',
@@ -143,6 +144,18 @@ usuarioId : string;
   
   }
   
+  reactive(element, event){
+    let arrayToDb : any;
+
+    arrayToDb = ({idDocumento: element.idDocumento
+                , estado: 0
+               , comentarios: '' })
+
+               console.log('aqui va el arreglo', arrayToDb)
+
+    this.aproveRejectDocument(arrayToDb);
+  }
+  
   // =================
   // UTILERIAS
   // =================
@@ -159,6 +172,32 @@ usuarioId : string;
     this.dataSourceShow = new MatTableDataSource(part);
     this.dataSourceShow.sort = this.sort;
     this.dataSourceShow.paginator = this.paginator;
+  }
+
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
+    }
   }
 
   // =================
@@ -217,6 +256,18 @@ usuarioId : string;
     console.log('estado show', estadoShow);
     
     this.arraySupplierGlobal.push({supplier_id : this.providerId, documento : titulo, estatus : estadoShow, aprobacion : true, url : urlShow, idDocumento : idDocumentShow})
+  }
+
+  aproveRejectDocument(arrayToDb : any){
+    // Inserta Archivos en base de datos
+    this._UploadFileService.postDocumentosAprobarRechazar(arrayToDb).subscribe(
+      res=> {
+        console.log('APROBAR DOCUMENTO', res);
+        this.getsupplierDocuments();
+        this.showMessage(2, 'Guardardo', 'success', 'Se actualizo el registro correctamente', 'Cerrar');
+      },
+      error => console.log("error al aprobar el ocumento",error)
+    )
   }
 
 }

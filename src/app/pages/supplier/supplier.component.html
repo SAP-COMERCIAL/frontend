@@ -80,15 +80,27 @@
                                 </ng-container>
                                 
                                 <ng-container matColumnDef="edit">
-                                    <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Editar </th>
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Editar </th>
                                     <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="edit(element, $event)">Editar</button> </td>
+                                            (click)="edit(element, $event)"><i class="fa fa-pencil fa-lg icon-cog-edit"></i></button> </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="users">
-                                    <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Usuario </th>
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Usuario </th>
                                     <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="users(element, $event)">Usuario</button> </td>
+                                            (click)="users(element, $event)"><i class="fa fa-user fa-lg icon-cog-user"></i></button> </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="aprove">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Autorizar </th>
+                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+                                            (click)="aprove(element, $event)"><i class="fa fa-check fa-lg icon-cog-check"></i></button> </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="deny">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Denegar </th>
+                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+                                            (click)="deny(element, $event)"><i class="fa fa-ban fa-lg icon-cog-cancel"></i></button> </td>
                                 </ng-container>
 
                                 <!-- <ng-container matColumnDef="delusers">

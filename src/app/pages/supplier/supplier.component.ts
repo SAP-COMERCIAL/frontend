@@ -11,6 +11,8 @@ import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { SupplierUserComponent } from '../../components/supplier-user/supplier-user.component';
 import { UserService } from '../../services/user.service';
 import { elementAt } from 'rxjs-compat/operator/elementAt';
+import Swal from 'sweetalert2';
+import { SubscribeOnObservable } from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-supplier',
@@ -36,7 +38,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estatus', 'edit', 'users']; //, 'delusers'
+  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estatus', 'edit', 'users', 'aprove', 'deny']; //, 'delusers'
 
   constructor(public dialog: MatDialog
     , private _excelService : ExcelServiceService
@@ -153,6 +155,30 @@ dataSourceShow : MatTableDataSource<supplierModel>
     console.log('filtro', filtro);
   }
 
+  aprove(element, event){
+    let arrayToDb : any;
+
+    arrayToDb = {
+      proveedorid : element.proveedorid
+        , estado : 1 
+                }
+    
+    console.log('APRUEBA', arrayToDb)
+
+    this.updateSupplierStatus(arrayToDb);
+  }
+
+  deny(element, event){
+    let arrayToDb : any;
+
+    arrayToDb = {
+      proveedorid : element.proveedorid
+        , estado : 0
+                }
+
+    this.updateSupplierStatus(arrayToDb);
+  }
+
   // =================
   // UTILERIAS
   // =================
@@ -169,6 +195,32 @@ dataSourceShow : MatTableDataSource<supplierModel>
     this.dataSourceShow = new MatTableDataSource(part);
     this.dataSourceShow.sort = this.sort;
     this.dataSourceShow.paginator = this.paginator;
+  }
+
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
+    }
   }
 
   // =================
@@ -206,6 +258,22 @@ dataSourceShow : MatTableDataSource<supplierModel>
       error => console.log("error consulta regiones",error)
     )
   }
+
+    updateSupplierStatus(arrayToDb : any){
+
+      // Inserta Proveedores
+      this._supplyservice.putsupplyStatus(arrayToDb).subscribe(
+        res=> {
+          console.log('ACTIVO', res);
+
+          this.showMessage(2, 'Comentario', 'success', 'Se actualizo el registro con exito', 'Cerrar');
+          this.getsupplier();
+
+        },
+        error => console.log("error al actualizar proveedores",error)
+      )
+    
+    }
 
   // getUser(rfc : string){
   //   let arrayUsers : any;

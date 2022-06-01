@@ -60,6 +60,7 @@
                                         <ng-container><button *ngIf="element.aprobacion == true && element.estatus == 0" mat-button color="primary" (click)="view(element, $event)"><i class="fa fa-eye fa-lg icon-cog-orange"></i> </button> </ng-container> 
                                         <ng-container><button *ngIf="element.aprobacion == true && element.estatus == 1" mat-button color="primary" (click)="view(element, $event)"><i class="fa fa-eye fa-lg icon-cog-green"></i> </button> </ng-container> 
                                         <ng-container><button *ngIf="element.aprobacion == true && element.estatus == 2" mat-button color="primary" (click)="view(element, $event)"><i class="fa fa-eye fa-lg icon-cog-red"></i> </button> </ng-container> 
+                                        <ng-container><button *ngIf="element.aprobacion == true && (element.estatus == 2 || element.estatus == 1)" mat-button color="primary" (click)="reactive(element, $event)"><i class="fa fa-retweet fa-lg icon-cog-reload"></i> </button> </ng-container> 
                                         <ng-container><button *ngIf="element.aprobacion == true && element.estatus == 4" mat-button color="primary"><i class="fa fa-eye fa-lg icon-cog-gray"></i> </button> </ng-container> 
                                     </td>
                                 </ng-container>

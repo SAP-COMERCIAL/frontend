@@ -20,5 +20,25 @@
 
 .colbuttons{
     vertical-align: bottom;
-    text-align: center;
+    text-align: left;
+}
+
+.icon-cog {
+    color: orange;
+}
+
+.icon-cog-cancel {
+    color: red;
+}
+
+.icon-cog-check {
+    color: rgb(126, 198, 17);
+}
+
+.icon-cog-user {
+    color: rgb(105, 151, 229);
+}
+
+.icon-cog-edit {
+    color: orange;
 }
