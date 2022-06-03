@@ -39,6 +39,13 @@ export class purchaseOrderservice {
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'PurchaseOrder/registrar',arrayToDb, {headers});
     }
 
+    updatePO_Hdr(arrayToDb : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+        return this.http.put(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/actualizar/ordendecompra', arrayToDb, {headers});
+    }
+
     insertPODetail(arrayToDb : any) {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')

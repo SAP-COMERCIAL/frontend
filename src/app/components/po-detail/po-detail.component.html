@@ -23,12 +23,12 @@
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div><br>Detalle</div>
+        <div><br>FO</div>
       </div>
       <div fxFlex.gt-sm="25%" >
             <div><br>
               <mat-form-field>
-                <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna"> <!--[(ngModel)]="codigo_requisicioninterna"-->
+                <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna">
             </mat-form-field>
             <!-- <span *ngIf="!newProject.get('codigo_requisicioninterna').valid && newProject.get('codigo_requisicioninterna').touched" class="help-block" style="color: red;"> seleccione una requisición</span> -->
           </div>
@@ -42,7 +42,7 @@
       <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="odc_Numero" matInput class="form-control form-control-line control" formControlName="odc_Numero"> <!-- [(ngModel)]="odc_Numero"-->
+              <input [type]="odc_Numero" matInput class="form-control form-control-line control" formControlName="odc_Numero"> 
             </mat-form-field>
             <span *ngIf="!newProject.get('odc_Numero').valid && newProject.get('odc_Numero').touched" class="help-block" style="color: red;"> seleccione un número de órden de compra</span>
           </div>

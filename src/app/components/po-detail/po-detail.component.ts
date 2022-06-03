@@ -24,6 +24,10 @@ import { ElementSchemaRegistry } from '@angular/compiler';
 import { mapMultiply } from 'chartist';
 import { poDetailModel } from 'src/app/models/po-detail.model';
 import * as XLSX from 'xlsx';
+import { I } from '@angular/cdk/keycodes';
+import { Console } from 'console';
+import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
+import { UserService } from '../../services/user.service';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -79,6 +83,7 @@ export class PoDetailComponent implements OnInit {
   datasourcePoveedores : any[] = [];
   datasourcesupplier : any;
   datasourcePo_Detail : any;
+  datasourceUsers : any;
   podatasource : MatTableDataSource<any>;
   po_count : number = 0;
   ordendecompra_id : number;
@@ -101,6 +106,10 @@ export class PoDetailComponent implements OnInit {
   UploadDataExcel : MatTableDataSource<poDetailModel>;
   public nombreArchivo : any = 'selecciona archivo';
   dataExcel: any[];
+  UserIdLogin : number;
+  userIdAprove : number;
+  userNameAprobe : string;
+  estado : number;
   
   destinoNombre : any;
   destinoDireccion : any;
@@ -119,6 +128,7 @@ export class PoDetailComponent implements OnInit {
     , private formBuilder: FormBuilder
     , private _snackBar : MatSnackBar
     , private _purchaseOrderservice : purchaseOrderservice
+    , private _UserService : UserService
     , public dialog: MatDialog
   ) { 
     this.projectInfo = data.arrayData;
@@ -154,8 +164,9 @@ export class PoDetailComponent implements OnInit {
   // =====================
 
   ngOnInit(): void {
-    
-    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+    this.estado = this.projectInfo.estado;
+        
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
       result => this.logoDataUrl = result
     )
 
@@ -167,7 +178,7 @@ export class PoDetailComponent implements OnInit {
       result => this.logoDataControlProy = result
     )
 
-    this.getImageDataUrlFromLocalPath1('../../../assets/images/background/logoCCC.PNG').then(
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/background/logoCCC.jpg').then(
       result => this.logoCCC = result
     )
 
@@ -193,7 +204,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
       this.newProject.patchValue({
         cotizacion_id : this.projectInfo.cotizacion_id,
-        codigo_requisicioninterna : this.projectInfo.codigo_requisicioninterna,
+        codigo_requisicioninterna : this.projectInfo.fo,
         odc_Numero : this.projectInfo.ordendecompra_codigo,
         proveedor_id : this.projectInfo.proveedor_id,
         iva : this.projectInfo.iva.toString(),
@@ -287,11 +298,17 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
     // TERMINA VALIDACIONES
 
-    this.insertPOHdr(this.tabla1["_data"]);
+    if(this.estadoPantalla == 'new'){
+      // INSERTA POHdr
+      this.insertPOHdr(this.tabla1["_data"]);
+    }else{
+      // ACTUALUIZA POHdr
+      this.updatePOHdr(this.tabla1["_data"]);
+    }
+
   }
 
   Authoriza(form, event){
-      console.log('autoriza po', form);
       this.updateODCStatus(form);
   }
 
@@ -339,9 +356,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   onBlurMethod(){
     let descuento : number = Number(this.newProject.controls["descuentoGlobal"].value);
 
-    console.log('ingresa onblur', this.tabla1["_data"][0]["activo"])
-    console.log('ingresa precio', this.tabla1["_data"][0]["precio_unitario"])
-
     if (this.tabla1["_data"][0]["activo"] != undefined && this.tabla1["_data"][0]["precio_unitario"] != undefined){ // && this.tabla1["_data"][0]["activo"] == true 
       
       this.importe = 100
@@ -362,9 +376,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
       this.total = this.subtotal + this.ivaSubtotal;
 
-      console.log('subtotal', this.subtotal)
-      console.log('iva', this.ivaSubtotal)
-      console.log('total', this.total)
     }
   }
 
@@ -377,7 +388,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
   onFileChange(event){
     this.datasourceCotizacionesDetalle = null;
-    console.log('PRIMERA CARGA', this.datasourceCotizacionesDetalle);
     let descuento : number = Number(this.newProject.controls["descuentoGlobal"].value);
     
     /* wire up file reader */
@@ -497,7 +507,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       this.UploadDataExcel = new MatTableDataSource(arrayExcel);
       this.datasourceCotizacionesDetalle = null;
       this.datasourceCotizacionesDetalle = this.UploadDataExcel.filteredData;
-      console.log('this.UploadDataExcel', arrayExcel);
       };
 
       
@@ -540,9 +549,19 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
     let decodeUser = jwt_decode(token)["usuario"];
     let decodeId = jwt_decode(token);
     
-    this.usuarioId = decodeUser; 
+    this.usuarioId = decodeUser;
 
-    switch(decodeUser){
+    if(this.estado == 3){
+      this.userNameAprobe = this.projectInfo.nombre_usuario;
+    }else{
+      this.userNameAprobe = this.usuarioId;
+    }
+
+    this.getusers();
+
+    console.log('usuario para firma', this.userNameAprobe)
+
+    switch(this.userNameAprobe){
       case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
                       this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
                         result => this.logoDataUrl = result
@@ -565,16 +584,11 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
         break;
       default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; // this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
                     // this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(              
-                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
                       result => this.logoDataUrl = result
                     )
         break;
     }
-
-    this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
-                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-                        result => this.logoDataUrl = result
-                      )
   }
   
   public async downloadAsPDF() {
@@ -673,7 +687,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
               text: '', fontSize:8, width: 20
             },
             {
-              text: 'COMMERCIAL CONTRACTING DE MEXICO, S DE RL DE CV      Carretera a Saltillo-Monterrey Km. 18                                       Parque Industrial Santa María 25900 Ramos Arízpe, Coahuila Telefono: (844) 866 9030 RFC: CCM-950330-P1A', fontSize:8, width: 230
+              text: 'COMMERCIAL CONTRACTING DE MEXICO, S DE RL DE CV      Carretera a Saltillo-Monterrey Km. 18                                       Parque Industrial Santa María 25903 Ramos Arízpe, Coahuila Telefono: (844) 866 9030 RFC: CCM-950330-P1A', fontSize:8, width: 230
             },
             {
               text: '', fontSize:8, width: 20
@@ -806,7 +820,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
         {
           columns: [
             {
-              text: ': ', fontSize:8, bold:true, width: 90
+              text: ' ', fontSize:8, bold:true, width: 90
             },
             {
               text: '', fontSize:8, width: '*'
@@ -816,6 +830,36 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
             },
             {
               text: '', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Orden de compra ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: this.newProject.controls['odc_Numero'].value, fontSize:8, width: '*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'FO ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: (this.newProject.controls['codigo_requisicioninterna'].value.length > 0) ? this.newProject.controls['codigo_requisicioninterna'].value : '', fontSize:8, width: '*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Proyecto ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: this.newProject.controls['odc_Numero'].value.substring(0, this.newProject.controls['odc_Numero'].value.indexOf('-')), fontSize:8, width: '*'
             }
           ]
         },
@@ -1221,8 +1265,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                   , tipo_moneda : 'MXN'
                   , sub_total : this.subtotal
                   , total : this.total
-
-                  // , nombre_usuario : '' // this.newProject.controls["proveedor_id"].value
                   , descuento_global : this.newProject.controls["descuentoGlobal"].value
                   , terminos_condiciones : this.newProject.controls["terminoYCondiciones"].value
                   , destino_nombre : this.newProject.controls["enviaANombre"].value
@@ -1232,6 +1274,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                   , destino_cp : (this.newProject.controls["destinoCP"].value.toString().length == 0 || this.newProject.controls["destinoCP"].value.toString() == '' || this.newProject.controls["destinoCP"].value == 0) ? 0 : this.newProject.controls["destinoCP"].value
                   , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
                   , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
+                  , fo : (this.newProject.controls["codigo_requisicioninterna"].value.length > 0) ? this.newProject.controls["codigo_requisicioninterna"].value : ''
                 }
       }
 
@@ -1274,6 +1317,83 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       },
       error => console.log("error alta de proyectos",error)
     )
+  }
+
+  updatePOHdr(table : any){
+    let arrayTodb : any;
+    let arrayDetail : any[] = [];
+    let conteo : number = 0;
+
+    this.cotizacionId = this.newProject.controls["cotizacion_id"].value;
+
+    table.forEach(element => {
+
+      //Hdr
+      if(conteo == 0){
+        console.log('element.cotizacion_id', this.projectInfo);
+        arrayTodb = {
+                  purchaseorder_id : this.projectInfo.ordendecompra_id
+                  , codigo : this.newProject.controls['odc_Numero'].value
+                  , cotizacion_id : (this.cotizacionId == undefined) ? 0 : this.cotizacionId
+                  , proveedor_id : this.newProject.controls["proveedor_id"].value
+                  , fecha : moment(new Date, 'YYYY-M-DD')
+                  , iva : this.iva
+                  , iva_moneda : this.ivaSubtotal
+                  , tipo_moneda : this.newProject.controls['moneda'].value
+                  , sub_total : this.subtotal
+                  , total : this.total
+                  , descuento_global : this.newProject.controls["descuentoGlobal"].value
+                  , terminos_condiciones : this.newProject.controls["terminoYCondiciones"].value
+                  , destino_nombre : this.newProject.controls["enviaANombre"].value
+                  , destino_direccion : this.newProject.controls["enviaADireccion"].value
+                  , destino_ciudad : this.newProject.controls["enviaACd"].value
+                  , destino_estado : this.newProject.controls["enviaAEstado"].value
+                  , destino_cp : (this.newProject.controls["destinoCP"].value.toString().length == 0 || this.newProject.controls["destinoCP"].value.toString() == '' || this.newProject.controls["destinoCP"].value == 0) ? 0 : this.newProject.controls["destinoCP"].value
+                  , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
+                  , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
+                  , fo : (this.newProject.controls["codigo_requisicioninterna"].value.length > 0) ? this.newProject.controls["codigo_requisicioninterna"].value : ''
+                }
+
+                this._purchaseOrderservice.updatePO_Hdr(arrayTodb).subscribe(
+                  res=> {
+                    console.log('Se inserto con éxito', res);
+              
+                    // // INSERTA REQUISICIONES DET
+                    // this.insertPODet(res, arrayDetail);
+            
+                    //INSERTA EN BITACORA
+                    this.insertODCStatus(res);
+            
+                    this.dialogRef.close();
+                  },
+                  error => console.log("error alta de proyectos",error)
+                )
+      }
+
+      // //Detalle
+      // if(element.activo == true)
+      // {
+      //   arrayDetail.push( {ordendecompradetalle_id : 0
+      //                       , ordendecompra_id : this.ordendecompra_id
+      //                       , cotizaciondetalle_id : (element.cotizaciondetalle_id != undefined) ? element.cotizaciondetalle_id : 0 
+      //                       , sku : element.sku
+      //                       , medida : (element.medida != undefined) ? element.medida : ''
+      //                       , color : (element.color != undefined) ? element.color : ''
+      //                       , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
+      //                       , cantidad : element.cantidad
+      //                       , unidad_medida : element.unidad_medida
+      //                       , costo : (element.costo != undefined) ? element.costo : 0
+      //                       , precio_unitario : element.precio_unitario
+      //                       , importe_total : element.cantidad * (element.precio_unitario - 0)
+      //                       , descuento : element.descuento
+      //                       , descripcion : element.descripcion });
+      // }
+      console.log('elemento', element)
+      conteo++;
+    });
+
+    console.log('arrelo a actualizar', arrayTodb)
+
   }
 
   insertPODet(po_id : any, arrayDetail : any){
@@ -1327,6 +1447,20 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       res=> {
         this.datasourceCotizacionesDetalle = res;
         console.log('ORDENES DE COMPRA DET', this.datasourceCotizacionesDetalle);
+      },
+      error => console.log("error consulta categorias",error)
+    )
+  }
+
+  getusers(){
+    let arrayUsers : any;
+    
+    this._UserService.getUsersAll().subscribe(
+      res=> {
+        this.datasourceUsers = res;
+        console.log('USUARIOS', this.datasourceUsers);
+        arrayUsers = this.datasourceUsers.filter(e => e.nombreUsuario == this.usuarioId)
+        this.UserIdLogin = Number(arrayUsers[0]["usuarioId"].toString());
       },
       error => console.log("error consulta categorias",error)
     )
@@ -1388,12 +1522,15 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
     console.log('numero de orden de compra', this.projectInfo.ordendecompra_id)
 
-    arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 3, usuario : 2}) // this.usuarioId
+    this.projectInfo.estado = this.UserIdLogin;
+
+    arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 3, usuario : this.UserIdLogin}) // this.usuarioId
 
     this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
         this.showMessage(2, 'Comentario', 'info', 'La autorización fue exitosa', 'Cerrar');
+        this.dialogRef.close();
         
       },
       error => console.log("error alta de proyectos",error)
@@ -1405,7 +1542,7 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
     console.log('numero de orden de compra', this.usuarioId)
 
-    arrayToDb = ({ordendecompra_id : po_id , estatus : 1, usuario : 2}) // this.usuarioId
+    arrayToDb = ({ordendecompra_id : po_id , estatus : 1, usuario : this.UserIdLogin}) // this.usuarioId
 
     this._purchaseOrderservice.insertPOStatus(arrayToDb).subscribe(
       res=> {

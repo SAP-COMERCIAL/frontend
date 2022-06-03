@@ -41,9 +41,6 @@ export class supplyservice {
     }
 
     putsupplyStatus(arrayToDb : any) {
-
-        console.log('graba', arrayToDb);
-
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));

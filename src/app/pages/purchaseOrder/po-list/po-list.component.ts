@@ -29,6 +29,8 @@ import { supplyservice } from '../../../services/supplier.service';
 import { quotationservice  } from 'src/app/services/quotation/quotation.service';
 import { elementAt } from 'rxjs-compat/operator/elementAt';
 import { element } from 'protractor';
+import { UserService } from '../../../services/user.service';
+import Swal from 'sweetalert2';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -74,12 +76,15 @@ dataSourceShow : MatTableDataSource<poModel>
   datasourcePoveedores : any[] = [];
   datasourceCotizaciones : any;
   datasourceCotizacionesDetalle : any;
+  UserIdLogin : number;
+  datasourceUsers : any;
 
   constructor(public dialog: MatDialog
           , private _excelService : ExcelServiceService
           , private _purchaseOrderService : purchaseOrderservice
           , private _supplyservice : supplyservice
-          , private _quotationservice : quotationservice) { }
+          , private _quotationservice : quotationservice
+          , private _UserService : UserService) { }
 
 
   // =====================
@@ -87,8 +92,8 @@ dataSourceShow : MatTableDataSource<poModel>
   // =====================
 
   ngOnInit(): void {
-
-    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+    
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
       result => this.logoDataUrl = result
     )
 
@@ -100,7 +105,7 @@ dataSourceShow : MatTableDataSource<poModel>
       result => this.logoDataControlProy = result
     )
 
-    this.getImageDataUrlFromLocalPath1('../../../assets/images/background/logoCCC.PNG').then(
+    this.getImageDataUrlFromLocalPath1('../../../assets/images/background/logoCCC.jpg').then(
       result => this.logoCCC = result
     )
 
@@ -216,6 +221,39 @@ dataSourceShow : MatTableDataSource<poModel>
 
   printPDF(element, event){
     console.log('elemento', element);
+
+    console.log('element.nombre_usuario', element.nombre_usuario)
+
+    switch(element.nombre_usuario){
+      case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+                        result => this.logoDataUrl = result
+                      )
+        break;
+      case('alejandro_fuentes'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(
+                        result => this.logoDataUrl = result
+                      )
+        break;
+      case('bernardo_tamez'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(
+                        result => this.logoDataUrl = result
+                      )        
+        break;
+      case('fernando_chavez'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
+                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(
+                        result => this.logoDataUrl = result
+                      )   
+        break;
+      default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
+                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
+                      result => this.logoDataUrl = result
+                    )
+        break;
+    }
+
+    console.log('aaaaqui estan las firmas', element.nombre_usuario)
+
     this.generaPDF(element);
   }
 
@@ -235,6 +273,32 @@ dataSourceShow : MatTableDataSource<poModel>
   //   pdfMake.createPdf(documentDefinition).open(); 
      
   // }
+
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
+    }
+  }
 
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
@@ -343,14 +407,33 @@ dataSourceShow : MatTableDataSource<poModel>
   updateODCStatus(element, statusToDb){
     let arrayToDb : any;
 
-    arrayToDb = ({ordendecompra_id : element.ordendecompra_id, estatus : statusToDb, usuario : 1})
+    arrayToDb = ({ordendecompra_id : element.ordendecompra_id, estatus : statusToDb, usuario : this.UserIdLogin})
 
     console.log('cancelado', element)
 
     this._purchaseOrderService.putPOCancel(element.ordendecompra_id).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
+        
+        //INSERTA EN BITACORA
+        this.insertODCStatusBitacora(element.ordendecompra_id);
+
         this.getPO_Hdr();
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+  }
+
+  insertODCStatusBitacora(po_id : any){
+    let arrayToDb : any;
+
+    console.log('numero de orden de compra', this.usuarioId)
+
+    arrayToDb = ({ordendecompra_id : po_id , estatus : 4, usuario : this.UserIdLogin}) // this.usuarioId
+
+    this._purchaseOrderService.insertPOStatus(arrayToDb).subscribe(
+      res=> {
+        console.log('Se inserto con éxito', res);
       },
       error => console.log("error alta de proyectos",error)
     )
@@ -396,40 +479,40 @@ dataSourceShow : MatTableDataSource<poModel>
     let decodeId = jwt_decode(token);
     
     this.usuarioId = decodeUser;
-    console.log('decodificado', decodeUser);
+    this.getusers();
 
-    switch(decodeUser){
-      case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
-                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-                        result => this.logoDataUrl = result
-                      )
-        break;
-      case('alejandro_fuentes'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
-                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(
-                        result => this.logoDataUrl = result
-                      )
-        break;
-      case('bernardo_tamez'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
-                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(
-                        result => this.logoDataUrl = result
-                      )        
-        break;
-      case('fernando_chavez'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
-                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(
-                        result => this.logoDataUrl = result
-                      )   
-        break;
-      default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
-                    this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-                      result => this.logoDataUrl = result
-                    )
-        break;
-    }
+    // switch(decodeUser){
+    //   case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
+    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+    //                     result => this.logoDataUrl = result
+    //                   )
+    //     break;
+    //   case('alejandro_fuentes'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
+    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(
+    //                     result => this.logoDataUrl = result
+    //                   )
+    //     break;
+    //   case('bernardo_tamez'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
+    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(
+    //                     result => this.logoDataUrl = result
+    //                   )        
+    //     break;
+    //   case('fernando_chavez'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
+    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(
+    //                     result => this.logoDataUrl = result
+    //                   )   
+    //     break;
+    //   default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
+    //                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+    //                   result => this.logoDataUrl = result
+    //                 )
+    //     break;
+    // }
 
-    this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
-                      this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-                        result => this.logoDataUrl = result
-                      )
+    // this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
+    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
+    //                     result => this.logoDataUrl = result
+    //                   )
     console.log('this.decodedSign', this.decodedSign)
   }
 
@@ -451,8 +534,30 @@ dataSourceShow : MatTableDataSource<poModel>
       error => console.log("error consulta proyectos",error)
     )
   }
+
+  getusers(){
+    let arrayUsers : any;
+    
+    this._UserService.getUsersAll().subscribe(
+      res=> {
+        this.datasourceUsers = res;
+        console.log('USUARIOS', this.datasourceUsers);
+        arrayUsers = this.datasourceUsers.filter(e => e.nombreUsuario == this.usuarioId)
+        this.UserIdLogin = Number(arrayUsers[0]["usuarioId"].toString());
+      },
+      error => console.log("error consulta categorias",error)
+    )
+  }
   
   public async downloadAsPDF(element) {
+
+    console.log('afuera')
+    if(element.estado != 3){
+      console.log('entre')
+      this.showMessage(1, 'Alerta', 'error', 'Para imprimir la orden de compra es necesario autorizarla', 'Cerrar');
+      return;
+    }
+
     let subtotalPDF : number = Number(element.sub_total);
     let ivaPDF : number = Number(element.iva_moneda);
     let totalPDF : number = Number(Number(element.sub_total) + Number(element.iva_moneda));
@@ -467,7 +572,7 @@ dataSourceShow : MatTableDataSource<poModel>
     var html = htmlToPdfmake(pdfTable.innerHTML);
 
     let arrayProveedor = this.datasourcesupplier.filter(e => e.proveedorid == element.proveedor_id) 
- 
+    
     var headers = {
       0:{
           col_1:{ text: 'Cantidad', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 },
@@ -536,7 +641,7 @@ dataSourceShow : MatTableDataSource<poModel>
               text: '', fontSize:8, width: 20
             },
             {
-              text: 'COMMERCIAL CONTRACTING DE MEXICO, S DE RL DE CV      Carretera a Saltillo-Monterrey Km. 18                                       Parque Industrial Santa María 25900 Ramos Arízpe, Coahuila Telefono: (844) 866 9030 RFC: CCM-950330-P1A', fontSize:8, width: 230
+              text: 'COMMERCIAL CONTRACTING DE MEXICO, S DE RL DE CV      Carretera a Saltillo-Monterrey Km. 18                                       Parque Industrial Santa María 25903 Ramos Arízpe, Coahuila Telefono: (844) 866 9030 RFC: CCM-950330-P1A', fontSize:8, width: 230
             },
             {
               text: '', fontSize:8, width: 20
@@ -669,7 +774,7 @@ dataSourceShow : MatTableDataSource<poModel>
         {
           columns: [
             {
-              text: ': ', fontSize:8, bold:true, width: 90
+              text: ' ', fontSize:8, bold:true, width: 90
             },
             {
               text: '', fontSize:8, width: '*'
@@ -679,6 +784,36 @@ dataSourceShow : MatTableDataSource<poModel>
             },
             {
               text: '', fontSize:8, width:'*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Orden de compra ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: element.ordendecompra_codigo, fontSize:8, width: '*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'FO ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: element.fo, fontSize:8, width: '*'
+            }
+          ]
+        },
+        {
+          columns: [
+            {
+              text: 'Proyecto ', fontSize:8, bold:true, width: 90
+            },
+            {
+              text: element.ordendecompra_codigo.substring(0, element.ordendecompra_codigo.indexOf('-')), fontSize:8, width: '*'
             }
           ]
         },
