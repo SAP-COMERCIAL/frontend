@@ -274,36 +274,4 @@ dataSourceShow : MatTableDataSource<supplierModel>
       )
     
     }
-
-  // getUser(rfc : string){
-  //   let arrayUsers : any;
-  //   let arrayUserFilter : any;
-  //   let userId : number;
-
-  //   this._UserService.getUsersAll().subscribe(
-  //     res=> {
-  //       console.log('user', res);
-  //       arrayUsers = res;
-  //       arrayUserFilter = arrayUsers.filter(e => e.nombreUsuario == rfc)
-  //       userId = arrayUserFilter[0]["usuarioId"];
-  //       // this.deleteUser(userId);
-  //     },
-  //     error => console.log("error consulta regiones",error)
-  //   )
-
-  // }
-
-//   deleteUser(userId : number){
-
-// console.log('usuarios', userId);
-
-//     this._UserService.postDeleteUser(userId).subscribe(
-//       res=> {
-//         console.log('Proveedores', res);        
-        
-//       },
-//       error => console.log("error consulta regiones",error)
-//     )
-//   }
-
 }

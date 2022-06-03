@@ -23,4 +23,11 @@ export class reportMasterservice {
             .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
         return this.http.get<reportMasterModel[]>(environment.urlapi + environment.apiContextDrivers + 'ReportMaster/' + id, {headers});
     }
+
+    getReportMasterByProject(project_id : number) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+        return this.http.get<reportMasterModel[]>(environment.urlapi + environment.apiContextDrivers + 'Report/' + project_id, {headers});
+    }
 }

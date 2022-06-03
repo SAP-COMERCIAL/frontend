@@ -1,14 +1,42 @@
-<p>Reporte maestro</p>
+<p>Reporte General</p>
+<div class="row">
+    <div style="width: 200px;"></div>
+    <div class="col">
+        <div class="card shadow">
+            <br>
+            <!-- INICIA CUERPO DE LA PÁGINA-->
+            <div class="col-12 col-md-12 p-0">
+                <div fxLayout="row" class="division">
+                <div fxFlex.gt-sm="10%"></div>
+                <div fxFlex.gt-sm="70%">
+                    <div>Proyecto<br>
+                        <mat-form-field>
+                            <mat-select class="form-control control" [(ngModel)]="proyecto_id">
+                              <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
+                                {{op.codigo_proyecto + ' - ' + op.nombre_proyecto + ' - ' + op.nombre_cliente}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div fxFlex.gt-sm="5%"></div>
+                <div fxFlex.gt-sm="15%">
+                    <div><br><br>
+                        <td class="col10"><button mat-raised-button color="accent" (click)="search()">Buscar</button></td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="card">
     <table>
         <tr>
             <td class="col20">
             </td>
             <td class="col70"></td>
-            <td class="col10"><button mat-raised-button color="primary"
-                    (click)="descargarExcel()">Descargar</button></td>
-            <td class="col10"><button mat-raised-button color="accent"
-                    (click)="cancel($event)">Cancelar</button></td>
+            <td class="col10"><button mat-raised-button color="primary" (click)="descargarExcel()">Descargar</button></td>
+            <td class="col10"><button mat-raised-button color="accent"  (click)="cancel($event)">Cancelar</button></td>
             <td class="col10"></td>
         </tr>
     </table>

@@ -71,6 +71,7 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { InvoiceDetailComponent } from './components/invoice/invoice-detail/invoice-detail.component';
 import { InvoiceDetailCaptureComponent } from './components/invoice/invoice-detail-capture/invoice-detail-capture.component';
 import { SupplyProfileComponent } from './components/supply-profile/supply-profile.component';
+import { ReportMasterComponent } from './pages/report-master/report-master/report-master.component';
 
 // import { Notification } from './components/notification/notification.component/notification.component.component';
 // import { NotificationComponent } from './components/notification/notification/notification.component' 
@@ -125,6 +126,7 @@ import { SupplyProfileComponent } from './components/supply-profile/supply-profi
     InvoiceDetailCaptureComponent,
     SupplyProfileComponent,
     RepseReportComponent,
+    ReportMasterComponent,
     // ,
     // Notification.ComponentComponent,
     // NotificationComponent

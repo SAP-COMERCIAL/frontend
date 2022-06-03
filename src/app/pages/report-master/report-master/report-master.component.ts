@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, LOCALE_ID, OnInit, Output, ViewChild, NgModule, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,10 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { BrowserStack } from 'protractor/built/driverProviders';
+import { projectservice } from '../../../services/projects/project.service';
+import { formatCurrency } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-report-master',
@@ -20,6 +24,7 @@ export class ReportMasterComponent implements OnInit {
 // =================
 // DECLARACIONES
 // =================
+curr = formatCurrency(10,this.locale, 'MXP');
 
 // Para paginación
 public pageIndex:number = 0;
@@ -29,11 +34,21 @@ public totalSize:number = 0;
 public array: any;
 dataSourceShow : MatTableDataSource<reportMasterModel>
 dataSourceShowX : any = [];
+datasourcePorjects : any;
+proyecto_id : number
 
   constructor(public dialog: MatDialog
-          , private _excelService : ExcelServiceService) { }
+          , private _excelService : ExcelServiceService
+          , private _projectService : projectservice
+          , private _reportMasterservice : reportMasterservice
+          , @Inject(LOCALE_ID) public locale: string) { }
 
   ngOnInit(): void {
+
+    this.getProyectos();
+  }
+
+  search(){
     this.getReporteMaestro();
   }
 
@@ -41,167 +56,135 @@ dataSourceShowX : any = [];
     console.log('Descargar a excel');
     let dataSourceShowToExcel : any[] = [];
     let contador : number = 0
-    let sumrateOriginal : number = 0;
-    let sumcostActual : number = 0;
-    let sumprojectAddedCost : number = 0;
-    let sumporjectedActualCost : number = 0;
-    let sumporjectedBalance : number = 0;
+    let sumOriginal_Estimate : number = 0;
+    let sumActual_Cost : number = 0;
+    let sumProject_Added : number = 0;
+    let sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION : number = 0;
+    let sumPROJECTED_BALANCE_AT_COMPLETION : number = 0;
 
     this.dataSourceShowX.forEach(element => {
 
-      switch(contador){
-        case 0 : 
+      // switch(contador){
+        
+      //   case 1 : 
             dataSourceShowToExcel.push({
-              etiqueta : ' '
+              '      ' : element.etiqueta
               , '    ' :''
-              , rateOriginal : 'Original Estimate'
+              , Original_Estimate : formatCurrency(element.Original_Estimate, this.locale, '$')
               , '' :''
-              , costActual : 'Actual Cost'
+              , Actual_Cost : formatCurrency(element.Actual_Cost, this.locale, '$')
               , ' ' :''
-              , projectAddedCost : 'Project Added'
+              , Project_Added : formatCurrency(element.Project_Added, this.locale, '$')
               , '  ' :''
-              , porjectedActualCost : 'PROJECTED ACTUAL COSTS AT COMPLETION'
+              , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : formatCurrency(element.PROJECTED_ACTUAL_COSTS_AT_COMPLETION, this.locale, '$')
               , '   ' :''
-              , porjectedBalance : 'PROJECTED BALANCE AT COMPLETION'
+              , PROJECTED_BALANCE_AT_COMPLETION : formatCurrency(element.PROJECTED_BALANCE_AT_COMPLETION, this.locale, '$')
             });
             contador++;
-          break;
-        case 1 : 
-            dataSourceShowToExcel.push({
-              etiqueta : 'Etiqueta' + element.etiqueta
-              , '    ' :''
-              , rateOriginal : element.rateOriginal
-              , '' :''
-              , costActual : element.costActual
-              , ' ' :''
-              , projectAddedCost : element.projectAddedCost
-              , '  ' :''
-              , porjectedActualCost : element.porjectedActualCost
-              , '   ' :''
-              , porjectedBalance : element.porjectedBalance
-            });
-            contador++;
-          break;
-        default :
-            dataSourceShowToExcel.push({
-              etiqueta : 'Etiqueta' + element.etiqueta
-              , '    ' :''
-              , rateOriginal : element.rateOriginal
-              , '' :''
-              , costActual : element.costActual
-              , ' ' :''
-              , projectAddedCost : element.projectAddedCost
-              , '  ' :''
-              , porjectedActualCost : element.porjectedActualCost
-              , '   ' :''
-              , porjectedBalance : element.porjectedBalance
-            });
-          break;
-      }
 
-      sumrateOriginal = sumrateOriginal + element.rateOriginal;
-      sumcostActual = sumcostActual + element.rateOriginal;
-      sumprojectAddedCost = sumprojectAddedCost + element.costActual;
-      sumporjectedActualCost = sumporjectedActualCost + element.projectAddedCost;
-      sumporjectedBalance = sumporjectedBalance + element.porjectedBalance;
+      sumOriginal_Estimate = sumOriginal_Estimate + element.Original_Estimate;
+      sumActual_Cost = sumActual_Cost + element.Original_Estimate;
+      sumProject_Added = sumProject_Added + element.Actual_Cost;
+      sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION = sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION + element.Project_Added;
+      sumPROJECTED_BALANCE_AT_COMPLETION = sumPROJECTED_BALANCE_AT_COMPLETION + element.PROJECTED_BALANCE_AT_COMPLETION;
     });
 
     dataSourceShowToExcel.push({
-      etiqueta : ''
+      '      ' : ''
       , '    ' :''
-      , rateOriginal : ''
+      , Original_Estimate : ''
       , '' :''
-      , costActual : ''
+      , Actual_Cost : ''
       , ' ' :''
-      , projectAddedCost : ''
+      , Project_Added : ''
       , '  ' :''
-      , porjectedActualCost : ''
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : ''
       , '   ' :''
-      , porjectedBalance : ''
+      , PROJECTED_BALANCE_AT_COMPLETION : ''
     });
 
     dataSourceShowToExcel.push({
-      etiqueta : 'Contract Totals'
+      '      ' : 'Contract Totals'
       , '    ' :''
-      , rateOriginal : sumrateOriginal
+      , Original_Estimate : sumOriginal_Estimate
       , '' :''
-      , costActual : sumcostActual
+      , Actual_Cost : sumActual_Cost
       , ' ' :''
-      , projectAddedCost : sumprojectAddedCost
+      , Project_Added : sumProject_Added
       , '  ' :''
-      , porjectedActualCost : sumporjectedActualCost
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION
       , '   ' :''
-      , porjectedBalance : sumporjectedBalance
+      , PROJECTED_BALANCE_AT_COMPLETION : sumPROJECTED_BALANCE_AT_COMPLETION
     });
     
     dataSourceShowToExcel.push({
-      etiqueta : ''
+      '      ' : ''
       , '    ' :''
-      , rateOriginal : ''
+      , Original_Estimate : ''
       , '' :''
-      , costActual : ''
+      , Actual_Cost : ''
       , ' ' :''
-      , projectAddedCost : ''
+      , Project_Added : ''
       , '  ' :''
-      , porjectedActualCost : ''
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : ''
       , '   ' :''
-      , porjectedBalance : ''
+      , PROJECTED_BALANCE_AT_COMPLETION : ''
     });
 
     dataSourceShowToExcel.push({
-      etiqueta : 'Subcontractors - Base Contract'
+      '      ' : 'Subcontractors - Base Contract'
       , '    ' :''
-      , rateOriginal : '0.00'
+      , Original_Estimate : '0.00'
       , '' :''
-      , costActual : '0.00'
+      , Actual_Cost : '0.00'
       , ' ' :''
-      , projectAddedCost : '0.00'
+      , Project_Added : '0.00'
       , '  ' :''
-      , porjectedActualCost : '0.00'
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : '0.00'
       , '   ' :''
-      , porjectedBalance : '0.00'
+      , PROJECTED_BALANCE_AT_COMPLETION : '0.00'
     });
 
     dataSourceShowToExcel.push({
-      etiqueta : 'Subcontractor Change Order Costs'
+      '      ' : 'Subcontractor Change Order Costs'
       , '    ' :''
-      , rateOriginal : '0.00'
+      , Original_Estimate : '0.00'
       , '' :''
-      , costActual : '0.00'
+      , Actual_Cost : '0.00'
       , ' ' :''
-      , projectAddedCost : '0.00'
+      , Project_Added : '0.00'
       , '  ' :''
-      , porjectedActualCost : '0.00'
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : '0.00'
       , '   ' :''
-      , porjectedBalance : '0.00'
+      , PROJECTED_BALANCE_AT_COMPLETION : '0.00'
     });
 
     dataSourceShowToExcel.push({
-      etiqueta : ''
+      '      ' : ''
       , '    ' :''
-      , rateOriginal : ''
+      , Original_Estimate : ''
       , '' :''
-      , costActual : ''
+      , Actual_Cost : ''
       , ' ' :''
-      , projectAddedCost : ''
+      , Project_Added : ''
       , '  ' :''
-      , porjectedActualCost : ''
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : ''
       , '   ' :''
-      , porjectedBalance : ''
+      , PROJECTED_BALANCE_AT_COMPLETION : ''
     });
 
     dataSourceShowToExcel.push({
-      etiqueta : 'PROJECTED TOTAL COSTS'
+      '      ' : 'PROJECTED TOTAL COSTS'
       , '    ' :''
-      , rateOriginal : ''
+      , Original_Estimate : ''
       , '' :''
-      , costActual : ''
+      , Actual_Cost : ''
       , ' ' :''
-      , projectAddedCost : ''
+      , Project_Added : ''
       , '  ' :''
-      , porjectedActualCost : sumporjectedActualCost
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION
       , '   ' :''
-      , porjectedBalance : sumporjectedBalance
+      , PROJECTED_BALANCE_AT_COMPLETION : sumPROJECTED_BALANCE_AT_COMPLETION
     });
 
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Reporte Maestro');  
@@ -210,18 +193,44 @@ dataSourceShowX : any = [];
   cancel(event){}
 
   getReporteMaestro(){
-    for (let i = 0; i < 10; i++) {
-        this.dataSourceShowX.push({
-          etiqueta : i
-          , rateOriginal : i
-          , costActual : i
-          , projectAddedCost : i
-          , porjectedActualCost : i
-          , porjectedBalance : i
-        });
-      }
-console.log('asasasas', this.dataSourceShowX);
 
+    // Obtiene reporte maestro
+    this._reportMasterservice.getReportMasterByProject(this.proyecto_id).subscribe(
+      res=> {
+        this.datasourcePorjects = res;
+        console.log('REPORTEEEE', res);
+        
+        this.datasourcePorjects.forEach(element => {
+          this.dataSourceShowX.push({
+            etiqueta : element.nombre
+            , Original_Estimate : element.original_Estimate
+            , Actual_Cost : element.projected_Actual_Costs
+            , Project_Added : element.projected_Added_Costs
+            , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : 0
+            , PROJECTED_BALANCE_AT_COMPLETION : element.projected_Balance
+          });
+        });
+
+        this.descargarExcel();
+        console.log('asasasas', this.dataSourceShowX);
+      },
+      error => console.log("error consulta proyectos",error)
+    )
+
+  }
+
+  // ==================
+  // SERVICIOS
+  // ==================
+  getProyectos(){
+    // Obtiene proyectos
+    this._projectService.getProjectAll().subscribe(
+      res=> {
+        this.datasourcePorjects = res;
+        console.log('PROYECTOS', res);
+      },
+      error => console.log("error consulta proyectos",error)
+    )
   }
 
 }
