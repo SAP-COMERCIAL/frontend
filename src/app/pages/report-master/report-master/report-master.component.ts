@@ -11,6 +11,7 @@ import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { BrowserStack } from 'protractor/built/driverProviders';
 import { projectservice } from '../../../services/projects/project.service';
 import { formatCurrency } from '@angular/common';
+import { Console } from 'console';
 
 
 
@@ -62,6 +63,7 @@ proyecto_id : number
     let sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION : number = 0;
     let sumPROJECTED_BALANCE_AT_COMPLETION : number = 0;
 
+    
     this.dataSourceShowX.forEach(element => {
 
       // switch(contador){
@@ -83,10 +85,12 @@ proyecto_id : number
             contador++;
 
       sumOriginal_Estimate = sumOriginal_Estimate + element.Original_Estimate;
-      sumActual_Cost = sumActual_Cost + element.Original_Estimate;
-      sumProject_Added = sumProject_Added + element.Actual_Cost;
-      sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION = sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION + element.Project_Added;
+      sumActual_Cost = sumActual_Cost + element.Actual_Cost;
+      sumProject_Added = sumProject_Added + element.Project_Added;
+      sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION = sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION + element.PROJECTED_ACTUAL_COSTS_AT_COMPLETION;
       sumPROJECTED_BALANCE_AT_COMPLETION = sumPROJECTED_BALANCE_AT_COMPLETION + element.PROJECTED_BALANCE_AT_COMPLETION;
+
+      console.warn('contos actual', sumActual_Cost);
     });
 
     dataSourceShowToExcel.push({
@@ -106,15 +110,15 @@ proyecto_id : number
     dataSourceShowToExcel.push({
       '      ' : 'Contract Totals'
       , '    ' :''
-      , Original_Estimate : sumOriginal_Estimate
+      , Original_Estimate : formatCurrency(sumOriginal_Estimate, this.locale, '$')
       , '' :''
-      , Actual_Cost : sumActual_Cost
+      , Actual_Cost : formatCurrency(sumActual_Cost, this.locale, '$')
       , ' ' :''
-      , Project_Added : sumProject_Added
+      , Project_Added : formatCurrency(sumProject_Added, this.locale, '$')
       , '  ' :''
-      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : formatCurrency(sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION, this.locale, '$')
       , '   ' :''
-      , PROJECTED_BALANCE_AT_COMPLETION : sumPROJECTED_BALANCE_AT_COMPLETION
+      , PROJECTED_BALANCE_AT_COMPLETION : formatCurrency(sumPROJECTED_BALANCE_AT_COMPLETION, this.locale, '$')
     });
     
     dataSourceShowToExcel.push({
@@ -134,29 +138,29 @@ proyecto_id : number
     dataSourceShowToExcel.push({
       '      ' : 'Subcontractors - Base Contract'
       , '    ' :''
-      , Original_Estimate : '0.00'
+      , Original_Estimate : formatCurrency(0.00, this.locale, '$')
       , '' :''
-      , Actual_Cost : '0.00'
+      , Actual_Cost : formatCurrency(0.00, this.locale, '$')
       , ' ' :''
-      , Project_Added : '0.00'
+      , Project_Added : formatCurrency(0.00, this.locale, '$')
       , '  ' :''
-      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : '0.00'
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : formatCurrency(0.00, this.locale, '$')
       , '   ' :''
-      , PROJECTED_BALANCE_AT_COMPLETION : '0.00'
+      , PROJECTED_BALANCE_AT_COMPLETION : formatCurrency(0.00, this.locale, '$')
     });
 
     dataSourceShowToExcel.push({
       '      ' : 'Subcontractor Change Order Costs'
       , '    ' :''
-      , Original_Estimate : '0.00'
+      , Original_Estimate : formatCurrency(0.00, this.locale, '$')
       , '' :''
-      , Actual_Cost : '0.00'
+      , Actual_Cost : formatCurrency(0.00, this.locale, '$')
       , ' ' :''
-      , Project_Added : '0.00'
+      , Project_Added : formatCurrency(0.00, this.locale, '$')
       , '  ' :''
-      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : '0.00'
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : formatCurrency(0.00, this.locale, '$')
       , '   ' :''
-      , PROJECTED_BALANCE_AT_COMPLETION : '0.00'
+      , PROJECTED_BALANCE_AT_COMPLETION : formatCurrency(0.00, this.locale, '$')
     });
 
     dataSourceShowToExcel.push({
@@ -182,9 +186,9 @@ proyecto_id : number
       , ' ' :''
       , Project_Added : ''
       , '  ' :''
-      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION
+      , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : formatCurrency(sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION, this.locale, '$')
       , '   ' :''
-      , PROJECTED_BALANCE_AT_COMPLETION : sumPROJECTED_BALANCE_AT_COMPLETION
+      , PROJECTED_BALANCE_AT_COMPLETION : formatCurrency(sumPROJECTED_BALANCE_AT_COMPLETION, this.locale, '$')
     });
 
     this._excelService.exportAsExcelFile(dataSourceShowToExcel, 'Reporte Maestro');  
@@ -194,25 +198,27 @@ proyecto_id : number
 
   getReporteMaestro(){
 
+    let arrayRPM : any;
     // Obtiene reporte maestro
     this._reportMasterservice.getReportMasterByProject(this.proyecto_id).subscribe(
       res=> {
-        this.datasourcePorjects = res;
+        arrayRPM = res;
         console.log('REPORTEEEE', res);
         
-        this.datasourcePorjects.forEach(element => {
+        arrayRPM.forEach(element => {
           this.dataSourceShowX.push({
             etiqueta : element.nombre
             , Original_Estimate : element.original_Estimate
-            , Actual_Cost : element.projected_Actual_Costs
+            , Actual_Cost : 0
             , Project_Added : element.projected_Added_Costs
-            , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : 0
+            , PROJECTED_ACTUAL_COSTS_AT_COMPLETION : element.projected_Actual_Costs
             , PROJECTED_BALANCE_AT_COMPLETION : element.projected_Balance
           });
         });
 
+        console.log('actual costoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', this.dataSourceShowX)
+
         this.descargarExcel();
-        console.log('asasasas', this.dataSourceShowX);
       },
       error => console.log("error consulta proyectos",error)
     )

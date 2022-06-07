@@ -164,7 +164,14 @@ export class PoDetailComponent implements OnInit {
   // =====================
 
   ngOnInit(): void {
-    this.estado = this.projectInfo.estado;
+    // this.estado = this.projectInfo.estado;
+    
+    if(this.projectInfo != null){
+      this.estado = this.projectInfo.estado;
+    }else{
+      this.estado = 0;
+    }
+
         
     this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
       result => this.logoDataUrl = result

@@ -37,6 +37,20 @@ export class ProjectCaptureDetailComponent implements OnInit {
   proeycto_numero_mayor : number = 0;
   myInput:any;
 
+  enviaANombre : string;
+  enviaADireccion : any;
+  enviaACd : any;
+  enviaAEstado : any;
+  enviaARequisitor : any;
+  enviaATelefono : any;
+  destinoNombre : any;
+  destinoDireccion : any;
+  destinoCiudad : any;
+  destinoEstado : any;
+  destinoCP : any;
+  destinoTelefono : any;
+  destinoRequisitor : any;
+
   numerotxt : any;
   nombretxt : any;
   clientecbo : any;  
@@ -80,7 +94,14 @@ export class ProjectCaptureDetailComponent implements OnInit {
       fecha_final_proyecto: new FormControl(''),
       responsable_proyecto: new FormControl('', [Validators.required]),
       centroDeCostos: new FormControl('', [Validators.required]),
-      almacen: new FormControl('')  
+      almacen: new FormControl(''),
+      enviaANombre : new FormControl(''),
+      enviaADireccion : new FormControl(''),
+      enviaACd : new FormControl(''),
+      enviaAEstado : new FormControl(''),
+      enviaARequisitor : new FormControl(''),
+      enviaATelefono : new FormControl(''),
+      destinoCP : new FormControl(''),
     });
   }
 

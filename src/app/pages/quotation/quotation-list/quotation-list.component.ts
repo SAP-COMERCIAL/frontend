@@ -42,14 +42,22 @@ dataSourceShow : MatTableDataSource<quotationListModel>
 
   getQuotationAll(){
     
+    let arrayTemp : any = [];
     let arraySort: any;
 
     // Proyectos registrados
     this._quotationService.getQuotationAll().subscribe(
       res=> {
 
+        res.forEach(element => {
+          if(element.estado == '0'){
+            arrayTemp.push(element);
+          }
+        });
+        
+        console.log('Cotizaciones', arrayTemp);
         // Ordenado de arreglo
-        arraySort = res.sort(function (a, b) {
+        arraySort = arrayTemp.sort(function (a, b) {
           if (a.cotizacion_id < b.cotizacion_id) {
             return 1;
           }
@@ -59,9 +67,10 @@ dataSourceShow : MatTableDataSource<quotationListModel>
           return 0;
         });
 
-        console.log('Cotizaciones', res);
         this.dataSourceShow = new MatTableDataSource(arraySort);
-        this.array = res;
+
+        console.log('nuevas cotizaciones', this.dataSourceShow);
+        this.array = arraySort;
         this.totalSize = this.array.length;
         
         this.iterator();
