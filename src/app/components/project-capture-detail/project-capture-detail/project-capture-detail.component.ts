@@ -182,7 +182,15 @@ console.log('data de entrada', this.projectInfo);
                   fecha_final_proyecto : moment(this.fecha_final_proyecto, 'YYYY-MM-DD').format('YYYY-MM-DD'),
                   responsable_proyecto : this.newProject.controls["responsable_proyecto"].value,
                   centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value,
-                  almacen_id : this.newProject.controls["almacen"].value};
+                  almacen_id : this.newProject.controls["almacen"].value,
+                  destino_nombre : 'nombre',
+                  destino_direccion : 'dire',
+                  destino_ciudad : 'cd',
+                  destino_estado : 'edo',
+                  destino_cp : 10,
+                  destino_requisitor : 'req',
+                  destino_telefono : 100
+                };
 
       // Actualiza registro NUEVO
       this._projectService.insertProjects(arrayTodb).subscribe(
@@ -206,7 +214,14 @@ console.log('data de entrada', this.projectInfo);
         responsable_proyecto : this.newProject.controls["centroDeCostos"].value,
         centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value,
         almacen_id : this.newProject.controls["almacen"].value,
-        codigo_proyecto : this.newProject.controls["codigo_proyecto"].value};
+        codigo_proyecto : this.newProject.controls["codigo_proyecto"].value,
+        destino_nombre : 'xxx',
+        destino_direccion : 'yyy',
+        destino_ciudad : 'zzz',
+        destino_estado : 'aaa',
+        destino_cp : 1110,
+        destino_requisitor : 'bb',
+        destino_telefono : 222};
 
         // Actualiza registro EDICION
         this._projectService.updateProjects(arrayTodb).subscribe(

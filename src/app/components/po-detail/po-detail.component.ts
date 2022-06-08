@@ -1282,6 +1282,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                   , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
                   , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
                   , fo : (this.newProject.controls["codigo_requisicioninterna"].value.length > 0) ? this.newProject.controls["codigo_requisicioninterna"].value : ''
+                  , retencion : 4
+                  , retencion_monto : 100
                 }
       }
 
@@ -1301,7 +1303,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                             , precio_unitario : element.precio_unitario
                             , importe_total : element.cantidad * (element.precio_unitario - 0)
                             , descuento : element.descuento
-                            , descripcion : element.descripcion });
+                            , descripcion : element.descripcion
+                            , nota : 'NOTAS INSERT' });
       }
       console.log('elemento', element)
       conteo++;
@@ -1359,6 +1362,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                   , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
                   , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
                   , fo : (this.newProject.controls["codigo_requisicioninterna"].value.length > 0) ? this.newProject.controls["codigo_requisicioninterna"].value : ''
+                  , retencion : 6
+                  , retencion_monto : 200
                 }
 
                 this._purchaseOrderservice.updatePO_Hdr(arrayTodb).subscribe(
@@ -1422,7 +1427,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                         , precio_unitario : element.precio_unitario 
                         , importe_total : element.cantidad * (element.precio_unitario - 0)
                         , descuento : element.descuento
-                        , descripcion : element.descripcion }
+                        , descripcion : element.descripcion
+                        , nota : 'NOTAS DEL INSERT' }
     
                         console.log('detalle', arrayTodbDetail);
 

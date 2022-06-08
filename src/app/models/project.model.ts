@@ -14,5 +14,12 @@ export class projectModel{
     nombre_almacen: string
     nombre_centro_de_costo_proyecto: string
     ubicacion_almacen: string
+    destino_nombre : string
+    destino_direccion : string
+    destino_ciudad : string
+    destino_estado : string
+    destino_cp : number
+    destino_requisitor : string
+    destino_telefono : number
 
 }
