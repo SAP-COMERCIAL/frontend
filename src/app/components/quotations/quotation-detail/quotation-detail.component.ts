@@ -311,6 +311,19 @@ getProyectos(){
   // Obtiene proyectos
   this._projectService.getProjectAll().subscribe(
     res=> {
+
+        // Ordena los proyectos
+        res.sort(function (a, b) {
+          if (a.proyecto_id < b.proyecto_id) {
+            return 1;
+          }
+          if (a.proyecto_id > b.proyecto_id) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+        
       this.datasourcePorjects = res;
       console.log('PROYECTOS', res);
     },

@@ -10,8 +10,7 @@
       <div fxFlex.gt-sm="25%" >
         <div *ngIf="requisicionId == 0">
           <mat-form-field>
-            <!-- [(ngModel)]="proyecto_id" (selectionChange)="emitFilters($event, 'Enviado')"  -->
-            <mat-select class="form-control control" formControlName="proyecto_id" (selectionChange)="proyectoSelected()" ><!--[(ngModel)]="proyecto_id" -->
+            <mat-select class="form-control control" formControlName="proyecto_id" (selectionChange)="proyectoSelected()" >
               <mat-option *ngFor="let op of datasourcePorjects" [value]="op.proyecto_id" >
                 {{op.codigo_proyecto}}
               </mat-option>
@@ -29,7 +28,7 @@
       <div fxFlex.gt-sm="25%" >
             <div *ngIf="requisicionId == 0">
               <mat-form-field>
-                <mat-select class="form-control control" formControlName="categoria_id" (selectionChange)="categorySelected()"><!-- (selectionChange)="emitFilters($event, 'Enviado')" [(ngModel)]="categoria_id" -->
+                <mat-select class="form-control control" formControlName="categoria_id" (selectionChange)="categorySelected()">
                   <mat-option *ngFor="let opx of datasourceCategories" [value]="opx.proyectocategoria_id">
                     {{opx.codigo_proyectocategoria}}
                   </mat-option>
@@ -47,7 +46,7 @@
       <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero" ><!--[(ngModel)]="requisicion_Numero"-->
+              <input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero" >
             </mat-form-field>
             <span *ngIf="!newProject.get('requisicion_Numero').valid && newProject.get('requisicion_Numero').touched" class="help-block" style="color: red;"> capture un número de Requisición</span>
           </div>

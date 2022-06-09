@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { poModel } from 'src/app/models/po.model';
 import { environment } from 'src/environments/environment';
+import { poDetailModel } from '../models/po-detail.model';
     
 @Injectable({
     providedIn: 'root'
@@ -29,7 +30,7 @@ export class purchaseOrderservice {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
             .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-        return this.http.get<poModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id, {headers});
+        return this.http.get<poDetailModel[]>(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/detalle/' + id, {headers});
     }
 
     insertPO_Hdr(arrayToDb : any) {

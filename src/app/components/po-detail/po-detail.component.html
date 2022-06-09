@@ -28,7 +28,7 @@
       <div fxFlex.gt-sm="25%" >
             <div><br>
               <mat-form-field>
-                <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna">
+                <input [type]="codigo_requisicioninterna" matInput class="form-control form-control-line control" formControlName="codigo_requisicioninterna" (blur)="onBlurFO($event)">
             </mat-form-field>
             <!-- <span *ngIf="!newProject.get('codigo_requisicioninterna').valid && newProject.get('codigo_requisicioninterna').touched" class="help-block" style="color: red;"> seleccione una requisición</span> -->
           </div>
@@ -75,7 +75,7 @@
       <div fxFlex.gt-sm="25%" >
         <div>
           <mat-form-field>
-            <mat-select class="form-control control" formControlName="iva" (selectionChange)="ivaSelected(newProject, $event)" > <!--[(ngModel)]="iva"-->
+            <mat-select class="form-control control" formControlName="iva" (selectionChange)="ivaSelected(newProject, $event)">
               <mat-option value= "16" selected="selected">16%</mat-option>
               <mat-option value= "10">10%</mat-option>
               <mat-option value= "0">0</mat-option>
@@ -288,6 +288,7 @@
         <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>
       </div>
     </div>
+    <br>
      <!-- INICIA CUERPO DE LA PÁGINA-->
      <div class="col-12 col-md-12 p-0">
       <div class="card">

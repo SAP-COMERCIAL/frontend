@@ -27,7 +27,7 @@ export class poDetailModel{
     destino_telefono : string
 
     // Detalle de orden de compra
-    SKU : string
+    // SKU : string
     cantidad : number
     unidad_de_medida : string
     descripcion : string
@@ -39,4 +39,6 @@ export class poDetailModel{
     descuento : number
     importe : number
     
+    sku : string;
+    unidad_medida : string
 }

@@ -112,7 +112,7 @@ public array: any;
      
     }
     dialogConfig.width = '900px';
-    dialogConfig.height = '700px';
+    dialogConfig.height = '1100px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(ProjectCaptureDetailComponent, dialogConfig);
@@ -158,7 +158,7 @@ public array: any;
      
     }
     dialogConfig.width = '900px';
-    dialogConfig.height = '700px';
+    dialogConfig.height = '1100px';
     dialogConfig.disableClose = true;
 
     const dialogRef = this.dialog.open(ProjectCaptureDetailComponent, dialogConfig);

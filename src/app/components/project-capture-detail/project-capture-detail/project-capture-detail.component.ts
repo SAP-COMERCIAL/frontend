@@ -12,6 +12,7 @@ import { CustomerDetailComponent } from '../../customer-detail/customer-detail.c
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { customerservice } from '../../../services/customer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-project-capture-detail',
@@ -121,8 +122,6 @@ console.log('data de entrada', this.projectInfo);
 
       this.presupuestoFormatoLable = this.projectInfo["presupuesto_proyecto"];
       // this.presupuestoFormato = this.projectInfo["presupuesto_proyecto"];
-
-
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
           codigo_proyecto : this.projectInfo["codigo_proyecto"],
@@ -133,7 +132,15 @@ console.log('data de entrada', this.projectInfo);
           fecha_final_proyecto : this.projectInfo["fecha_final_proyecto"] ,
           responsable_proyecto : this.projectInfo["responsable_proyecto"],
           centroDeCostos : this.projectInfo["centro_de_costo_proyecto"].toString() ,
-          almacen : this.projectInfo["almacen_id"].toString()
+          almacen : this.projectInfo["almacen_id"].toString(),
+          
+          enviaANombre : this.projectInfo["destino_nombre"].toString(),
+          enviaADireccion : this.projectInfo["destino_direccion"].toString(),
+          enviaACd : this.projectInfo["destino_ciudad"].toString(),
+          enviaAEstado : this.projectInfo["destino_estado"].toString(),
+          enviaARequisitor : this.projectInfo["destino_requisitor"].toString(),
+          enviaATelefono : this.projectInfo["destino_telefono"].toString(),
+          destinoCP : this.projectInfo["destino_cp"].toString()
       })
       this.nombre_proyecto = this.projectInfo["nombre_proyecto"];
       this.cliente = this.projectInfo["cliente_id"].toString() ;
@@ -183,21 +190,22 @@ console.log('data de entrada', this.projectInfo);
                   responsable_proyecto : this.newProject.controls["responsable_proyecto"].value,
                   centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value,
                   almacen_id : this.newProject.controls["almacen"].value,
-                  destino_nombre : 'nombre',
-                  destino_direccion : 'dire',
-                  destino_ciudad : 'cd',
-                  destino_estado : 'edo',
-                  destino_cp : 10,
-                  destino_requisitor : 'req',
-                  destino_telefono : 100
+                  destino_nombre : this.newProject.controls["enviaANombre"].value,
+                  destino_direccion : this.newProject.controls["enviaADireccion"].value,
+                  destino_ciudad : this.newProject.controls["enviaACd"].value,
+                  destino_estado : this.newProject.controls["enviaAEstado"].value,
+                  destino_cp : this.newProject.controls["destinoCP"].value,
+                  destino_requisitor : this.newProject.controls["enviaARequisitor"].value,
+                  destino_telefono : this.newProject.controls["enviaATelefono"].value
                 };
 
       // Actualiza registro NUEVO
       this._projectService.insertProjects(arrayTodb).subscribe(
         res=> {
           console.log('Se inserto con éxito', res);
-          this.openSnackBar('Se genero el proyecto exitosamente', 'success');
-          
+          // this.openSnackBar('Se genero el proyecto exitosamente', 'success');
+
+          this.showMessage(2, 'Exitoso', 'success', 'Se inserto el registro con éxito', 'Cerrar');
           // Inserta categorias
           this.insertCategories();
         },
@@ -215,18 +223,19 @@ console.log('data de entrada', this.projectInfo);
         centro_de_costo_proyecto : this.newProject.controls["centroDeCostos"].value,
         almacen_id : this.newProject.controls["almacen"].value,
         codigo_proyecto : this.newProject.controls["codigo_proyecto"].value,
-        destino_nombre : 'xxx',
-        destino_direccion : 'yyy',
-        destino_ciudad : 'zzz',
-        destino_estado : 'aaa',
-        destino_cp : 1110,
-        destino_requisitor : 'bb',
-        destino_telefono : 222};
+        destino_nombre : this.newProject.controls["enviaANombre"].value,
+        destino_direccion : this.newProject.controls["enviaADireccion"].value,
+        destino_ciudad : this.newProject.controls["enviaACd"].value,
+        destino_estado : this.newProject.controls["enviaAEstado"].value,
+        destino_cp : this.newProject.controls["destinoCP"].value,
+        destino_requisitor : this.newProject.controls["enviaARequisitor"].value,
+        destino_telefono : this.newProject.controls["enviaATelefono"].value};
 
         // Actualiza registro EDICION
         this._projectService.updateProjects(arrayTodb).subscribe(
         res=> {
         console.log('Se edito con éxito', res);
+        this.showMessage(2, 'Exitoso', 'success', 'Se actualizo el registro con éxito', 'Cerrar');
         },
         error => console.log("error consulta regiones",error)
         )
@@ -362,6 +371,32 @@ selectcustommer(event){
         this.presupuesto_proyecto = this.presupuesto_proyecto.substring(0,this.presupuesto_proyecto.length-1)
       }
 
+    }
+  }
+
+  showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
+  
+    switch(tipoMensaje){
+      case(1) : 
+          Swal.fire({
+            title: header,
+            html: '<p style="text-transform: capitalize;"></p>' + '<p><b>' + message + '</b></p>' + '<p style="text-transform: capitalize;"></p>',
+            icon: icon,
+            confirmButtonText: buttonCaption,
+            customClass: {
+                confirmButton: 'btn  btn-rounded btn-outline-warning'
+            }
+          })
+        break;
+      case(2) :
+          Swal.fire({
+            position: 'top-end',
+            icon: icon,
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        break;
     }
   }
 

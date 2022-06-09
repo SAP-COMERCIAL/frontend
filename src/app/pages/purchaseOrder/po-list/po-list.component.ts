@@ -2,23 +2,13 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import * as moment from 'moment';
-import { AbstractControl, FormBuilder } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { DataSource } from '@angular/cdk/table';
-import { CategoriesComponent } from 'src/app/components/categories/categories/categories.component';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
-import { getMatFormFieldPlaceholderConflictError } from '@angular/material/form-field';
 import { poModel } from 'src/app/models/po.model';
 import { purchaseOrderservice } from 'src/app/services/PurchaseOrder.service';
 import { PoDetailComponent } from 'src/app/components/po-detail/po-detail.component';
-
 import jsPDF from 'jspdf';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -27,8 +17,6 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import jwt_decode from "jwt-decode";
 import { supplyservice } from '../../../services/supplier.service';
 import { quotationservice  } from 'src/app/services/quotation/quotation.service';
-import { elementAt } from 'rxjs-compat/operator/elementAt';
-import { element } from 'protractor';
 import { UserService } from '../../../services/user.service';
 import Swal from 'sweetalert2';
 
@@ -125,7 +113,6 @@ dataSourceShow : MatTableDataSource<poModel>
   }
 
   descargarExcel(){
-    console.log('Descargar a excel');
     let dataSourceShowToExcel : any[] = [];
 
   this.dataSourceShow.filteredData.forEach(element => {
@@ -141,8 +128,7 @@ dataSourceShow : MatTableDataSource<poModel>
   }
 
   nuevaOrdenDeCompra(event){
-    console.log('Alta de requisiciones');
-
+    
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
@@ -165,11 +151,9 @@ dataSourceShow : MatTableDataSource<poModel>
   }
 
   editRequisicion(element, event){
-    console.log('Alta de requisiciones');
 
     const dialogConfig = new MatDialogConfig();
 
-    console.log('autoriza registro', element);
     dialogConfig.data = {
       id: 1,
       title: 'REQUISICIONES',
@@ -190,11 +174,8 @@ dataSourceShow : MatTableDataSource<poModel>
   }
 
   aproveODC(element, event){
-    console.log('Aprueba orden de compra');
 
     const dialogConfig = new MatDialogConfig();
-
-    console.log('aprueba odc', element)
 
     dialogConfig.data = {
       id: 1,
@@ -220,9 +201,6 @@ dataSourceShow : MatTableDataSource<poModel>
   }
 
   printPDF(element, event){
-    console.log('elemento', element);
-
-    console.log('element.nombre_usuario', element.nombre_usuario)
 
     switch(element.nombre_usuario){
       case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
@@ -252,27 +230,12 @@ dataSourceShow : MatTableDataSource<poModel>
         break;
     }
 
-    console.log('aaaaqui estan las firmas', element.nombre_usuario)
-
     this.generaPDF(element);
   }
 
   // =====================
   // UTILERIAS
   // =====================
-
-  // public downloadAsPDF() {
-  //   const doc = new jsPDF();
-   
-  //   const pdfTable = this.pdfTable.nativeElement;
-   
-  //   var html = htmlToPdfmake(pdfTable.innerHTML);
-  //   // var html = htmlToPdfmake(AllTable.innerHTML);
-     
-  //   const documentDefinition = { content: html };
-  //   pdfMake.createPdf(documentDefinition).open(); 
-     
-  // }
 
   showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
   

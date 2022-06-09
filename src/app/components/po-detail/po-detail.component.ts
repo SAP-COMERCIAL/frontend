@@ -28,6 +28,7 @@ import { I } from '@angular/cdk/keycodes';
 import { Console } from 'console';
 import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
 import { UserService } from '../../services/user.service';
+import { projectservice } from '../../services/projects/project.service';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -110,6 +111,7 @@ export class PoDetailComponent implements OnInit {
   userIdAprove : number;
   userNameAprobe : string;
   estado : number;
+  datasourcePorjects : any;
   
   destinoNombre : any;
   destinoDireccion : any;
@@ -130,6 +132,7 @@ export class PoDetailComponent implements OnInit {
     , private _purchaseOrderservice : purchaseOrderservice
     , private _UserService : UserService
     , public dialog: MatDialog
+    , private _projectService : projectservice
   ) { 
     this.projectInfo = data.arrayData;
     this.estadoPantalla = data.estadoPantalla;
@@ -197,8 +200,9 @@ export class PoDetailComponent implements OnInit {
     this.getsupplierAll();
     this.getProveedores();
     this.getCotizacionesAll();
+    this.getProyectos();
 
-this.newProject.controls["descuentoGlobal"].setValue(0);
+    this.newProject.controls["descuentoGlobal"].setValue(0);
 
     if(this.projectInfo != undefined){
       this.ordendecompra_id = this.projectInfo.proveedor_nombre
@@ -321,7 +325,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
   ActivarDesactivar(element : any, event : Event){
     this.activoEdicion = event["checked"]
-    console.log('Actualiza registro de activar y desactivar', event["checked"])
     this.onBlurMethod(); 
   }
 
@@ -523,12 +526,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       this.deleteUploadFile(event);
     }
 
-    // this.tabla1["_data"].forEach(element => {
-    //   this.subtotal = parseInt(element.presupuesto);
-    //   console.log('subtotal', element);
-    //   // CalculaPresupuesto = CalculaPresupuesto + presupuestoCategoria;
-
-    // });
   }
 
   validate(data : any)
@@ -540,6 +537,24 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   deleteUploadFile(event: any){
     this.nombreArchivo = " (archivo nuevo) ";
     this.UploadDataExcel = null;
+  }
+
+  onBlurFO(event){
+
+    let arrayFiltroFO : any
+
+    arrayFiltroFO = this.datasourcePorjects.filter(e => e.nombre_centro_de_costo_proyecto.toString().toLowerCase() == this.newProject.controls["codigo_requisicioninterna"].value.toString().toLowerCase());
+
+    if(arrayFiltroFO.length > 0){
+      // OBTIENE CAMPOS DE DESTINO
+      this.newProject.controls["enviaANombre"].setValue(arrayFiltroFO[0]["destino_nombre"])
+      this.newProject.controls["enviaADireccion"].setValue(arrayFiltroFO[0]["destino_direccion"])
+      this.newProject.controls["enviaACd"].setValue(arrayFiltroFO[0]["destino_ciudad"])
+      this.newProject.controls["enviaAEstado"].setValue(arrayFiltroFO[0]["destino_estado"])
+      this.newProject.controls["destinoCP"].setValue(arrayFiltroFO[0]["destino_cp"])
+      this.newProject.controls["enviaATelefono"].setValue(arrayFiltroFO[0]["destino_telefono"])
+      this.newProject.controls["enviaARequisitor"].setValue(arrayFiltroFO[0]["destino_requisitor"])
+    }
   }
 
   // =====================
@@ -565,8 +580,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
     }
 
     this.getusers();
-
-    console.log('usuario para firma', this.userNameAprobe)
 
     switch(this.userNameAprobe){
       case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be'; //this.decodedSign = 'https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/firmas%2FFirmaPablo.PNG?alt=media&token=c5a8f192-5cb8-4025-8d30-31918abfa5be' //this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be' 
@@ -1207,6 +1220,30 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
     this.datasourcePoveedores = arrayProvider;
   }
 
+  getProyectos(){
+    // Obtiene proyectos
+    this._projectService.getProjectAll().subscribe(
+      res=> {
+  
+          // Ordena los proyectos
+          res.sort(function (a, b) {
+            if (a.proyecto_id < b.proyecto_id) {
+              return 1;
+            }
+            if (a.proyecto_id > b.proyecto_id) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+          
+        this.datasourcePorjects = res;
+        console.log('PROYECTOS', res);
+      },
+      error => console.log("error consulta proyectos",error)
+    )
+  }
+
   getPO_Hdr(codigo_cotizacion : string){
     // ordenes de compra Todas
     let arrayPO_Hdr : any[];
@@ -1229,6 +1266,19 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   getCotizacionesAll(){
     this._quotationservice.getQuotationAll().subscribe(
       res=> {
+
+        // Ordena los proyectos
+        res.sort(function (a, b) {
+          if (a.cotizacion_id < b.cotizacion_id) {
+            return 1;
+          }
+          if (a.cotizacion_id > b.cotizacion_id) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+
         this.datasourceCotizaciones = res;
         console.log('COTIZACIONES TODAS', res);
   
@@ -1238,8 +1288,15 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   }
 
   getcotizacionesDetail(cotizacion_id : any){
+    let arrayDatasourceQT : any;
+    
     this._quotationservice.getQuotationDetail(cotizacion_id).subscribe(
       res=> {
+
+        res.forEach(element => {
+          console.log('entra');
+        });
+
         this.datasourceCotizacionesDetalle = res;
         console.log('COTIZACIONES TODAS', res);
 
@@ -1262,7 +1319,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
       //Hdr
       if(conteo == 0){
-        console.log('element.cotizacion_id', this.cotizacionId);
         arrayTodb = {codigo : this.odc_Numero
                   , cotizacion_id : (this.cotizacionId == undefined) ? 0 : this.cotizacionId
                   , proveedor_id : this.newProject.controls["proveedor_id"].value // this.proveedor_id
@@ -1306,12 +1362,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                             , descripcion : element.descripcion
                             , nota : 'NOTAS INSERT' });
       }
-      console.log('elemento', element)
       conteo++;
     });
-
-    console.log('encabezado', arrayTodb)
-    console.log('detalle', arrayDetail)
 
     this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(
       res=> {
@@ -1340,7 +1392,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
       //Hdr
       if(conteo == 0){
-        console.log('element.cotizacion_id', this.projectInfo);
         arrayTodb = {
                   purchaseorder_id : this.projectInfo.ordendecompra_id
                   , codigo : this.newProject.controls['odc_Numero'].value
@@ -1400,11 +1451,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
       //                       , descuento : element.descuento
       //                       , descripcion : element.descripcion });
       // }
-      console.log('elemento', element)
       conteo++;
     });
-
-    console.log('arrelo a actualizar', arrayTodb)
 
   }
 
@@ -1429,8 +1477,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
                         , descuento : element.descuento
                         , descripcion : element.descripcion
                         , nota : 'NOTAS DEL INSERT' }
-    
-                        console.log('detalle', arrayTodbDetail);
 
     this._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(
       res=> {
@@ -1455,10 +1501,30 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   }
 
   getPO_Detail(po_id : any){
+    let arrayPODetail : any = [];
+
     // Selecciona ordenes de compra
     this._purchaseOrderservice.getPODetail(po_id).subscribe(
       res=> {
-        this.datasourceCotizacionesDetalle = res;
+
+        res.forEach(element => {
+          arrayPODetail.push({
+            activo : true
+            , sku : element.sku
+            , cantidad : element.cantidad
+            , um : element.unidad_medida
+            , descripcion : element.descripcion
+            , medida : element.medida
+            , color : element.color
+            , otras_especificaciones : element.otras_especificaciones
+            , precio_unitario : element.precio_unitario
+          })
+        });
+
+        console.warn('res', res);
+        console.log('arreglo', arrayPODetail);
+
+        this.datasourceCotizacionesDetalle = arrayPODetail;
         console.log('ORDENES DE COMPRA DET', this.datasourceCotizacionesDetalle);
       },
       error => console.log("error consulta categorias",error)
@@ -1533,12 +1599,8 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
   updateODCStatus(form){
     let arrayToDb : any;
 
-    console.log('numero de orden de compra', this.projectInfo.ordendecompra_id)
-
     this.projectInfo.estado = this.UserIdLogin;
-
     arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 3, usuario : this.UserIdLogin}) // this.usuarioId
-
     this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
@@ -1552,8 +1614,6 @@ this.newProject.controls["descuentoGlobal"].setValue(0);
 
   insertODCStatus(po_id : any){
     let arrayToDb : any;
-
-    console.log('numero de orden de compra', this.usuarioId)
 
     arrayToDb = ({ordendecompra_id : po_id , estatus : 1, usuario : this.UserIdLogin}) // this.usuarioId
 
