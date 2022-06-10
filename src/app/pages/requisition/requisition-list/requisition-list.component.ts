@@ -5,12 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { requisitionModel } from 'src/app/models/requisition.model';
 import { requisitionservice } from 'src/app/services/requisition/requisition.service';
 import { RequisitionDetailComponent } from 'src/app/components/requisitions/requisition-detail/requisition-detail.component';
-
 import * as moment from 'moment';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
-
 
 @Component({
   selector: 'app-requisition-list',
@@ -53,7 +51,6 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   }
 
   descargarExcel(){
-    console.log('Descargar a excel');
     let dataSourceShowToExcel : any[] = [];
 
   this.dataSourceShow.filteredData.forEach(element => {
@@ -70,15 +67,15 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   }
 
   nuevaRequisicion(evetn){
-    console.log('Alta de requisiciones');
-
+    
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id: 1,
       title: 'REQUISICIONES',
       arrayData : null,
-      requisicionId: 0
+      requisicionId: 0,
+      estadoPantalla : 'new'
      
     }
     dialogConfig.width = '1300px';
@@ -93,15 +90,15 @@ dataSourceShow : MatTableDataSource<requisitionModel>
   }
 
   editRequisicion(element){
-    console.log('Editar de requisiciones');
-
+    
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id: 1,
       title: 'REQUISICIONES',
       arrayData : element,
-      requisicionId: element.requisicioninterna_id
+      requisicionId: element.requisicioninterna_id,
+      estadoPantalla : 'edit'
      
     }
     dialogConfig.width = '1200px';

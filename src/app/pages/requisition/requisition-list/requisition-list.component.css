@@ -35,3 +35,11 @@
   .icon-cog-wite {
     color: white;
   }
+
+  .icon-cog-edit {
+    color: orange;
+}
+
+.icon-cog-view {
+    color: rgb(105, 151, 229);
+}

@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { projectModel } from 'src/app/models/project.model';
 import { projectservice } from '../../../services/projects/project.service';
-import { categoryservice } from '../../../services/category/category.service';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
 import { requisitionModel } from 'src/app/models/requisition.model';
@@ -15,7 +14,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { RequisitionDetailComponent } from '../../requisitions/requisition-detail/requisition-detail.component';
 import Swal from 'sweetalert2';
-import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-quotation-detail',
@@ -56,22 +54,24 @@ export class QuotationDetailComponent implements OnInit {
 
   projectInfo : any;
   requisicionId : any = 0;
+  estadoPantalla : any;
   quotationId : any = 0;
   newProject: FormGroup;
   datasourceCategories : any[] = [];
   datasourcePorjects : any[] = [];
   datasourceRequisition : any;
-  datasourceRequisitionDetail : any = []; // MatTableDataSource<requisitionModelDetail>;
+  datasourceRequisitionDetail : any = [];
   datasourceCotizaciones : any;
   datasourceCotizacionesDet : any[] = [];
   arraytemp : any = [];
   selectionM: boolean;
   disabledM: boolean;
+  sku : string;
+  descripcion : string;
 
   constructor(
     public dialogRef: MatDialogRef<projectModel>
     , private _projectService : projectservice
-    , private _categoryService : categoryservice
     , private _projectCategoryservice : projectCategoryservice
     , @Inject(MAT_DIALOG_DATA) public data,public snackBar: MatSnackBar
     , private formBuilder: FormBuilder
@@ -82,6 +82,7 @@ export class QuotationDetailComponent implements OnInit {
     this.projectInfo = data.arrayData;
     this.requisicionId = data.requisicionId;
     this.quotationId = data.cotizacionId;
+    this.estadoPantalla = data.estadoPantalla
 
     this.newProject = this.formBuilder.group({
       proyecto_id : new FormControl('', [Validators.required]),
@@ -95,8 +96,6 @@ export class QuotationDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    console.log('this.projectInfo', this.projectInfo);
 
     this.getProyectos();
     if(this.projectInfo["cotizacion_id"] != 0){
@@ -177,15 +176,14 @@ export class QuotationDetailComponent implements OnInit {
 
     let arrayTodb : any;
 
-    if(this.validaCamposRequeridos() == false){
-      this.openSnackBar('debe capturar los campos requeridos', 'success');
-      return;
-    }
+    if(this.estadoPantalla == 'new'){
+      if(this.validaCamposRequeridos() == false){
+        this.openSnackBar('debe capturar los campos requeridos', 'success');
+        return;
+      }
 
-    if(this.quotationId == 0){
       arrayTodb = { 
-        // proyecto_id : this.proyecto_id,
-                  requisicioninterna_id : this.newProject.controls["requisicion_Numero"].value, // this.requisicionId,
+                  requisicioninterna_id : this.newProject.controls["requisicion_Numero"].value,
                   codigo : this.newProject.controls["cotizacion_Numero"].value,
                   fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 };
@@ -194,26 +192,13 @@ export class QuotationDetailComponent implements OnInit {
       this.insertQuotationHeader(arrayTodb);
     }
     else{
-      arrayTodb = {
-        // proyecto_id : this.proyecto_id,
-        categoria_id : this.newProject.controls["categoria_id"].value, // this.categoria_id,
-        requisicioninterna_id : this.newProject.controls["requisicionId"].value, //this.requisicionId,
-        fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
-      };
 
-        // Actualiza registro EDICION
-        // this._projectService.updateProjects(arrayTodb).subscribe(
-        // res=> {
-        // console.log('Se edito con éxito', res);
-        // },
-        // error => console.log("error consulta regiones",error)
-        // )
-        // this.dialogRef.close();
+      // INSERTA REQUISICIONES DET
+      this.updateQuotationDet(this.quotationId);
+
     }
     this.dialogRef.close();
   }
-
-
 
   fechaControl(event){
     console.log('fecha', this.fecha);
@@ -464,36 +449,48 @@ insertQuotationDet(cotizacionId : any){
 
   });
 
-    // this.datasourceCotizacionesDet.forEach(element => {
-        // arrayToDb = { cotizaciondetalle_id: 0
-        //     , codigo_cotizacion : ''
-        //     , requisicioninternaDetalle_id : element.requisicioninternaDetalle_id
-        //     , cotizacion_id : cotizacionId
-        //     , sku : element.sku
-        //     , medida : ''
-        //     , color : ''
-        //     , otras_especificaciones : ''
-        //     , almacen_id : 1
-        //     , cantidad : element.cantidad
-        //     , unidad_medida : element.um
-        //     , descripcion : element.descripcion
-        //     , descuento : 0
-        //     , costo : 0
-        // }
-
-        // Inserta Proyecto Categoria
-      //   this._quotationservice.insertQuotationDetail(arrayToDb).subscribe(
-      //     res=> {
-      //       console.log('INSERTA COTIZACION DETALLE', arrayToDb);
-      //       this.openSnackBar('Se genero el la cotización exitosamente', 'success');
-      //     },
-      //     error => console.log("error al insertar proyectos categorias",error)
-      //   )
-        
-      //   arrayToDb = null;
-
-      // });
 }
 
+updateQuotationDet(cotizacionId : any){
+
+  console.log('para guardar', this.datasourceCotizacionesDet);
+
+  // Obtiene Requisicion Registrada
+  let datasourceRequsition : MatTableDataSource<requisitionModel>
+  let requisitionIdMaximo : any = "0";
+  let arrayToDb : any;
+
+  this.tabla1["_data"].forEach(element => {
+    if(element.activo == true){
+      arrayToDb = { cotizaciondetalle_id: element.cotizaciondetalle_id
+        , codigo_cotizacion : ''
+        , requisicioninternadetalle_id : element.requisicioninternadetalle_id
+        , cotizacion_id : cotizacionId
+        , sku : element.sku
+        , medida : element.medida
+        , color : element.color
+        , otras_especificaciones : element.otras_especificaciones
+        , cantidad : element.cantidad
+        , unidad_medida : element.unidad_medida
+        , descripcion : element.descripcion
+        , descuento : 0
+        , costo : 0
+      }
+
+    // Actualiza Cotizacion Detalle
+    this._quotationservice.updateQuotationDetail(arrayToDb).subscribe(
+      res=> {
+        console.log('INSERTA COTIZACION DETALLE', arrayToDb);
+        this.showMessage(2, 'Guardardo', 'success', 'La cotización se guardo exitosamente', 'Cerrar');
+      },
+      error => console.log("error al insertar proyectos categorias",error)
+    )
+  }
+
+    arrayToDb = null;
+
+  });
+
+}
 
 }

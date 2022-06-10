@@ -17,16 +17,9 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
-import { MatMenu } from '@angular/material/menu';
-declare var name: any;
 import Swal from 'sweetalert2';
-import { ElementSchemaRegistry } from '@angular/compiler';
-import { mapMultiply } from 'chartist';
 import { poDetailModel } from 'src/app/models/po-detail.model';
 import * as XLSX from 'xlsx';
-import { I } from '@angular/cdk/keycodes';
-import { Console } from 'console';
-import { getMultipleValuesInSingleSelectionError } from '@angular/cdk/collections';
 import { UserService } from '../../services/user.service';
 import { projectservice } from '../../services/projects/project.service';
 
@@ -73,7 +66,7 @@ export class PoDetailComponent implements OnInit {
   odc_Numero : any = '';
   proveedor_id : any = '';
   activoEdicion : boolean = true;
-  displayedColumns = ['select', 'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento'];
+  displayedColumns = ['select', 'detalle_id',  'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento']; // 
 
   projectInfo : any;
   estadoPantalla : string;
@@ -120,6 +113,7 @@ export class PoDetailComponent implements OnInit {
   destinoCP : any;
   destinoTelefono : any;
   destinoRequisitor : any;
+  filtroEstatus : any = 3;
 
   constructor(
     public dialogRef: MatDialogRef<quotationDetailModel>
@@ -364,6 +358,7 @@ export class PoDetailComponent implements OnInit {
   }
 
   onBlurMethod(){
+    
     let descuento : number = Number(this.newProject.controls["descuentoGlobal"].value);
 
     if (this.tabla1["_data"][0]["activo"] != undefined && this.tabla1["_data"][0]["precio_unitario"] != undefined){ // && this.tabla1["_data"][0]["activo"] == true 
@@ -376,10 +371,15 @@ export class PoDetailComponent implements OnInit {
       this.tabla1["_data"].forEach(element => {
         
         if (element.activo != undefined && element.activo == true && element.precio_unitario != undefined){
-          this.subtotal = this.subtotal + element.cantidad * (element.precio_unitario - element.descuento);
+          this.subtotal = this.subtotal + element.cantidad * (element.precio_unitario);
         }
             
       });
+
+
+      console.log('iva', this.iva)
+      
+      console.log('descuento', descuento)
 
       this.subtotal = this.subtotal - descuento
 
@@ -494,7 +494,8 @@ export class PoDetailComponent implements OnInit {
             otras_especificaciones : element.OTRAS_ESPECIFICACIONES,
             precio_unitario : element.PRECIO_UNITARIO,
             importe : element.IMPORTE,
-            activo : true
+            activo : true,
+            detalle_id : 0
            })
 
            if (element.PRECIO_UNITARIO != undefined){
@@ -1388,6 +1389,8 @@ export class PoDetailComponent implements OnInit {
 
     this.cotizacionId = this.newProject.controls["cotizacion_id"].value;
 
+console.log('orden de compra detalle', table)
+
     table.forEach(element => {
 
       //Hdr
@@ -1416,43 +1419,47 @@ export class PoDetailComponent implements OnInit {
                   , retencion : 6
                   , retencion_monto : 200
                 }
-
-                this._purchaseOrderservice.updatePO_Hdr(arrayTodb).subscribe(
-                  res=> {
-                    console.log('Se inserto con éxito', res);
-              
-                    // // INSERTA REQUISICIONES DET
-                    // this.insertPODet(res, arrayDetail);
-            
-                    //INSERTA EN BITACORA
-                    this.insertODCStatus(res);
-            
-                    this.dialogRef.close();
-                  },
-                  error => console.log("error alta de proyectos",error)
-                )
       }
 
-      // //Detalle
-      // if(element.activo == true)
-      // {
-      //   arrayDetail.push( {ordendecompradetalle_id : 0
-      //                       , ordendecompra_id : this.ordendecompra_id
-      //                       , cotizaciondetalle_id : (element.cotizaciondetalle_id != undefined) ? element.cotizaciondetalle_id : 0 
-      //                       , sku : element.sku
-      //                       , medida : (element.medida != undefined) ? element.medida : ''
-      //                       , color : (element.color != undefined) ? element.color : ''
-      //                       , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
-      //                       , cantidad : element.cantidad
-      //                       , unidad_medida : element.unidad_medida
-      //                       , costo : (element.costo != undefined) ? element.costo : 0
-      //                       , precio_unitario : element.precio_unitario
-      //                       , importe_total : element.cantidad * (element.precio_unitario - 0)
-      //                       , descuento : element.descuento
-      //                       , descripcion : element.descripcion });
-      // }
+      //Detalle
+      if(element.activo == true)
+      {
+        arrayDetail.push( {ordendecompradetalle_id : element.detalle_id
+                            , ordendecompra_id : this.projectInfo.ordendecompra_id
+                            , cotizaciondetalle_id : (element.cotizaciondetalle_id != undefined) ? element.cotizaciondetalle_id : 0 
+                            , sku : element.sku
+                            , medida : (element.medida != undefined) ? element.medida : ''
+                            , color : (element.color != undefined) ? element.color : ''
+                            , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
+                            , cantidad : element.cantidad
+                            , unidad_medida : element.um
+                            , costo : (element.costo != undefined) ? element.costo : 0
+                            , precio_unitario : element.precio_unitario
+                            , importe_total : element.cantidad * (element.precio_unitario - 0)
+                            , descuento : 0
+                            , descripcion : element.descripcion });
+      }
+
+      
       conteo++;
     });
+
+
+    this._purchaseOrderservice.updatePO_Hdr(arrayTodb).subscribe(
+      res=> {
+        console.log('Se actualizo con éxito', arrayDetail);
+  
+        // // INSERTA REQUISICIONES DET
+        this.updatePODet(arrayDetail);
+
+        //INSERTA EN BITACORA
+        // this.insertODCStatus(res);
+
+        this.dialogRef.close();
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+    
 
   }
 
@@ -1489,6 +1496,42 @@ export class PoDetailComponent implements OnInit {
     });
   }
 
+  updatePODet(arrayDetail : any){
+
+    let arrayTodbDetail : any;
+    this.loading = true;
+    arrayDetail.forEach(element => {
+
+      arrayTodbDetail = {ordendecompradetalle_id : element.ordendecompradetalle_id
+                        , ordendecompra_id : element.ordendecompra_id
+                        , cotizaciondetalle_id : element.cotizaciondetalle_id
+                        , sku : element.sku
+                        , medida : element.medida
+                        , color : element.color
+                        , otras_especificaciones : element.otras_especificaciones
+                        , cantidad : element.cantidad
+                        , unidad_medida : element.unidad_medida
+                        // , costo : element.costo
+                        , precio_unitario : element.precio_unitario 
+                        , importe_total : element.cantidad * (element.precio_unitario - 0)
+                        , descuento : 0
+                        , descripcion : element.descripcion
+                        , nota : 'NOTAS DEL INSERT' 
+                      }
+
+    console.log('ACTUALIZA ORDEN DE COMPRA DETALLE', arrayTodbDetail)
+
+    this._purchaseOrderservice.updatePODetail(arrayTodbDetail).subscribe(
+      res=> {
+        console.log('Se actualizo con éxito', res);
+        this.showMessage(2, 'Exitoso', 'success', 'Se actualizo la orden de compra', 'Cerrar');
+  
+      },
+      error => console.log("error alta de proyectos",error)
+    )
+    });
+  }
+
   getsupplierAll(){
     // Selecciona todos los proveedores
     this._supplyservice.getsupplyAll().subscribe(
@@ -1518,6 +1561,7 @@ export class PoDetailComponent implements OnInit {
             , color : element.color
             , otras_especificaciones : element.otras_especificaciones
             , precio_unitario : element.precio_unitario
+            , detalle_id : element.ordendecompradetalle_id
           })
         });
 

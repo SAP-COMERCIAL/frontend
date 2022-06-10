@@ -23,8 +23,19 @@
           <div class="card">
             <table>
               <tr>
-                <td class="col20"><input type="text" class="form-control form-control-line" placeholder="BUSCAR" (keyup)="filtrar($event)"><!-- [(ngModel)]="buscar"--></td>
-                <td class="col70"></td>
+                <td class="col20"><input type="text" class="form-control form-control-line" placeholder="BUSCAR" (keyup)="filtrar($event)"></td>
+                <td class="col10"></td>
+                <td class="col20">
+                  <mat-form-field>
+                    <mat-select class="form-control control" [(ngModel)]="fEstatus" (selectionChange)="emitFilters($event, 'Estatus')">
+                      <mat-option value= "1">POR AUTORIZAR</mat-option>
+                      <mat-option value= "2">ORDEN DE COMPRA</mat-option>
+                      <mat-option value= "3" selected>AUTORIZADO</mat-option>
+                      <mat-option value= "4">CANCELADO</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td class="col40"></td>
                 <td class="col10"><button mat-raised-button color="primary" (click)="descargarExcel()"><i class="fa fa-arrow-down fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Descargar</button></td>
                 <td class="col10"><button mat-raised-button color="accent" (click)="nuevaOrdenDeCompra($event)"><i class="fa fa-plus fa-lg icon-cog-wite"></i>&nbsp;&nbsp;Nueva Orde de Compra</button></td>
                 <td class="col10"></td>

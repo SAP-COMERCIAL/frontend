@@ -43,6 +43,7 @@ public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
 dataSourceShow : MatTableDataSource<poModel>
+dataSourceShowOriginal : MatTableDataSource<poModel>
 
   @ViewChild('pdfTable') pdfTable: ElementRef;
   @ViewChild(MatSort,{static:true}) sort: MatSort;
@@ -66,6 +67,7 @@ dataSourceShow : MatTableDataSource<poModel>
   datasourceCotizacionesDetalle : any;
   UserIdLogin : number;
   datasourceUsers : any;
+  fEstatus : any = '3'
 
   constructor(public dialog: MatDialog
           , private _excelService : ExcelServiceService
@@ -269,6 +271,32 @@ dataSourceShow : MatTableDataSource<poModel>
     console.log('filtro', filtro);
   }
 
+  emitFilters(event, filtro) {
+    this.dataSourceShow = this.dataSourceShowOriginal;
+    let filtroEstatus : number = 3;
+    let arrayFiltroData : MatTableDataSource<poModel> = null;
+
+    console.warn(' event.value',  event.value)
+    console.warn(' event',  event)
+
+    if(filtro === 'Estatus'){
+      this.fEstatus = (this.fEstatus == undefined) ? '3' : event; 
+      filtroEstatus = (filtroEstatus == undefined) ? 3 : event.value; 
+      this.fEstatus.value = (this.fEstatus == undefined) ? '3' : event.value.toString(); 
+    }
+
+    arrayFiltroData = new MatTableDataSource(this.dataSourceShow.filteredData.filter(elemento => (
+                                                                                  (elemento.estado == filtroEstatus ) || (filtroEstatus == 3)
+                                                                                   )));
+
+    this.dataSourceShow = new MatTableDataSource(arrayFiltroData.filteredData);
+
+    this.array = this.dataSourceShow.filteredData;
+    this.totalSize = this.dataSourceShow.filteredData.length;
+    this.iterator();
+    this.dataSourceShow.sort = this.sort;
+  }
+
   public handlePage(e: any) {
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
@@ -346,6 +374,7 @@ dataSourceShow : MatTableDataSource<poModel>
         });
         
         this.dataSourceShow = new MatTableDataSource(arraySort);
+        this.dataSourceShowOriginal = new MatTableDataSource(arraySort);
         this.array = res;
         this.totalSize = this.array.length;
         

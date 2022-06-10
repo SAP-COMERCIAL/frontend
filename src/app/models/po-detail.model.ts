@@ -41,4 +41,5 @@ export class poDetailModel{
     
     sku : string;
     unidad_medida : string
+    ordendecompradetalle_id : number
 }

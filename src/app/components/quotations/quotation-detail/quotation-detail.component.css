@@ -77,4 +77,20 @@
         text-align: center;
     }
 
+    .input-xshort{
+        width: 70px;
+    }
+    
+    .input-short{
+        width: 100px;
+    }
+    
+    .input-large{
+        width: 200px;
+    }
+    
+    .input-xlarge{
+        width: 300px;
+    }
+
     

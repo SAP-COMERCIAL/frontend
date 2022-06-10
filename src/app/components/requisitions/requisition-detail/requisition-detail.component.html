@@ -46,7 +46,7 @@
       <div fxFlex.gt-sm="25%" >
           <div>
             <mat-form-field>
-              <input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero" >
+              <ng-container><input [type]="requisicion_Numero" matInput class="form-control form-control-line control" formControlName="requisicion_Numero"></ng-container>
             </mat-form-field>
             <span *ngIf="!newProject.get('requisicion_Numero').valid && newProject.get('requisicion_Numero').touched" class="help-block" style="color: red;"> capture un número de Requisición</span>
           </div>
@@ -55,13 +55,13 @@
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div><br>Fecha</div>
+        <div><br><ng-container *ngIf="requisicionId == 0">Fecha</ng-container></div>
       </div>
       <div fxFlex.gt-sm="25%" >
         <div>
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" *ngIf="requisicionId == 0">
             <mat-label>{{fecha | date: 'dd-MM-yyyy'}}</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control" > <!--[(ngModel)]="fecha" -->
+            <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="fechaInicial($event)" class="control" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker [startAt]="fecha" #picker></mat-datepicker>
           </mat-form-field></div>
@@ -70,12 +70,11 @@
     <div fxLayout="row" class="division" *ngIf="requisicionId == 0">
         <div fxFlex.gt-sm="20%">
             <div class="input-group mb-3">
-              <input type="file" name="loadFile" id="loadFile" class="form-control form-control-line" placeholder="SELECCIONA ARCHIVO" style="display: none;" (change)="onFileChange($event)" onclick="this.value=null;"> <!--[(ngModel)]="buscar" -->
-              <label for="loadFile" style="margin: 0; text-align: left; width: 400px;" class="btn btn-outline-dark"><b style="background-color: orange;">{{nombreArchivo}}</b></label><br><!--{{nombreArchivo}}  formControlName="loadFile"--> 
+              <input type="file" name="loadFile" id="loadFile" class="form-control form-control-line" placeholder="SELECCIONA ARCHIVO" style="display: none;" (change)="onFileChange($event)" onclick="this.value=null;">
+              <label for="loadFile" style="margin: 0; text-align: left; width: 400px;" class="btn btn-outline-dark"><b style="background-color: orange;">{{nombreArchivo}}</b></label><br>
             </div>
         </div>
         <div fxFlex.gt-sm="20%">
-            <!-- <div><button mat-raised-button color="primary" (click)="save(newProject, $event)">Subir Archivo</button></div> -->
         </div>
         <div fxFlex.gt-sm="20%">
             <div></div>
@@ -140,7 +139,7 @@
     
     <div fxFlex.gt-sm="20%" >
       <div>
-        <ng-container *ngIf='requisicionId == 0' ><button mat-raised-button color="accent" (click)="add(newProject, $event)">Agregar</button></ng-container>
+        <ng-container><button mat-raised-button color="accent" (click)="add(newProject, $event)">Agregar</button></ng-container>
       </div>
     </div>
   </div>
@@ -164,7 +163,7 @@
     </div>
     <div fxFlex.gt-sm="20%" >
       <div>
-        <ng-container *ngIf='requisicionId == 0' >
+        <ng-container>
           <button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button>
         </ng-container>
         </div>
@@ -185,51 +184,63 @@
             <!-- ID Column -->
             <ng-container matColumnDef="SKU">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col10"> <span>SKU</span> </th>
-              <td mat-cell *matCellDef="let element"> {{element.SKU}} </td>
+              <td mat-cell *matCellDef="let element">
+                <input type='SKU' [(ngModel)]="element.SKU" class="input-short"  class="form-control form-control-line control input-xshort">
+              </td>
             </ng-container>
 
             <!-- ID Column -->
             <ng-container matColumnDef="cantidad">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> <span>Cantidad</span> </th>
-              <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+              <td mat-cell *matCellDef="let element">
+                <input type='cantidad' [(ngModel)]="element.cantidad" class="form-control form-control-line control input-xshort">
+              </td>
             </ng-container>
             
             <!-- Name Column -->
             <ng-container matColumnDef="unidad_de_medida">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Unidad de Medida </th>
-              <td mat-cell *matCellDef="let element"> {{element.um}} </td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20" matInput> Unidad de Medida </th>
+              <td mat-cell *matCellDef="let element"> 
+                <input type='um' [(ngModel)]="element.um" class="form-control form-control-line control input-xshort">
+              </td>
             </ng-container>
 
             <!-- Email Column -->
             <ng-container matColumnDef="descripcion">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
-              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+              <td mat-cell *matCellDef="let element"> 
+                <input type='descripcion' [(ngModel)]="element.descripcion" class="form-control form-control-line control input-xlarge">
+              </td>
             </ng-container>
 
             <!-- Email Column -->
             <ng-container matColumnDef="medida">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Medida </th>
-              <td mat-cell *matCellDef="let element"> {{element.medida}} </td>
+              <td mat-cell *matCellDef="let element">  
+                <input type='medida' [(ngModel)]="element.medida" class="input-short" class="form-control form-control-line control input-short">
+              </td>
             </ng-container>
 
             <!-- Email Column -->
             <ng-container matColumnDef="color">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Color </th>
-              <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+              <td mat-cell *matCellDef="let element">
+                <input type='colorDet' [(ngModel)]="element.color" class="input-short" class="form-control form-control-line control input-short"> 
+              </td>
             </ng-container>
 
             <!-- Email Column -->
             <ng-container matColumnDef="otras_Especificaciones">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Otras especificaciones </th>
-              <td mat-cell *matCellDef="let element"> {{element.otras_especificaciones}} </td>
+              <td mat-cell *matCellDef="let element"> 
+                <input type='otras_especificaciones' [(ngModel)]="element.otras_especificaciones" class="form-control form-control-line control input-short"> 
+              </td>
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </mat-table>
-    
         </div>
-        <!-- <mat-paginator [pageSizeOptions]="[20, 100, 150]" [showFirstLastButtons]="true" [pageSize]="pageSize" [length]="totalSize"  (page)="handlePage($event)" style="width: 95%;"></mat-paginator> -->
       </div>
     </div>
   

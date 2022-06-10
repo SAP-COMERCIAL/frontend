@@ -108,8 +108,9 @@ dataSourceShow : MatTableDataSource<quotationListModel>
       title: 'COTIZACIONES',
       arrayData : null,
       requisicionId: 0,
-      cotizacionId : 0
-     
+      cotizacionId : 0,
+      estadoPantalla : 'new'
+
     }
     dialogConfig.width = '1300px';
     dialogConfig.height = '900px';
@@ -132,8 +133,9 @@ dataSourceShow : MatTableDataSource<quotationListModel>
       title: 'COTIZACIONES',
       arrayData : element,
       requisicionId: 0,
-      cotizacionId : element.cotizacion_id
-     
+      cotizacionId : element.cotizacion_id,
+      estadoPantalla : 'edit'
+      
     }
     dialogConfig.width = '1200px';
     dialogConfig.height = '700px';

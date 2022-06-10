@@ -77,4 +77,11 @@
     text-align: center;
 }
 
+.input-short{
+    width: 100px;
+}
+
+.input-large{
+    width: 200px;
+}
     

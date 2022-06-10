@@ -68,6 +68,13 @@ export class purchaseOrderservice {
         return this.http.post(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/estado', arrayToDb, {headers});
     }
 
+    updatePODetail(arrayToDb : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+        return this.http.put(environment.urlapi + environment.apiContextDrivers + 'PurchaseOrder/actualizar/ordendecompradetalle', arrayToDb, {headers});
+    }
+
     insertPOStatus(arrayToDb : any) {
         const headers : HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')

@@ -49,6 +49,13 @@ export class quotationservice {
         return this.http.post(environment.urlapi+environment.apiContextDrivers+'Quote/registrar/detalle',arrayToDb, {headers});
     }
 
+    updateQuotationDetail(arrayToDb : any) {
+        const headers : HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
+        return this.http.put(environment.urlapi+environment.apiContextDrivers+'Quote/actualizar/detalle',arrayToDb, {headers});
+    }
+
     insertQuotationCancel(id : any) {
         // return this.http.put(environment.urlapi + environment.apiContextDrivers + 'Quotation/cancelar' + id);
     }

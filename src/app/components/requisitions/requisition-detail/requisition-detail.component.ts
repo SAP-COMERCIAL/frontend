@@ -9,13 +9,11 @@ import { projectservice } from '../../../services/projects/project.service';
 import { categoryservice } from '../../../services/category/category.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { projectCategoryservice } from 'src/app/services/projectCtegory/projectCateogry.service';
-import { requisitionModel } from 'src/app/models/requisition.model';
 import { requisitionservice } from '../../../services/requisition/requisition.service';
 import { requisitionModelDetail } from 'src/app/models/requisition.model.detail';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-requisition-detail',
   templateUrl: './requisition-detail.component.html',
@@ -54,15 +52,22 @@ export class RequisitionDetailComponent implements OnInit {
   UploadDataExcel : MatTableDataSource<requisitionModelDetail>;
   UploadDataExcelManual : MatTableDataSource<requisitionModelDetail>;
   dataExcel: any[];
-  // displayedColumns = ['SKU', 'cantidad', 'unidad_de_medida', 'descripcion'];
   displayedColumns = ['SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones'];
 
   projectInfo : any;
   requisicionId : any = 0;
+  estadoPantalla : string;
   newProject: FormGroup;
   datasourceCategories : any[] = [];
   datasourcePorjects : any[] = [];
   datasourceRequisition : any;
+  SKU : string;
+  cantidad : number;
+  um : string;
+  descripcion : string;
+  medida : string
+  colorDet : string;
+  otras_especificaciones : string;
 
   fo : string
   cargo : string
@@ -78,10 +83,10 @@ export class RequisitionDetailComponent implements OnInit {
     , private formBuilder: FormBuilder
     , private _snackBar : MatSnackBar
     , private _requisitionservice : requisitionservice
-    // , private notificationService: NotificationService,
   ) { 
     this.projectInfo = data.arrayData;
     this.requisicionId = data.requisicionId;
+    this.estadoPantalla = data.estadoPantalla;
 
     this.newProject = this.formBuilder.group({
       proyecto_id : new FormControl('', [Validators.required]),
@@ -112,20 +117,18 @@ export class RequisitionDetailComponent implements OnInit {
     if(this.requisicionId != 0){
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
-          requisicion_id : '', // this.projectInfo["requisicion_id"] ,
+          requisicion_id : '',
           requisicion_Numero : this.projectInfo["codigo"] ,
-          categoria_id : '', // this.projectInfo["categoria_id"],
-          fecha : moment(new Date), //this.projectInfo["fecha"], // this.projectInfo["fecha"]
+          categoria_id : '',
+          fecha : moment(new Date),
           loadfile : ''
       })
       this.requisicion_Numero = this.projectInfo["codigo"];
-      // this.projectInfo.controls["proyecto_id"].setValue(77);
       this.proyecto_id = this.projectInfo["proyecto_id"];
-      this.requisicion_id = '' //this.projectInfo["requisicion_id"];
+      this.requisicion_id = '';
       this.categoria_id = this.projectInfo["proyectocategoria_id"];
-      // this.projectInfo.controls["categoria_id"].setValue('161');
-      this.fecha = '', //this.projectInfo["fecha"];
-      this.loadfile = ''
+      this.fecha = '';
+      this.loadfile = '';
 
       this.getRequisitionDetail(this.requisicionId);
     }
@@ -299,24 +302,34 @@ export class RequisitionDetailComponent implements OnInit {
 
     let arrayTodb : any;
 
-    if(this.validaCamposRequeridos() == false){
-      this.openSnackBar('debe capturar los campos requeridos', 'success');
-      return;
+    if(this.estadoPantalla == 'new'){
+      if(this.validaCamposRequeridos() == false){
+        this.openSnackBar('debe capturar los campos requeridos', 'success');
+        return;
+      }
     }
 
     if(this.requisicionId == 0){
       arrayTodb = {
-                  proyectocategoria_id : this.newProject.controls["categoria_id"].value, // this.categoria_id,
-                  codigo : this.newProject.controls["requisicion_Numero"].value, // this.requisicion_Numero,
-                  fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD') //,
+                  proyectocategoria_id : this.newProject.controls["categoria_id"].value,
+                  codigo : this.newProject.controls["requisicion_Numero"].value,
+                  fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 };
 
-      // INSERTA REQUISICION HDR
-      this.insertRequisition(arrayTodb)
+      
+      if(this.estadoPantalla == 'new'){
+        // INSERTA REQUISICION HDR
+        this.insertRequisition(arrayTodb)
+      }else{
+        // ACTUALIZA REQUISICION HDR
+        console.log('ACTUALIA PRIMER PASO');
+        this.updateRequisition(arrayTodb)
+      }
+      
     }
     else{
-      arrayTodb = {proyecto_id : this.newProject.controls["requisicion_Numero"].value, // this.proyecto_id,
-        proyectocategoria_id : this.newProject.controls["categoria_id"].value, // this.categoria_id,
+      arrayTodb = {proyecto_id : this.newProject.controls["requisicion_Numero"].value,
+        proyectocategoria_id : this.newProject.controls["categoria_id"].value,
         requisicion_id : this.requisicion_id,
         fecha : moment(this.fecha, 'YYYY-MM-DD').format('YYYY-MM-DD')
       };
@@ -343,6 +356,7 @@ export class RequisitionDetailComponent implements OnInit {
             , medida : element.medida
             , color : element.color
             , otras_especificaciones : element.otras_especificaciones
+            , requisicioninternadetalle_id : (element.requisicioninternadetalle_id != undefined) ? element.requisicioninternadetalle_id : 0
           })
         });
       }else{
@@ -361,10 +375,13 @@ export class RequisitionDetailComponent implements OnInit {
       , medida : this.newProject.controls["medida_Detalle"].value
       , color : this.newProject.controls["color_Detalle"].value
       , otras_especificaciones : ''
+      , requisicioninternadetalle_id : 0
      })
 
     this.UploadDataExcel = null;
      this.UploadDataExcel = new MatTableDataSource(arrayExcel);
+
+     console.log('AGREGANDO', this.UploadDataExcel);
   }
 
   clean(event){
@@ -536,14 +553,24 @@ export class RequisitionDetailComponent implements OnInit {
   getRequisitionDetail(arrayTodb){
 
     let arrayRequsitionDetail : any;
-    let arrayRequsitionToTable : any[] = []; //MatTableDataSource<requisitionModelDetail>;
+    let arrayRequsitionToTable : any[] = [];
 
     this._requisitionservice.getRequisitionDetail(arrayTodb).subscribe(
       res=> {
         arrayRequsitionDetail = res;
 
+        console.log('arreglo detalle', arrayRequsitionDetail)
+
         arrayRequsitionDetail.forEach(element => {
-          arrayRequsitionToTable.push({requisition_Id: 0, SKU : element.sku, cantidad : element.cantidad, um : element.unidad_medida, descripcion : element.descripcion, medida : element.medida})
+          arrayRequsitionToTable.push({requisition_Id: 0
+                                , SKU : element.sku
+                                , cantidad : element.cantidad
+                                , um : element.unidad_medida
+                                , descripcion : element.descripcion
+                                , medida : element.medida
+                                , requisicioninternadetalle_id : element.requisicioninternadetalle_id
+                                , color : element.color
+                                , otras_especificaciones : element.otras_especificaciones})
         });
 
         this.UploadDataExcel = new MatTableDataSource(arrayRequsitionToTable);
@@ -555,23 +582,16 @@ export class RequisitionDetailComponent implements OnInit {
 
   updateRequisition(arrayTodb : any){
     console.log('ACTUALIZA REQUISICION');
-        // this._projectService.updateProjects(arrayTodb).subscribe(
-        // res=> {
-        // console.log('Se edito con éxito', res);
-        // },
-        // error => console.log("error consulta regiones",error)
-        // )
-        // this.dialogRef.close();
+    
+      this.updateRequisitionDetalle(this.requisicionId);
   }
 
   insertRequisitionDet(requisicionId : any){
     // Obtiene Requisicion Registrada
-    let datasourceRequsition : MatTableDataSource<requisitionModel>
-    let requisitionIdMaximo : any = "0";
     let arrayToDb : any;
 
       this.UploadDataExcel.filteredData.forEach(element => {
-        arrayToDb = {requisicioninternadetalle_id : 0
+        arrayToDb = {requisicioninternadetalle_id : element.requisicioninternadetalle_id
             , requisicioninterna_id : requisicionId
             , cantidad : element.cantidad
             , sku : element.SKU
@@ -587,8 +607,6 @@ export class RequisitionDetailComponent implements OnInit {
             , cotizado : false
         }
 
-        console.log('DETALLE DETALLE DETALLE', arrayToDb);
-
         // Inserta Proyecto Categoria
         this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
           res=> {
@@ -602,6 +620,87 @@ export class RequisitionDetailComponent implements OnInit {
         arrayToDb = null;
 
       });
+  }
+
+  updateRequisitionDetalle(requisicionId : any){
+     // Obtiene Requisicion Registrada
+     let arrayToDb : any;
+
+     console.log('Detalle de requisicion', this.UploadDataExcel.filteredData)
+ 
+       this.UploadDataExcel.filteredData.forEach(element => {
+
+        if(element.requisicioninternadetalle_id != 0){
+            
+            // ==========
+            // ACTUALIZAR
+            // ==========
+            arrayToDb = {
+              requisicioninternadetalle_id : element.requisicioninternadetalle_id
+                , requisicioninterna_id : requisicionId
+                , cantidad : element.cantidad
+                //  , sku : element.SKU
+                //  , codigo_requisicioninterna : ''
+                , unidad_medida : element.um
+                , descripcion : element.descripcion
+                //  , existencia_almacen : 0
+                //  , cantidad_comprar : element.cantidad
+                //  , medida : (element.medida != undefined) ? element.medida : ''
+                //  , color : (element.color != undefined) ? element.color : ''
+                //  , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
+                //  , estado : true
+                //  , cotizado : false
+            }
+
+            // Inserta Proyecto Categoria
+            this._requisitionservice.updateRequisitionDetail(arrayToDb).subscribe(
+              res=> {
+                console.log('REQUISICIONES DETALLE', res);
+                this.showMessage(2, 'Guardardo', 'success', 'La requisición se guardo exitosamente', 'Cerrar');
+                // this.dialogRef.close();
+              },
+              error => console.log("error al insertar proyectos categorias",error)
+            )
+            
+            arrayToDb = null;
+            
+          }else{
+
+            // ==========
+            // INSERTAR
+            // ==========
+            arrayToDb = {requisicioninternadetalle_id : element.requisicioninternadetalle_id
+              , requisicioninterna_id : requisicionId
+              , cantidad : element.cantidad
+              , sku : element.SKU
+              , codigo_requisicioninterna : ''
+              , unidad_medida : element.um
+              , descripcion : element.descripcion
+              , existencia_almacen : 0
+              , cantidad_comprar : element.cantidad
+              , medida : (element.medida != undefined) ? element.medida : ''
+              , color : (element.color != undefined) ? element.color : ''
+              , otras_especificaciones : (element.otras_especificaciones != undefined) ? element.otras_especificaciones : ''
+              , estado : true
+              , cotizado : false
+            }
+
+            // Inserta Proyecto Categoria
+            this._requisitionservice.insertRequisitionDetail(arrayToDb).subscribe(
+              res=> {
+                console.log('REQUISICIONES DETALLE', res);
+                this.showMessage(2, 'Guardardo', 'success', 'La requisición se guardo exitosamente', 'Cerrar');
+                // this.dialogRef.close();
+              },
+              error => console.log("error al insertar proyectos categorias",error)
+            )
+
+          }
+         console.log('DETALLE DETALLE DETALLE', arrayToDb);
+ 
+         
+ 
+       });
   }
 
 }
