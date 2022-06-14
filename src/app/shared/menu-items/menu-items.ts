@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import jwt_decode from "jwt-decode";
+import { switchMapTo } from 'rxjs-compat/operator/switchMapTo';
 
 export interface Menu {
   state: string;
@@ -8,8 +9,6 @@ export interface Menu {
   type: string;
   icon: string; 
 }
-
-
 
 // console.log('token-access', localStorage.getItem('token_access'));
 // console.log('proveedor-access', jwt_decode((localStorage.getItem('token_access'))));
@@ -29,7 +28,7 @@ export interface Menu {
     { state: 'reportMaster', name: 'Reporte Maestro', type: 'link', icon: 'assignment_turned_in' },
     { state: 'invoice', name: 'Captura de facturas', type: 'link', icon: 'tab' },
     // { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
-    { state: 'repseReview', name: 'Revisión de proveedores', type: 'link', icon: 'assignment_turned_in' },
+    // { state: 'repseReview', name: 'Revisión de proveedores', type: 'link', icon: 'assignment_turned_in' },
   
     // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
     // { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
@@ -79,6 +78,11 @@ export interface Menu {
   
   ];
 
+  const MENUITEMS_REPSE = [
+    { state: 'supplier', name: 'Proveedores', type: 'link', icon: 'assignment_turned_in' },
+    { state: 'repseReview', name: 'Revisión de proveedores', type: 'link', icon: 'assignment_turned_in' },
+  ];
+
 // decode(){
 //   let token = localStorage.getItem('token_access');
 //   this.decodedSign = jwt_decode(token)["firma"] + '?alt=media&token='; 
@@ -91,9 +95,39 @@ export interface Menu {
 @Injectable()
 export class MenuItems {
   getMenuitem(proveedor_id: string): Menu[] {
-    if(proveedor_id.length > 0 )
+
+    // DECODIFICA
+    let token = localStorage.getItem('token_access');
+    this.decodedSign = jwt_decode(token)["firma"] + '?alt=media&token='; 
+    let decodeUser = jwt_decode(token)["usuario"];
+    let decodeId = jwt_decode(token);
+    
+    this.usuarioId = decodeUser;
+    // this.getusers();
+    
+    // TERMINA DECODIFICA
+
+    if(proveedor_id.length > 0 ){
       return MENUITEMS_PROV;
-    else
-      return MENUITEMS;
+    }else{
+      if(jwt_decode(token)["perfil_usuarioid"] == 1 || jwt_decode(token)["perfil_usuarioid"] == 2 ){
+        return MENUITEMS;
+      }
+      
+      if(jwt_decode(token)["perfil_usuarioid"] == 3 ){
+        return MENUITEMS_PROV;
+      }
+
+      if(jwt_decode(token)["perfil_usuarioid"] == 4 ){
+        return MENUITEMS_REPSE;
+      }
+
+    }
+      
   }
+
+  decodedSign : any;
+  usuarioId : any;
+
+
 }

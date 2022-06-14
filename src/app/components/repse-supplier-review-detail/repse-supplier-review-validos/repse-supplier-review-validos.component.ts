@@ -127,7 +127,6 @@ anio : any;
 
 
     arrayToDb = {activity_id : activity_id, provider_id : this.providerId , year : year, month : month, is_required : requiredNumber}
-    console.warn('ACTIVIDAD A GUARDAR', arrayToDb);
 
     if(activity_id == 0){
       // INSERTA

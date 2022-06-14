@@ -20,7 +20,6 @@ export class UserService {
     const headers : HttpHeaders = new HttpHeaders()
         .set('Content-Type', 'application/json')
         .append('Authorization', 'Bearer ' + localStorage.getItem('token_access'));
-        console.log('aqui esta', environment.urlapi + environment.apiContextDrivers + 'User/lista')
     return this.http.get<userAppModel[]>(environment.urlapi + environment.apiContextDrivers + 'User/lista', {headers});
 }
 

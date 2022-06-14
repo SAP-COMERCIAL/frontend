@@ -105,7 +105,6 @@ export class QuotationDetailFilesComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
     extencionArchivo = target.files[0].name.substring(target.files[0].name.length - 5,target.files[0].name.length)
     
-      console.log('AQUI ESTAN LAS EXTENCIONES DE EXCEL')
       reader.onload = (e: any) => {
         /* create workbook */
   

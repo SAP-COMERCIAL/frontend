@@ -89,8 +89,6 @@ proyecto_id : number
       sumProject_Added = sumProject_Added + element.Project_Added;
       sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION = sumPROJECTED_ACTUAL_COSTS_AT_COMPLETION + element.PROJECTED_ACTUAL_COSTS_AT_COMPLETION;
       sumPROJECTED_BALANCE_AT_COMPLETION = sumPROJECTED_BALANCE_AT_COMPLETION + element.PROJECTED_BALANCE_AT_COMPLETION;
-
-      console.warn('contos actual', sumActual_Cost);
     });
 
     dataSourceShowToExcel.push({

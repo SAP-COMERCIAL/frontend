@@ -210,8 +210,6 @@ export class QuotationDetailComponent implements OnInit {
 
   checkProduct(event){
 
-    console.log('seleccion event', event)
-
     if (event.checked ) {
       console.log('checado');
           // this.datasourceRequisitionDetail.data= this.datasourceRequisitionDetail.data.filter(s => s.productName.toUpperCase() === product.toUpperCase());
@@ -387,14 +385,6 @@ getCategories(proyecto : any){
       },
       error => console.log("error consulta cateogorias",error)
     )
-
-  // this._projectCategoryservice.getProjectCateogryAll().subscribe(
-  //   res=> {
-  //     this.datasourceCategories = res;
-  //     console.log('PROYECTOS - CATEGORIAS', res);
-  //   },
-  //   error => console.log("error consulta cateogorias",error)
-  // )
 }
 
 insertQuotationHeader(arrayTodb : any){
@@ -410,8 +400,6 @@ insertQuotationHeader(arrayTodb : any){
 }
 
 insertQuotationDet(cotizacionId : any){
-
-  console.log('para guardar', this.datasourceCotizacionesDet);
 
   // Obtiene Requisicion Registrada
   let datasourceRequsition : MatTableDataSource<requisitionModel>
@@ -452,8 +440,6 @@ insertQuotationDet(cotizacionId : any){
 }
 
 updateQuotationDet(cotizacionId : any){
-
-  console.log('para guardar', this.datasourceCotizacionesDet);
 
   // Obtiene Requisicion Registrada
   let datasourceRequsition : MatTableDataSource<requisitionModel>

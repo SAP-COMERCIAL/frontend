@@ -21,12 +21,14 @@ export class RequisitionListComponent implements OnInit {
 // =================
 
 // Para paginación
+fEstatus : any = '0';
 public pageIndex:number = 0;
 public pageSize:number = 20;
 public currentPage = 0;
 public totalSize:number = 0;
 public array: any;
 dataSourceShow : MatTableDataSource<requisitionModel>
+dataSourceShowOriginal : MatTableDataSource<requisitionModel>
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -137,6 +139,30 @@ dataSourceShow : MatTableDataSource<requisitionModel>
     this.dataSourceShow.paginator = this.paginator;
   }
 
+  emitFilters(event, filtro) {
+    this.dataSourceShow = this.dataSourceShowOriginal;
+    let filtroEstatus : number = 0;
+    let arrayFiltroData : MatTableDataSource<requisitionModel> = null;
+
+    if(filtro === 'Estatus'){
+    //   this.fEstatus = (this.fEstatus == undefined) ? '0' : event; 
+      filtroEstatus = (filtroEstatus == undefined) ? 0 : event.value;
+      filtroEstatus = (event.value == undefined) ? 0 : filtroEstatus;
+    //   this.fEstatus.value = (this.fEstatus == undefined) ? '0' : event.value.toString(); 
+    }
+
+    arrayFiltroData = new MatTableDataSource(this.dataSourceShow.filteredData.filter(elemento => (
+                                                                                  (elemento.estado == filtroEstatus ) || (filtroEstatus == 99)
+                                                                                   )));
+
+    this.dataSourceShow = new MatTableDataSource(arrayFiltroData.filteredData);
+
+    this.array = this.dataSourceShow.filteredData;
+    this.totalSize = this.dataSourceShow.filteredData.length;
+    this.iterator();
+    this.dataSourceShow.sort = this.sort;
+  }
+
   // =================
   // SERVICIOS
   // =================
@@ -161,12 +187,17 @@ dataSourceShow : MatTableDataSource<requisitionModel>
           return 0;
         });
 
-        this.dataSourceShow = new MatTableDataSource(arraySort);
-        this.array = res;
-        this.totalSize = this.array.length;
+        // this.dataSourceShow = new MatTableDataSource(arraySort);
+
+        this.dataSourceShowOriginal = new MatTableDataSource(arraySort);
+
+        this.emitFilters(0, 'Estatus')
+
+        // this.array = res;
+        // this.totalSize = this.array.length;
         
-        this.iterator();
-        this.dataSourceShow.sort = this.sort;
+        // this.iterator();
+        // this.dataSourceShow.sort = this.sort;
         
       },
       error => console.log("error consulta regiones",error)

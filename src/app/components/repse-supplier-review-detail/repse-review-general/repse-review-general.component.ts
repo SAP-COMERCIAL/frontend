@@ -171,8 +171,6 @@ downloadURL : any;
         fileNameCompleto = element.url.substring(posicion, posicionInicial + 3)
         dataType = fileNameCompleto.substring(fileNameCompleto.indexOf(".") + 1, fileNameCompleto.length)
         fileName = fileNameCompleto.substring(0, fileNameCompleto.indexOf("."))
-        console.warn('ELEMENTOS', fileName);
-        console.warn('TIPO DE ELEMENTOS', dataType);
 
         // DESCARGAR ARCHIVO
         // ==================

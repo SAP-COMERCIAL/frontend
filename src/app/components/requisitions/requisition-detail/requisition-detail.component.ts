@@ -381,7 +381,6 @@ export class RequisitionDetailComponent implements OnInit {
     this.UploadDataExcel = null;
      this.UploadDataExcel = new MatTableDataSource(arrayExcel);
 
-     console.log('AGREGANDO', this.UploadDataExcel);
   }
 
   clean(event){
@@ -422,7 +421,6 @@ export class RequisitionDetailComponent implements OnInit {
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.UploadDataExcel.filter = filtro.trim().toLowerCase();
-    console.log('filtro', filtro);
   }
 
   showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
@@ -574,7 +572,6 @@ export class RequisitionDetailComponent implements OnInit {
         });
 
         this.UploadDataExcel = new MatTableDataSource(arrayRequsitionToTable);
-        console.log('Se obtiene detalle de requisición', res);
       },
       error => console.log("error alta de proyectos",error)
     )
@@ -696,9 +693,7 @@ export class RequisitionDetailComponent implements OnInit {
             )
 
           }
-         console.log('DETALLE DETALLE DETALLE', arrayToDb);
- 
-         
+         console.log('DETALLE DETALLE DETALLE', arrayToDb);   
  
        });
   }

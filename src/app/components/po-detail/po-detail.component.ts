@@ -22,6 +22,7 @@ import { poDetailModel } from 'src/app/models/po-detail.model';
 import * as XLSX from 'xlsx';
 import { UserService } from '../../services/user.service';
 import { projectservice } from '../../services/projects/project.service';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -376,13 +377,7 @@ export class PoDetailComponent implements OnInit {
             
       });
 
-
-      console.log('iva', this.iva)
-      
-      console.log('descuento', descuento)
-
       this.subtotal = this.subtotal - descuento
-
       this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
       this.total = this.subtotal + this.ivaSubtotal;
 
@@ -1294,10 +1289,6 @@ export class PoDetailComponent implements OnInit {
     this._quotationservice.getQuotationDetail(cotizacion_id).subscribe(
       res=> {
 
-        res.forEach(element => {
-          console.log('entra');
-        });
-
         this.datasourceCotizacionesDetalle = res;
         console.log('COTIZACIONES TODAS', res);
 
@@ -1388,8 +1379,6 @@ export class PoDetailComponent implements OnInit {
     let conteo : number = 0;
 
     this.cotizacionId = this.newProject.controls["cotizacion_id"].value;
-
-console.log('orden de compra detalle', table)
 
     table.forEach(element => {
 
@@ -1564,9 +1553,6 @@ console.log('orden de compra detalle', table)
             , detalle_id : element.ordendecompradetalle_id
           })
         });
-
-        console.warn('res', res);
-        console.log('arreglo', arrayPODetail);
 
         this.datasourceCotizacionesDetalle = arrayPODetail;
         console.log('ORDENES DE COMPRA DET', this.datasourceCotizacionesDetalle);

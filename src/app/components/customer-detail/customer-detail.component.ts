@@ -122,7 +122,6 @@ openSnackBar(message: string, action: string) {
 
 insertCustommer(arrayToDb : any){
   
-  console.log('aqui esta log', arrayToDb)
   // Inserta clientes
   this._customerservice.insertcustomer(arrayToDb).subscribe(
     res=> {

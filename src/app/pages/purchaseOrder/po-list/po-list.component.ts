@@ -268,7 +268,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSourceShow.filter = filtro.trim().toLowerCase();
-    console.log('filtro', filtro);
   }
 
   emitFilters(event, filtro) {
@@ -276,17 +275,13 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
     let filtroEstatus : number = 3;
     let arrayFiltroData : MatTableDataSource<poModel> = null;
 
-    console.warn(' event.value',  event.value)
-    console.warn(' event',  event)
-
     if(filtro === 'Estatus'){
-      this.fEstatus = (this.fEstatus == undefined) ? '3' : event; 
       filtroEstatus = (filtroEstatus == undefined) ? 3 : event.value; 
-      this.fEstatus.value = (this.fEstatus == undefined) ? '3' : event.value.toString(); 
+      filtroEstatus = (event.value == undefined) ? 3 : filtroEstatus;
     }
 
     arrayFiltroData = new MatTableDataSource(this.dataSourceShow.filteredData.filter(elemento => (
-                                                                                  (elemento.estado == filtroEstatus ) || (filtroEstatus == 3)
+                                                                                  (elemento.estado == filtroEstatus ) || (filtroEstatus == 99)
                                                                                    )));
 
     this.dataSourceShow = new MatTableDataSource(arrayFiltroData.filteredData);
@@ -349,7 +344,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
 
     this.datasourcePoveedores = arrayProvider;
 
-    console.log(this.datasourcePoveedores);
   }
 
 
@@ -373,13 +367,8 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
           return 0;
         });
         
-        this.dataSourceShow = new MatTableDataSource(arraySort);
         this.dataSourceShowOriginal = new MatTableDataSource(arraySort);
-        this.array = res;
-        this.totalSize = this.array.length;
-        
-        this.iterator();
-        this.dataSourceShow.sort = this.sort;
+        this.emitFilters(3, 'Estatus')
         
       },
       error => console.log("error consulta regiones",error)
@@ -401,8 +390,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
 
     arrayToDb = ({ordendecompra_id : element.ordendecompra_id, estatus : statusToDb, usuario : this.UserIdLogin})
 
-    console.log('cancelado', element)
-
     this._purchaseOrderService.putPOCancel(element.ordendecompra_id).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
@@ -419,9 +406,7 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
   insertODCStatusBitacora(po_id : any){
     let arrayToDb : any;
 
-    console.log('numero de orden de compra', this.usuarioId)
-
-    arrayToDb = ({ordendecompra_id : po_id , estatus : 4, usuario : this.UserIdLogin}) // this.usuarioId
+    arrayToDb = ({ordendecompra_id : po_id , estatus : 4, usuario : this.UserIdLogin})
 
     this._purchaseOrderService.insertPOStatus(arrayToDb).subscribe(
       res=> {
@@ -458,8 +443,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
         }
         img.onerror = () => reject('Imagen no disponible')
         img.src = localPath;
-
-        console.log('path', localPath);
     })
 
   }
@@ -473,50 +456,16 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
     this.usuarioId = decodeUser;
     this.getusers();
 
-    // switch(decodeUser){
-    //   case('pablo'):  this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
-    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-    //                     result => this.logoDataUrl = result
-    //                   )
-    //     break;
-    //   case('alejandro_fuentes'): this.decodedSign = this.decodedSign + '36189034-32e5-4e28-b44c-43dec58e9999' 
-    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaAlejandro.PNG').then(
-    //                     result => this.logoDataUrl = result
-    //                   )
-    //     break;
-    //   case('bernardo_tamez'): this.decodedSign = this.decodedSign + '611d133a-d14a-45ab-a26a-f6e0dd570636' 
-    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBernardo.PNG').then(
-    //                     result => this.logoDataUrl = result
-    //                   )        
-    //     break;
-    //   case('fernando_chavez'): this.decodedSign = this.decodedSign + 'be146605-1624-48e9-b646-cf9dbfd4f7a8' 
-    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaFernando.PNG').then(
-    //                     result => this.logoDataUrl = result
-    //                   )   
-    //     break;
-    //   default: this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
-    //                 this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-    //                   result => this.logoDataUrl = result
-    //                 )
-    //     break;
-    // }
-
-    // this.decodedSign = this.decodedSign + 'c5a8f192-5cb8-4025-8d30-31918abfa5be';
-    //                   this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaPablo.PNG').then(
-    //                     result => this.logoDataUrl = result
-    //                   )
-    console.log('this.decodedSign', this.decodedSign)
   }
 
   generaPDF(element){
     this.getPO_Det(element)
-    // this.getcotizacionesDetail(element.cotizacion_id, element);
   }
 
   datsourcePoDetail : any;
 
   getPO_Det(element){
-    this._purchaseOrderService.getPODetail(element.ordendecompra_id).subscribe( //.getQuotationDetail(cotizacion_id).subscribe(
+    this._purchaseOrderService.getPODetail(element.ordendecompra_id).subscribe(
       res=> {
         console.log('ORDEN DE COMPRA DETALLE', res);
         this.datsourcePoDetail = res;
@@ -533,7 +482,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
     this._UserService.getUsersAll().subscribe(
       res=> {
         this.datasourceUsers = res;
-        console.log('USUARIOS', this.datasourceUsers);
         arrayUsers = this.datasourceUsers.filter(e => e.nombreUsuario == this.usuarioId)
         this.UserIdLogin = Number(arrayUsers[0]["usuarioId"].toString());
       },
@@ -543,9 +491,7 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
   
   public async downloadAsPDF(element) {
 
-    console.log('afuera')
     if(element.estado != 3){
-      console.log('entre')
       this.showMessage(1, 'Alerta', 'error', 'Para imprimir la orden de compra es necesario autorizarla', 'Cerrar');
       return;
     }
@@ -599,8 +545,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
             body.push(row);
         }
     }
-
-    console.log('orden de compra detalle', this.datsourcePoDetail)
 
     for (var key in this.datsourcePoDetail) {
         if (this.datsourcePoDetail.hasOwnProperty(key))
@@ -1100,8 +1044,6 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
         // alignment: 'justify'
       }
     };
-
-    console.log('documentDefinition', documentDefinition);
 
     pdfMake.createPdf(documentDefinition).open();
      
