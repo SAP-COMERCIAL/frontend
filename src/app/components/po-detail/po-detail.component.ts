@@ -22,7 +22,6 @@ import { poDetailModel } from 'src/app/models/po-detail.model';
 import * as XLSX from 'xlsx';
 import { UserService } from '../../services/user.service';
 import { projectservice } from '../../services/projects/project.service';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -664,7 +663,7 @@ export class PoDetailComponent implements OnInit {
             var data = this.datasourceCotizacionesDetalle[key];
             var row = new Array();
             row.push( data.cantidad.toString() );
-            row.push( data.unidad_medida.toString()  );
+            row.push( data.um.toString() );
             row.push( data.descripcion.toString() );
             row.push( formatter.format(data.precio_unitario).toString()  );
             row.push( formatter.format((data.precio_unitario * data.cantidad)).toString() );
@@ -674,6 +673,8 @@ export class PoDetailComponent implements OnInit {
             
             // Calcula Totales
             subtotalPDF = subtotalPDF + (data.precio_unitario * data.cantidad);
+
+            console.log('udem', data);
         }
     }
 
@@ -905,7 +906,7 @@ export class PoDetailComponent implements OnInit {
         {
           fontSize:8, width:'100%',
           table: {
-            widths: [ '*', '*', '*', '*', '*' ],
+            widths: [ '10%', '10%', '50%', '15%', '15%' ],
             headerRows: 2,
             // keepWithHeaderRows: 1,
             body: body

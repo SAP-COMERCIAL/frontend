@@ -515,9 +515,9 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
       0:{
           col_1:{ text: 'Cantidad', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 },
           col_2:{ text: 'Unidad', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 },
-          col_3:{ text: 'Descripción', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 90 },
-          col_4:{ text: 'Precio Unitario', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20  },
-          col_5:{ text: 'Importe', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20  },
+          col_3:{ text: 'Descripción', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 40 },
+          col_4:{ text: 'Precio Unitario', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 10  },
+          col_5:{ text: 'Importe', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 10  },
           // col_6:{ text: 'SKU', style: 'tableHeader',rowSpan: 2, alignment: 'center',margin: [0, 8, 0, 0], width: 20 }
       },
       1:{
@@ -779,7 +779,7 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
         {
           fontSize:8, width:'100%',
           table: {
-            widths: [ '*', '*', '*', '*', '*' ],
+            widths: [ '10%', '10%', '50%', '15%', '15%' ],
             headerRows: 2,
             // keepWithHeaderRows: 1,
             body: body
