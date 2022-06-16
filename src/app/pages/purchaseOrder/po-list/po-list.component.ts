@@ -499,7 +499,7 @@ dataSourceShowOriginal : MatTableDataSource<poModel>
     let subtotalPDF : number = Number(element.sub_total);
     let ivaPDF : number = Number(element.iva_moneda);
     let totalPDF : number = Number(Number(element.sub_total) + Number(element.iva_moneda));
-    let totalPDFLetra : string = (element.tipo_moneda == 'MXN') ? this.numeroALetras(totalPDF, 'PESOS MEXICANOS') : this.numeroALetras(totalPDF, 'PESOS MEXICANOS');
+    let totalPDFLetra : string = (element.tipo_moneda == 'MXN') ? this.numeroALetras(totalPDF, 'PESOS MEXICANOS') : this.numeroALetras(totalPDF, 'DOLARES AMERICANOS');
     let ciudadEstado : string;
     let terminosYCondiciones : string = element.terminos_condiciones
     let descuentoPDF : number = Number(element.descuento_global);

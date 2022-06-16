@@ -112,9 +112,9 @@ export class RequisitionDetailComponent implements OnInit {
     this.getProyectos();
     this.getEnabledCategories();
     
-    this.newProject.controls["categoria_id"].setValue(this.projectInfo["codigo_proyectocategoria"]);
-    
     if(this.requisicionId != 0){
+      this.newProject.controls["categoria_id"].setValue(this.projectInfo["codigo_proyectocategoria"]);
+      
         this.newProject.patchValue({
           proyecto_id : this.projectInfo["proyecto_id"],
           requisicion_id : '',
@@ -185,6 +185,8 @@ export class RequisitionDetailComponent implements OnInit {
         const data = XLSX.utils.sheet_to_json(ws);
         this.dataExcel = this.validate(data);
         this.dataExcel = data;
+
+        console.log('ordenamientod de excel', this.dataExcel);
 
         let arrayErrores = [];
         let valido : boolean = true;
@@ -591,7 +593,7 @@ export class RequisitionDetailComponent implements OnInit {
         arrayToDb = {requisicioninternadetalle_id : element.requisicioninternadetalle_id
             , requisicioninterna_id : requisicionId
             , cantidad : element.cantidad
-            , sku : element.SKU
+            , sku : (element.SKU != undefined) ? element.SKU : ''
             , codigo_requisicioninterna : ''
             , unidad_medida : element.um
             , descripcion : element.descripcion

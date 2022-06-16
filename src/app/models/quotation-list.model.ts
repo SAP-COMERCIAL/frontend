@@ -6,4 +6,16 @@ export class quotationListModel{
     codigo: string
     fecha: string
     estado: string
+
+    cotizaciondetalle_id : number
+    codigo_cotizacion : string
+    requisicioninternadetalle_id : number
+    sku : string
+    medida : string
+    color : string
+    otras_especificaciones : string
+    cantidad : number
+    unidad_medida : string
+    descripcion : string
+
 }

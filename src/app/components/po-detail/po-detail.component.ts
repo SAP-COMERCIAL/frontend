@@ -22,11 +22,8 @@ import { poDetailModel } from 'src/app/models/po-detail.model';
 import * as XLSX from 'xlsx';
 import { UserService } from '../../services/user.service';
 import { projectservice } from '../../services/projects/project.service';
-
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { elementAt } from 'rxjs-compat/operator/elementAt';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -46,7 +43,6 @@ export class PoDetailComponent implements OnInit {
   filteredOptions: Observable<any[]>;
   
   @ViewChild('pdfTable') pdfTable: ElementRef;
-  // @ViewChild('AllTable') pdfTable: ElementRef;
   // ===================
   // DECLARACIONES
   // ===================
@@ -1323,13 +1319,33 @@ console.log('codigo', arrayFiltroFO);
   }
 
   getcotizacionesDetail(cotizacion_id : any){
-    let arrayDatasourceQT : any;
+    let arrayDatasourceQD : any = [];
     
     this._quotationservice.getQuotationDetail(cotizacion_id).subscribe(
       res=> {
 
-        this.datasourceCotizacionesDetalle = res;
-        console.log('COTIZACIONES TODAS', res);
+        res.forEach(element => {
+          arrayDatasourceQD.push({
+                activo : true
+              ,cotizaciondetalle_id : element.cotizaciondetalle_id
+              ,codigo_cotizacion : element.codigo_cotizacion
+              ,requisicioninternadetalle_id : element.requisicioninternadetalle_id
+              ,cotizacion_id : element.cotizacion_id
+              ,sku : element.sku
+              ,medida : element.medida
+              ,color : element.color
+              ,otras_especificaciones : element.otras_especificaciones
+              ,cantidad : element.cantidad
+              ,unidad_medida : element.unidad_medida
+              ,descripcion : element.descripcion
+              ,descuento : 0
+              ,costo : 0
+          })
+        });
+
+        this.datasourceCotizacionesDetalle = arrayDatasourceQD;
+        console.log('COTIZACIONES RES', res);
+        console.log('COTIZACIONES TODAS', this.datasourceCotizacionesDetalle);
 
         this.getPO_Hdr(res[0]["codigo_cotizacion"]);
   
@@ -1587,24 +1603,11 @@ console.log('arreglo a detalle', arrayTodbDetail);
 
         console.log('PROVEEDORES', this.datasourcesupplier);
 
-
     // ===========================
     // TERMINA SUPPY
     // ===========================
-    
-    console.log('option inicial', this.optionsx);
 
     this.optionsx= this.datasourcesupplier;
-
-    console.log('option final', this.optionsx);
-
-
-  // this.optionsx = [
-  //   { proveedorid : 1, nombre: 'Mary' },
-  //   { proveedorid : 2, nombre: 'Shelley' },
-  //   { proveedorid : 3, nombre: 'Igor' },
-  // ];
-
 
     this.filteredOptions = this.proveedor_id.valueChanges.pipe(
       startWith(''),

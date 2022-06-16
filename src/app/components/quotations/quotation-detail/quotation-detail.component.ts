@@ -136,7 +136,6 @@ export class QuotationDetailComponent implements OnInit {
   RequisitionSelected(){
     
     let arrayRequisicion_interna : any;
-    let codigoRequisicion_interna : any;
 
     this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
     arrayRequisicion_interna = this.datasourceRequisition.filter(e => e.requisicioninterna_id == this.requisicionId);
@@ -328,10 +327,34 @@ getCotizacionesAll(requisicion_interna : any){
 }
 
 getQuotationDetail(cotizacionId : number){
+  let arrayQuoteDetail : any = []
 // Obtiene el detalle de la cotización
 this._quotationservice.getQuotationDetail(cotizacionId).subscribe(
   res=> {
-    this.datasourceRequisitionDetail = res;
+
+    res.forEach(element => {
+      arrayQuoteDetail.push({
+        activo : true
+        ,cotizaciondetalle_id: element.cotizaciondetalle_id
+        ,codigo_cotizacion: element.codigo_cotizacion
+        ,requisicioninternadetalle_id: element.requisicioninternadetalle_id
+        ,cotizacion_id: element.cotizacion_id
+        ,sku: element.sku
+        ,medida: element.medida
+        ,color: element.color
+        ,otras_especificaciones: element.otras_especificaciones
+        ,cantidad: element.cantidad
+        ,unidad_medida: element.unidad_medida
+        ,descripcion: element.descripcion
+        ,descuento: 0
+        ,costo: 0
+      })
+    });
+
+
+    this.datasourceRequisitionDetail = arrayQuoteDetail;
+
+    console.log('payload deseado', this.datasourceRequisitionDetail)
     console.log('datasourde cotizacion', res);
 
   },
@@ -365,10 +388,32 @@ getrequisition(){
 }
 
 getRequisitionDetail(Requisition_Id : any){
+  let arrayRequisitionDetail : any  = [];
   // Obtiene requisiciones 
   this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(
     res=> {
-      this.datasourceRequisitionDetail = (res);
+
+      res.forEach(element => {
+        arrayRequisitionDetail.push({
+          activo : true
+          , requisicioninternadetalle_id : element.requisicioninternadetalle_id
+          , requisicioninterna_id : element.requisicioninterna_id
+          , cantidad : element.cantidad
+          , sku : element.sku
+          , codigo_requisicioninterna : element.codigo_requisicioninterna
+          , unidad_medida : element.unidad_medida
+          , descripcion : element.descripcion
+          , existencia_almacen : element.existencia_almacen
+          , cantidad_comprar : element.cantidad_comprar
+          , medida : element.medida
+          , color : element.color
+          , otras_especificaciones : element.otras_especificaciones
+          , estado : element.estado
+          , cotizado : element.cotizado
+        })
+      });
+
+      this.datasourceRequisitionDetail = (arrayRequisitionDetail);
 
         console.log('REQUISICIONES DETALLE', this.datasourceRequisitionDetail);
     },

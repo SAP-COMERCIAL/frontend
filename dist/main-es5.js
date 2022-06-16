@@ -40327,7 +40327,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](14, "label");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](15, "V1.00.26");
+            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](15, "V1.00.27");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 
@@ -44232,7 +44232,7 @@
                       subtotalPDF = Number(element.sub_total);
                       ivaPDF = Number(element.iva_moneda);
                       totalPDF = Number(Number(element.sub_total) + Number(element.iva_moneda));
-                      totalPDFLetra = element.tipo_moneda == 'MXN' ? this.numeroALetras(totalPDF, 'PESOS MEXICANOS') : this.numeroALetras(totalPDF, 'PESOS MEXICANOS');
+                      totalPDFLetra = element.tipo_moneda == 'MXN' ? this.numeroALetras(totalPDF, 'PESOS MEXICANOS') : this.numeroALetras(totalPDF, 'DOLARES AMERICANOS');
                       terminosYCondiciones = element.terminos_condiciones;
                       descuentoPDF = Number(element.descuento_global);
                       doc = new jspdf__WEBPACK_IMPORTED_MODULE_2__["default"]();

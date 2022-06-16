@@ -14,4 +14,7 @@ export class requisitionModelDetail{
     otras_especificaciones : string
     estado : boolean
     cotizado : boolean
+
+    sku : string;
+    unidad_medida : string
 }
