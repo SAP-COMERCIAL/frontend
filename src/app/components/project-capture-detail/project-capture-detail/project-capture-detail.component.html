@@ -119,7 +119,7 @@
     <div fxFlex.gt-sm="25%">
       <div>
         <mat-form-field>
-          <input [type]="centro_de_costo_proyecto" matInput class="form-control form-control-line control" placeholder="FO" formControlName="centroDeCostos" >
+          <input [type]="centro_de_costo_proyecto" matInput class="form-control form-control-line control" placeholder="FO" formControlName="centroDeCostos" (blur)="onBlurFO($event)">
         </mat-form-field>
         <span *ngIf="!newProject.get('centroDeCostos').valid && newProject.get('centroDeCostos').touched" class="help-block" style="color: red;"> Capture un centro de costos</span>
       </div>

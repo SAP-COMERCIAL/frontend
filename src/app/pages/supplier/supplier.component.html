@@ -81,26 +81,31 @@
                                 
                                 <ng-container matColumnDef="edit">
                                     <th mat-header-cell *matHeaderCellDef class="colbuttons"> Editar </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="edit(element, $event)"><i class="fa fa-pencil fa-lg icon-cog-edit"></i></button> </td>
+                                    <td mat-cell *matCellDef="let element">
+                                        <ng-container *ngIf="decodeUserProfile != 5"> <button mat-button color="primary" (click)="edit(element, $event)"><i class="fa fa-pencil fa-lg icon-cog-edit"></i></button> </ng-container>
+                                        <ng-container *ngIf="decodeUserProfile == 5"> <button mat-button color="primary" (click)="edit(element, $event)"><i class="fa fa-eye fa-lg icon-cog-edit"></i></button> </ng-container>
+                                    </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="users">
-                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Usuario </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="users(element, $event)"><i class="fa fa-user fa-lg icon-cog-user"></i></button> </td>
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Usuario </ng-container>  </th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                        <ng-container *ngIf="decodeUserProfile != 5"><button mat-button color="primary" (click)="users(element, $event)"><i class="fa fa-user fa-lg icon-cog-user"></i></button> </ng-container>
+                                    </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="aprove">
-                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Autorizar </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="aprove(element, $event)"><i class="fa fa-check fa-lg icon-cog-check"></i></button> </td>
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Autorizar </ng-container> </th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                        <ng-container *ngIf="decodeUserProfile != 5"><button mat-button color="primary" (click)="aprove(element, $event)"><i class="fa fa-check fa-lg icon-cog-check"></i></button> </ng-container>
+                                    </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="deny">
-                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Denegar </th>
-                                    <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
-                                            (click)="deny(element, $event)"><i class="fa fa-ban fa-lg icon-cog-cancel"></i></button> </td>
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Denegar </ng-container>  </th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                        <ng-container *ngIf="decodeUserProfile != 5"><button mat-button color="primary" (click)="deny(element, $event)"><i class="fa fa-ban fa-lg icon-cog-cancel"></i></button> </ng-container>
+                                    </td>
                                 </ng-container>
 
                                 <!-- <ng-container matColumnDef="delusers">

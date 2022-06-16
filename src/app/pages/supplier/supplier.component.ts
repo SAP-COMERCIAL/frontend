@@ -10,9 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ExcelServiceService } from 'src/app/helpers/excel-service.service';
 import { SupplierUserComponent } from '../../components/supplier-user/supplier-user.component';
 import { UserService } from '../../services/user.service';
-import { elementAt } from 'rxjs-compat/operator/elementAt';
 import Swal from 'sweetalert2';
-import { SubscribeOnObservable } from 'rxjs/internal-compatibility';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-supplier',
@@ -27,6 +26,7 @@ export class SupplierComponent implements OnInit {
 // =================
 
 // Para paginación
+decodeUserProfile : any;
 public pageIndex:number = 0;
 public pageSize:number = 20;
 public currentPage = 0;
@@ -78,7 +78,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
       title: 'PROVEEDOR',
       arrayData : null,
       proveedorId: 0,
-      estadoPantalla: 'New'
+      estadoPantalla: 'New',
+      userProfile : 1
      
     }
     dialogConfig.width = '1300px';
@@ -103,7 +104,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
       title: 'PROVEEDOR',
       arrayData : element,
       proveedorId: element.proveedorId,
-      estadoPantalla: 'Edit'
+      estadoPantalla: 'Edit',
+      userProfile : this.decodeUserProfile
      
     }
     dialogConfig.width = '1300px';
@@ -127,7 +129,8 @@ dataSourceShow : MatTableDataSource<supplierModel>
       title: 'USUARIOS',
       arrayData : element,
       proveedorId: element.proveedorId,
-      estadoPantalla: 'Edit'
+      estadoPantalla: 'Edit',
+      userProfile : this.decodeUserProfile
      
     }
     dialogConfig.width = '500px';
@@ -223,6 +226,12 @@ dataSourceShow : MatTableDataSource<supplierModel>
     }
   }
 
+  decode(){
+    let token = localStorage.getItem('token_access');
+    this.decodeUserProfile = jwt_decode(token)["perfil_usuarioid"];
+
+  }
+
   // =================
   // SERVICIOS
   // =================
@@ -253,7 +262,9 @@ dataSourceShow : MatTableDataSource<supplierModel>
         
         this.iterator();
         this.dataSourceShow.sort = this.sort;
-        
+  
+        this.decode();
+
       },
       error => console.log("error consulta regiones",error)
     )

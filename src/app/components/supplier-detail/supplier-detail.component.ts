@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { supplierModel } from 'src/app/models/supplier.model';
 import { supplyservice } from '../../services/supplier.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-supplier-detail',
@@ -23,6 +22,7 @@ contacto : string;
 ciudad : string;
 estado : string;
 supplierDataSource: any;
+userProfile : any;
 
 projectInfo : any;
 estadoPantalla : string;
@@ -55,6 +55,8 @@ public newProject: FormGroup;
 // =========================
 
   ngOnInit(): void {
+
+    this.userProfile = this.data.userProfile;
 
     this.getSupplier();
     if(this.estadoPantalla == 'Edit'){

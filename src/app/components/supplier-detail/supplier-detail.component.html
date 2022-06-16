@@ -99,7 +99,7 @@
       <div></div>
     </div>
     <div fxFlex.gt-sm="20%" >
-      <div><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></div>
+      <div><ng-container *ngIf="userProfile != 5"><button mat-raised-button color="accent" (click)="save(newProject, $event)">Guardar</button></ng-container></div>
     </div>
     <div fxFlex.gt-sm="20%" >
       <div><button mat-raised-button color="warn" (click)="cancel($event)">Cancelar</button></div>

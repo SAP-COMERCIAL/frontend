@@ -13,7 +13,6 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { customerservice } from '../../../services/customer.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-project-capture-detail',
   templateUrl: './project-capture-detail.component.html',
@@ -67,6 +66,7 @@ export class ProjectCaptureDetailComponent implements OnInit {
   datasourceCategories : any[] = [];
   datasourceProyects : any[] = [];
   datasourceCustomers : any;
+  datasourcePorjects : any;
   public presupuestoFormato: any = 0;
   public presupuestoFormatoLable: any = 0;
 
@@ -115,8 +115,9 @@ export class ProjectCaptureDetailComponent implements OnInit {
     this.getcustomerAll();
     this.getAllProjects();
     this.getEnabledCategories();
+    this.getProyectos();
 
-console.log('data de entrada', this.projectInfo);
+    console.log('data de entrada', this.projectInfo);
 
     if(this.projectId != 0){
 
@@ -324,6 +325,50 @@ reloadClient(form, event){
 
 selectcustommer(event){
   this.cliente = event.value;
+}
+
+getProyectos(){
+  // Obtiene proyectos
+  this._projectService.getProjectAll().subscribe(
+    res=> {
+
+        // Ordena los proyectos
+        res.sort(function (a, b) {
+          if (a.proyecto_id < b.proyecto_id) {
+            return 1;
+          }
+          if (a.proyecto_id > b.proyecto_id) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+        
+      this.datasourcePorjects = res;
+      console.log('PROYECTOS', res);
+    },
+    error => console.log("error consulta proyectos",error)
+  )
+}
+
+onBlurFO(event){
+
+  let arrayFiltroFO : any
+
+  arrayFiltroFO = this.datasourcePorjects.filter(e => e.nombre_centro_de_costo_proyecto.toString().toLowerCase() == this.newProject.controls["centroDeCostos"].value.toString().toLowerCase());
+
+  console.log('codigo', arrayFiltroFO);
+
+  if(arrayFiltroFO.length > 0){
+    // OBTIENE CAMPOS DE DESTINO
+    this.newProject.controls["enviaANombre"].setValue(arrayFiltroFO[0]["destino_nombre"])
+    this.newProject.controls["enviaADireccion"].setValue(arrayFiltroFO[0]["destino_direccion"])
+    this.newProject.controls["enviaACd"].setValue(arrayFiltroFO[0]["destino_ciudad"])
+    this.newProject.controls["enviaAEstado"].setValue(arrayFiltroFO[0]["destino_estado"])
+    this.newProject.controls["destinoCP"].setValue(arrayFiltroFO[0]["destino_cp"])
+    this.newProject.controls["enviaATelefono"].setValue(arrayFiltroFO[0]["destino_telefono"])
+    this.newProject.controls["enviaARequisitor"].setValue(arrayFiltroFO[0]["destino_requisitor"])
+  }
 }
 
   // =========================

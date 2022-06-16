@@ -23,6 +23,11 @@ import * as XLSX from 'xlsx';
 import { UserService } from '../../services/user.service';
 import { projectservice } from '../../services/projects/project.service';
 
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { elementAt } from 'rxjs-compat/operator/elementAt';
+
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -36,6 +41,9 @@ var formatter = new Intl.NumberFormat('en-US', {
 })
 export class PoDetailComponent implements OnInit {
   title = 'htmltopdf';
+  proveedor_id = new FormControl('', [Validators.required]);
+  optionsx: any[];
+  filteredOptions: Observable<any[]>;
   
   @ViewChild('pdfTable') pdfTable: ElementRef;
   // @ViewChild('AllTable') pdfTable: ElementRef;
@@ -56,6 +64,7 @@ export class PoDetailComponent implements OnInit {
   logoDataBlanco : string
   usuarioId : any;
   loading:boolean;
+  retencion : any = 0;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -64,7 +73,7 @@ export class PoDetailComponent implements OnInit {
   cotizacion_id : any = '';
   codigo_requisicioninterna : any = '';
   odc_Numero : any = '';
-  proveedor_id : any = '';
+  proveedor_idw : any = '';
   activoEdicion : boolean = true;
   displayedColumns = ['select', 'detalle_id',  'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento']; // 
 
@@ -152,6 +161,7 @@ export class PoDetailComponent implements OnInit {
       descuentoGlobal : new FormControl(''),
       terminoYCondiciones : new FormControl(''),
       destinoCP : new FormControl(''),
+      retencion : new FormControl(''),
   });
 
   }
@@ -168,8 +178,7 @@ export class PoDetailComponent implements OnInit {
     }else{
       this.estado = 0;
     }
-
-        
+ 
     this.getImageDataUrlFromLocalPath1('../../../assets/images/Signs/FirmaBlanco.PNG').then(
       result => this.logoDataUrl = result
     )
@@ -198,12 +207,13 @@ export class PoDetailComponent implements OnInit {
 
     this.newProject.controls["descuentoGlobal"].setValue(0);
 
-    if(this.projectInfo != undefined){
+    if(this.estadoPantalla != 'new'){
       this.ordendecompra_id = this.projectInfo.proveedor_nombre
       this.subtotal = this.projectInfo.sub_total;
       this.ivaSubtotal = this.projectInfo.iva_moneda;
       this.total = this.projectInfo.total;
       this.descuentoGlobal = this.projectInfo.descuento_global;
+      this.proveedor_idw = this.projectInfo.proveedor_id;
 
       this.getPO_Detail(this.projectInfo.ordendecompra_id);
 
@@ -211,7 +221,7 @@ export class PoDetailComponent implements OnInit {
         cotizacion_id : this.projectInfo.cotizacion_id,
         codigo_requisicioninterna : this.projectInfo.fo,
         odc_Numero : this.projectInfo.ordendecompra_codigo,
-        proveedor_id : this.projectInfo.proveedor_id,
+        // proveedor_id : this.projectInfo.proveedor_id,
         iva : this.projectInfo.iva.toString(),
         moneda : this.projectInfo.tipo_moneda.toString(),
         
@@ -237,6 +247,10 @@ export class PoDetailComponent implements OnInit {
   ivaSelected(form, event){
     this.iva = this.newProject.controls['iva'].value;
     this.onBlurMethod();
+  }
+
+  retencionSelected(form, event){
+    this.retencion = this.newProject.controls['retencion'].value;
   }
 
   cancel(event){
@@ -276,7 +290,8 @@ export class PoDetailComponent implements OnInit {
     valido = (this.newProject.get('cotizacion_id').status == 'INVALID') ? false : valido;
     valido = (this.newProject.get("codigo_requisicioninterna").status == 'INVALID') ? false : valido;
     valido = (this.newProject.get("odc_Numero").status == 'INVALID') ? false : valido;
-    valido = (this.newProject.get("proveedor_id").status == 'INVALID') ? false : valido;
+    // valido = (this.newProject.get("proveedor_id").status == 'INVALID') ? false : valido;
+    valido = (this.proveedor_id.status == 'INVALID') ? false : valido;
     
     if(valido == false){
       this.showMessage(1, 'Alerta', 'error', 'Debe capturar los campos requeridos', 'Cerrar');
@@ -354,7 +369,8 @@ export class PoDetailComponent implements OnInit {
   }
 
   selectsupplier(event){
-    this.proveedor_id = event.value;
+    console.log('SELECCOPMA PROVEEDOR', event)
+    this.proveedor_idw = event.value;
   }
 
   onBlurMethod(){
@@ -540,6 +556,8 @@ export class PoDetailComponent implements OnInit {
 
     arrayFiltroFO = this.datasourcePorjects.filter(e => e.nombre_centro_de_costo_proyecto.toString().toLowerCase() == this.newProject.controls["codigo_requisicioninterna"].value.toString().toLowerCase());
 
+console.log('codigo', arrayFiltroFO);
+
     if(arrayFiltroFO.length > 0){
       // OBTIENE CAMPOS DE DESTINO
       this.newProject.controls["enviaANombre"].setValue(arrayFiltroFO[0]["destino_nombre"])
@@ -558,6 +576,22 @@ export class PoDetailComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
+  }
+
+  displayFn(element): string {
+
+    console.log('elementos', element);
+
+    this.proveedor_idw = element.proveedorid;
+    return element && element.nombre ? element.nombre : '';    
+  }
+
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+
+    return this.optionsx.filter((option) =>
+      option.nombre.toLowerCase().includes(filterValue)
+    );
   }
 
   decode(){
@@ -605,6 +639,8 @@ export class PoDetailComponent implements OnInit {
         break;
     }
   }
+
+ 
   
   public async downloadAsPDF() {
     let subtotalPDF : number = 0;
@@ -620,7 +656,7 @@ export class PoDetailComponent implements OnInit {
    
     var html = htmlToPdfmake(pdfTable.innerHTML);
 
-    let arrayProveedor = this.datasourcesupplier.filter(e => e.proveedorid == this.projectInfo["proveedor_id"])
+    let arrayProveedor = this.datasourcesupplier.filter(e => e.proveedorid == this.proveedor_idw) // this.projectInfo["proveedor_id"])
 
     var headers = {
       0:{
@@ -1215,6 +1251,7 @@ export class PoDetailComponent implements OnInit {
                     )
 
     this.datasourcePoveedores = arrayProvider;
+
   }
 
   getProyectos(){
@@ -1235,6 +1272,7 @@ export class PoDetailComponent implements OnInit {
           });
           
         this.datasourcePorjects = res;
+
         console.log('PROYECTOS', res);
       },
       error => console.log("error consulta proyectos",error)
@@ -1302,6 +1340,12 @@ export class PoDetailComponent implements OnInit {
 
   insertPOHdr(table : any){
     
+    let arrayProveedores : any = this.proveedor_id.value;
+    this.proveedor_idw = arrayProveedores.proveedorid;
+
+    console.log('proveedores nuevos', arrayProveedores.proveedorid)
+    
+
     let arrayTodb : any;
     let arrayDetail : any[] = [];
     let conteo : number = 0;
@@ -1314,7 +1358,7 @@ export class PoDetailComponent implements OnInit {
       if(conteo == 0){
         arrayTodb = {codigo : this.odc_Numero
                   , cotizacion_id : (this.cotizacionId == undefined) ? 0 : this.cotizacionId
-                  , proveedor_id : this.newProject.controls["proveedor_id"].value // this.proveedor_id
+                  , proveedor_id : this.proveedor_idw //this.newProject.controls["proveedor_id"].value // this.proveedor_idw
                   , fecha : moment(new Date, 'YYYY-M-DD')
                   , iva : this.iva
                   , iva_moneda : this.ivaSubtotal
@@ -1389,7 +1433,7 @@ export class PoDetailComponent implements OnInit {
                   purchaseorder_id : this.projectInfo.ordendecompra_id
                   , codigo : this.newProject.controls['odc_Numero'].value
                   , cotizacion_id : (this.cotizacionId == undefined) ? 0 : this.cotizacionId
-                  , proveedor_id : this.newProject.controls["proveedor_id"].value
+                  , proveedor_id : this.proveedor_idw // this.newProject.controls["proveedor_id"].value
                   , fecha : moment(new Date, 'YYYY-M-DD')
                   , iva : this.iva
                   , iva_moneda : this.ivaSubtotal
@@ -1475,6 +1519,8 @@ export class PoDetailComponent implements OnInit {
                         , descripcion : element.descripcion
                         , nota : 'NOTAS DEL INSERT' }
 
+console.log('arreglo a detalle', arrayTodbDetail);
+
     this._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(
       res=> {
         console.log('Se inserto con éxito', res);
@@ -1527,7 +1573,51 @@ export class PoDetailComponent implements OnInit {
     this._supplyservice.getsupplyAll().subscribe(
       res=> {
         this.datasourcesupplier = res;
+
+        if(this.estadoPantalla != 'new'){
+          // let arrayProv : any = {proveedorid : this.projectInfo.proveedor_id, nombre : 'FORJA Y ASOCIADOS'}
+          // this.displayFn(arrayProv);
+          let arrayProv : any = this.datasourcesupplier.filter(e => e.proveedorid == this.projectInfo.proveedor_id)
+
+          console.log('arrayProv', arrayProv[0]);
+          console.log('Proveedores', this.projectInfo.proveedor_id);
+          this.proveedor_id.setValue(arrayProv[0])
+        }
+        
+
         console.log('PROVEEDORES', this.datasourcesupplier);
+
+
+    // ===========================
+    // TERMINA SUPPY
+    // ===========================
+    
+    console.log('option inicial', this.optionsx);
+
+    this.optionsx= this.datasourcesupplier;
+
+    console.log('option final', this.optionsx);
+
+
+  // this.optionsx = [
+  //   { proveedorid : 1, nombre: 'Mary' },
+  //   { proveedorid : 2, nombre: 'Shelley' },
+  //   { proveedorid : 3, nombre: 'Igor' },
+  // ];
+
+
+    this.filteredOptions = this.proveedor_id.valueChanges.pipe(
+      startWith(''),
+      map((value) => (typeof value === 'string' ? value : value?.nombre)),
+      map((nombre) => (nombre ? this._filter(nombre) : this.optionsx.slice()))
+    );
+
+    // ===========================
+    // TERMINA SUPPY
+    // ===========================
+
+
+
       },
       error => console.log("error consulta categorias",error)
     )
@@ -1557,6 +1647,7 @@ export class PoDetailComponent implements OnInit {
 
         this.datasourceCotizacionesDetalle = arrayPODetail;
         console.log('ORDENES DE COMPRA DET', this.datasourceCotizacionesDetalle);
+
       },
       error => console.log("error consulta categorias",error)
     )

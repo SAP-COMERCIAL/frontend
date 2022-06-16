@@ -73,6 +73,11 @@ export interface Menu {
     // }
   ];
 
+  const MENUITEMS_REVISOR = [
+    { state: 'supplier', name: 'Proveedores', type: 'link', icon: 'assignment_turned_in' },
+  
+  ];
+
   const MENUITEMS_PROV = [
     { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
   
@@ -120,6 +125,10 @@ export class MenuItems {
 
       if(jwt_decode(token)["perfil_usuarioid"] == 4 ){
         return MENUITEMS_REPSE;
+      }
+
+      if(jwt_decode(token)["perfil_usuarioid"] == 5 ){
+        return MENUITEMS_REVISOR;
       }
 
     }

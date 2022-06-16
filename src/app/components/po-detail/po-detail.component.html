@@ -20,7 +20,8 @@
         </div>
       </div>
       <div fxFlex.gt-sm="10%" >
-        <div></div>
+        <div>
+        </div>
       </div>
       <div fxFlex.gt-sm="20%" >
         <div><br>FO</div>
@@ -48,21 +49,38 @@
           </div>
       </div>
       <div fxFlex.gt-sm="10%" >
-        <div></div>
+        <div>
+        </div>
       </div>
       <div fxFlex.gt-sm="20%" >
         <div><br>Proveedor</div>
       </div>
       <div fxFlex.gt-sm="25%" >
         <div>
-          <mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Provedor</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="proveedor_id"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let op of filteredOptions | async" [value]="op" (selectionChange)="selectsupplier($event)">
+                <ng-container *ngIf="op.estatus == true"> <p style="color: navy;">{{op.nombre}}</p></ng-container>
+                <ng-container *ngIf="op.estatus == false"> <p style="color: red;">{{op.nombre}}</p></ng-container>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <!-- <mat-form-field>
             <mat-select class="form-control control" formControlName="proveedor_id" >
                 <mat-option *ngFor="let op of datasourcesupplier" [value]="op.proveedorid" (selectionChange)="selectsupplier($event)">
                   <ng-container *ngIf="op.estatus == true"> <p style="color: navy;">{{op.nombre}}</p></ng-container>
                   <ng-container *ngIf="op.estatus == false"> <p style="color: red;">{{op.nombre}}</p></ng-container>
                 </mat-option>
-              </mat-select>
-          </mat-form-field>
+            </mat-select>
+          </mat-form-field> -->
           <span *ngIf="!newProject.get('proveedor_id').valid && newProject.get('proveedor_id').touched" class="help-block" style="color: red;"> seleccione un proveedor</span>
         </div>
       </div>
@@ -227,7 +245,7 @@
         <div></div>
       </div>
       <div fxFlex.gt-sm="20%" >
-        <div><br>
+        <div><br>Terminos y condiciones
         </div>
       </div>
       <div fxFlex.gt-sm="25%" >
@@ -235,6 +253,34 @@
               <mat-form-field>
                 <input [type]="terminoYCondiciones" matInput class="form-control form-control-line control" formControlName="terminoYCondiciones" placeholder="Términos y condiciones">
               </mat-form-field>
+            </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" class="division">
+      <div fxFlex.gt-sm="20%">
+          <div hidden><br>Retención</div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+        <div hidden>
+            <mat-form-field>
+              <mat-select class="form-control control" formControlName="retencion" (selectionChange)="retencionSelected(newProject, $event)">
+                <mat-option value= "0" selected="selected">0%</mat-option>
+                <mat-option value= "4">4%</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="10%" >
+        <div>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="20%" >
+        <div><br>
+        </div>
+      </div>
+      <div fxFlex.gt-sm="25%" >
+            <div>
             </div>
       </div>
     </div>
@@ -340,8 +386,10 @@
 
             <!-- Email Column -->
             <ng-container matColumnDef="descripcion">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Descripción </th>
-              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20wrap"> Descripción </th>
+              <td mat-cell *matCellDef="let element" class="col20wrap">
+                <textarea rows="5" cols="20" wrap="soft" disabled>{{element.descripcion}}</textarea>  
+              </td>
             </ng-container>
 
             <!-- Email Column -->
