@@ -38,5 +38,6 @@ export class poModel{
     destino_cp : string
     destino_requisitor : string
     destino_telefono : string
+    tim : number
 }
 

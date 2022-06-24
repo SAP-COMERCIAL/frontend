@@ -6494,8 +6494,7 @@
           this.dialog = dialog;
           this._projectService = _projectService;
           this.title = 'htmltopdf';
-          this.proveedor_id = new _angular_forms__WEBPACK_IMPORTED_MODULE_16__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_16__.Validators.required]); // @ViewChild('AllTable') pdfTable: ElementRef;
-          // ===================
+          this.proveedor_id = new _angular_forms__WEBPACK_IMPORTED_MODULE_16__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_16__.Validators.required]); // ===================
           // DECLARACIONES
           // ===================
           // Para paginación
@@ -7857,11 +7856,30 @@
           value: function getcotizacionesDetail(cotizacion_id) {
             var _this25 = this;
 
-            var arrayDatasourceQT;
+            var arrayDatasourceQD = [];
 
             this._quotationservice.getQuotationDetail(cotizacion_id).subscribe(function (res) {
-              _this25.datasourceCotizacionesDetalle = res;
-              console.log('COTIZACIONES TODAS', res);
+              res.forEach(function (element) {
+                arrayDatasourceQD.push({
+                  activo: true,
+                  cotizaciondetalle_id: element.cotizaciondetalle_id,
+                  codigo_cotizacion: element.codigo_cotizacion,
+                  requisicioninternadetalle_id: element.requisicioninternadetalle_id,
+                  cotizacion_id: element.cotizacion_id,
+                  sku: element.sku,
+                  medida: element.medida,
+                  color: element.color,
+                  otras_especificaciones: element.otras_especificaciones,
+                  cantidad: element.cantidad,
+                  unidad_medida: element.unidad_medida,
+                  descripcion: element.descripcion,
+                  descuento: 0,
+                  costo: 0
+                });
+              });
+              _this25.datasourceCotizacionesDetalle = arrayDatasourceQD;
+              console.log('COTIZACIONES RES', res);
+              console.log('COTIZACIONES TODAS', _this25.datasourceCotizacionesDetalle);
 
               _this25.getPO_Hdr(res[0]["codigo_cotizacion"]);
             }, function (error) {
@@ -8118,14 +8136,7 @@
               // TERMINA SUPPY
               // ===========================
 
-              console.log('option inicial', _this30.optionsx);
               _this30.optionsx = _this30.datasourcesupplier;
-              console.log('option final', _this30.optionsx); // this.optionsx = [
-              //   { proveedorid : 1, nombre: 'Mary' },
-              //   { proveedorid : 2, nombre: 'Shelley' },
-              //   { proveedorid : 3, nombre: 'Igor' },
-              // ];
-
               _this30.filteredOptions = _this30.proveedor_id.valueChanges.pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_19__.startWith)(''), (0, rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.map)(function (value) {
                 return typeof value === 'string' ? value : value === null || value === void 0 ? void 0 : value.nombre;
               }), (0, rxjs_operators__WEBPACK_IMPORTED_MODULE_20__.map)(function (nombre) {
@@ -13029,7 +13040,6 @@
             var _this43 = this;
 
             var arrayRequisicion_interna;
-            var codigoRequisicion_interna;
             this.requisicionId = this.newProject.controls["requisicion_Numero"].value;
             arrayRequisicion_interna = this.datasourceRequisition.filter(function (e) {
               return e.requisicioninterna_id == _this43.requisicionId;
@@ -13238,9 +13248,29 @@
           value: function getQuotationDetail(cotizacionId) {
             var _this46 = this;
 
-            // Obtiene el detalle de la cotización
+            var arrayQuoteDetail = []; // Obtiene el detalle de la cotización
+
             this._quotationservice.getQuotationDetail(cotizacionId).subscribe(function (res) {
-              _this46.datasourceRequisitionDetail = res;
+              res.forEach(function (element) {
+                arrayQuoteDetail.push({
+                  activo: true,
+                  cotizaciondetalle_id: element.cotizaciondetalle_id,
+                  codigo_cotizacion: element.codigo_cotizacion,
+                  requisicioninternadetalle_id: element.requisicioninternadetalle_id,
+                  cotizacion_id: element.cotizacion_id,
+                  sku: element.sku,
+                  medida: element.medida,
+                  color: element.color,
+                  otras_especificaciones: element.otras_especificaciones,
+                  cantidad: element.cantidad,
+                  unidad_medida: element.unidad_medida,
+                  descripcion: element.descripcion,
+                  descuento: 0,
+                  costo: 0
+                });
+              });
+              _this46.datasourceRequisitionDetail = arrayQuoteDetail;
+              console.log('payload deseado', _this46.datasourceRequisitionDetail);
               console.log('datasourde cotizacion', res);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -13283,9 +13313,29 @@
           value: function getRequisitionDetail(Requisition_Id) {
             var _this49 = this;
 
-            // Obtiene requisiciones 
+            var arrayRequisitionDetail = []; // Obtiene requisiciones 
+
             this._requisitionservice.getRequisitionDetail(Requisition_Id).subscribe(function (res) {
-              _this49.datasourceRequisitionDetail = res;
+              res.forEach(function (element) {
+                arrayRequisitionDetail.push({
+                  activo: true,
+                  requisicioninternadetalle_id: element.requisicioninternadetalle_id,
+                  requisicioninterna_id: element.requisicioninterna_id,
+                  cantidad: element.cantidad,
+                  sku: element.sku,
+                  codigo_requisicioninterna: element.codigo_requisicioninterna,
+                  unidad_medida: element.unidad_medida,
+                  descripcion: element.descripcion,
+                  existencia_almacen: element.existencia_almacen,
+                  cantidad_comprar: element.cantidad_comprar,
+                  medida: element.medida,
+                  color: element.color,
+                  otras_especificaciones: element.otras_especificaciones,
+                  estado: element.estado,
+                  cotizado: element.cotizado
+                });
+              });
+              _this49.datasourceRequisitionDetail = arrayRequisitionDetail;
               console.log('REQUISICIONES DETALLE', _this49.datasourceRequisitionDetail);
             }, function (error) {
               return console.log("error consulta requisiciones", error);
@@ -36599,9 +36649,9 @@
           value: function ngOnInit() {
             this.getProyectos();
             this.getEnabledCategories();
-            this.newProject.controls["categoria_id"].setValue(this.projectInfo["codigo_proyectocategoria"]);
 
             if (this.requisicionId != 0) {
+              this.newProject.controls["categoria_id"].setValue(this.projectInfo["codigo_proyectocategoria"]);
               this.newProject.patchValue({
                 proyecto_id: this.projectInfo["proyecto_id"],
                 requisicion_id: '',
@@ -36675,6 +36725,7 @@
                 var data = xlsx__WEBPACK_IMPORTED_MODULE_1__.utils.sheet_to_json(ws);
                 _this95.dataExcel = _this95.validate(data);
                 _this95.dataExcel = data;
+                console.log('ordenamientod de excel', _this95.dataExcel);
                 var arrayErrores = [];
                 var valido = true; // Validadores de campos
 
@@ -37118,7 +37169,7 @@
                 requisicioninternadetalle_id: element.requisicioninternadetalle_id,
                 requisicioninterna_id: requisicionId,
                 cantidad: element.cantidad,
-                sku: element.SKU,
+                sku: element.SKU != undefined ? element.SKU : '',
                 codigo_requisicioninterna: '',
                 unidad_medida: element.um,
                 descripcion: element.descripcion,
@@ -40327,7 +40378,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](14, "label");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](15, "V1.00.27");
+            _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](15, "V1.00.28");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
 

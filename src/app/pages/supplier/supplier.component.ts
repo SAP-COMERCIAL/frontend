@@ -38,7 +38,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estatus', 'edit', 'users', 'aprove', 'deny']; //, 'delusers'
+  displayedColumns = ['id', 'nombre', 'direccion', 'rfc', 'estatus', 'edit', 'users', 'activeInactive','aprove']; //, 'delusers', 'deny'
 
   constructor(public dialog: MatDialog
     , private _excelService : ExcelServiceService
@@ -164,8 +164,7 @@ dataSourceShow : MatTableDataSource<supplierModel>
     arrayToDb = {
       proveedorid : element.proveedorid
         , estado : 1 
-                }
-    
+                }  
     console.log('APRUEBA', arrayToDb)
 
     this.updateSupplierStatus(arrayToDb);
@@ -178,7 +177,28 @@ dataSourceShow : MatTableDataSource<supplierModel>
       proveedorid : element.proveedorid
         , estado : 0
                 }
+    this.updateSupplierStatus(arrayToDb);
+  }
 
+  active(element, event){
+    let arrayToDb : any;
+
+    arrayToDb = {
+      proveedorid : element.proveedorid
+        , estado : 1 
+                }  
+    console.log('APRUEBA', arrayToDb)
+
+    this.updateSupplierStatus(arrayToDb);
+  }
+
+  inactive(element, event){
+    let arrayToDb : any;
+
+    arrayToDb = {
+      proveedorid : element.proveedorid
+        , estado : 0
+                }
     this.updateSupplierStatus(arrayToDb);
   }
 

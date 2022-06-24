@@ -42,3 +42,11 @@
 .icon-cog-edit {
     color: orange;
 }
+
+.icon-cog-play {
+    color: rgb(104, 161, 20);
+}
+
+.icon-cog-pause {
+    color: rgb(247, 122, 12);
+}

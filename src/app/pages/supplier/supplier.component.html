@@ -78,6 +78,15 @@
                                         <ng-container *ngIf="element.estatus == false"><p style="color: red;">INACTIVO</p></ng-container>
                                     </td>
                                 </ng-container>
+
+
+                                <!-- <ng-container matColumnDef="estatus">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20"> Autorizado </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <ng-container *ngIf="element.estatus == true"><p style="color: green;">AUTORIZADO</p></ng-container>
+                                        <ng-container *ngIf="element.estatus == false"><p style="color: red;">NO AUTORIZADO</p></ng-container>
+                                    </td>
+                                </ng-container> -->
                                 
                                 <ng-container matColumnDef="edit">
                                     <th mat-header-cell *matHeaderCellDef class="colbuttons"> Editar </th>
@@ -94,19 +103,32 @@
                                     </td>
                                 </ng-container>
 
-                                <ng-container matColumnDef="aprove">
-                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Autorizar </ng-container> </th>
+                                <ng-container matColumnDef="activeInactive">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Activo/Inactivo </ng-container>  </th>
                                     <td mat-cell *matCellDef="let element"> 
-                                        <ng-container *ngIf="decodeUserProfile != 5"><button mat-button color="primary" (click)="aprove(element, $event)"><i class="fa fa-check fa-lg icon-cog-check"></i></button> </ng-container>
+                                        <ng-container *ngIf="decodeUserProfile != 5">
+                                            <ng-container *ngIf="element.estatus == 1"><button mat-button color="primary" (click)="inactive(element, $event)"><i class="fa fa-check fa-lg icon-cog-check"></i></button></ng-container>
+                                            <ng-container *ngIf="element.estatus == 0"><button mat-button color="primary" (click)="active(element, $event)"><i class="fa fa-ban fa-lg icon-cog-cancel"></i></button></ng-container>
+                                        </ng-container>
                                     </td>
                                 </ng-container>
 
-                                <ng-container matColumnDef="deny">
-                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Denegar </ng-container>  </th>
+                                <ng-container matColumnDef="aprove">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Autorizar/Denegar </ng-container> </th>
                                     <td mat-cell *matCellDef="let element"> 
-                                        <ng-container *ngIf="decodeUserProfile != 5"><button mat-button color="primary" (click)="deny(element, $event)"><i class="fa fa-ban fa-lg icon-cog-cancel"></i></button> </ng-container>
+                                        <ng-container *ngIf="decodeUserProfile != 5">
+                                            <ng-container *ngIf="element.estatus == 1"><button mat-button color="primary" (click)="deny(element, $event)"><i class="fa fa-play fa-lg icon-cog-play"></i></button></ng-container>
+                                            <ng-container *ngIf="element.estatus == 0"><button mat-button color="primary" (click)="aprove(element, $event)"><i class="fa fa-pause fa-lg icon-cog-pause"></i></button></ng-container>
+                                        </ng-container>
                                     </td>
                                 </ng-container>
+
+                                <!-- <ng-container matColumnDef="deny">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"><ng-container *ngIf="decodeUserProfile != 5">Denegar </ng-container>  </th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                        <ng-container *ngIf="decodeUserProfile != 5"> </ng-container>
+                                    </td>
+                                </ng-container> -->
 
                                 <!-- <ng-container matColumnDef="delusers">
                                     <th mat-header-cell *matHeaderCellDef class=".colbuttons"> Elimina Usuario </th>

@@ -256,19 +256,27 @@
             </div>
       </div>
     </div>
-
+  </div>
+  <!--AQUI AQUI AQUI-->
     <div fxLayout="row" class="division">
       <div fxFlex.gt-sm="20%">
-          <div hidden><br>Retención</div>
+          <div><br></div>
       </div>
       <div fxFlex.gt-sm="25%" >
-        <div hidden>
-            <mat-form-field>
-              <mat-select class="form-control control" formControlName="retencion" (selectionChange)="retencionSelected(newProject, $event)">
-                <mat-option value= "0" selected="selected">0%</mat-option>
-                <mat-option value= "4">4%</mat-option>
-              </mat-select>
-            </mat-form-field>
+        <div><br>
+          <mat-checkbox color="warn"
+            [checked]="chkTIM"
+            (click)="$event.stopPropagation()"
+            (change)="ActivaTIM(chkTIM, $event)"
+            [(ngModel)]="chkTIM">
+        </mat-checkbox> &nbsp; TIM
+        <br> 
+          <mat-checkbox color="warn"
+            [checked]="chkRetencion"
+            (click)="$event.stopPropagation()"
+            (change)="ActivaRetencion(chkRetencion, $event)"
+            [(ngModel)]="chkRetencion">
+        </mat-checkbox> &nbsp; Retención 4% 
         </div>
       </div>
       <div fxFlex.gt-sm="10%" >
@@ -294,7 +302,7 @@
 
     <p style="font-weight: bold;">Detalle orden de compra</p>
 
-  </div>
+
   <div fxLayout="row" class="division">
     <div fxFlex.gt-sm="20%">
       <div class="input-group mb-3" *ngIf="estadoPantalla != 'aprove'">
@@ -484,6 +492,16 @@
           </div>
           <div fxFlex.gt-sm="20%">
             IVA: {{ivaSubtotal | currency}}
+          </div>
+        </div>
+
+        <div fxLayout="row" class="division">
+          <div fxFlex.gt-sm="60%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+          </div>
+          <div fxFlex.gt-sm="20%">
+            Retención: {{retencionMonto | currency}}
           </div>
         </div>
 

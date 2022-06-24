@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -24,6 +24,7 @@ import { UserService } from '../../services/user.service';
 import { projectservice } from '../../services/projects/project.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { timeStamp } from 'console';
 
 // Create our number formatter.
 var formatter = new Intl.NumberFormat('en-US', {
@@ -60,7 +61,10 @@ export class PoDetailComponent implements OnInit {
   logoDataBlanco : string
   usuarioId : any;
   loading:boolean;
-  retencion : any = 0;
+  retencion : number = 0;
+  retencionMonto : number = 0
+  chkTIM : boolean = false;
+  chkRetencion : boolean = false;
 
   @ViewChild(MatSort,{static:true}) sort: MatSort;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
@@ -110,6 +114,8 @@ export class PoDetailComponent implements OnInit {
   userNameAprobe : string;
   estado : number;
   datasourcePorjects : any;
+  activaTIM : boolean = false;
+  activaRetencion : boolean = false;
   
   destinoNombre : any;
   destinoDireccion : any;
@@ -157,7 +163,6 @@ export class PoDetailComponent implements OnInit {
       descuentoGlobal : new FormControl(''),
       terminoYCondiciones : new FormControl(''),
       destinoCP : new FormControl(''),
-      retencion : new FormControl(''),
   });
 
   }
@@ -210,6 +215,10 @@ export class PoDetailComponent implements OnInit {
       this.total = this.projectInfo.total;
       this.descuentoGlobal = this.projectInfo.descuento_global;
       this.proveedor_idw = this.projectInfo.proveedor_id;
+      this.chkRetencion = (this.projectInfo.retencion == 0) ? false: true;
+      this.retencion = (this.projectInfo.retencion == 0) ? 0: 4;
+      this.retencionMonto = (this.projectInfo.retencion_monto == 0) ? 0: this.projectInfo.retencion_monto;
+      this.chkTIM = (this.projectInfo.tim == 0) ? false : true;
 
       this.getPO_Detail(this.projectInfo.ordendecompra_id);
 
@@ -243,10 +252,6 @@ export class PoDetailComponent implements OnInit {
   ivaSelected(form, event){
     this.iva = this.newProject.controls['iva'].value;
     this.onBlurMethod();
-  }
-
-  retencionSelected(form, event){
-    this.retencion = this.newProject.controls['retencion'].value;
   }
 
   cancel(event){
@@ -333,6 +338,23 @@ export class PoDetailComponent implements OnInit {
     this.onBlurMethod(); 
   }
 
+  ActivaTIM(element : any, event : Event){
+    this.activaTIM = event["checked"]
+  }
+
+  ActivaRetencion(element : any, event : Event){
+    this.activaRetencion = event["checked"]
+    if(this.activaRetencion == true){
+      this.retencion = 4;
+    }else{
+      this.retencion = 0;
+      this.retencionMonto = 0;
+      }
+
+      if(this.total != 0)
+        this.onBlurMethod();
+    }
+
   checkEnterKey(){
 
   }
@@ -384,13 +406,14 @@ export class PoDetailComponent implements OnInit {
         
         if (element.activo != undefined && element.activo == true && element.precio_unitario != undefined){
           this.subtotal = this.subtotal + element.cantidad * (element.precio_unitario);
+          this.retencionMonto = (this.retencion != 0) ?this.subtotal * .04 : 0;
         }
             
       });
 
       this.subtotal = this.subtotal - descuento
       this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
-      this.total = this.subtotal + this.ivaSubtotal;
+      this.total = this.subtotal + this.ivaSubtotal - this.retencionMonto;
 
     }
   }
@@ -511,9 +534,11 @@ export class PoDetailComponent implements OnInit {
       });
 
       this.subtotal = this.subtotal - descuento
+      
+      this.retencionMonto = (this.chkRetencion != false) ? this.subtotal * .04 : 0;
 
       this.ivaSubtotal = this.ivaSubtotal + (this.subtotal * (this.iva/100));
-      this.total = this.subtotal + this.ivaSubtotal;
+      this.total = this.subtotal + this.ivaSubtotal - this.retencionMonto;
 
       if(arrayErrores.length > 0){
         this.openSnackBar('Los registros contienen datos incorrectos', '');
@@ -1391,8 +1416,9 @@ console.log('codigo', arrayFiltroFO);
                   , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
                   , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
                   , fo : (this.newProject.controls["codigo_requisicioninterna"].value.length > 0) ? this.newProject.controls["codigo_requisicioninterna"].value : ''
-                  , retencion : 4
-                  , retencion_monto : 100
+                  , retencion : this.retencion
+                  , retencion_monto : this.retencionMonto
+                  , tim : (this.chkTIM == true) ? 1 : 0
                 }
       }
 
@@ -1466,8 +1492,9 @@ console.log('codigo', arrayFiltroFO);
                   , destino_requisitor : this.newProject.controls["enviaARequisitor"].value
                   , destino_telefono : (this.newProject.controls["enviaATelefono"].value.toString().length == 0 || this.newProject.controls["enviaATelefono"].value.toString() == '' || this.newProject.controls["enviaATelefono"].value == 0) ? 0 : this.newProject.controls["enviaATelefono"].value
                   , fo : (this.newProject.controls["codigo_requisicioninterna"].value.length > 0) ? this.newProject.controls["codigo_requisicioninterna"].value : ''
-                  , retencion : 6
-                  , retencion_monto : 200
+                  , retencion : this.retencion
+                  , retencion_monto : this.retencionMonto
+                  , tim : (this.chkTIM == true) ? 1 : 0
                 }
       }
 
