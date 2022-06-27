@@ -9,6 +9,22 @@
       </div>
       <div fxFlex.gt-sm="25%" >
         <div><br>
+          
+          <!-- <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Cotización</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="cotizacion_id"
+              [matAutocomplete]="auto"/>
+
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnQuote">
+              <mat-option *ngFor="let option of filteredQuoteOptions | async" [value]="option" (selectionChange)="cotizacionSelected(newProject, $event)">
+                <ng-container>{{option.codigo}}</ng-container>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
+
           <mat-form-field>
             <mat-select class="form-control control" formControlName="cotizacion_id" (selectionChange)="cotizacionSelected(newProject, $event)" >
               <mat-option *ngFor="let op of datasourceCotizaciones" [value]="op.cotizacion_id" >
@@ -16,6 +32,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
           <span *ngIf="!newProject.get('cotizacion_id').valid && newProject.get('cotizacion_id').touched" class="help-block" style="color: red;"> seleccione una cotización</span>
         </div>
       </div>
@@ -64,8 +81,8 @@
               type="text"
               matInput
               [formControl]="proveedor_id"
-              [matAutocomplete]="auto"
-            />
+              [matAutocomplete]="auto"/>
+
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let op of filteredOptions | async" [value]="op" (selectionChange)="selectsupplier($event)">
                 <ng-container *ngIf="op.estatus == true"> <p style="color: navy;">{{op.nombre}}</p></ng-container>
@@ -73,14 +90,7 @@
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <!-- <mat-form-field>
-            <mat-select class="form-control control" formControlName="proveedor_id" >
-                <mat-option *ngFor="let op of datasourcesupplier" [value]="op.proveedorid" (selectionChange)="selectsupplier($event)">
-                  <ng-container *ngIf="op.estatus == true"> <p style="color: navy;">{{op.nombre}}</p></ng-container>
-                  <ng-container *ngIf="op.estatus == false"> <p style="color: red;">{{op.nombre}}</p></ng-container>
-                </mat-option>
-            </mat-select>
-          </mat-form-field> -->
+
           <span *ngIf="!newProject.get('proveedor_id').valid && newProject.get('proveedor_id').touched" class="help-block" style="color: red;"> seleccione un proveedor</span>
         </div>
       </div>

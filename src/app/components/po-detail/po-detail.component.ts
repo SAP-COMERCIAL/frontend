@@ -40,8 +40,11 @@ var formatter = new Intl.NumberFormat('en-US', {
 export class PoDetailComponent implements OnInit {
   title = 'htmltopdf';
   proveedor_id = new FormControl('', [Validators.required]);
+  cotizacion_id = new FormControl('', [Validators.required]);
   optionsx: any[];
+  optionsQuote: any[];
   filteredOptions: Observable<any[]>;
+  filteredQuoteOptions: Observable<any[]>;
   
   @ViewChild('pdfTable') pdfTable: ElementRef;
   // ===================
@@ -70,7 +73,7 @@ export class PoDetailComponent implements OnInit {
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @ViewChild(MatTable) tabla1: MatTable<any>;
   
-  cotizacion_id : any = '';
+  cotizacion_idw : any = '';
   codigo_requisicioninterna : any = '';
   odc_Numero : any = '';
   proveedor_idw : any = '';
@@ -246,6 +249,7 @@ export class PoDetailComponent implements OnInit {
 
   cotizacionSelected(form, event){
     this.getcotizacionesDetail(form.controls['cotizacion_id'].value);
+    this.cotizacion_idw = event.value;
 
   }
 
@@ -597,22 +601,6 @@ console.log('codigo', arrayFiltroFO);
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
-  }
-
-  displayFn(element): string {
-
-    console.log('elementos', element);
-
-    this.proveedor_idw = element.proveedorid;
-    return element && element.nombre ? element.nombre : '';    
-  }
-
-  private _filter(name: string): any[] {
-    const filterValue = name.toLowerCase();
-
-    return this.optionsx.filter((option) =>
-      option.nombre.toLowerCase().includes(filterValue)
-    );
   }
 
   decode(){
@@ -1336,11 +1324,41 @@ console.log('codigo', arrayFiltroFO);
         });
 
         this.datasourceCotizaciones = res;
-        console.log('COTIZACIONES TODAS', res);
-  
+        console.log('COTIZACIONES TODAS', this.datasourceCotizaciones);
+
+        // ===========================
+        // COMBO AUTOCOMPLETE
+        this.optionsQuote = this.datasourceCotizaciones;
+
+        this.filteredQuoteOptions = this.cotizacion_id.valueChanges.pipe(
+          startWith(''),
+          map((value) => (typeof value === 'string' ? value : value?.codigo)),
+          map((codigo) => (codigo ? this._filterQuote(codigo) : this.optionsQuote.slice()))
+        );
+        // ===========================
+
+        console.log('COTIZACIONES FINALES', this.filteredQuoteOptions);
       },
       error => console.log("error consulta proyectos",error)
     )
+  }
+
+  // ================================
+  // AUTO COMPLETE COTIZACIONES
+  displayFnQuote(element): string {
+
+    console.log('elementos', element);
+
+    this.cotizacion_idw = element.codigo;
+    return element && element.codigo ? element.codigo : '';    
+  }
+
+  private _filterQuote(codigo: string): any[] {
+    const filterValue = codigo.toLowerCase();
+
+    return this.optionsQuote.filter((option) =>
+      option.codigo.toLowerCase().includes(filterValue)
+    );
   }
 
   getcotizacionesDetail(cotizacion_id : any){
@@ -1622,35 +1640,43 @@ console.log('arreglo a detalle', arrayTodbDetail);
           // this.displayFn(arrayProv);
           let arrayProv : any = this.datasourcesupplier.filter(e => e.proveedorid == this.projectInfo.proveedor_id)
 
-          console.log('arrayProv', arrayProv[0]);
-          console.log('Proveedores', this.projectInfo.proveedor_id);
           this.proveedor_id.setValue(arrayProv[0])
         }
         
-
         console.log('PROVEEDORES', this.datasourcesupplier);
 
-    // ===========================
-    // TERMINA SUPPY
-    // ===========================
+        // ===========================
+        // COMBO AUTOCOMPLETE
+        this.optionsx= this.datasourcesupplier;
 
-    this.optionsx= this.datasourcesupplier;
-
-    this.filteredOptions = this.proveedor_id.valueChanges.pipe(
-      startWith(''),
-      map((value) => (typeof value === 'string' ? value : value?.nombre)),
-      map((nombre) => (nombre ? this._filter(nombre) : this.optionsx.slice()))
-    );
-
-    // ===========================
-    // TERMINA SUPPY
-    // ===========================
-
-
+        this.filteredOptions = this.proveedor_id.valueChanges.pipe(
+          startWith(''),
+          map((value) => (typeof value === 'string' ? value : value?.nombre)),
+          map((nombre) => (nombre ? this._filter(nombre) : this.optionsx.slice()))
+        );
+        // ===========================
 
       },
       error => console.log("error consulta categorias",error)
     )
+  }
+
+  // ================================
+  // AUTO COMPLETE PROVEEDORES
+  displayFn(element): string {
+
+    console.log('elementos', element);
+
+    this.proveedor_idw = element.proveedorid;
+    return element && element.nombre ? element.nombre : '';    
+  }
+
+  private _filter(name: string): any[] {
+    const filterValue = name.toLowerCase();
+
+    return this.optionsx.filter((option) =>
+      option.nombre.toLowerCase().includes(filterValue)
+    );
   }
 
   getPO_Detail(po_id : any){
