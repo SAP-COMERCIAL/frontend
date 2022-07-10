@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Injectable, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,6 +15,13 @@ import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY_FACTORY } from '@angular/material/auto
 import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-aprove.component';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
+import { Storage, uploadBytes } from '@angular/fire/storage';
+import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { saveAs } from 'file-saver';
+
+const storage = getStorage();
 
 @Component({
   selector: 'app-repse-review-mensual',
@@ -52,7 +59,10 @@ usuarioId : string;
     , private _supplyservice : supplyservice
     , private _UploadFileService : UploadFileService
     , @Inject(MAT_DIALOG_DATA) public data
-    , private formBuilder: FormBuilder) { 
+    , private http: HttpClient
+    , private downloads: DownloadService
+    , private formBuilder: FormBuilder
+    ) { 
       this.pageInfo = data.arrayData;
 
       this.newForm = this.formBuilder.group({
@@ -155,6 +165,10 @@ usuarioId : string;
     this.aproveRejectDocument(arrayToDb);
   }
 
+  downloadFiles(form, event){
+    this.downloadFilesGeneral(this.newForm.controls["anio"].value, this.newForm.controls["mes"].value, 'mensuales')
+  }
+
   // =================
   // UTILERIAS
   // =================
@@ -176,6 +190,99 @@ usuarioId : string;
   search(form, event){
     this.getsupplierDocuments();
   }
+
+  downloadFilesGeneral(anio : number, mes : number, tipo : string){
+  
+    // const imagesRef = ref(this.storage, 'documentos/generales/1');
+    // Create a reference under which you want to list
+    const listRef = ref(storage, 'documentos/generales/1');
+
+    //let binaryData : any = []
+    let dataType = 'pdf';
+    let fileName = 'Nombre'
+    let fileNameCompleto : string;
+    let filePath : string;
+
+    switch(tipo){
+      case('mensuales') : //console.log('descarga mensuales');
+
+        listAll(listRef)
+        .then(async response => {
+          console.log(response);
+
+          for (let item of response.items){
+            const url = await getDownloadURL(item);
+            console.warn('URL to DOWNLOAD', url);
+
+            console.warn('tipo de archivo', item.name);
+            let arrayitemSplit : any = item.name.split('.');
+            dataType = arrayitemSplit[arrayitemSplit.length - 1];
+        
+
+            
+
+            // DESCARGAR ARCHIVO
+            // ==================
+            let binaryData : any = [];
+            binaryData.push(url)
+            
+            filePath = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+            
+            let downloadLink = document.createElement('a');
+            downloadLink.href = filePath;
+            downloadLink.setAttribute('download', 'descaga.pdf');
+            downloadLink.setAttribute('src', binaryData); // fileNameCompleto
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+
+
+            console.log('doc', downloadLink)
+            console.log('binario FILE PATH', binaryData);
+            console.log('binario', filePath);
+            
+            // this.download(element.url);
+
+            // this.downloads
+            // .download(filePath) // '/downloads/archive.zip'
+            // .subscribe(blob => {
+            //   const a = document.createElement('a')
+            //   const objectUrl = URL.createObjectURL(blob)
+            //   a.href = objectUrl
+            //   a.download = item.name;
+            //   a.click();
+            //   URL.revokeObjectURL(objectUrl);
+            // })
+
+          //   this.downloads
+          // .download(filePath)
+          // .subscribe(blob => saveAs(blob, item.name))
+
+            // ==================
+            // TERMINA DESCARGA       
+
+          }
+          // console.warn('termina for', getDownloadURL(response.items[0]) );
+
+        })
+        .catch(error => console.log(error));
+        break;
+      case('bimestrales'): console.log('descarga bimestrales');
+        break;
+      case('cuatrimestrales'): console.log('descarga cuatrimestral');
+        break;
+      case('papeleriasCCM'): console.log('descarga papeleriasCCM');
+        break;
+      default: console.log('descarga mensuales');
+        break;
+    }
+
+  }
+
+  // download(url: string): Observable<Blob> {
+  //   return this.http.get(url, {
+  //     responseType: 'blob'
+  //   })
+  // }
 
   showMessage(tipoMensaje : number, header: string, icon: any, message : string, buttonCaption: string){
   
@@ -286,4 +393,12 @@ usuarioId : string;
 }
 
 
-
+@Injectable({providedIn: 'root'})
+export class DownloadService {
+  constructor(private http: HttpClient) {}
+  download(url: string): Observable<Blob> {
+    return this.http.get(url, {
+      responseType: 'blob'
+    })
+  }
+}

@@ -7,9 +7,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AESEncryptService } from 'src/app/services/aesencrypt.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
+import { analyzeAndValidateNgModules, CompileShallowModuleMetadata } from '@angular/compiler';
 import jwt_decode from "jwt-decode";
 
+import { Observable } from "rxjs/observable";
+import { switchMap } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { BrowserStack } from 'protractor/built/driverProviders';
+
+declare const require;
+const xml2js = require("xml2js");
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,12 +24,20 @@ import jwt_decode from "jwt-decode";
   providers: [loginservice]
 })
 export class LoginComponent implements OnInit {
+  employees$: Observable<Array<any>>;
+
   msg = '';
   public userinterface: UserI;
   public spinerShow: boolean; 
   ProveedorId : any;
   usuarioId : any;
   loginform: FormGroup;
+
+  //---------------
+  // Etiquetas
+  //---------------
+  usuario : string;
+  clave : string;
 
   constructor(private service: loginservice,
     private routes: Router,
@@ -31,14 +46,20 @@ export class LoginComponent implements OnInit {
     private route: Router,
     private cryptService: AESEncryptService,
     private toastr: ToastrService,
+    private http: HttpClient,
     public _snackBar: MatSnackBar
     ) { 
       this.spinerShow = false;
       this.userinterface = new UserC();
     }
 
+  
   ngOnInit() {
+    
     this.clearForm();
+    this.employees$ = this.getEmployees();
+    this.readlabels(this.employees$);
+
   }
 
   loginReq() {
@@ -98,5 +119,65 @@ export class LoginComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {duration : 3000, horizontalPosition: "center", verticalPosition: "top", panelClass: 'alert-snackbar'});
+  }
+
+  readlabels(arrayLables){
+
+    let contador : number = 1;
+    arraylabels : analyzeAndValidateNgModules;
+
+    this.employees$.forEach(element => {
+      arrayLables = element.find(e => e.label == 'usuario')
+      this.usuario = (arrayLables.length > 0) ? arrayLables.show : 'Usuario';
+
+      console.log('encuentra', element.find(e => e.label == 'usuario'))
+
+      arrayLables = element.find(e => e.label == 'clave')
+      this.clave = (arrayLables.length > 0) ? arrayLables.show : 'Clave'
+
+      
+      console.log('encuentra', element.find(e => e.label == 'clave'))
+      console.log(this.clave)
+      
+    });
+
+    console.log('usuario', this.usuario)
+    console.log('clave', this.clave)
+
+  }
+
+  // getEmployees2() {
+  //   let employees$ = this.http
+  //     .get("/assets/languages/es/lan-login-es.xml", { responseType: "text" })
+  //     .pipe(
+  //       switchMap(async xml => await this.parseXmlToJson(xml))
+  //     );
+  // }
+
+  getEmployees() {
+    return this.http
+      .get("/assets/languages/es/lan-login-es.xml", { responseType: "text" })
+      .pipe(
+        switchMap(async xml => await this.parseXmlToJson(xml))
+      );
+  }
+
+  async parseXmlToJson(xml) {
+    // With parser
+    /* const parser = new xml2js.Parser({ explicitArray: false });
+    parser
+      .parseStringPromise(xml)
+      .then(function(result) {
+        console.log(result);
+        console.log("Done");
+      })
+      .catch(function(err) {
+        // Failed
+      }); */
+
+    // Without parser    
+    return await xml2js
+      .parseStringPromise(xml, { explicitArray: false })
+      .then(response => response.Employees.Employee);
   }
 }

@@ -9,7 +9,11 @@
 <div class="container-fluid mt--7" class="row" [formGroup]="newForm">
     <div fxLayout="row" class="division">
         <div fxFlex.gt-sm="150px">
-            <div></div>
+            <div>
+                <a href="https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/documentos%2Fgenerales%2F1%2FordenCompraCCM_4.1%20EBA%20febrero%202022.pdf?alt=media&token=9115734b-0fd8-4dab-903d-f317cff3121a"
+                src="https://firebasestorage.googleapis.com/v0/b/sap-comercial.appspot.com/o/documentos%2Fgenerales%2F1%2FordenCompraCCM_4.1%20EBA%20febrero%202022.pdf?alt=media&token=9115734b-0fd8-4dab-903d-f317cff3121a" 
+                download="filename" target="_blank">Download link</a>
+            </div>
         </div>
         <div fxFlex.gt-sm="200px">
             <div>Año
@@ -55,6 +59,9 @@
             <div><br>
                 <ng-container>
                     <button mat-raised-button color="accent" (click)="search(newForm, $event)">Buscar</button>
+                </ng-container>
+                <ng-container>
+                    <button mat-raised-button color="accent" (click)="downloadFiles(newForm, $event)">Buscar</button>
                 </ng-container>
             </div>
         </div>

@@ -214,8 +214,6 @@ proyecto_id : number
           });
         });
 
-        console.log('actual costoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', this.dataSourceShowX)
-
         this.descargarExcel();
       },
       error => console.log("error consulta proyectos",error)

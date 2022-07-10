@@ -25,7 +25,7 @@ export interface Menu {
     // { state: 'warehouse-review', name: 'Revisión en Almacén', type: 'link', icon: 'assignment_turned_in' },
     { state: 'customer', name: 'Clientes', type: 'link', icon: 'assignment_turned_in' },
     { state: 'supplier', name: 'Proveedores', type: 'link', icon: 'assignment_turned_in' },
-    { state: 'reportMaster', name: 'Reporte Maestro', type: 'link', icon: 'assignment_turned_in' },
+    { state: 'reportMaster', name: 'Reportes', type: 'link', icon: 'assignment_turned_in' },
     { state: 'invoice', name: 'Captura de facturas', type: 'link', icon: 'tab' },
     // { state: 'repseCapture', name: 'Captura de proveedores', type: 'link', icon: 'assignment_turned_in' },
     // { state: 'repseReview', name: 'Revisión de proveedores', type: 'link', icon: 'assignment_turned_in' },

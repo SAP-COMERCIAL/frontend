@@ -76,7 +76,7 @@ export class PoDetailComponent implements OnInit {
   cotizacion_idw : any = '';
   codigo_requisicioninterna : any = '';
   odc_Numero : any = '';
-  proveedor_idw : any = '';
+  proveedor_idw: any = '';
   activoEdicion : boolean = true;
   displayedColumns = ['select', 'detalle_id',  'SKU', 'cantidad', 'unidad_de_medida', 'descripcion', 'medida', 'color', 'otras_Especificaciones', 'cantidad_Ordenar', 'precio_unitario', 'descuento']; // 
 
@@ -391,7 +391,6 @@ export class PoDetailComponent implements OnInit {
   }
 
   selectsupplier(event){
-    console.log('SELECCOPMA PROVEEDOR', event)
     this.proveedor_idw = event.value;
   }
 
@@ -581,8 +580,6 @@ export class PoDetailComponent implements OnInit {
 
     arrayFiltroFO = this.datasourcePorjects.filter(e => e.nombre_centro_de_costo_proyecto.toString().toLowerCase() == this.newProject.controls["codigo_requisicioninterna"].value.toString().toLowerCase());
 
-console.log('codigo', arrayFiltroFO);
-
     if(arrayFiltroFO.length > 0){
       // OBTIENE CAMPOS DE DESTINO
       this.newProject.controls["enviaANombre"].setValue(arrayFiltroFO[0]["destino_nombre"])
@@ -718,8 +715,6 @@ console.log('codigo', arrayFiltroFO);
             
             // Calcula Totales
             subtotalPDF = subtotalPDF + (data.precio_unitario * data.cantidad);
-
-            console.log('udem', data);
         }
     }
 
@@ -1313,10 +1308,10 @@ console.log('codigo', arrayFiltroFO);
 
         // Ordena los proyectos
         res.sort(function (a, b) {
-          if (a.cotizacion_id < b.cotizacion_id) {
+          if (a.codigo < b.codigo) {
             return 1;
           }
-          if (a.cotizacion_id > b.cotizacion_id) {
+          if (a.codigo > b.codigo) {
             return -1;
           }
           // a must be equal to b
@@ -1324,7 +1319,6 @@ console.log('codigo', arrayFiltroFO);
         });
 
         this.datasourceCotizaciones = res;
-        console.log('COTIZACIONES TODAS', this.datasourceCotizaciones);
 
         // ===========================
         // COMBO AUTOCOMPLETE
@@ -1336,8 +1330,6 @@ console.log('codigo', arrayFiltroFO);
           map((codigo) => (codigo ? this._filterQuote(codigo) : this.optionsQuote.slice()))
         );
         // ===========================
-
-        console.log('COTIZACIONES FINALES', this.filteredQuoteOptions);
       },
       error => console.log("error consulta proyectos",error)
     )
@@ -1346,8 +1338,6 @@ console.log('codigo', arrayFiltroFO);
   // ================================
   // AUTO COMPLETE COTIZACIONES
   displayFnQuote(element): string {
-
-    console.log('elementos', element);
 
     this.cotizacion_idw = element.codigo;
     return element && element.codigo ? element.codigo : '';    
@@ -1387,8 +1377,6 @@ console.log('codigo', arrayFiltroFO);
         });
 
         this.datasourceCotizacionesDetalle = arrayDatasourceQD;
-        console.log('COTIZACIONES RES', res);
-        console.log('COTIZACIONES TODAS', this.datasourceCotizacionesDetalle);
 
         this.getPO_Hdr(res[0]["codigo_cotizacion"]);
   
@@ -1401,9 +1389,6 @@ console.log('codigo', arrayFiltroFO);
     
     let arrayProveedores : any = this.proveedor_id.value;
     this.proveedor_idw = arrayProveedores.proveedorid;
-
-    console.log('proveedores nuevos', arrayProveedores.proveedorid)
-    
 
     let arrayTodb : any;
     let arrayDetail : any[] = [];
@@ -1464,7 +1449,6 @@ console.log('codigo', arrayFiltroFO);
 
     this._purchaseOrderservice.insertPO_Hdr(arrayTodb).subscribe(
       res=> {
-        console.log('Se inserto con éxito', res);
   
         // INSERTA REQUISICIONES DET
         this.insertPODet(res, arrayDetail);
@@ -1485,6 +1469,9 @@ console.log('codigo', arrayFiltroFO);
 
     this.cotizacionId = this.newProject.controls["cotizacion_id"].value;
 
+    let arrayProveedores : any = this.proveedor_id.value;
+    this.proveedor_idw = arrayProveedores.proveedorid;
+
     table.forEach(element => {
 
       //Hdr
@@ -1493,7 +1480,7 @@ console.log('codigo', arrayFiltroFO);
                   purchaseorder_id : this.projectInfo.ordendecompra_id
                   , codigo : this.newProject.controls['odc_Numero'].value
                   , cotizacion_id : (this.cotizacionId == undefined) ? 0 : this.cotizacionId
-                  , proveedor_id : this.proveedor_idw // this.newProject.controls["proveedor_id"].value
+                  , proveedor_id : this.proveedor_idw // this.newProject.controls["proveedor_id"].value // 
                   , fecha : moment(new Date, 'YYYY-M-DD')
                   , iva : this.iva
                   , iva_moneda : this.ivaSubtotal
@@ -1542,7 +1529,6 @@ console.log('codigo', arrayFiltroFO);
 
     this._purchaseOrderservice.updatePO_Hdr(arrayTodb).subscribe(
       res=> {
-        console.log('Se actualizo con éxito', arrayDetail);
   
         // // INSERTA REQUISICIONES DET
         this.updatePODet(arrayDetail);
@@ -1580,11 +1566,8 @@ console.log('codigo', arrayFiltroFO);
                         , descripcion : element.descripcion
                         , nota : 'NOTAS DEL INSERT' }
 
-console.log('arreglo a detalle', arrayTodbDetail);
-
     this._purchaseOrderservice.insertPODetail(arrayTodbDetail).subscribe(
       res=> {
-        console.log('Se inserto con éxito', res);
         this.showMessage(2, 'Exitoso', 'success', 'Se creo una nueva orden de compra', 'Cerrar');
   
       },
@@ -1616,11 +1599,8 @@ console.log('arreglo a detalle', arrayTodbDetail);
                         , nota : 'NOTAS DEL INSERT' 
                       }
 
-    console.log('ACTUALIZA ORDEN DE COMPRA DETALLE', arrayTodbDetail)
-
     this._purchaseOrderservice.updatePODetail(arrayTodbDetail).subscribe(
       res=> {
-        console.log('Se actualizo con éxito', res);
         this.showMessage(2, 'Exitoso', 'success', 'Se actualizo la orden de compra', 'Cerrar');
   
       },
@@ -1664,10 +1644,7 @@ console.log('arreglo a detalle', arrayTodbDetail);
   // ================================
   // AUTO COMPLETE PROVEEDORES
   displayFn(element): string {
-
-    console.log('elementos', element);
-
-    this.proveedor_idw = element.proveedorid;
+    this.proveedor_idw = element.proveedorid;    
     return element && element.nombre ? element.nombre : '';    
   }
 
@@ -1702,7 +1679,6 @@ console.log('arreglo a detalle', arrayTodbDetail);
         });
 
         this.datasourceCotizacionesDetalle = arrayPODetail;
-        console.log('ORDENES DE COMPRA DET', this.datasourceCotizacionesDetalle);
 
       },
       error => console.log("error consulta categorias",error)
@@ -1781,7 +1757,6 @@ console.log('arreglo a detalle', arrayTodbDetail);
     arrayToDb = ({ordendecompra_id : this.projectInfo.ordendecompra_id , estatus : 3, usuario : this.UserIdLogin}) // this.usuarioId
     this._purchaseOrderservice.updatePOStatus(arrayToDb).subscribe(
       res=> {
-        console.log('Se inserto con éxito', res);
         this.showMessage(2, 'Comentario', 'info', 'La autorización fue exitosa', 'Cerrar');
         this.dialogRef.close();
         
@@ -1797,7 +1772,6 @@ console.log('arreglo a detalle', arrayTodbDetail);
 
     this._purchaseOrderservice.insertPOStatus(arrayToDb).subscribe(
       res=> {
-        console.log('Se inserto con éxito', res);
         this.loading = false;
       },
       error => console.log("error alta de proyectos",error)

@@ -296,10 +296,10 @@ getProyectos(){
 
         // Ordena los proyectos
         res.sort(function (a, b) {
-          if (a.proyecto_id < b.proyecto_id) {
+          if (a.codigo_proyecto < b.codigo_proyecto) {
             return 1;
           }
-          if (a.proyecto_id > b.proyecto_id) {
+          if (a.codigo_proyecto > b.codigo_proyecto) {
             return -1;
           }
           // a must be equal to b
