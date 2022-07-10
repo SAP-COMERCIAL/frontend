@@ -28115,7 +28115,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const environment = {
     production: false,
-    urlapi: 'http://api.dev.comercial.gsctech.com.mx/',
+    urlapi: 'https://gsctech.azurewebsites.net/',
     apiContextDrivers: 'api/',
     firebaseConfig: {
         apiKey: "AIzaSyBRC1z4fQiZMaxSwdn4wHIDmHBN2WsGg-Y",
