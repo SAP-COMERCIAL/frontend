@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 
 export const environment = {
   production: false,
-  urlapi : 'https://localhost:44347/', //'http://api.dev.comercial.gsctech.com.mx/', //  'https://sap-comercial.azurewebsites.net/', // 'http://api.qas.comercial.gsctech.com.mx/', //'http://api.prod.comercial.gsctech.com.mx/'
+  urlapi : 'http://api.dev.comercial.gsctech.com.mx/', // 'https://localhost:44347/', // 'https://sap-comercial.azurewebsites.net/', // 'http://api.qas.comercial.gsctech.com.mx/', //'http://api.prod.comercial.gsctech.com.mx/'
   apiContextDrivers : 'api/',
   
 
