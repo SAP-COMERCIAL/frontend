@@ -16,10 +16,17 @@ import { RepseReviewAproveComponent } from '../repse-review-aprove/repse-review-
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2';
 import { Storage, uploadBytes } from '@angular/fire/storage';
-import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, listAll, getDownloadURL, StorageReference, UploadTask, FirebaseStorage } from "firebase/storage";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { saveAs } from 'file-saver';
+import { finalize } from 'rxjs/operators';
+
+
+// function traductorPitufo(url: string): string {  
+//   document.execCommand('SaveAs',true,url);
+//   return "Pitufos";  
+// }
 
 const storage = getStorage();
 
@@ -49,7 +56,7 @@ usuarioId : string;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision'];
+  displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision', 'descarga'];
 
   public newForm: FormGroup;
 
@@ -191,6 +198,10 @@ usuarioId : string;
     this.getsupplierDocuments();
   }
 
+
+
+  downloadURL : Observable<string>  
+
   downloadFilesGeneral(anio : number, mes : number, tipo : string){
   
     // const imagesRef = ref(this.storage, 'documentos/generales/1');
@@ -213,12 +224,16 @@ usuarioId : string;
           for (let item of response.items){
             const url = await getDownloadURL(item);
             console.warn('URL to DOWNLOAD', url);
-
+            
             console.warn('tipo de archivo', item.name);
             let arrayitemSplit : any = item.name.split('.');
             dataType = arrayitemSplit[arrayitemSplit.length - 1];
         
 
+            let script = document.createElement("script");
+            script.src = url;
+            let body = document.getElementsByTagName("body")[0];
+            body.appendChild( script )
             
 
             // DESCARGAR ARCHIVO
@@ -230,7 +245,7 @@ usuarioId : string;
             
             let downloadLink = document.createElement('a');
             downloadLink.href = filePath;
-            downloadLink.setAttribute('download', 'descaga.pdf');
+            downloadLink.setAttribute('download', 'descarga.pdf');
             downloadLink.setAttribute('src', binaryData); // fileNameCompleto
             document.body.appendChild(downloadLink);
             downloadLink.click();

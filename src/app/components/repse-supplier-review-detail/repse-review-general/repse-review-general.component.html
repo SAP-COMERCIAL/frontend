@@ -73,6 +73,16 @@
                                     </td>
                                 </ng-container>
 
+                                <ng-container matColumnDef="descarga">
+                                    <th mat-header-cell *matHeaderCellDef class="colbuttons"> Descarga </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <ng-container *ngIf="element.aprobacion == true && element.estatus != 4">
+                                            <a href="{{ element.url }}" src="{{ element.url }}" download target="_blank"><i class="fa fa-download fa-lg icon-cog-orange"></i></a>
+                                        </ng-container> 
+                                        
+                                    </td>
+                                </ng-container>
+
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                             </mat-table>

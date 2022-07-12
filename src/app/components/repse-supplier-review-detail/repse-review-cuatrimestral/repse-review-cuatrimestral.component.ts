@@ -41,7 +41,7 @@ usuarioId : string;
   @ViewChild(MatPaginator,{static:true}) paginator: MatPaginator;
   @Output() filterChange = new EventEmitter();
 
-  displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision'];
+  displayedColumns = ['supplier_id', 'documento', 'estatus', 'ver', 'revision', 'descarga'];
 
   public newForm: FormGroup;
 
