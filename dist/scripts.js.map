@@ -1,0 +1,1 @@
+{"version":3,"sources":["src\\assets\\Utilities\\nand.js"],"names":[],"mappings":"AAAA;AACA;AACA,G","file":"scripts.js","sourcesContent":["function name(){\r\n    alert(\"Helow every body\");\r\n  }"],"sourceRoot":"webpack:///"}
