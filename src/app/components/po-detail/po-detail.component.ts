@@ -1308,10 +1308,10 @@ export class PoDetailComponent implements OnInit {
 
         // Ordena los proyectos
         res.sort(function (a, b) {
-          if (a.codigo < b.codigo) {
+          if (a.cotizacion_id < b.cotizacion_id) {
             return 1;
           }
-          if (a.codigo > b.codigo) {
+          if (a.cotizacion_id > b.cotizacion_id) {
             return -1;
           }
           // a must be equal to b
@@ -1472,6 +1472,8 @@ export class PoDetailComponent implements OnInit {
     let arrayProveedores : any = this.proveedor_id.value;
     this.proveedor_idw = arrayProveedores.proveedorid;
 
+    console.log('elemento', this.tabla1);
+
     table.forEach(element => {
 
       //Hdr
@@ -1581,7 +1583,6 @@ export class PoDetailComponent implements OnInit {
     let arrayTodbDetail : any;
     this.loading = true;
     arrayDetail.forEach(element => {
-
       arrayTodbDetail = {ordendecompradetalle_id : element.ordendecompradetalle_id
                         , ordendecompra_id : element.ordendecompra_id
                         , cotizaciondetalle_id : element.cotizaciondetalle_id

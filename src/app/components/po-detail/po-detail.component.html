@@ -406,7 +406,7 @@
             <ng-container matColumnDef="descripcion">
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="col20wrap"> Descripción </th>
               <td mat-cell *matCellDef="let element" class="col20wrap">
-                <textarea rows="5" cols="20" wrap="soft" disabled>{{element.descripcion}}</textarea>  
+                <textarea rows="5" cols="20" wrap="soft" (keyup)="checkEnterKey($event, 'descripcion')" (blur)="onBlurMethod($event)" [(ngModel)]="element.descripcion" >{{element.descripcion}}</textarea>
               </td>
             </ng-container>
 
